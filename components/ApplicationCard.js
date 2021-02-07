@@ -1,12 +1,20 @@
-export default function ApplicationList({ applications }) {
+import Link from "next/link";
+const ApplicationCard = ({ applications }) => {
   return (
     <div>
       {applications.map((application) => (
-        <div>
-          <img alt="application-icon" width="50" src={application.image} />
-          <h3>{application.title}</h3>
-        </div>
+        <Link
+          key="{application.id}"
+          href="/application/[id]"
+          as={`/application/${application.id}`}
+        >
+          <div>
+            <img alt="application-icon" width="50" src={application.icon} />
+            <h3>{application.title}</h3>
+          </div>
+        </Link>
       ))}
     </div>
   );
-}
+};
+export default ApplicationCard;

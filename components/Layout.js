@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
-export default function Layout({ children, title = "PWA Store" }) {
+const Layout = ({ children, title = "PWA Store" }) => {
   return (
     <div className="text-gray-600 text-sm font-mono">
       <Head>
@@ -28,19 +28,22 @@ export default function Layout({ children, title = "PWA Store" }) {
             <p className="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">
               categories
             </p>
-            <Link href="/[category]" as="entertainment">
+            <Link
+              href="/applications/[category]"
+              as="/applications/entertainment"
+            >
               <a className="mb-3 capitalize font-medium text-sm hover:text-green-600 transition ease-in-out duration-500">
                 <i className="fad fa-envelope-open-text text-xs mr-2"></i>
                 Entertainment
               </a>
             </Link>
-            <Link href="/[category]" as="tools">
+            <Link href="/applications/[category]" as="/applications/tools">
               <a className="mb-3 capitalize font-medium text-sm hover:text-green-600 transition ease-in-out duration-500">
                 <i className="fad fa-envelope-open-text text-xs mr-2"></i>
                 Tools
               </a>
             </Link>
-            <Link href="/[category]" as="shopping">
+            <Link href="/applications/[category]" as="/applications/shopping">
               <a className="mb-3 capitalize font-medium text-sm hover:text-green-600 transition ease-in-out duration-500">
                 <i className="fad fa-envelope-open-text text-xs mr-2"></i>
                 Shopping
@@ -52,4 +55,5 @@ export default function Layout({ children, title = "PWA Store" }) {
       </div>
     </div>
   );
-}
+};
+export default Layout;
