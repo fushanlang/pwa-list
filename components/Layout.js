@@ -28,21 +28,21 @@ export default function Layout({ children, title = "PWA Store" }) {
             <p className="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">
               categories
             </p>
-            <Link href="/[category]" as="business">
+            <Link href="/[category]" as="entertainment">
               <a className="mb-3 capitalize font-medium text-sm hover:text-green-600 transition ease-in-out duration-500">
                 <i className="fad fa-envelope-open-text text-xs mr-2"></i>
-                Business
+                Entertainment
               </a>
             </Link>
-            <Link href="/[category]" as="travel">
+            <Link href="/[category]" as="tools">
               <a className="mb-3 capitalize font-medium text-sm hover:text-green-600 transition ease-in-out duration-500">
                 <i className="fad fa-envelope-open-text text-xs mr-2"></i>
-                Travel
+                Tools
               </a>
             </Link>
             <Link href="/[category]" as="shopping">
               <a className="mb-3 capitalize font-medium text-sm hover:text-green-600 transition ease-in-out duration-500">
-                <i class="fad fa-envelope-open-text text-xs mr-2"></i>
+                <i className="fad fa-envelope-open-text text-xs mr-2"></i>
                 Shopping
               </a>
             </Link>
