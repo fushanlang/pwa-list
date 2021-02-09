@@ -5,13 +5,13 @@ const ApplicationCard = ({ applications }) => {
       {applications.map((application) => (
         <Link
           key="{application.id}"
-          href="/application/[id]"
-          as={`/application/${application.id}`}
+          href="/application/[name]]"
+          as={`/application/${application.name}`}
         >
-          <div>
+          <a>
             <img alt="application-icon" width="50" src={application.icon} />
-            <h3>{application.title}</h3>
-          </div>
+            <h3>{application.name}</h3>
+          </a>
         </Link>
       ))}
     </div>
