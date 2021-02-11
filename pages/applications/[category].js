@@ -6,27 +6,30 @@ import ApplicationCard from "../../components/ApplicationCard";
 
 const ApplicationsCategory = () => {
   const [applications, setApplications] = useState([
-    { id: "", name: "", icon: "" },
+    { id: "", name: "", icon: "", overview: "", description: "" },
   ]);
   const router = useRouter();
   const { category } = router.query;
   useEffect(() => {
-    if (category) {
-      const fetchApplicationsData = async () => {
-        const applicationsSnapShot = await db
-          .collection("applications")
-          .where("category", "==", category)
-          .get();
-        setApplications(
-          applicationsSnapShot.docs.map((doc) => ({
-            id: doc.id,
-            name: doc.data().name,
-            icon: doc.data().icon,
-          }))
-        );
-      };
-      fetchApplicationsData();
+    if (!category) {
+      return;
     }
+    const fetchApplicationsData = async () => {
+      const applicationsData = await db
+        .collection("applications")
+        .where("category", "==", category)
+        .get();
+      setApplications(
+        applicationsData.docs.map((doc) => ({
+          id: doc.id,
+          name: doc.data().name,
+          icon: doc.data().icon,
+          overview: doc.data().overview,
+          description: doc.data().description,
+        }))
+      );
+    };
+    fetchApplicationsData();
   }, [category]);
   // useEffect(() => {
   //   const unSub = db
