@@ -49,7 +49,7 @@ const Layout = ({ children, title = "PWA Store" }) => {
             </Link>
           </div>
         </div>
-        <div class="bg-gray-100 flex-1 p-6"> {children}</div>
+        <div className="bg-gray-100 flex-1 p-6"> {children}</div>
       </div>
     </div>
   );

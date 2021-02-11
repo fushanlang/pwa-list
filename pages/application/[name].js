@@ -26,7 +26,7 @@ const ApplicationName = () => {
   }, [name]);
   return (
     <Layout title={application.name}>
-      <p>{application.name}</p>
+      <h1>{application.name}</h1>
       <img alt="application-icon" width="50" src={application.icon} />
       <p>{application.url}</p>
       <p>{application.description}</p>
