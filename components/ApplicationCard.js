@@ -10,11 +10,7 @@ const ApplicationCard = ({ applications }) => {
         >
           <a className="flex bg-white shadow-md mt-6 p-4 rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
             <div className="mr-2 h-20 w-20 overflow-hidden">
-              <img
-                className="block"
-                alt="application-icon"
-                src={application.icon}
-              />
+              <img alt="application-icon" src={application.icon} />
             </div>
             <div className="flex flex-col justify-between">
               <div className="mb-2 h-5 w-40 overflow-hidden">

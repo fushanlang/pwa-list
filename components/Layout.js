@@ -43,19 +43,19 @@ const Layout = ({ children, title = "PWA Store" }) => {
         </div>
         <div className="bg-gray-100 flex-1 p-6"> {children}</div>
       </div>
-      <div className="fixed bottom-0 w-full bg-white h-10">
-        <ul className="flex justify-center align-between">
+      <div className="bottom-0 w-full bg-white fixed md:hidden">
+        <ul className="flex h-12 justify-around items-center">
           <li className="text-center px-6">
             <Link href="/">
-              <a className="">
+              <a className="block px-8 hover:text-green-600">
                 <FontAwesomeIcon icon={faHome} size="lg" className="" />
                 <span className="block">Home</span>
               </a>
             </Link>
           </li>
-          <li className="text-center px-6">
+          <li className="text-center">
             <Link href="/">
-              <a className="">
+              <a className="block px-8 hover:text-green-600">
                 <FontAwesomeIcon icon={faHome} size="lg" className="" />
                 <span className="block">Home</span>
               </a>
