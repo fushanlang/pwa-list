@@ -26,10 +26,19 @@ const ApplicationName = () => {
   }, [name]);
   return (
     <Layout title={application.name}>
-      <h1>{application.name}</h1>
-      <img alt="application-icon" width="50" src={application.icon} />
-      <p>{application.url}</p>
-      <p>{application.description}</p>
+      <div className="text-center">
+        <h1 className="font-bold text-2xl">{application.name}</h1>
+        {/* <img alt="application-icon" width="50" src={application.icon} /> */}
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={application.url}
+          className="inline-block w-64 bg-white shadow-md my-8 p-3 rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
+        >
+          VIEW
+        </a>
+        <p>{application.description}</p>
+      </div>
     </Layout>
   );
 };

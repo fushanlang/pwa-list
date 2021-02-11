@@ -8,7 +8,7 @@ const ApplicationCard = ({ applications }) => {
           href="/application/[name]]"
           as={`/application/${application.name}`}
         >
-          <a className="flex bg-white shadow-md mt-6 p-4 rounded-md hover:bg-gray-200 transition ease-in-out">
+          <a className="flex bg-white shadow-md mt-6 p-4 rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
             <div className="mr-2 h-20 w-20 overflow-hidden">
               <img
                 className="block"
