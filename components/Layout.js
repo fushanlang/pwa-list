@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import CategoryLink from "./CategoryLink";
 
 const Layout = ({ children, title = "PWA Store" }) => {
   return (
@@ -17,36 +18,25 @@ const Layout = ({ children, title = "PWA Store" }) => {
         >
           <div className="flex flex-col">
             <p className="uppercase text-xs text-gray-600 mb-4">homes</p>
-            <a
-              href="/"
-              className="mb-3 font-medium text-sm hover:text-green-600 transition ease-in-out"
-            >
-              Analytics dashboard
-            </a>
+            <CategoryLink href="/" as="/" name="Home" />
             <p className="uppercase text-xs text-gray-600 mb-4 mt-4">
               categories
             </p>
-            <Link
+            <CategoryLink
               href="/applications/[category]"
               as="/applications/entertainment"
-            >
-              <a className="mb-3 font-medium text-sm hover:text-green-600 transition ease-in-out">
-                <i className="fad fa-envelope-open-text text-xs mr-2"></i>
-                Entertainment
-              </a>
-            </Link>
-            <Link href="/applications/[category]" as="/applications/tools">
-              <a className="mb-3 font-medium text-sm hover:text-green-600 transition ease-in-out">
-                <i className="fad fa-envelope-open-text text-xs mr-2"></i>
-                Tools
-              </a>
-            </Link>
-            <Link href="/applications/[category]" as="/applications/shopping">
-              <a className="mb-3 font-medium text-sm hover:text-green-600 transition ease-in-out">
-                <i className="fad fa-envelope-open-text text-xs mr-2"></i>
-                Shopping
-              </a>
-            </Link>
+              name="Entertainment"
+            />
+            <CategoryLink
+              href="/applications/[category]"
+              as="/applications/tools"
+              name="Tools"
+            />
+            <CategoryLink
+              href="/applications/[category]"
+              as="/applications/shopping"
+              name="Shopping"
+            />
           </div>
         </div>
         <div className="bg-gray-100 flex-1 p-6"> {children}</div>
