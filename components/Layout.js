@@ -1,5 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
 import CategoryLink from "./CategoryLink";
 
 const Layout = ({ children, title = "PWA Store" }) => {
@@ -40,6 +42,26 @@ const Layout = ({ children, title = "PWA Store" }) => {
           </div>
         </div>
         <div className="bg-gray-100 flex-1 p-6"> {children}</div>
+      </div>
+      <div className="fixed bottom-0 w-full bg-white h-10">
+        <ul className="flex justify-center align-between">
+          <li className="text-center px-6">
+            <Link href="/">
+              <a className="">
+                <FontAwesomeIcon icon={faHome} size="lg" className="" />
+                <span className="block">Home</span>
+              </a>
+            </Link>
+          </li>
+          <li className="text-center px-6">
+            <Link href="/">
+              <a className="">
+                <FontAwesomeIcon icon={faHome} size="lg" className="" />
+                <span className="block">Home</span>
+              </a>
+            </Link>
+          </li>
+        </ul>
       </div>
     </div>
   );
