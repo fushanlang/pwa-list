@@ -47,7 +47,7 @@ const Layout = ({ children, title = "PWA Store" }) => {
         <ul className="flex h-12 justify-around items-center">
           <li className="text-center px-6">
             <Link href="/">
-              <a className="block px-8 hover:text-green-600">
+              <a className="block px-8 transition duration-500 ease-in-out hover:text-green-600">
                 <FontAwesomeIcon icon={faHome} size="lg" className="" />
                 <span className="block">Home</span>
               </a>
@@ -55,7 +55,7 @@ const Layout = ({ children, title = "PWA Store" }) => {
           </li>
           <li className="text-center">
             <Link href="/">
-              <a className="block px-8 hover:text-green-600">
+              <a className="block px-8 transition duration-500 ease-in-out hover:text-green-600">
                 <FontAwesomeIcon icon={faHome} size="lg" className="" />
                 <span className="block">Home</span>
               </a>
