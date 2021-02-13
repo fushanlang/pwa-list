@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import CategoryLink from "./CategoryLink";
+import { faHome, faListUl } from "@fortawesome/free-solid-svg-icons";
+import CategoryLinkSide from "./CategoryLinkSide";
 
 const Layout = ({ children, title = "PWA Store" }) => {
   return (
@@ -20,25 +20,27 @@ const Layout = ({ children, title = "PWA Store" }) => {
         >
           <div className="flex flex-col">
             <p className="uppercase text-xs text-gray-600 mb-4">homes</p>
-            <CategoryLink href="/" as="/" name="Home" />
+            <Link href="/" as="/">
+              <a className="mb-3 font-medium text-sm transition duration-500 ease-in-out hover:text-green-600">
+                Home
+              </a>
+            </Link>
             <p className="uppercase text-xs text-gray-600 mb-4 mt-4">
               categories
             </p>
-            <CategoryLink
+            <Link
               href="/applications/[category]"
               as="/applications/entertainment"
-              name="Entertainment"
-            />
-            <CategoryLink
-              href="/applications/[category]"
-              as="/applications/tools"
-              name="Tools"
-            />
-            <CategoryLink
-              href="/applications/[category]"
-              as="/applications/shopping"
-              name="Shopping"
-            />
+            >
+              <a className="mb-3 font-medium text-sm transition duration-500 ease-in-out hover:text-green-600">
+                Entertainment
+              </a>
+            </Link>
+            <Link href="/applications/[category]" as="/applications/tools">
+              <a className="mb-3 font-medium text-sm transition duration-500 ease-in-out hover:text-green-600">
+                Tools
+              </a>
+            </Link>
           </div>
         </div>
         <div className="bg-gray-100 flex-1 p-6"> {children}</div>
@@ -49,15 +51,15 @@ const Layout = ({ children, title = "PWA Store" }) => {
             <Link href="/">
               <a className="block px-8 transition duration-500 ease-in-out hover:text-green-600">
                 <FontAwesomeIcon icon={faHome} size="lg" className="" />
-                <span className="block">Home</span>
+                <span className="text-xs block">Home</span>
               </a>
             </Link>
           </li>
           <li className="text-center">
-            <Link href="/">
+            <Link href="/categories">
               <a className="block px-8 transition duration-500 ease-in-out hover:text-green-600">
-                <FontAwesomeIcon icon={faHome} size="lg" className="" />
-                <span className="block">Home</span>
+                <FontAwesomeIcon icon={faListUl} size="lg" className="" />
+                <span className="text-xs block">Categories</span>
               </a>
             </Link>
           </li>
