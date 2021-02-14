@@ -9,7 +9,7 @@ const db = firebase.firestore();
 const ApplicationName = (applicationData) => {
   const application = applicationData.applicationData;
   return (
-    <Layout title={application.name}>
+    <Layout>
       {application.name === undefined ? (
         <NotFound />
       ) : (

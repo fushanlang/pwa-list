@@ -49,7 +49,7 @@ const ApplicationsCategory = () => {
   //   return () => unSub();
   // }, []);
   return (
-    <Layout title={category}>
+    <Layout>
       <ApplicationCard applications={applications} />
     </Layout>
   );
