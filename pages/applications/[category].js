@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { db } from "../../plugins/firebase";
+import firebase from "../../plugins/firebase";
+import "firebase/firestore";
 import Layout from "../../components/Layout";
 import ApplicationCard from "../../components/ApplicationCard";
 
+const db = firebase.firestore();
 const ApplicationsCategory = () => {
   const [applications, setApplications] = useState([
     { id: "", name: "", icon: "", overview: "", description: "" },
