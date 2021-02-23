@@ -6,7 +6,7 @@ const SideBar = () => {
   return (
     <div
       id="sideBar"
-      className="bg-white border-r border-gray-300 p-6 w-64 hidden md:block"
+      className="bg-white border-r border-gray-300 p-6 w-60 hidden md:block"
     >
       <div className="flex flex-col">
         <p className="uppercase text-xs text-gray-600 mb-4">homes</p>

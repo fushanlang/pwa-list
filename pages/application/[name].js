@@ -5,11 +5,15 @@ import "firebase/firestore";
 import Layout from "../../components/Layout";
 import NotFound from "../../components/NotFound";
 import Modal from "react-modal";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.min.css";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");
 
 const db = firebase.firestore();
 const ApplicationName = (applicationData) => {
-  // const [modalsOpen, setModalsOpen] = useState(false);
+  const [modalsOpen, setModalsOpen] = useState(false);
   const application = applicationData.applicationData;
   return (
     <Layout>
@@ -44,19 +48,63 @@ const ApplicationName = (applicationData) => {
               src={application.image_smartphone2}
             />
           </div>
-          {/* <button onClick={() => setModalsOpen(true)}>Open Modal</button>
-          <Modal
-            className=""
-            isOpen={modalsOpen}
-            onRequestClose={() => setModalsOpen(false)}
-          >
-            <img className="rounded-lg inset-0" src={application.image3} />
-            <button onClick={() => setModalsOpen(false)}>Close Modal</button>
-          </Modal> */}
           <div className="mt-7 px-4">
             <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
             <p className="text-left text-base">{application.description}</p>
           </div>
+
+          <button className="" onClick={() => setModalsOpen(true)}>
+            Open Modal
+          </button>
+          <Modal
+            className="rounded-none outline-none text-center max-h-96 mt-20 mx-2"
+            isOpen={modalsOpen}
+            onRequestClose={() => setModalsOpen(false)}
+          >
+            <div className="">
+              <Swiper
+                spaceBetween={50}
+                slidesPerView={1}
+                navigation
+                pagination={{ clickable: true }}
+                onSlideChange={() => console.log("slide change")}
+                onSwiper={(swiper) => console.log(swiper)}
+              >
+                <SwiperSlide>
+                  <Image
+                    width={1320}
+                    height={680}
+                    className="rounded-lg"
+                    src={application.image_pc1}
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    width={1320}
+                    height={680}
+                    className="rounded-lg"
+                    src={application.image_pc2}
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    width={380}
+                    height={680}
+                    className="rounded-lg"
+                    src={application.image_smartphone1}
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    width={380}
+                    height={680}
+                    className="rounded-lg"
+                    src={application.image_smartphone2}
+                  />
+                </SwiperSlide>
+              </Swiper>
+            </div>
+          </Modal>
         </div>
       )}
     </Layout>
