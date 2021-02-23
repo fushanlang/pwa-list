@@ -9,6 +9,6 @@ module.exports = {
     FIREBASE_APPID: process.env.FIREBASE_APPID,
   },
   images: {
-    domains: ["firebasestorage.googleapis.com"],
+    domains: ["firebasestorage.googleapis.com", "placehold.jp"],
   },
 };

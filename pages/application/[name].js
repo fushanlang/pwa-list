@@ -1,30 +1,62 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import Image from "next/image";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
 import NotFound from "../../components/NotFound";
+import Modal from "react-modal";
+Modal.setAppElement("#__next");
 
 const db = firebase.firestore();
 const ApplicationName = (applicationData) => {
+  // const [modalsOpen, setModalsOpen] = useState(false);
   const application = applicationData.applicationData;
   return (
     <Layout>
       {application.name === undefined ? (
         <NotFound />
       ) : (
-        <div className="text-center">
-          <h1 className="font-bold text-2xl">{application.name}</h1>
-          {/* <img alt="application-icon" width="50" src={application.icon} /> */}
+        <div className="text-center bg-white px-4 py-12 rounded-lg">
+          <h1 className="font-bold text-3xl mb-5">{application.name}</h1>
           <a
             target="_blank"
             rel="noopener noreferrer"
             href={application.url}
-            className="inline-block w-64 bg-white shadow-md my-8 p-3 rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
+            className="inline-block w-60 text-lg text-gray-50 bg-green-400 shadow-md p-1 rounded-md hover:bg-green-600 hover:shadow-none transition ease-in-out"
           >
             VIEW
           </a>
-          <p>{application.description}</p>
+          <div className="flex mt-6 overflow-scroll">
+            <img
+              className="rounded-lg max-h-96 mx-2 hidden lg:inline-block"
+              src={application.image_pc1}
+            />
+            <img
+              className="rounded-lg max-h-96 mx-2 hidden lg:inline-block"
+              src={application.image_pc2}
+            />
+            <img
+              className="rounded-lg max-h-96 mx-2"
+              src={application.image_smartphone1}
+            />
+            <img
+              className="rounded-lg max-h-96 mx-2"
+              src={application.image_smartphone2}
+            />
+          </div>
+          {/* <button onClick={() => setModalsOpen(true)}>Open Modal</button>
+          <Modal
+            className=""
+            isOpen={modalsOpen}
+            onRequestClose={() => setModalsOpen(false)}
+          >
+            <img className="rounded-lg inset-0" src={application.image3} />
+            <button onClick={() => setModalsOpen(false)}>Close Modal</button>
+          </Modal> */}
+          <div className="mt-7 px-4">
+            <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
+            <p className="text-left text-base">{application.description}</p>
+          </div>
         </div>
       )}
     </Layout>
@@ -47,6 +79,10 @@ ApplicationName.getInitialProps = async ({ query }) => {
     name: application.name,
     url: application.url,
     description: application.description,
+    image_pc1: application.image_pc1,
+    image_pc2: application.image_pc2,
+    image_smartphone1: application.image_smartphone1,
+    image_smartphone2: application.image_smartphone2,
   };
   return {
     applicationData: returnApplicationData,
