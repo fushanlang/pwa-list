@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
 import NotFound from "../../components/NotFound";
-import Modal from "react-modal";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.min.css";
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
-Modal.setAppElement("#__next");
+import ApplocationImageModal from "../../components/ApplocationImageModal";
 
 const db = firebase.firestore();
 const ApplicationName = (applicationData) => {
   const [modalsOpen, setModalsOpen] = useState(false);
+  const [initialSlide, setInitialSlide] = useState(0);
   const application = applicationData.applicationData;
   return (
     <Layout>
@@ -32,79 +27,48 @@ const ApplicationName = (applicationData) => {
           </a>
           <div className="flex mt-6 overflow-scroll">
             <img
-              className="rounded-lg max-h-96 mx-2 hidden lg:inline-block"
-              src={application.image_pc1}
-            />
-            <img
-              className="rounded-lg max-h-96 mx-2 hidden lg:inline-block"
-              src={application.image_pc2}
-            />
-            <img
-              className="rounded-lg max-h-96 mx-2"
+              onClick={() => {
+                setModalsOpen(true);
+                setInitialSlide(0);
+              }}
+              className="rounded-lg max-h-96 mx-2 cursor-pointer"
               src={application.image_smartphone1}
             />
             <img
-              className="rounded-lg max-h-96 mx-2"
+              onClick={() => {
+                setModalsOpen(true);
+                setInitialSlide(1);
+              }}
+              className="rounded-lg max-h-96 mx-2 cursor-pointer"
               src={application.image_smartphone2}
+            />
+            <img
+              onClick={() => {
+                setModalsOpen(true);
+                setInitialSlide(2);
+              }}
+              className="rounded-lg max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
+              src={application.image_pc1}
+            />
+            <img
+              onClick={() => {
+                setModalsOpen(true);
+                setInitialSlide(3);
+              }}
+              className="rounded-lg max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
+              src={application.image_pc2}
             />
           </div>
           <div className="mt-7 px-4">
             <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
             <p className="text-left text-base">{application.description}</p>
           </div>
-
-          <button className="" onClick={() => setModalsOpen(true)}>
-            Open Modal
-          </button>
-          <Modal
-            className="rounded-none outline-none text-center max-h-96 mt-20 mx-2"
-            isOpen={modalsOpen}
-            onRequestClose={() => setModalsOpen(false)}
-          >
-            <div className="">
-              <Swiper
-                spaceBetween={50}
-                slidesPerView={1}
-                navigation
-                pagination={{ clickable: true }}
-                onSlideChange={() => console.log("slide change")}
-                onSwiper={(swiper) => console.log(swiper)}
-              >
-                <SwiperSlide>
-                  <Image
-                    width={1320}
-                    height={680}
-                    className="rounded-lg"
-                    src={application.image_pc1}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Image
-                    width={1320}
-                    height={680}
-                    className="rounded-lg"
-                    src={application.image_pc2}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Image
-                    width={380}
-                    height={680}
-                    className="rounded-lg"
-                    src={application.image_smartphone1}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Image
-                    width={380}
-                    height={680}
-                    className="rounded-lg"
-                    src={application.image_smartphone2}
-                  />
-                </SwiperSlide>
-              </Swiper>
-            </div>
-          </Modal>
+          <ApplocationImageModal
+            application={application}
+            modalsOpen={modalsOpen}
+            setModalsOpen={setModalsOpen}
+            initialSlide={initialSlide}
+          />
         </div>
       )}
     </Layout>

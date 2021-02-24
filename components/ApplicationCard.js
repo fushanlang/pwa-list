@@ -18,8 +18,8 @@ const ApplicationCard = ({ applications }) => {
               />
             </div>
             <div className="flex flex-col justify-between">
-              <div className="mb-2 h-5 w-40">{application.name}</div>
-              <div className="h-10 w-40">{application.overview}</div>
+              <div className="text-base mt-1">{application.name}</div>
+              <div className="h-10 w-35">{application.overview}</div>
             </div>
           </a>
         </Link>
