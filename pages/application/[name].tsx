@@ -3,7 +3,7 @@ import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
 import NotFound from "../../components/NotFound";
-import ApplocationImageModal from "../../components/ApplocationImageModal";
+import ApplicationImageModal from "../../components/ApplicationImageModal";
 
 const db = firebase.firestore();
 const ApplicationName = (applicationData) => {
@@ -63,7 +63,7 @@ const ApplicationName = (applicationData) => {
             <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
             <p className="text-left text-base">{application.description}</p>
           </div>
-          <ApplocationImageModal
+          <ApplicationImageModal
             application={application}
             modalsOpen={modalsOpen}
             setModalsOpen={setModalsOpen}
