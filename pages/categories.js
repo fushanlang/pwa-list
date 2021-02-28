@@ -16,9 +16,9 @@ import {
 const categories = () => {
   return (
     <div>
-      <Layout title="Home">
-        <div className="text-xl flex flex-col">
-          <p className="font-bold mb-4 ml-1">Categories</p>
+      <Layout>
+        <div className="text-xl flex flex-col rounded-md bg-white px-7 pt-5 pb-6">
+          <p className="text-2xl font-bold mb-4">Categories</p>
           <Link
             href="applications/entertainment"
             as="applications/entertainment"
