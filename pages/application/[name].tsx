@@ -32,7 +32,7 @@ const ApplicationName = (applicationData) => {
                 setInitialSlide(0);
               }}
               className="rounded-lg max-h-96 mx-2 cursor-pointer"
-              src={application.image_smartphone1}
+              src={application.image_mobile1}
             />
             <img
               onClick={() => {
@@ -40,7 +40,7 @@ const ApplicationName = (applicationData) => {
                 setInitialSlide(1);
               }}
               className="rounded-lg max-h-96 mx-2 cursor-pointer"
-              src={application.image_smartphone2}
+              src={application.image_mobile2}
             />
             <img
               onClick={() => {
@@ -93,8 +93,8 @@ ApplicationName.getInitialProps = async ({ query }) => {
     description: application.description,
     image_pc1: application.image_pc1,
     image_pc2: application.image_pc2,
-    image_smartphone1: application.image_smartphone1,
-    image_smartphone2: application.image_smartphone2,
+    image_mobile1: application.image_mobile1,
+    image_mobile2: application.image_mobile2,
   };
   return {
     applicationData: returnApplicationData,

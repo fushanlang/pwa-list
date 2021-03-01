@@ -30,7 +30,7 @@ const ApplocationImageModal = ({
                 width={380}
                 height={680}
                 className="rounded-lg"
-                src={application.image_smartphone1}
+                src={application.image_mobile1}
               />
             </SwiperSlide>
             <SwiperSlide>
@@ -38,7 +38,7 @@ const ApplocationImageModal = ({
                 width={380}
                 height={680}
                 className="rounded-lg"
-                src={application.image_smartphone2}
+                src={application.image_mobile2}
               />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
