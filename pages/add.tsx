@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
@@ -13,12 +13,18 @@ const add = () => {
   const [overview, setOverview] = useState<String | null>(null);
   const [description, setDescription] = useState<String | null>(null);
   const [imagePc1, setImagePc1] = useState<File | null>(null);
-
+  const [imagePc1Url, setImagePc1Url] = useState<any | null>(null);
   const onChangeImageHandler = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (e.target.files[0]) {
-      setImagePc1(e.target.files![0]);
+      var file = e.target.files![0];
+      var reader = new FileReader();
+      setImagePc1(file);
+      reader.onload = (e) => {
+        setImagePc1Url(e.target.result);
+      };
+      reader.readAsDataURL(file);
       e.target.value = "";
     }
   };
@@ -79,6 +85,24 @@ const add = () => {
           </div>
           <div className="mb-4">
             <label className="block font-bold mb-2">PC Image</label>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={onChangeImageHandler}
+            />
+            <div>
+              <img className="rounded max-h-96 mx-2" src={imagePc1Url} />
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setImagePc1(null);
+                setImagePc1Url(null);
+              }}
+            >
+              del
+            </button>
           </div>
           <div className="mb-4">
             <label className="block font-bold mb-2">Mobile Image</label>
@@ -91,7 +115,6 @@ const add = () => {
               Submit
             </button>
           </div>
-          <input type="file" onChange={onChangeImageHandler} />
         </form>
       </Layout>
     </div>

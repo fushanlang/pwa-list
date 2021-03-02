@@ -31,7 +31,7 @@ const ApplicationName = (applicationData) => {
                 setModalsOpen(true);
                 setInitialSlide(0);
               }}
-              className="rounded-lg max-h-96 mx-2 cursor-pointer"
+              className="rounded max-h-96 mx-2 cursor-pointer"
               src={application.image_mobile1}
             />
             <img
@@ -39,7 +39,7 @@ const ApplicationName = (applicationData) => {
                 setModalsOpen(true);
                 setInitialSlide(1);
               }}
-              className="rounded-lg max-h-96 mx-2 cursor-pointer"
+              className="rounded max-h-96 mx-2 cursor-pointer"
               src={application.image_mobile2}
             />
             <img
@@ -47,7 +47,7 @@ const ApplicationName = (applicationData) => {
                 setModalsOpen(true);
                 setInitialSlide(2);
               }}
-              className="rounded-lg max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
+              className="rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
               src={application.image_pc1}
             />
             <img
@@ -55,7 +55,7 @@ const ApplicationName = (applicationData) => {
                 setModalsOpen(true);
                 setInitialSlide(3);
               }}
-              className="rounded-lg max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
+              className="rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
               src={application.image_pc2}
             />
           </div>
