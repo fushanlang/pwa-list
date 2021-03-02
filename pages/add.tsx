@@ -13,34 +13,53 @@ const add = () => {
   const [overview, setOverview] = useState<String | null>(null);
   const [description, setDescription] = useState<String | null>(null);
   const [imagePc1, setImagePc1] = useState<File | null>(null);
+  const [imagePc2, setImagePc2] = useState<File | null>(null);
+  const [imagePc3, setImagePc3] = useState<File | null>(null);
   const [imagePc1Url, setImagePc1Url] = useState<any | null>(null);
+  const [imagePc2Url, setImagePc2Url] = useState<any | null>(null);
+  const [imagePc3Url, setImagePc3Url] = useState<any | null>(null);
   const onChangeImageHandler = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (e.target.files[0]) {
-      var file = e.target.files![0];
+    function setImagePc(num, file) {
+      var functions = [setImagePc1, setImagePc2, setImagePc3];
+      if (typeof functions[num] !== "undefined") {
+        functions[num](file);
+      }
+    }
+    function setImagePcUrl(num, result) {
+      var functions = [setImagePc1Url, setImagePc2Url, setImagePc3Url];
+      if (typeof functions[num] !== "undefined") {
+        functions[num](result);
+      }
+    }
+    var files = e.target.files;
+    for (let i = 0; i < files.length; i++) {
+      console.log(i);
+      var file = e.target.files[i];
       var reader = new FileReader();
-      setImagePc1(file);
+      setImagePc(i, file);
       reader.onload = (e) => {
-        setImagePc1Url(e.target.result);
+        setImagePcUrl(i, e.target.result);
       };
       reader.readAsDataURL(file);
-      e.target.value = "";
+      // e.target.value = "";
+      console.log(i);
     }
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await storage.ref("application-images/aaa").put(imagePc1);
-    let image_pc1_url = await storage
+    await storage.ref(`application-images/${name}_pc1`).put(imagePc1);
+    let imagePc1DlUrl = await storage
       .ref("application-images")
-      .child("aaa")
+      .child(`${name}_pc1`)
       .getDownloadURL();
     db.collection("applications").add({
       name: name,
       link: link,
       overview: overview,
       description: description,
-      image_pc1: image_pc1_url,
+      image_pc1: imagePc1DlUrl,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
@@ -92,7 +111,12 @@ const add = () => {
               onChange={onChangeImageHandler}
             />
             <div>
+              aa
               <img className="rounded max-h-96 mx-2" src={imagePc1Url} />
+            </div>
+            <div>
+              bb
+              <img className="rounded max-h-96 mx-2" src={imagePc2Url} />
             </div>
             <button
               type="button"
