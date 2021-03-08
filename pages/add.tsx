@@ -4,6 +4,8 @@ import ImagePreview from "../components/ImagePreview";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import "firebase/storage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
 const db = firebase.firestore();
 const storage = firebase.storage();
@@ -232,11 +234,18 @@ const add = () => {
               />
             </label>
           </div>
-          <div className="mb-4 flex overflow-scroll">
-            <ImagePreview
-              imageUrl={iconUrl}
-              handleDeleteImage={handleDeleteIcon}
-            />
+          <div className="mb-4 flex">
+            <div className="relative">
+              <img className="rounded max-h-20 mx-2" src={iconUrl} />
+              {iconUrl && (
+                <button
+                  className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3"
+                  onClick={handleDeleteIcon}
+                >
+                  <FontAwesomeIcon icon={faMinusCircle} size="lg" />
+                </button>
+              )}
+            </div>
           </div>
           <label className="block font-bold mb-4">PC Image</label>
           <div className="mb-4 text-center">
