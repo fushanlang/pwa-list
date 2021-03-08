@@ -56,7 +56,14 @@ const add = () => {
       .getDownloadURL();
     return res;
   }
-  const handleDeleteImage = async () => {};
+  const handleDeleteImage = async (index) => {
+    tmpPcImageUrlList = [...pcImageUrlList];
+    tmpPcImages = [...pcImages];
+    tmpPcImages.splice(index, 1);
+    tmpPcImageUrlList.splice(index, 1);
+    setPcImages(tmpPcImages);
+    setPcImageUrlList(tmpPcImageUrlList);
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     var image_pc1 = pcImages[0]
@@ -138,15 +145,13 @@ const add = () => {
             </label>
           </div>
           <div className="mb-4 flex overflow-scroll">
-            <div>
-              {pcImageUrlList.map((pcImageUrl, index) => (
-                <ImagePreview
-                  key={index}
-                  imageUrl={pcImageUrl}
-                  handleDeleteImage={handleDeleteImage}
-                />
-              ))}
-            </div>
+            {pcImageUrlList.map((pcImageUrl, index) => (
+              <ImagePreview
+                key={index}
+                imageUrl={pcImageUrl}
+                handleDeleteImage={() => handleDeleteImage(index)}
+              />
+            ))}
           </div>
           <label className="block font-bold mb-2">Mobile Image</label>
 
