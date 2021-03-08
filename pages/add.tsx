@@ -13,26 +13,53 @@ const add = () => {
   const [link, setLink] = useState<String | null>(null);
   const [overview, setOverview] = useState<String | null>(null);
   const [description, setDescription] = useState<String | null>(null);
+  const [icon, setIcon] = useState(null);
+  const [iconUrl, setIconUrl] = useState(null);
   const [pcImages, setPcImages] = useState([]);
   const [pcImageUrlList, setPcImageUrlList] = useState([]);
+  const [mobileImages, setMobileImages] = useState([]);
+  const [mobileImageUrlList, setMobileImageUrlList] = useState([]);
   var tmpPcImages = [];
   var tmpPcImageUrlList = [];
-  function fileLoad(file, tmpPcImageUrlList, tmpPcImages, i, fileLengh) {
+  var tmpMobileImages = [];
+  var tmpMobileImageUrlList = [];
+  function fileLoad(
+    file,
+    i,
+    fileLengh,
+    setImageUrlList,
+    setImages,
+    tmpImageUrlList,
+    tmpImages
+  ) {
     return new Promise((resolve, reject) => {
       var end = fileLengh - 1;
       var reader = new FileReader();
-      tmpPcImages.push(file);
+      tmpImages.push(file);
       reader.onload = (e) => {
-        tmpPcImageUrlList.push(e.target.result);
+        tmpImageUrlList.push(e.target.result);
         if (i == end) {
-          setPcImageUrlList(tmpPcImageUrlList);
-          setPcImages(tmpPcImages);
+          setImageUrlList(tmpImageUrlList);
+          setImages(tmpImages);
         }
         resolve("success");
       };
       reader.readAsDataURL(file);
     });
   }
+
+  const onChangeIconHandler = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      setIconUrl(e.target.result);
+      setIcon(file);
+    };
+    reader.readAsDataURL(file);
+  };
+
   const onChangePcImageHandler = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -41,11 +68,61 @@ const add = () => {
     tmpPcImages = [...pcImages];
     for (let i = 0; i < files.length; i++) {
       var file = e.target.files[i];
-      await fileLoad(file, tmpPcImageUrlList, tmpPcImages, i, files.length);
+      await fileLoad(
+        file,
+        i,
+        files.length,
+        setPcImageUrlList,
+        setPcImages,
+        tmpPcImageUrlList,
+        tmpPcImages
+      );
     }
   };
 
-  async function uploadToStorage(image, fileName) {
+  const onChangeMobileImageHandler = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    var files = e.target.files;
+    tmpMobileImageUrlList = [...mobileImageUrlList];
+    tmpMobileImages = [...mobileImages];
+    for (let i = 0; i < files.length; i++) {
+      var file = e.target.files[i];
+      await fileLoad(
+        file,
+        i,
+        files.length,
+        setMobileImageUrlList,
+        setMobileImages,
+        tmpMobileImageUrlList,
+        tmpMobileImages
+      );
+    }
+  };
+  const handleDeleteIcon = async () => {
+    setIcon(null);
+    setIconUrl(null);
+  };
+
+  const handleDeletePcImage = async (index) => {
+    tmpPcImageUrlList = [...pcImageUrlList];
+    tmpPcImages = [...pcImages];
+    tmpPcImages.splice(index, 1);
+    tmpPcImageUrlList.splice(index, 1);
+    setPcImages(tmpPcImages);
+    setPcImageUrlList(tmpPcImageUrlList);
+  };
+
+  const handleDeleteMobileImage = async (index) => {
+    tmpMobileImageUrlList = [...mobileImageUrlList];
+    tmpMobileImages = [...mobileImages];
+    tmpMobileImages.splice(index, 1);
+    tmpMobileImageUrlList.splice(index, 1);
+    setMobileImages(tmpMobileImages);
+    setMobileImageUrlList(tmpMobileImageUrlList);
+  };
+
+  async function uploadToImagesStorage(image, fileName) {
     if (image == null) {
       return null;
     }
@@ -56,39 +133,50 @@ const add = () => {
       .getDownloadURL();
     return res;
   }
-  const handleDeleteImage = async (index) => {
-    tmpPcImageUrlList = [...pcImageUrlList];
-    tmpPcImages = [...pcImages];
-    tmpPcImages.splice(index, 1);
-    tmpPcImageUrlList.splice(index, 1);
-    setPcImages(tmpPcImages);
-    setPcImageUrlList(tmpPcImageUrlList);
-  };
+
+  async function uploadToIconsStorage(icon) {
+    await storage.ref(`application-icons/${name}`).put(icon);
+    let res = await storage
+      .ref("application-icons")
+      .child(`${name}`)
+      .getDownloadURL();
+    return res;
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    var image_pc1 = pcImages[0]
-      ? await uploadToStorage(pcImages[0], "pc1")
+    console.log(icon);
+    var icon_url = icon ? await uploadToIconsStorage(icon) : null;
+    var image_pc1_url = pcImages[0]
+      ? await uploadToImagesStorage(pcImages[0], "pc1")
       : null;
-    var image_pc2 = pcImages[1]
-      ? await uploadToStorage(pcImages[1], "pc2")
+    var image_pc2_url = pcImages[1]
+      ? await uploadToImagesStorage(pcImages[1], "pc2")
       : null;
-    var image_pc3 = pcImages[2]
-      ? await uploadToStorage(pcImages[2], "pc3")
+    var image_pc3_url = pcImages[2]
+      ? await uploadToImagesStorage(pcImages[2], "pc3")
       : null;
-    // var imageMobile1DlUrl = await uploadToStorage(imageMobile1, "mobile1");
-    // var imageMobile2DlUrl = await uploadToStorage(imageMobile2, "mobile2");
-    // var imageMobile3DlUrl = await uploadToStorage(imageMobile3, "mobile3");
+    var image_mobile1_url = mobileImages[0]
+      ? await uploadToImagesStorage(mobileImages[0], "mobile1")
+      : null;
+    var image_mobile2_url = mobileImages[1]
+      ? await uploadToImagesStorage(mobileImages[1], "mobile2")
+      : null;
+    var image_mobile3_url = mobileImages[2]
+      ? await uploadToImagesStorage(mobileImages[2], "mobile3")
+      : null;
     db.collection("applications").add({
       name: name,
       link: link,
       overview: overview,
       description: description,
-      image_pc1: image_pc1,
-      image_pc2: image_pc2,
-      image_pc3: image_pc3,
-      // image_mobile1: imageMobile1DlUrl,
-      // image_mobile2: imageMobile2DlUrl,
-      // image_mobile3: imageMobile3DlUrl,
+      icon: icon_url,
+      image_pc1: image_pc1_url,
+      image_pc2: image_pc2_url,
+      image_pc3: image_pc3_url,
+      image_mobile1: image_mobile1_url,
+      image_mobile2: image_mobile2_url,
+      image_mobile3: image_mobile3_url,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
@@ -131,6 +219,25 @@ const add = () => {
               ></textarea>
             </label>
           </div>
+          <label className="block font-bold mb-4">Icon</label>
+          <div className="mb-4 text-center">
+            <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
+              Choose Icon
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                multiple
+                onChange={onChangeIconHandler}
+              />
+            </label>
+          </div>
+          <div className="mb-4 flex overflow-scroll">
+            <ImagePreview
+              imageUrl={iconUrl}
+              handleDeleteImage={handleDeleteIcon}
+            />
+          </div>
           <label className="block font-bold mb-4">PC Image</label>
           <div className="mb-4 text-center">
             <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
@@ -149,12 +256,32 @@ const add = () => {
               <ImagePreview
                 key={index}
                 imageUrl={pcImageUrl}
-                handleDeleteImage={() => handleDeleteImage(index)}
+                handleDeleteImage={() => handleDeletePcImage(index)}
               />
             ))}
           </div>
           <label className="block font-bold mb-2">Mobile Image</label>
-
+          <div className="mb-4 text-center">
+            <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
+              Choose Mobile Image
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                multiple
+                onChange={onChangeMobileImageHandler}
+              />
+            </label>
+          </div>
+          <div className="mb-4 flex overflow-scroll">
+            {mobileImageUrlList.map((mobileImageUrl, index) => (
+              <ImagePreview
+                key={index}
+                imageUrl={mobileImageUrl}
+                handleDeleteImage={() => handleDeleteMobileImage(index)}
+              />
+            ))}
+          </div>
           <div className="text-center">
             <button
               className="w-52 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

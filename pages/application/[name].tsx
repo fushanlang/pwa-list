@@ -25,7 +25,7 @@ const ApplicationName = (applicationData) => {
           >
             VIEW
           </a>
-          <div className="flex mt-6">
+          <div className="flex mt-6 overflow-scroll">
             <img
               onClick={() => {
                 setModalsOpen(true);
