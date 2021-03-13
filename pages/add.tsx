@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
+import AddCompletedModal from "../components/AddCompletedModal";
 import ErrorMessage from "../components/ErrorMessage";
 import ImagePreview from "../components/ImagePreview";
 import firebase from "../plugins/firebase";
@@ -14,7 +15,9 @@ import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 
 const add = () => {
+  const [modalsOpen, setModalsOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [email, setEmail] = useState<string | null>(null);
   const [name, setName] = useState<string | null>(null);
   const [link, setLink] = useState<string | null>(null);
   const [overview, setOverview] = useState<string | null>(null);
@@ -26,6 +29,7 @@ const add = () => {
   const [mobileImages, setMobileImages] = useState<any[]>([]);
   const [mobileImageUrlList, setMobileImageUrlList] = useState<any[]>([]);
   const [errors, setErrors] = useState<any | null>({
+    email: [],
     name: [],
     link: [],
     overview: [],
@@ -44,7 +48,6 @@ const add = () => {
     var file = e.target.files[0];
     var reader = new FileReader();
     reader.onload = (e) => {
-      console.log(e.target.result);
       setIconUrl(e.target.result);
       setIcon(file);
     };
@@ -122,18 +125,20 @@ const add = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    var nameErrors = validateRequired(name, "Please put your app name");
-    var linkErrors = validateRequired(link, "Please put your app link");
+    var emailErrors = validateRequired(name, "Please put your email");
+    var nameErrors = validateRequired(name, "Please put the App name");
+    var linkErrors = validateRequired(link, "Please put the App link");
     var overviewErrors = validateRequired(
       overview,
-      "Please put your app overview"
+      "Please put the App overview"
     );
     var descriptionErrors = validateRequired(
       description,
-      "Please put your app description"
+      "Please put the App description"
     );
-    var iconErrors = validateRequired(icon, "Please put your app icon");
+    var iconErrors = validateRequired(icon, "Please put the App icon");
     if (
+      emailErrors ||
       nameErrors ||
       linkErrors ||
       overviewErrors ||
@@ -141,6 +146,7 @@ const add = () => {
       iconErrors
     ) {
       setErrors({
+        email: emailErrors,
         name: nameErrors,
         link: linkErrors,
         overview: overviewErrors,
@@ -172,6 +178,7 @@ const add = () => {
       ? await uploadToStorage(imagesFolder, name, mobileImages[2], "mobile3")
       : null;
     db.collection("applications").add({
+      email: email,
       name: name,
       link: link,
       overview: overview,
@@ -187,6 +194,7 @@ const add = () => {
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setIsSubmitting(false);
+    setModalsOpen(true);
   };
 
   return (
@@ -195,36 +203,61 @@ const add = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block font-bold mb-2">
-              Name<span className="text-red-400 ml-2">*</span>
+              Your Email
+              <span className="text-red-400 ml-2">* </span>
+              (not be published)
             </label>
             <input
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               type="text"
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setErrors({ ...errors, email: [] });
+              }}
             />
             <ErrorMessage errors={errors.name}></ErrorMessage>
           </div>
           <div className="mb-4">
             <label className="block font-bold mb-2">
-              Link
+              App Name<span className="text-red-400 ml-2">*</span>
+            </label>
+            <input
+              className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              type="text"
+              onChange={(e) => {
+                setName(e.target.value);
+                setErrors({ ...errors, name: [] });
+              }}
+            />
+            <ErrorMessage errors={errors.name}></ErrorMessage>
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold mb-2">
+              App Link
               <span className="text-red-400 ml-2">*</span>
             </label>
             <input
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               placeholder="https://"
-              onChange={(e) => setLink(e.target.value)}
+              onChange={(e) => {
+                setLink(e.target.value);
+                setErrors({ ...errors, link: [] });
+              }}
             />
             <ErrorMessage errors={errors.link}></ErrorMessage>
           </div>
           <div className="mb-4">
             <label className="block font-bold mb-2">
-              Overview<span className="text-red-400 ml-2">*</span>
+              App Overview<span className="text-red-400 ml-2">*</span>
             </label>
             <input
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               type="text"
               placeholder="Video Upload Site"
-              onChange={(e) => setOverview(e.target.value)}
+              onChange={(e) => {
+                setOverview(e.target.value);
+                setErrors({ ...errors, overview: [] });
+              }}
             />
             <ErrorMessage errors={errors.overview}></ErrorMessage>
           </div>
@@ -236,12 +269,15 @@ const add = () => {
             <textarea
               className="shadow form-textarea mt-1 block w-full border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               rows={5}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) => {
+                setDescription(e.target.value);
+                setErrors({ ...errors, description: [] });
+              }}
             ></textarea>
             <ErrorMessage errors={errors.description}></ErrorMessage>
           </div>
           <label className="block font-bold mb-4">
-            Icon<span className="text-red-400 ml-2">*</span>
+            App Icon<span className="text-red-400 ml-2">*</span>
           </label>
           <div className="mb-4 text-center">
             <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
@@ -251,7 +287,10 @@ const add = () => {
                 className="hidden"
                 accept="image/*"
                 multiple
-                onChange={onChangeIconHandler}
+                onChange={(e) => {
+                  onChangeIconHandler(e);
+                  setErrors({ ...errors, icon: [] });
+                }}
               />
             </label>
             <ErrorMessage errors={errors.icon}></ErrorMessage>
@@ -270,7 +309,7 @@ const add = () => {
             </div>
           </div>
           <label className="block font-bold mb-4">
-            PC Image (Up to 3 Images)
+            App PC Image (Up to 3 Images)
           </label>
           <div className="mb-4 text-center">
             <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
@@ -294,7 +333,7 @@ const add = () => {
             ))}
           </div>
           <label className="block font-bold mb-2">
-            Mobile Image (Up to 3 Images)
+            App Mobile Image (Up to 3 Images)
           </label>
           <div className="mb-4 text-center">
             <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
@@ -336,6 +375,10 @@ const add = () => {
             )}
           </div>
         </form>
+        <AddCompletedModal
+          modalsOpen={modalsOpen}
+          setModalsOpen={setModalsOpen}
+        />
       </Layout>
     </div>
   );

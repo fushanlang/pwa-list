@@ -7,7 +7,7 @@ import "swiper/swiper-bundle.min.css";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");
 
-const ApplocationImageModal = ({
+const ApplicationImageModal = ({
   application,
   modalsOpen,
   setModalsOpen,
@@ -64,4 +64,4 @@ const ApplocationImageModal = ({
   );
 };
 
-export default ApplocationImageModal;
+export default ApplicationImageModal;
