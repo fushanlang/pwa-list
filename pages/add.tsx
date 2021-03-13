@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import categories from "../consts/categories";
 import Layout from "../components/Layout";
 import AddCompletedModal from "../components/AddCompletedModal";
 import ErrorMessage from "../components/ErrorMessage";
@@ -20,6 +21,7 @@ const add = () => {
   const [email, setEmail] = useState<string | null>(null);
   const [name, setName] = useState<string | null>(null);
   const [link, setLink] = useState<string | null>(null);
+  const [category, setCategory] = useState<string | null>(null);
   const [overview, setOverview] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [icon, setIcon] = useState<File | null>(null);
@@ -32,6 +34,7 @@ const add = () => {
     email: [],
     name: [],
     link: [],
+    category: [],
     overview: [],
     description: [],
     icon: [],
@@ -128,6 +131,10 @@ const add = () => {
     var emailErrors = validateRequired(name, "Please put your email");
     var nameErrors = validateRequired(name, "Please put the App name");
     var linkErrors = validateRequired(link, "Please put the App link");
+    var categoryErrors = validateRequired(
+      category,
+      "Please put the App category"
+    );
     var overviewErrors = validateRequired(
       overview,
       "Please put the App overview"
@@ -141,6 +148,7 @@ const add = () => {
       emailErrors ||
       nameErrors ||
       linkErrors ||
+      categoryErrors ||
       overviewErrors ||
       descriptionErrors ||
       iconErrors
@@ -149,6 +157,7 @@ const add = () => {
         email: emailErrors,
         name: nameErrors,
         link: linkErrors,
+        category: categoryErrors,
         overview: overviewErrors,
         description: descriptionErrors,
         icon: iconErrors,
@@ -181,6 +190,7 @@ const add = () => {
       email: email,
       name: name,
       link: link,
+      category: category,
       overview: overview,
       description: description,
       icon: icon_url,
@@ -248,6 +258,26 @@ const add = () => {
           </div>
           <div className="mb-4">
             <label className="block font-bold mb-2">
+              App Category<span className="text-red-400 ml-2">*</span>
+            </label>
+            <select
+              className="shadow w-full border py-2 px-3 rounded leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              onChange={(e) => {
+                setCategory(e.target.value);
+                setErrors({ ...errors, category: [] });
+              }}
+            >
+              <option value="">-</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category.value}>
+                  {category.label}
+                </option>
+              ))}
+            </select>
+            <ErrorMessage errors={errors.category}></ErrorMessage>
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold mb-2">
               App Overview<span className="text-red-400 ml-2">*</span>
             </label>
             <input
@@ -262,7 +292,7 @@ const add = () => {
             <ErrorMessage errors={errors.overview}></ErrorMessage>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block font-bold mb-2">
               About this app
               <span className="text-red-400 ml-2">*</span>
             </label>
