@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
+import ErrorMessage from "../components/ErrorMessage";
 import ImagePreview from "../components/ImagePreview";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
@@ -11,6 +12,7 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 
 const add = () => {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [name, setName] = useState<String | null>(null);
   const [link, setLink] = useState<String | null>(null);
   const [overview, setOverview] = useState<String | null>(null);
@@ -21,6 +23,13 @@ const add = () => {
   const [pcImageUrlList, setPcImageUrlList] = useState([]);
   const [mobileImages, setMobileImages] = useState([]);
   const [mobileImageUrlList, setMobileImageUrlList] = useState([]);
+  const [errors, setErrors] = useState({
+    name: [],
+    link: [],
+    overview: [],
+    description: [],
+    icon: [],
+  });
   var tmpPcImages = [];
   var tmpPcImageUrlList = [];
   var tmpMobileImages = [];
@@ -49,7 +58,6 @@ const add = () => {
       reader.readAsDataURL(file);
     });
   }
-
   const onChangeIconHandler = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -69,6 +77,9 @@ const add = () => {
     tmpPcImageUrlList = [...pcImageUrlList];
     tmpPcImages = [...pcImages];
     for (let i = 0; i < files.length; i++) {
+      if (tmpPcImages[2]) {
+        break;
+      }
       var file = e.target.files[i];
       await fileLoad(
         file,
@@ -89,6 +100,9 @@ const add = () => {
     tmpMobileImageUrlList = [...mobileImageUrlList];
     tmpMobileImages = [...mobileImages];
     for (let i = 0; i < files.length; i++) {
+      if (tmpMobileImages[2]) {
+        break;
+      }
       var file = e.target.files[i];
       await fileLoad(
         file,
@@ -145,9 +159,42 @@ const add = () => {
     return res;
   }
 
+  function validateRequired(property, message) {
+    const error = property === "" || property === null ? [message] : null;
+    return error;
+  }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(icon);
+    setIsSubmitting(true);
+    var nameErrors = validateRequired(name, "Please put your app name");
+    var linkErrors = validateRequired(link, "Please put your app link");
+    var overviewErrors = validateRequired(
+      overview,
+      "Please put your app overview"
+    );
+    var descriptionErrors = validateRequired(
+      description,
+      "Please put your app description"
+    );
+    var iconErrors = validateRequired(icon, "Please put your app icon");
+    if (
+      nameErrors ||
+      linkErrors ||
+      overviewErrors ||
+      descriptionErrors ||
+      iconErrors
+    ) {
+      setErrors({
+        name: nameErrors,
+        link: linkErrors,
+        overview: overviewErrors,
+        description: descriptionErrors,
+        icon: iconErrors,
+      });
+      setIsSubmitting(false);
+      return;
+    }
+    return;
     var icon_url = icon ? await uploadToIconsStorage(icon) : null;
     var image_pc1_url = pcImages[0]
       ? await uploadToImagesStorage(pcImages[0], "pc1")
@@ -182,46 +229,64 @@ const add = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
+    setIsSubmitting(false);
   };
+
   return (
     <div>
       <Layout>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block font-bold mb-2">Name</label>
+            <label className="block font-bold mb-2">
+              Name<span className="text-red-400 ml-2">*</span>
+            </label>
             <input
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               type="text"
               onChange={(e) => setName(e.target.value)}
             />
+            <ErrorMessage errors={errors.name}></ErrorMessage>
           </div>
           <div className="mb-4">
-            <label className="block font-bold mb-2">Link</label>
+            <label className="block font-bold mb-2">
+              Link
+              <span className="text-red-400 ml-2">*</span>
+            </label>
             <input
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-              type="text"
+              type="url"
+              placeholder="https://"
               onChange={(e) => setLink(e.target.value)}
             />
+            <ErrorMessage errors={errors.link}></ErrorMessage>
           </div>
           <div className="mb-4">
-            <label className="block font-bold mb-2">Overview</label>
+            <label className="block font-bold mb-2">
+              Overview<span className="text-red-400 ml-2">*</span>
+            </label>
             <input
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               type="text"
+              placeholder="Video Upload Site"
               onChange={(e) => setOverview(e.target.value)}
             />
+            <ErrorMessage errors={errors.overview}></ErrorMessage>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               About this app
-              <textarea
-                className="shadow form-textarea mt-1 block w-full border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                rows={5}
-                onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
+              <span className="text-red-400 ml-2">*</span>
             </label>
+            <textarea
+              className="shadow form-textarea mt-1 block w-full border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              rows={5}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+            <ErrorMessage errors={errors.description}></ErrorMessage>
           </div>
-          <label className="block font-bold mb-4">Icon</label>
+          <label className="block font-bold mb-4">
+            Icon<span className="text-red-400 ml-2">*</span>
+          </label>
           <div className="mb-4 text-center">
             <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
               Choose Icon
@@ -233,6 +298,7 @@ const add = () => {
                 onChange={onChangeIconHandler}
               />
             </label>
+            <ErrorMessage errors={errors.icon}></ErrorMessage>
           </div>
           <div className="mb-4 flex">
             <div className="relative">
@@ -247,7 +313,9 @@ const add = () => {
               )}
             </div>
           </div>
-          <label className="block font-bold mb-4">PC Image</label>
+          <label className="block font-bold mb-4">
+            PC Image (Up to 3 Images)
+          </label>
           <div className="mb-4 text-center">
             <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
               Choose PC Image
@@ -269,7 +337,9 @@ const add = () => {
               />
             ))}
           </div>
-          <label className="block font-bold mb-2">Mobile Image</label>
+          <label className="block font-bold mb-2">
+            Mobile Image (Up to 3 Images)
+          </label>
           <div className="mb-4 text-center">
             <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
               Choose Mobile Image
@@ -292,12 +362,22 @@ const add = () => {
             ))}
           </div>
           <div className="text-center">
-            <button
-              className="w-52 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Submit
-            </button>
+            {!isSubmitting && (
+              <button
+                className="w-52 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Submit
+              </button>
+            )}
+            {isSubmitting && (
+              <button
+                disabled
+                className="w-52 bg-green-200 text-white font-bold py-2 px-4 rounded pointer-events-none"
+              >
+                Submiting...
+              </button>
+            )}
           </div>
         </form>
       </Layout>
