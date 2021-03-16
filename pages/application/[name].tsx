@@ -77,9 +77,10 @@ const ApplicationName = (applicationData) => {
 
 ApplicationName.getInitialProps = async ({ query }) => {
   const { name } = query;
+  console.log(name);
   const applicationDataDb = await db
     .collection("applications")
-    .where("name", "==", name)
+    .where("name_lowercase", "==", name)
     .get();
   if (applicationDataDb.empty) {
     return {

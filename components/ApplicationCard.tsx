@@ -7,7 +7,7 @@ const ApplicationCard = ({ applications }) => {
         <Link
           key={index}
           href="/application/[name]]"
-          as={`/application/${application.name}`}
+          as={`/application/${application.name_lowercase}`}
         >
           <a className="flex bg-white shadow-md mb-1 p-4 rounded-md transition duration-300 ease-in-out hover:bg-gray-200 hover:shadow-none">
             <div className="mr-2 h-20 w-20">

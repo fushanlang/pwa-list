@@ -26,6 +26,7 @@ const Index = () => {
         applicationsData.docs.map((doc) => ({
           id: doc.id,
           name: doc.data().name,
+          name_lowercase: doc.data().name_lowercase,
           icon: doc.data().icon,
           overview: doc.data().overview,
           description: doc.data().description,

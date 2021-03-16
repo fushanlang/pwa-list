@@ -7,9 +7,7 @@ import ApplicationCard from "../../components/ApplicationCard";
 
 const db = firebase.firestore();
 const ApplicationsCategory = () => {
-  const [applications, setApplications] = useState([
-    { id: "", name: "", icon: "", overview: "", description: "" },
-  ]);
+  const [applications, setApplications] = useState([{}]);
   const router = useRouter();
   const { category } = router.query;
   useEffect(() => {
@@ -25,6 +23,7 @@ const ApplicationsCategory = () => {
         applicationsData.docs.map((doc) => ({
           id: doc.id,
           name: doc.data().name,
+          name_lowercase: doc.data().name_lowercase,
           icon: doc.data().icon,
           overview: doc.data().overview,
           description: doc.data().description,
