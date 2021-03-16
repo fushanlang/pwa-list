@@ -12,12 +12,15 @@ const Index = () => {
   ]);
   useEffect(() => {
     const fetchApplicationsData = async () => {
-      console.log(searchParam);
+      if (searchParam == null || searchParam == "") {
+        return;
+      }
+      var searchParamLowercase = searchParam.toLowerCase().replace(/\s+/g, "");
       const applicationsData = await db
         .collection("applications")
-        .orderBy("name")
-        .startAt(searchParam)
-        .endAt(searchParam + "\uf8ff")
+        .orderBy("name_lowercase")
+        .startAt(searchParamLowercase)
+        .endAt(searchParamLowercase + "\uf8ff")
         .get();
       setSearchedApp(
         applicationsData.docs.map((doc) => ({

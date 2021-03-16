@@ -165,6 +165,7 @@ const add = () => {
       setIsSubmitting(false);
       return;
     }
+    var name_lowercase = name.toLowerCase().replace(/\s+/g, "");
     var icon_url = icon
       ? await uploadToStorage(iconsFolder, name, icon, "icon")
       : null;
@@ -189,6 +190,7 @@ const add = () => {
     db.collection("applications").add({
       email: email,
       name: name,
+      name_lowercase: name_lowercase,
       link: link,
       category: category,
       overview: overview,
