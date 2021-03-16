@@ -37,7 +37,6 @@ const Index = () => {
   }, [searchParam]);
   return (
     <Layout>
-      <p className="text-4xl">Welcome to Nextjs</p>
       <form className="my-8">
         <input
           className="shadow border rounded w-full py-2 px-3 leading-tight"

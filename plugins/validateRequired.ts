@@ -1,5 +1,5 @@
-const validateRequired = (property: string, message: string) => {
-  const error = property === "" || property === null ? [message] : null;
+const validateRequired = (property: string) => {
+  const error = property === "" || property === null ? true : false;
   return error;
 };
 

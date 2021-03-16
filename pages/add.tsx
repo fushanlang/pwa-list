@@ -125,33 +125,35 @@ const add = () => {
     setMobileImageUrlList(tmpMobileImageUrlList);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    var emailErrors = validateRequired(name, "Please put your email");
-    var nameErrors = validateRequired(name, "Please put the App name");
-    var linkErrors = validateRequired(link, "Please put the App link");
-    var categoryErrors = validateRequired(
-      category,
-      "Please put the App category"
-    );
-    var overviewErrors = validateRequired(
-      overview,
-      "Please put the App overview"
-    );
-    var descriptionErrors = validateRequired(
-      description,
-      "Please put the App description"
-    );
-    var iconErrors = validateRequired(icon, "Please put the App icon");
+  const validate = () => {
+    var emailErrors = [];
+    var nameErrors = [];
+    var linkErrors = [];
+    var categoryErrors = [];
+    var overviewErrors = [];
+    var descriptionErrors = [];
+    var iconErrors = [];
+    // required
+    if (validateRequired(email)) emailErrors.push("Please put your email");
+    if (validateRequired(name)) nameErrors.push("Please put the App name");
+    if (validateRequired(link)) linkErrors.push("Please put the App link");
+    if (validateRequired(category))
+      categoryErrors.push("Please put the App category");
+    if (validateRequired(overview))
+      overviewErrors.push("Please put the App overview");
+    if (validateRequired(description))
+      descriptionErrors.push("Please put the App description");
+    if (validateRequired(icon)) iconErrors.push("Please put the App icon");
+    // custom
+    if (validateUrl(link)) linkErrors.push("Please put the App Correct link");
     if (
-      emailErrors ||
-      nameErrors ||
-      linkErrors ||
-      categoryErrors ||
-      overviewErrors ||
-      descriptionErrors ||
-      iconErrors
+      emailErrors.length ||
+      nameErrors.length ||
+      linkErrors.length ||
+      categoryErrors.length ||
+      overviewErrors.length ||
+      descriptionErrors.length ||
+      iconErrors.length
     ) {
       setErrors({
         email: emailErrors,
@@ -162,6 +164,15 @@ const add = () => {
         description: descriptionErrors,
         icon: iconErrors,
       });
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    if (!validate()) {
       setIsSubmitting(false);
       return;
     }
