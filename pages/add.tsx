@@ -8,6 +8,8 @@ import firebase from "../plugins/firebase";
 import fileLoad from "../plugins/fileLoad";
 import validateRequired from "../plugins/validateRequired";
 import validateUrl from "../plugins/validateUrl";
+import validateEmail from "../plugins/validateEmail";
+import validateAlphanum from "../plugins/validateAlphanum";
 import uploadToStorage from "../plugins/uploadToStorage";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -146,6 +148,9 @@ const add = () => {
     if (validateRequired(icon)) iconErrors.push("Please put the App icon");
     // custom
     if (validateUrl(link)) linkErrors.push("Please put the App Correct link");
+    if (validateEmail(email)) emailErrors.push("Please put your correct Email");
+    if (validateAlphanum(name))
+      nameErrors.push("Please put App name validateAlphanum");
     if (
       emailErrors.length ||
       nameErrors.length ||
@@ -233,12 +238,13 @@ const add = () => {
             <input
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               type="text"
+              maxLength={50}
               onChange={(e) => {
                 setEmail(e.target.value);
                 setErrors({ ...errors, email: [] });
               }}
             />
-            <ErrorMessage errors={errors.name}></ErrorMessage>
+            <ErrorMessage errors={errors.email}></ErrorMessage>
           </div>
           <div className="mb-4">
             <label className="block font-bold mb-2">
@@ -247,6 +253,7 @@ const add = () => {
             <input
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               type="text"
+              maxLength={28}
               onChange={(e) => {
                 setName(e.target.value);
                 setErrors({ ...errors, name: [] });
@@ -261,6 +268,8 @@ const add = () => {
             </label>
             <input
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              type="text"
+              maxLength={120}
               placeholder="https://"
               onChange={(e) => {
                 setLink(e.target.value);
@@ -296,6 +305,7 @@ const add = () => {
             <input
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               type="text"
+              maxLength={40}
               placeholder="Video Upload Site"
               onChange={(e) => {
                 setOverview(e.target.value);
@@ -312,6 +322,7 @@ const add = () => {
             <textarea
               className="shadow form-textarea mt-1 block w-full border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               rows={5}
+              maxLength={500}
               onChange={(e) => {
                 setDescription(e.target.value);
                 setErrors({ ...errors, description: [] });
