@@ -24,7 +24,9 @@ const add = () => {
   const [name, setName] = useState<string | null>(null);
   const [link, setLink] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
-  const [overview, setOverview] = useState<string | null>(null);
+  const [tag1, setTag1] = useState<string | null>(null);
+  const [tag2, setTag2] = useState<string | null>(null);
+  const [tag3, setTag3] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [icon, setIcon] = useState<File | null>(null);
   const [iconUrl, setIconUrl] = useState<any | null>(null);
@@ -37,7 +39,9 @@ const add = () => {
     name: [],
     link: [],
     category: [],
-    overview: [],
+    tag1: [],
+    tag2: [],
+    tag3: [],
     description: [],
     icon: [],
   });
@@ -132,7 +136,9 @@ const add = () => {
     var nameErrors = [];
     var linkErrors = [];
     var categoryErrors = [];
-    var overviewErrors = [];
+    var tag1Errors = [];
+    var tag2Errors = [];
+    var tag3Errors = [];
     var descriptionErrors = [];
     var iconErrors = [];
     // required
@@ -141,8 +147,6 @@ const add = () => {
     if (validateRequired(link)) linkErrors.push("Please put the App link");
     if (validateRequired(category))
       categoryErrors.push("Please put the App category");
-    if (validateRequired(overview))
-      overviewErrors.push("Please put the App overview");
     if (validateRequired(description))
       descriptionErrors.push("Please put the App description");
     if (validateRequired(icon)) iconErrors.push("Please put the App icon");
@@ -156,7 +160,9 @@ const add = () => {
       nameErrors.length ||
       linkErrors.length ||
       categoryErrors.length ||
-      overviewErrors.length ||
+      tag1Errors.length ||
+      tag2Errors.length ||
+      tag3Errors.length ||
       descriptionErrors.length ||
       iconErrors.length
     ) {
@@ -165,7 +171,9 @@ const add = () => {
         name: nameErrors,
         link: linkErrors,
         category: categoryErrors,
-        overview: overviewErrors,
+        tag1: tag1Errors,
+        tag2: tag2Errors,
+        tag3: tag3Errors,
         description: descriptionErrors,
         icon: iconErrors,
       });
@@ -182,6 +190,9 @@ const add = () => {
       return;
     }
     var name_lowercase = name.toLowerCase().replace(/\s+/g, "");
+    var tag1_lowercase = tag1.toLowerCase().replace(/\s+/g, "");
+    var tag2_lowercase = tag2.toLowerCase().replace(/\s+/g, "");
+    var tag3_lowercase = tag3.toLowerCase().replace(/\s+/g, "");
     var icon_url = icon
       ? await uploadToStorage(iconsFolder, name, icon, "icon")
       : null;
@@ -209,7 +220,12 @@ const add = () => {
       name_lowercase: name_lowercase,
       link: link,
       category: category,
-      overview: overview,
+      tag1: tag1,
+      tag2: tag2,
+      tag3: tag3,
+      tag1_lowercase: tag1_lowercase,
+      tag2_lowercase: tag2_lowercase,
+      tag3_lowercase: tag3_lowercase,
       description: description,
       icon: icon_url,
       image_pc1: image_pc1_url,
@@ -218,6 +234,7 @@ const add = () => {
       image_mobile1: image_mobile1_url,
       image_mobile2: image_mobile2_url,
       image_mobile3: image_mobile3_url,
+      public_flg: 0,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
@@ -300,19 +317,41 @@ const add = () => {
           </div>
           <div className="mb-4">
             <label className="block font-bold mb-2">
-              App Overview<span className="text-red-400 ml-2">*</span>
+              App Tags<span className="text-red-400 ml-2"></span>
             </label>
             <input
-              className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               type="text"
-              maxLength={40}
-              placeholder="Video Upload Site"
+              maxLength={10}
+              placeholder="Memo"
               onChange={(e) => {
-                setOverview(e.target.value);
-                setErrors({ ...errors, overview: [] });
+                setTag1(e.target.value);
+                setErrors({ ...errors, tag1: [] });
               }}
             />
-            <ErrorMessage errors={errors.overview}></ErrorMessage>
+            <input
+              className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              type="text"
+              maxLength={10}
+              placeholder="Map"
+              onChange={(e) => {
+                setTag2(e.target.value);
+                setErrors({ ...errors, tag2: [] });
+              }}
+            />
+            <input
+              className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              type="text"
+              maxLength={10}
+              placeholder="IoT"
+              onChange={(e) => {
+                setTag3(e.target.value);
+                setErrors({ ...errors, tag3: [] });
+              }}
+            />
+            <ErrorMessage errors={errors.tag1}></ErrorMessage>
+            <ErrorMessage errors={errors.tag2}></ErrorMessage>
+            <ErrorMessage errors={errors.tag3}></ErrorMessage>
           </div>
           <div className="mb-4">
             <label className="block font-bold mb-2">
