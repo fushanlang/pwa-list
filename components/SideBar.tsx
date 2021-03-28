@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
+  faSearch,
   faStar,
   faHammer,
   faGamepad,
@@ -17,7 +18,7 @@ const SideBar = () => {
   return (
     <div
       id="sideBar"
-      className="bg-white border-r border-gray-300 p-6 w-60 hidden md:block"
+      className="bg-white border-r border-gray-300 p-6 w-60 hidden md:block overflow-scroll"
     >
       <div className="flex flex-col">
         <p className="uppercase text-xs text-gray-600 mb-4">homes</p>
@@ -25,6 +26,12 @@ const SideBar = () => {
           <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
             <FontAwesomeIcon icon={faHome} size="xs" className="mr-2" />
             Home
+          </a>
+        </Link>
+        <Link href="/search" as="/search">
+          <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+            <FontAwesomeIcon icon={faSearch} size="xs" className="mr-2" />
+            Search
           </a>
         </Link>
         <p className="uppercase text-xs text-gray-600 mb-4 mt-4">categories</p>
@@ -74,6 +81,60 @@ const SideBar = () => {
           <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
             <FontAwesomeIcon icon={faHeartbeat} size="xs" className="mr-2" />
             Health
+          </a>
+        </Link>
+        <Link href="/applications/[category]" as="/applications/design">
+          <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+            <FontAwesomeIcon icon={faPalette} size="xs" className="mr-2" />
+            Design
+          </a>
+        </Link>
+        <Link href="/applications/[category]" as="/applications/design">
+          <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+            <FontAwesomeIcon icon={faPalette} size="xs" className="mr-2" />
+            Design
+          </a>
+        </Link>
+        <Link href="/applications/[category]" as="/applications/design">
+          <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+            <FontAwesomeIcon icon={faPalette} size="xs" className="mr-2" />
+            Design
+          </a>
+        </Link>
+        <Link href="/applications/[category]" as="/applications/design">
+          <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+            <FontAwesomeIcon icon={faPalette} size="xs" className="mr-2" />
+            Design
+          </a>
+        </Link>
+        <Link href="/applications/[category]" as="/applications/design">
+          <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+            <FontAwesomeIcon icon={faPalette} size="xs" className="mr-2" />
+            Design
+          </a>
+        </Link>
+        <Link href="/applications/[category]" as="/applications/design">
+          <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+            <FontAwesomeIcon icon={faPalette} size="xs" className="mr-2" />
+            Design
+          </a>
+        </Link>
+        <Link href="/applications/[category]" as="/applications/design">
+          <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+            <FontAwesomeIcon icon={faPalette} size="xs" className="mr-2" />
+            Design
+          </a>
+        </Link>
+        <Link href="/applications/[category]" as="/applications/design">
+          <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+            <FontAwesomeIcon icon={faPalette} size="xs" className="mr-2" />
+            Design
+          </a>
+        </Link>
+        <Link href="/applications/[category]" as="/applications/design">
+          <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+            <FontAwesomeIcon icon={faPalette} size="xs" className="mr-2" />
+            Design
           </a>
         </Link>
         <Link href="/applications/[category]" as="/applications/design">

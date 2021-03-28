@@ -8,12 +8,12 @@ const Layout = ({ children, title = "PWA Store" }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <header>
-        <div className="h-14 border-b border-gray-300"></div>
-      </header>
       <div className="h-screen flex">
         <SideBar />
-        <div className="bg-gray-100 flex-1 p-6"> {children}</div>
+        <div className="bg-gray-100 flex-1 p-6 overflow-scroll">
+          {" "}
+          {children}
+        </div>
         <BottomBar />
       </div>
     </div>

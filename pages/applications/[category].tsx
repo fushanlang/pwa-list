@@ -10,6 +10,8 @@ const ApplicationsCategory = () => {
   const [applications, setApplications] = useState([{}]);
   const router = useRouter();
   const { category } = router.query;
+  const caategoryFirstUpperCase =
+    category.toString().charAt(0).toUpperCase() + category.slice(1);
   useEffect(() => {
     if (!category) {
       return;
@@ -25,7 +27,10 @@ const ApplicationsCategory = () => {
           name: doc.data().name,
           name_lowercase: doc.data().name_lowercase,
           icon: doc.data().icon,
-          overview: doc.data().overview,
+          category: doc.data().category,
+          tag1: doc.data().tag1,
+          tag2: doc.data().tag2,
+          tag3: doc.data().tag3,
           description: doc.data().description,
         }))
       );
@@ -49,7 +54,10 @@ const ApplicationsCategory = () => {
   // }, []);
   return (
     <Layout>
-      <ApplicationCard applications={applications} />
+      <div className="text-2xl mb-4">{caategoryFirstUpperCase}</div>
+      <div className="ml-1">
+        <ApplicationCard applications={applications} />
+      </div>
     </Layout>
   );
 };

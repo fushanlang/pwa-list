@@ -9,17 +9,34 @@ const ApplicationCard = ({ applications }) => {
           href="/application/[name]]"
           as={`/application/${application.name_lowercase}`}
         >
-          <a className="flex bg-white shadow-md mb-1 p-4 rounded-md transition duration-300 ease-in-out hover:bg-gray-200 hover:shadow-none">
-            <div className="mr-2 h-20 w-20">
+          <a className="flex items-center bg-white shadow-md mb-1 p-4 rounded-md transition duration-300 ease-in-out hover:bg-gray-200 hover:shadow-none">
+            <div className="mr-3 h-20 w-20">
               <Image
                 src={application.icon || "/default-app-icon.png"}
                 width={100}
                 height={100}
               />
             </div>
-            <div className="flex flex-col justify-between">
-              <div className="text-base mt-1">{application.name}</div>
-              <div className="h-10 w-35">{application.overview}</div>
+            <div className="flex flex-col">
+              <div className="text-base font-bold">{application.name}</div>
+              <div className="">{application.category}</div>
+              <div className="mt-1">
+                {application.tag1 && (
+                  <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-500 text-white">
+                    {application.tag1}
+                  </span>
+                )}
+                {application.tag2 && (
+                  <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-500 text-white">
+                    {application.tag2}
+                  </span>
+                )}
+                {application.tag3 && (
+                  <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-500 text-white">
+                    {application.tag3}
+                  </span>
+                )}
+              </div>
             </div>
           </a>
         </Link>
