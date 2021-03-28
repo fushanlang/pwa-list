@@ -190,9 +190,9 @@ const add = () => {
       return;
     }
     var name_lowercase = name.toLowerCase().replace(/\s+/g, "");
-    var tag1_lowercase = tag1.toLowerCase().replace(/\s+/g, "");
-    var tag2_lowercase = tag2.toLowerCase().replace(/\s+/g, "");
-    var tag3_lowercase = tag3.toLowerCase().replace(/\s+/g, "");
+    var tag1_lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
+    var tag2_lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
+    var tag3_lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
     var icon_url = icon
       ? await uploadToStorage(iconsFolder, name, icon, "icon")
       : null;

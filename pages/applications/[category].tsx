@@ -7,15 +7,19 @@ import ApplicationCard from "../../components/ApplicationCard";
 
 const db = firebase.firestore();
 const ApplicationsCategory = () => {
-  const [applications, setApplications] = useState([{}]);
+  const [applications, setApplications] = useState<Object>([{}]);
+  const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] = useState<
+    string | null
+  >(null);
   const router = useRouter();
   const { category } = router.query;
-  const caategoryFirstUpperCase =
-    category.toString().charAt(0).toUpperCase() + category.slice(1);
   useEffect(() => {
     if (!category) {
       return;
     }
+    setCaategoryFirstUpperCase(
+      category.toString().charAt(0).toUpperCase() + category.slice(1)
+    );
     const fetchApplicationsData = async () => {
       const applicationsData = await db
         .collection("applications")
@@ -54,7 +58,7 @@ const ApplicationsCategory = () => {
   // }, []);
   return (
     <Layout>
-      <div className="text-2xl mb-4">{caategoryFirstUpperCase}</div>
+      <div className="text-2xl font-bold mb-4">{caategoryFirstUpperCase}</div>
       <div className="ml-1">
         <ApplicationCard applications={applications} />
       </div>

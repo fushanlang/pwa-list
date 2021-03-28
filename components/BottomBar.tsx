@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faListUl } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faListUl, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const BottomBar = () => {
   return (
@@ -11,6 +11,14 @@ const BottomBar = () => {
             <a className="block px-8 transition duration-500 ease-in-out hover:text-green-600">
               <FontAwesomeIcon icon={faHome} size="lg" className="" />
               <span className="text-xs block">Home</span>
+            </a>
+          </Link>
+        </li>
+        <li className="text-center px-6">
+          <Link href="/search">
+            <a className="block px-8 transition duration-500 ease-in-out hover:text-green-600">
+              <FontAwesomeIcon icon={faSearch} size="lg" className="" />
+              <span className="text-xs block">Search</span>
             </a>
           </Link>
         </li>
