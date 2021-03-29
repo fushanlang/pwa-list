@@ -6,7 +6,6 @@ import { faHome, faListUl, faSearch } from "@fortawesome/free-solid-svg-icons";
 const BottomBar = () => {
   const router = useRouter();
   const path = router.pathname;
-  console.log(path);
   return (
     <div className="bottom-0 w-full bg-white fixed md:hidden">
       <ul className="flex h-14 justify-around items-center">
