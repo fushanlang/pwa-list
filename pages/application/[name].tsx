@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
@@ -15,16 +16,28 @@ const ApplicationName = (applicationData) => {
       {application.name === undefined ? (
         <NotFound />
       ) : (
-        <div className="text-center bg-white px-4 py-12 rounded-lg">
-          <h1 className="font-bold text-3xl mb-5">{application.name}</h1>
-          <a
+        <div className="bg-white px-4 py-7 rounded-lg">
+          <div className="flex items-center ml-4">
+            <div className="mr-3 h-20 w-20">
+              <Image
+                src={application.icon || "/default-app-icon.png"}
+                width={80}
+                height={80}
+              />
+            </div>
+            <div className="flex flex-col">
+              <h1 className="font-bold text-2xl ml-1">{application.name}</h1>
+              <h2 className="ml-1">{application.category}</h2>
+            </div>
+          </div>
+          {/* <a
             target="_blank"
             rel="noopener noreferrer"
             href={application.url}
             className="inline-block w-60 text-lg text-gray-50 bg-green-400 shadow-md p-1 rounded-md hover:bg-green-600 hover:shadow-none transition ease-in-out"
           >
             VIEW
-          </a>
+          </a> */}
           <div className="flex mt-6 overflow-scroll">
             <img
               onClick={() => {
@@ -77,7 +90,6 @@ const ApplicationName = (applicationData) => {
 
 ApplicationName.getInitialProps = async ({ query }) => {
   const { name } = query;
-  console.log(name);
   const applicationDataDb = await db
     .collection("applications")
     .where("name_lowercase", "==", name)
@@ -90,6 +102,11 @@ ApplicationName.getInitialProps = async ({ query }) => {
   const application = applicationDataDb.docs[0].data();
   const returnApplicationData = {
     name: application.name,
+    icon: application.icon,
+    tag1: application.tag1,
+    tag2: application.tag2,
+    tag3: application.tag3,
+    category: application.category,
     url: application.url,
     description: application.description,
     image_pc1: application.image_pc1,
