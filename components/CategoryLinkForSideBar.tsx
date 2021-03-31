@@ -10,12 +10,12 @@ const CategoryLinkForSideBar = ({ categoryName, iconName }) => {
   return (
     <Link href="/applications/[category]" as={`/applications/${categoryName}`}>
       {categoryName === category ? (
-        <a className="mb-3 text-green-600">
+        <a className="mb-4 text-green-600">
           <FontAwesomeIcon icon={iconName} size="xs" className="mr-2" />
           {categoryNameFirstUpperCase}
         </a>
       ) : (
-        <a className="mb-3 transition duration-500 ease-in-out hover:text-green-600">
+        <a className="mb-4 transition duration-500 ease-in-out hover:text-green-600">
           <FontAwesomeIcon icon={iconName} size="xs" className="mr-2" />
           {categoryNameFirstUpperCase}
         </a>

@@ -15,6 +15,14 @@ import {
   faCode,
   faHeartbeat,
   faPalette,
+  faUtensils,
+  faMusic,
+  faNewspaper,
+  faShoppingBag,
+  faRunning,
+  faShareAlt,
+  faNotesMedical,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faStar,
@@ -25,7 +33,15 @@ library.add(
   faBookOpen,
   faCode,
   faHeartbeat,
-  faPalette
+  faPalette,
+  faUtensils,
+  faMusic,
+  faNewspaper,
+  faShoppingBag,
+  faRunning,
+  faShareAlt,
+  faNotesMedical,
+  faHeart
 );
 const SideBar = () => {
   const router = useRouter();
@@ -62,27 +78,30 @@ const SideBar = () => {
             </a>
           )}
         </Link>
-        <p className="uppercase text-gray-600 mb-2 mt-2">categories</p>
-        <CategoryLinkForSideBar categoryName="entertainment" iconName="star" />
-        <CategoryLinkForSideBar categoryName="tools" iconName="hammer" />
-        <CategoryLinkForSideBar categoryName="game" iconName="gamepad" />
-        <CategoryLinkForSideBar categoryName="travel" iconName="plane" />
+        <p className="uppercase text-gray-600 mb-3 mt-2">categories</p>
         <CategoryLinkForSideBar categoryName="business" iconName="chart-bar" />
+        <CategoryLinkForSideBar categoryName="dating" iconName="heart" />
+        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
         <CategoryLinkForSideBar categoryName="education" iconName="book-open" />
-        <CategoryLinkForSideBar categoryName="tech" iconName="code" />
+        <CategoryLinkForSideBar categoryName="entertainment" iconName="star" />
+        <CategoryLinkForSideBar categoryName="food" iconName="utensils" />
+        <CategoryLinkForSideBar categoryName="game" iconName="gamepad" />
         <CategoryLinkForSideBar categoryName="health" iconName="heartbeat" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-        <CategoryLinkForSideBar categoryName="design" iconName="palette" />
+        <CategoryLinkForSideBar
+          categoryName="medical"
+          iconName="notes-medical"
+        />
+        <CategoryLinkForSideBar categoryName="music" iconName="music" />
+        <CategoryLinkForSideBar categoryName="news" iconName="newspaper" />
+        <CategoryLinkForSideBar
+          categoryName="shopping"
+          iconName="shopping-bag"
+        />
+        <CategoryLinkForSideBar categoryName="social" iconName="share-alt" />
+        <CategoryLinkForSideBar categoryName="sports" iconName="running" />
+        <CategoryLinkForSideBar categoryName="tech" iconName="code" />
+        <CategoryLinkForSideBar categoryName="tools" iconName="hammer" />
+        <CategoryLinkForSideBar categoryName="travel" iconName="plane" />
         {/* <div className="mt-10 ">
           <Link href="/add" as="/add">
             <a className="text-center inline-block w-40 text-gray-50 bg-green-400 shadow-md p-1 rounded-md hover:bg-green-600 hover:shadow-none transition ease-in-out">

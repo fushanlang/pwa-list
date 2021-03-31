@@ -10,10 +10,7 @@ const Layout = ({ children, title = "PWA Store" }) => {
       </Head>
       <div className="h-screen flex">
         <SideBar />
-        <div className="bg-gray-100 flex-1 p-6 overflow-scroll">
-          {" "}
-          {children}
-        </div>
+        <div className="bg-gray-100 flex-1 p-6 overflow-scroll">{children}</div>
         <BottomBar />
       </div>
     </div>

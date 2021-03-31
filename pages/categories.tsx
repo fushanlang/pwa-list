@@ -1,7 +1,7 @@
-import Layout from "../components/Layout";
-import Link from "next/link";
+import Head from "next/head";
+import SideBar from "../components/SideBar";
+import BottomBar from "../components/BottomBar";
 import CategoryLinkForCategories from "../components/CategoryLinkForCategories";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faStar,
@@ -13,6 +13,14 @@ import {
   faCode,
   faHeartbeat,
   faPalette,
+  faUtensils,
+  faMusic,
+  faNewspaper,
+  faShoppingBag,
+  faRunning,
+  faShareAlt,
+  faNotesMedical,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faStar,
@@ -23,37 +31,81 @@ library.add(
   faBookOpen,
   faCode,
   faHeartbeat,
-  faPalette
+  faPalette,
+  faUtensils,
+  faMusic,
+  faNewspaper,
+  faShoppingBag,
+  faRunning,
+  faShareAlt,
+  faNotesMedical,
+  faHeart
 );
 const categories = () => {
   return (
-    <div>
-      <Layout>
-        <div className="text-xl flex flex-col rounded-md bg-white px-7 pt-5 pb-6">
-          <p className="text-2xl font-bold mb-4">Categories</p>
-          <CategoryLinkForCategories
-            categoryName="entertainment"
-            iconName="star"
-          />
-          <CategoryLinkForCategories categoryName="tools" iconName="hammer" />
-          <CategoryLinkForCategories categoryName="game" iconName="gamepad" />
-          <CategoryLinkForCategories categoryName="travel" iconName="plane" />
-          <CategoryLinkForCategories
-            categoryName="business"
-            iconName="chart-bar"
-          />
-          <CategoryLinkForCategories
-            categoryName="education"
-            iconName="book-open"
-          />
-          <CategoryLinkForCategories categoryName="tech" iconName="code" />
-          <CategoryLinkForCategories
-            categoryName="health"
-            iconName="heartbeat"
-          />
-          <CategoryLinkForCategories categoryName="design" iconName="palette" />
+    <div className="text-gray-600 text-sm font-mono">
+      <Head>
+        <title>PWA Store</title>
+      </Head>
+      <div className="h-screen flex">
+        <SideBar />
+        <div className="flex-1 overflow-scroll bg-white p-5 pl-7 mb-7">
+          <p className="text-lg mt-1 mb-6">Categories</p>
+          <div className="flex flex-col ml-1">
+            <CategoryLinkForCategories
+              categoryName="business"
+              iconName="chart-bar"
+            />
+            <CategoryLinkForCategories categoryName="dating" iconName="heart" />
+            <CategoryLinkForCategories
+              categoryName="design"
+              iconName="palette"
+            />
+            <CategoryLinkForCategories
+              categoryName="education"
+              iconName="book-open"
+            />
+            <CategoryLinkForCategories
+              categoryName="entertainment"
+              iconName="star"
+            />
+            <CategoryLinkForCategories
+              categoryName="food"
+              iconName="utensils"
+            />
+            <CategoryLinkForCategories categoryName="game" iconName="gamepad" />
+            <CategoryLinkForCategories
+              categoryName="health"
+              iconName="heartbeat"
+            />
+            <CategoryLinkForCategories
+              categoryName="medical"
+              iconName="notes-medical"
+            />
+            <CategoryLinkForCategories categoryName="music" iconName="music" />
+            <CategoryLinkForCategories
+              categoryName="news"
+              iconName="newspaper"
+            />
+            <CategoryLinkForCategories
+              categoryName="shopping"
+              iconName="shopping-bag"
+            />
+            <CategoryLinkForCategories
+              categoryName="social"
+              iconName="share-alt"
+            />
+            <CategoryLinkForCategories
+              categoryName="sports"
+              iconName="running"
+            />
+            <CategoryLinkForCategories categoryName="tech" iconName="code" />
+            <CategoryLinkForCategories categoryName="tools" iconName="hammer" />
+            <CategoryLinkForCategories categoryName="travel" iconName="plane" />
+          </div>
         </div>
-      </Layout>
+        <BottomBar />
+      </div>
     </div>
   );
 };

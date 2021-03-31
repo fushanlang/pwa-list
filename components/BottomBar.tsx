@@ -7,7 +7,7 @@ const BottomBar = () => {
   const router = useRouter();
   const path = router.pathname;
   return (
-    <div className="bottom-0 w-full bg-white fixed md:hidden">
+    <div className="bottom-0 w-full border-t bg-white fixed md:hidden">
       <ul className="flex h-14 justify-around items-center">
         <li className="text-center px-6">
           <Link href="/">
