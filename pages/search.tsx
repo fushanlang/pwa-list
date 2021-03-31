@@ -11,6 +11,7 @@ const Search = () => {
   const [searchParam, setSearchParam] = useState<String | null>(null);
   const [searchedApp, setSearchedApp] = useState<Object | null>([]);
   var mergedApplicationData = [];
+  console.log(searchParam);
   useEffect(() => {
     if (searchParam === null || searchParam === "") {
       setSearchParam("empty");
@@ -44,9 +45,6 @@ const Search = () => {
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
         .get();
-      console.log(applicationsDataName);
-      console.log(applicationsDataTag1);
-      console.log(applicationsDataTag2);
       mergedApplicationData.push(...applicationsDataName.docs);
       mergedApplicationData.push(...applicationsDataTag1.docs);
       mergedApplicationData.push(...applicationsDataTag2.docs);
