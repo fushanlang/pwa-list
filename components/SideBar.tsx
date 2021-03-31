@@ -51,7 +51,7 @@ const SideBar = () => {
       id="sideBar"
       className="bg-white border-r border-gray-300 p-6 w-60 hidden md:block overflow-scroll"
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-3">
         <Link href="/" as="/">
           {path === "/" ? (
             <a className="text-base mb-3 text-green-600">

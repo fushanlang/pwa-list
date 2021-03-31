@@ -9,6 +9,9 @@ const db = firebase.firestore();
 
 const Search = () => {
   const [searchParam, setSearchParam] = useState<String | null>(null);
+  const [initialSearchParam, setInitialSearchParam] = useState<String | null>(
+    null
+  );
   const [searchedApp, setSearchedApp] = useState<Object | null>([]);
   var mergedApplicationData = [];
   console.log(searchParam);
@@ -69,17 +72,29 @@ const Search = () => {
       setSearchedApp(applicationData);
     };
     fetchApplicationsData();
+    localStorage.saveKey = searchParam;
   }, [searchParam]);
+  useEffect(() => {
+    if (
+      localStorage.saveKey !== null &&
+      localStorage.saveKey !== "" &&
+      localStorage.saveKey !== "empty"
+    ) {
+      setInitialSearchParam(localStorage.saveKey);
+      setSearchParam(localStorage.saveKey);
+    }
+  }, []);
   return (
     <Layout>
       <div className="flex w-4/5 m-auto mt-2 rounded-md shadow h-11 bg-white">
         <div className="m-auto ml-3">
-          <FontAwesomeIcon icon={faSearch} size="lg" className="" />
+          <FontAwesomeIcon icon={faSearch} size="lg" />
         </div>
         <input
           className="focus:outline-none ml-2 w-full pl-2 text-base rounded-md"
           type="text"
           placeholder="Search"
+          defaultValue={initialSearchParam}
           onChange={(e) => {
             setSearchParam(e.target.value);
           }}
