@@ -86,7 +86,7 @@ const Search = () => {
   }, []);
   return (
     <Layout>
-      <div className="flex w-4/5 m-auto mt-2 rounded-md shadow h-11 bg-white">
+      <div className="flex w-4/5 m-auto mt-5 rounded-md shadow h-11 bg-white">
         <div className="m-auto ml-3">
           <FontAwesomeIcon icon={faSearch} size="lg" />
         </div>

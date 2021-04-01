@@ -142,7 +142,6 @@ const add = () => {
     var descriptionErrors = [];
     var iconErrors = [];
     // required
-    if (validateRequired(email)) emailErrors.push("Please put your email");
     if (validateRequired(name)) nameErrors.push("Please put the App name");
     if (validateRequired(link)) linkErrors.push("Please put the App link");
     if (validateRequired(category))
@@ -155,6 +154,7 @@ const add = () => {
     if (validateEmail(email)) emailErrors.push("Please put your correct Email");
     if (validateAlphanum(name))
       nameErrors.push("Please put App name validateAlphanum");
+    if (validateRequired(email)) emailErrors.push("Please put your email");
     if (
       emailErrors.length ||
       nameErrors.length ||
@@ -244,8 +244,198 @@ const add = () => {
 
   return (
     <Layout>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
+      <form onSubmit={handleSubmit} className="lg:px-28 xl:px-40 pt-6">
+        <h2 className="text-lg font-bold">Application</h2>
+        <div className="ml-1 mt-1 mb-9">
+          <div className="mb-4">
+            <label className="block font-bold mb-1">
+              Name<span className="text-red-400 ml-2">*</span>
+            </label>
+            <input
+              className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              type="text"
+              maxLength={28}
+              onChange={(e) => {
+                setName(e.target.value);
+                setErrors({ ...errors, name: [] });
+              }}
+            />
+            <ErrorMessage errors={errors.name}></ErrorMessage>
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold mb-1">
+              Link
+              <span className="text-red-400 ml-2">*</span>
+            </label>
+            <input
+              className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              type="text"
+              maxLength={120}
+              placeholder="https://"
+              onChange={(e) => {
+                setLink(e.target.value);
+                setErrors({ ...errors, link: [] });
+              }}
+            />
+            <ErrorMessage errors={errors.link}></ErrorMessage>
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold mb-1">
+              Category<span className="text-red-400 ml-2">*</span>
+            </label>
+            <select
+              className="shadow w-44 border py-2 px-3 rounded leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              onChange={(e) => {
+                setCategory(e.target.value);
+                setErrors({ ...errors, category: [] });
+              }}
+            >
+              <option value="">-</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category.value}>
+                  {category.label}
+                </option>
+              ))}
+            </select>
+            <ErrorMessage errors={errors.category}></ErrorMessage>
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold mb-1">
+              Tags<span className="text-red-400 ml-2"></span>
+            </label>
+            <input
+              className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              type="text"
+              maxLength={10}
+              placeholder="Memo"
+              onChange={(e) => {
+                setTag1(e.target.value);
+                setErrors({ ...errors, tag1: [] });
+              }}
+            />
+            <input
+              className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              type="text"
+              maxLength={10}
+              placeholder="Map"
+              onChange={(e) => {
+                setTag2(e.target.value);
+                setErrors({ ...errors, tag2: [] });
+              }}
+            />
+            <input
+              className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              type="text"
+              maxLength={10}
+              placeholder="IoT"
+              onChange={(e) => {
+                setTag3(e.target.value);
+                setErrors({ ...errors, tag3: [] });
+              }}
+            />
+            <ErrorMessage errors={errors.tag1}></ErrorMessage>
+            <ErrorMessage errors={errors.tag2}></ErrorMessage>
+            <ErrorMessage errors={errors.tag3}></ErrorMessage>
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold mb-1">
+              About this app
+              <span className="text-red-400 ml-2">*</span>
+            </label>
+            <textarea
+              className="shadow form-textarea mt-1 block w-full border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+              rows={5}
+              maxLength={500}
+              onChange={(e) => {
+                setDescription(e.target.value);
+                setErrors({ ...errors, description: [] });
+              }}
+            ></textarea>
+            <ErrorMessage errors={errors.description}></ErrorMessage>
+          </div>
+          <label className="block font-bold mb-2">
+            Icon<span className="text-red-400 ml-2">*</span>
+          </label>
+          {iconUrl && (
+            <div className="flex mb-4">
+              <div className="relative">
+                <img className="rounded max-h-20" src={iconUrl} />
+                <button
+                  className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3"
+                  onClick={handleDeleteIcon}
+                >
+                  <FontAwesomeIcon icon={faMinusCircle} size="lg" />
+                </button>
+              </div>
+            </div>
+          )}
+          <div className="mb-8">
+            <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+              Choose
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                multiple
+                onChange={(e) => {
+                  onChangeIconHandler(e);
+                  setErrors({ ...errors, icon: [] });
+                }}
+              />
+            </label>
+            <ErrorMessage errors={errors.icon}></ErrorMessage>
+          </div>
+          <label className="block font-bold mb-2">
+            Image for PC (Up to 3 Images)
+          </label>
+          <div className="flex overflow-scroll">
+            {pcImageUrlList.map((pcImageUrl, index) => (
+              <ImagePreview
+                key={index}
+                imageUrl={pcImageUrl}
+                handleDeleteImage={() => handleDeletePcImage(index)}
+              />
+            ))}
+          </div>
+          <div className="mb-8">
+            <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+              Choose
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                multiple
+                onChange={onChangePcImageHandler}
+              />
+            </label>
+          </div>
+          <label className="block font-bold mb-2">
+            Image for Mobile (Up to 3 Images)
+          </label>
+          <div className="flex overflow-scroll">
+            {mobileImageUrlList.map((mobileImageUrl, index) => (
+              <ImagePreview
+                key={index}
+                imageUrl={mobileImageUrl}
+                handleDeleteImage={() => handleDeleteMobileImage(index)}
+              />
+            ))}
+          </div>
+          <div className="mb-8">
+            <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+              Choose
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                multiple
+                onChange={onChangeMobileImageHandler}
+              />
+            </label>
+          </div>
+        </div>
+        <h2 className="text-lg font-bold">Personal</h2>
+        <div className="ml-1 mt-1 mb-7">
           <label className="block font-bold mb-2">
             Your Email
             <span className="text-red-400 ml-2">* </span>
@@ -262,196 +452,10 @@ const add = () => {
           />
           <ErrorMessage errors={errors.email}></ErrorMessage>
         </div>
-        <div className="mb-4">
-          <label className="block font-bold mb-2">
-            App Name<span className="text-red-400 ml-2">*</span>
-          </label>
-          <input
-            className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-            type="text"
-            maxLength={28}
-            onChange={(e) => {
-              setName(e.target.value);
-              setErrors({ ...errors, name: [] });
-            }}
-          />
-          <ErrorMessage errors={errors.name}></ErrorMessage>
-        </div>
-        <div className="mb-4">
-          <label className="block font-bold mb-2">
-            App Link
-            <span className="text-red-400 ml-2">*</span>
-          </label>
-          <input
-            className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-            type="text"
-            maxLength={120}
-            placeholder="https://"
-            onChange={(e) => {
-              setLink(e.target.value);
-              setErrors({ ...errors, link: [] });
-            }}
-          />
-          <ErrorMessage errors={errors.link}></ErrorMessage>
-        </div>
-        <div className="mb-4">
-          <label className="block font-bold mb-2">
-            App Category<span className="text-red-400 ml-2">*</span>
-          </label>
-          <select
-            className="shadow w-full border py-2 px-3 rounded leading-tight focus:outline-none focus:ring focus:ring-green-400"
-            onChange={(e) => {
-              setCategory(e.target.value);
-              setErrors({ ...errors, category: [] });
-            }}
-          >
-            <option value="">-</option>
-            {categories.map((category, index) => (
-              <option key={index} value={category.value}>
-                {category.label}
-              </option>
-            ))}
-          </select>
-          <ErrorMessage errors={errors.category}></ErrorMessage>
-        </div>
-        <div className="mb-4">
-          <label className="block font-bold mb-2">
-            App Tags<span className="text-red-400 ml-2"></span>
-          </label>
-          <input
-            className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-            type="text"
-            maxLength={10}
-            placeholder="Memo"
-            onChange={(e) => {
-              setTag1(e.target.value);
-              setErrors({ ...errors, tag1: [] });
-            }}
-          />
-          <input
-            className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-            type="text"
-            maxLength={10}
-            placeholder="Map"
-            onChange={(e) => {
-              setTag2(e.target.value);
-              setErrors({ ...errors, tag2: [] });
-            }}
-          />
-          <input
-            className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-            type="text"
-            maxLength={10}
-            placeholder="IoT"
-            onChange={(e) => {
-              setTag3(e.target.value);
-              setErrors({ ...errors, tag3: [] });
-            }}
-          />
-          <ErrorMessage errors={errors.tag1}></ErrorMessage>
-          <ErrorMessage errors={errors.tag2}></ErrorMessage>
-          <ErrorMessage errors={errors.tag3}></ErrorMessage>
-        </div>
-        <div className="mb-4">
-          <label className="block font-bold mb-2">
-            About this app
-            <span className="text-red-400 ml-2">*</span>
-          </label>
-          <textarea
-            className="shadow form-textarea mt-1 block w-full border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-            rows={5}
-            maxLength={500}
-            onChange={(e) => {
-              setDescription(e.target.value);
-              setErrors({ ...errors, description: [] });
-            }}
-          ></textarea>
-          <ErrorMessage errors={errors.description}></ErrorMessage>
-        </div>
-        <label className="block font-bold mb-4">
-          App Icon<span className="text-red-400 ml-2">*</span>
-        </label>
-        <div className="mb-4 text-center">
-          <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
-            Choose Icon
-            <input
-              type="file"
-              className="hidden"
-              accept="image/*"
-              multiple
-              onChange={(e) => {
-                onChangeIconHandler(e);
-                setErrors({ ...errors, icon: [] });
-              }}
-            />
-          </label>
-          <ErrorMessage errors={errors.icon}></ErrorMessage>
-        </div>
-        <div className="mb-4 flex">
-          <div className="relative">
-            <img className="rounded max-h-20 mx-2" src={iconUrl} />
-            {iconUrl && (
-              <button
-                className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3"
-                onClick={handleDeleteIcon}
-              >
-                <FontAwesomeIcon icon={faMinusCircle} size="lg" />
-              </button>
-            )}
-          </div>
-        </div>
-        <label className="block font-bold mb-4">
-          App PC Image (Up to 3 Images)
-        </label>
-        <div className="mb-4 text-center">
-          <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
-            Choose PC Image
-            <input
-              type="file"
-              className="hidden"
-              accept="image/*"
-              multiple
-              onChange={onChangePcImageHandler}
-            />
-          </label>
-        </div>
-        <div className="mb-4 flex overflow-scroll">
-          {pcImageUrlList.map((pcImageUrl, index) => (
-            <ImagePreview
-              key={index}
-              imageUrl={pcImageUrl}
-              handleDeleteImage={() => handleDeletePcImage(index)}
-            />
-          ))}
-        </div>
-        <label className="block font-bold mb-2">
-          App Mobile Image (Up to 3 Images)
-        </label>
-        <div className="mb-4 text-center">
-          <label className="bg-gray-700 text-white p-2 rounded-lg cursor-pointer hover:bg-gray-900">
-            Choose Mobile Image
-            <input
-              type="file"
-              className="hidden"
-              accept="image/*"
-              multiple
-              onChange={onChangeMobileImageHandler}
-            />
-          </label>
-        </div>
-        <div className="mb-4 flex overflow-scroll">
-          {mobileImageUrlList.map((mobileImageUrl, index) => (
-            <ImagePreview
-              key={index}
-              imageUrl={mobileImageUrl}
-              handleDeleteImage={() => handleDeleteMobileImage(index)}
-            />
-          ))}
-        </div>
-        <div className="text-center">
+        <div className="ml-1 mt-10 mb-12">
           {!isSubmitting && (
             <button
-              className="w-52 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Submit
@@ -460,7 +464,7 @@ const add = () => {
           {isSubmitting && (
             <button
               disabled
-              className="w-52 bg-green-200 text-white font-bold py-2 px-4 rounded pointer-events-none"
+              className="w-48 bg-green-200 text-white font-bold py-2 px-4 rounded pointer-events-none"
             >
               Submiting...
             </button>
