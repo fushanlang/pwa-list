@@ -30,7 +30,7 @@ const ApplicationImageModal = ({
                 width={380}
                 height={680}
                 className="rounded-lg"
-                src={application.image_mobile1}
+                src={application.imageMobile1}
               />
             </SwiperSlide>
             <SwiperSlide>
@@ -38,7 +38,7 @@ const ApplicationImageModal = ({
                 width={380}
                 height={680}
                 className="rounded-lg"
-                src={application.image_mobile2}
+                src={application.imageMobile2}
               />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
@@ -46,7 +46,7 @@ const ApplicationImageModal = ({
                 width={1320}
                 height={680}
                 className="rounded-lg"
-                src={application.image_pc1}
+                src={application.imagePc1}
               />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
@@ -54,7 +54,7 @@ const ApplicationImageModal = ({
                 width={1320}
                 height={680}
                 className="rounded-lg"
-                src={application.image_pc2}
+                src={application.imagePc2}
               />
             </SwiperSlide>
           </Swiper>

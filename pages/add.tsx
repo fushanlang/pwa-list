@@ -189,52 +189,54 @@ const add = () => {
       setIsSubmitting(false);
       return;
     }
-    var name_lowercase = name.toLowerCase().replace(/\s+/g, "");
-    var tag1_lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
-    var tag2_lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
-    var tag3_lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
-    var icon_url = icon
+    var nameLowercase = name.toLowerCase().replace(/\s+/g, "");
+    var tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
+    var tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
+    var tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
+    var iconUrl = icon
       ? await uploadToStorage(iconsFolder, name, icon, "icon")
       : null;
-    var image_pc1_url = pcImages[0]
+    var imagePc1Url = pcImages[0]
       ? await uploadToStorage(imagesFolder, name, pcImages[0], "pc1")
       : null;
-    var image_pc2_url = pcImages[1]
+    var imagePc2Url = pcImages[1]
       ? await uploadToStorage(imagesFolder, name, pcImages[1], "pc2")
       : null;
-    var image_pc3_url = pcImages[2]
+    var imagePc3Url = pcImages[2]
       ? await uploadToStorage(imagesFolder, name, pcImages[2], "pc3")
       : null;
-    var image_mobile1_url = mobileImages[0]
+    var imageMobile1Url = mobileImages[0]
       ? await uploadToStorage(imagesFolder, name, mobileImages[0], "mobile1")
       : null;
-    var image_mobile2_url = mobileImages[1]
+    var imageMobile2Url = mobileImages[1]
       ? await uploadToStorage(imagesFolder, name, mobileImages[1], "mobile2")
       : null;
-    var image_mobile3_url = mobileImages[2]
+    var imageMobile3Url = mobileImages[2]
       ? await uploadToStorage(imagesFolder, name, mobileImages[2], "mobile3")
       : null;
     db.collection("applications").add({
       email: email,
       name: name,
-      name_lowercase: name_lowercase,
+      nameLowercase: nameLowercase,
       link: link,
       category: category,
       tag1: tag1,
       tag2: tag2,
       tag3: tag3,
-      tag1_lowercase: tag1_lowercase,
-      tag2_lowercase: tag2_lowercase,
-      tag3_lowercase: tag3_lowercase,
+      tag1Lowercase: tag1Lowercase,
+      tag2Lowercase: tag2Lowercase,
+      tag3Lowercase: tag3Lowercase,
       description: description,
-      icon: icon_url,
-      image_pc1: image_pc1_url,
-      image_pc2: image_pc2_url,
-      image_pc3: image_pc3_url,
-      image_mobile1: image_mobile1_url,
-      image_mobile2: image_mobile2_url,
-      image_mobile3: image_mobile3_url,
+      icon: iconUrl,
+      imagePc1: imagePc1Url,
+      imagePc2: imagePc2Url,
+      imagePc3: imagePc3Url,
+      imageMobile1: imageMobile1Url,
+      imageMobile2: imageMobile2Url,
+      imageMobile3: imageMobile3Url,
       isPublic: false,
+      isFeatured: false,
+      isNewApp: false,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });

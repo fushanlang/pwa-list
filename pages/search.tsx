@@ -14,7 +14,6 @@ const Search = () => {
   );
   const [searchedApp, setSearchedApp] = useState<Object | null>([]);
   var mergedApplicationData = [];
-  console.log(searchParam);
   useEffect(() => {
     if (searchParam === null || searchParam === "") {
       setSearchParam("empty");
@@ -26,28 +25,28 @@ const Search = () => {
         : null;
       const applicationsDataName = await db
         .collection("applications")
-        .orderBy("name_lowercase")
+        .orderBy("nameLowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
         .where("isPublic", "==", true)
         .get();
       const applicationsDataTag1 = await db
         .collection("applications")
-        .orderBy("tag1_lowercase")
+        .orderBy("tag1Lowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
         .where("isPublic", "==", true)
         .get();
       const applicationsDataTag2 = await db
         .collection("applications")
-        .orderBy("tag2_lowercase")
+        .orderBy("tag2Lowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
         .where("isPublic", "==", true)
         .get();
       const applicationsDataTag3 = await db
         .collection("applications")
-        .orderBy("tag3_lowercase")
+        .orderBy("tag3Lowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
         .where("isPublic", "==", true)
@@ -60,7 +59,7 @@ const Search = () => {
         (doc) => ({
           id: doc.id,
           name: doc.data().name,
-          name_lowercase: doc.data().name_lowercase,
+          nameLowercase: doc.data().nameLowercase,
           icon: doc.data().icon,
           category: doc.data().category,
           tag1: doc.data().tag1,

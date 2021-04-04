@@ -30,7 +30,7 @@ const ApplicationsCategory = () => {
         applicationsData.docs.map((doc) => ({
           id: doc.id,
           name: doc.data().name,
-          name_lowercase: doc.data().name_lowercase,
+          nameLowercase: doc.data().nameLowercase,
           icon: doc.data().icon,
           category: doc.data().category,
           tag1: doc.data().tag1,

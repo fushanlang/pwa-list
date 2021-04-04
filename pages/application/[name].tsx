@@ -75,7 +75,7 @@ const ApplicationName = (applicationData) => {
                 setInitialSlide(0);
               }}
               className="rounded max-h-96 mx-2 cursor-pointer"
-              src={application.image_mobile1}
+              src={application.imageMobile1}
             />
             <img
               onClick={() => {
@@ -83,7 +83,7 @@ const ApplicationName = (applicationData) => {
                 setInitialSlide(1);
               }}
               className="rounded max-h-96 mx-2 cursor-pointer"
-              src={application.image_mobile2}
+              src={application.imageMobile2}
             />
             <img
               onClick={() => {
@@ -91,7 +91,7 @@ const ApplicationName = (applicationData) => {
                 setInitialSlide(2);
               }}
               className="rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
-              src={application.image_pc1}
+              src={application.imagePc1}
             />
             <img
               onClick={() => {
@@ -99,7 +99,7 @@ const ApplicationName = (applicationData) => {
                 setInitialSlide(3);
               }}
               className="rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
-              src={application.image_pc2}
+              src={application.imagePc2}
             />
           </div>
           <div className="mt-7 px-4">
@@ -122,7 +122,7 @@ ApplicationName.getInitialProps = async ({ query }) => {
   const { name } = query;
   const applicationDataDb = await db
     .collection("applications")
-    .where("name_lowercase", "==", name)
+    .where("nameLowercase", "==", name)
     .where("isPublic", "==", true)
     .get();
   if (applicationDataDb.empty) {
@@ -140,10 +140,10 @@ ApplicationName.getInitialProps = async ({ query }) => {
     category: application.category,
     url: application.url,
     description: application.description,
-    image_pc1: application.image_pc1,
-    image_pc2: application.image_pc2,
-    image_mobile1: application.image_mobile1,
-    image_mobile2: application.image_mobile2,
+    imagePc1: application.imagePc1,
+    imagePc2: application.imagePc2,
+    imageMobile1: application.imageMobile1,
+    imageMobile2: application.imageMobile2,
   };
   return {
     applicationData: returnApplicationData,
