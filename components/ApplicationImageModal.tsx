@@ -6,7 +6,6 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/swiper-bundle.min.css";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");
-
 const modalStyle = {
   overlay: {
     position: "fixed",
@@ -48,6 +47,7 @@ const ApplicationImageModal = ({
           </button>
           <Swiper
             className="mt-2"
+            id="swiper"
             spaceBetween={50}
             slidesPerView={1}
             initialSlide={initialSlide}
@@ -66,10 +66,16 @@ const ApplicationImageModal = ({
               />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
-              <img className="rounded-lg inline" src={application.imagePc1} />
+              <img
+                className="rounded-lg inline w-11/12 mt-20 xl:mt-0"
+                src={application.imagePc1}
+              />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
-              <img className="rounded-lg inline" src={application.imagePc2} />
+              <img
+                className="rounded-lg inline w-11/12 mt-20 xl:mt-0"
+                src={application.imagePc2}
+              />
             </SwiperSlide>
           </Swiper>
         </div>

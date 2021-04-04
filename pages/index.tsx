@@ -62,6 +62,10 @@ const Index = () => {
   }, []);
   return (
     <Layout>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap"
+      />
       <div className="text-3xl font-bold mt-3" style={logo}>
         P<span className="text-green-500">W</span>A LIST
       </div>
