@@ -234,7 +234,7 @@ const add = () => {
       image_mobile1: image_mobile1_url,
       image_mobile2: image_mobile2_url,
       image_mobile3: image_mobile3_url,
-      public_flg: 0,
+      isPublic: false,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
@@ -244,7 +244,7 @@ const add = () => {
 
   return (
     <Layout>
-      <form onSubmit={handleSubmit} className="lg:px-28 xl:px-40 pt-6">
+      <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
         <h2 className="text-lg font-bold">Application</h2>
         <div className="ml-1 mt-1 mb-9">
           <div className="mb-4">

@@ -29,24 +29,28 @@ const Search = () => {
         .orderBy("name_lowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
+        .where("isPublic", "==", true)
         .get();
       const applicationsDataTag1 = await db
         .collection("applications")
         .orderBy("tag1_lowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
+        .where("isPublic", "==", true)
         .get();
       const applicationsDataTag2 = await db
         .collection("applications")
         .orderBy("tag2_lowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
+        .where("isPublic", "==", true)
         .get();
       const applicationsDataTag3 = await db
         .collection("applications")
         .orderBy("tag3_lowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
+        .where("isPublic", "==", true)
         .get();
       mergedApplicationData.push(...applicationsDataName.docs);
       mergedApplicationData.push(...applicationsDataTag1.docs);

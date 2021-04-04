@@ -24,6 +24,7 @@ const ApplicationsCategory = () => {
       const applicationsData = await db
         .collection("applications")
         .where("category", "==", category)
+        .where("isPublic", "==", true)
         .get();
       setApplications(
         applicationsData.docs.map((doc) => ({

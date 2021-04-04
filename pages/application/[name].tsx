@@ -123,6 +123,7 @@ ApplicationName.getInitialProps = async ({ query }) => {
   const applicationDataDb = await db
     .collection("applications")
     .where("name_lowercase", "==", name)
+    .where("isPublic", "==", true)
     .get();
   if (applicationDataDb.empty) {
     return {
