@@ -37,7 +37,7 @@ const ApplicationName = (applicationData) => {
             </div>
             <div className="flex flex-col">
               <h1 className="font-bold text-2xl ml-1">{application.name}</h1>
-              <h2 className="ml-1">{application.category}</h2>
+              <h2 className="text-base ml-1">{application.category}</h2>
               <div className="mt-1">
                 {application.tag1 && (
                   <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">

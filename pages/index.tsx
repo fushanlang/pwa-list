@@ -60,12 +60,12 @@ const Index = () => {
   }, []);
   return (
     <Layout>
-      <div className="text-2xl ">PWA LIST</div>
-      <div className="font-bold text-xl mt-4">Featured</div>
+      <div className="text-2xl font-bold ">PWA LIST</div>
+      <div className="text-xl font-bold mt-4">Featured</div>
       <div className="ml-1 mt-2">
         <ApplicationCard applications={featuredApps} />
       </div>
-      <div className="font-bold text-xl mt-10">New Apps</div>
+      <div className="text-xl font-bold mt-10">New Apps</div>
       <div className="ml-1 mt-2">
         <ApplicationCard applications={newApps} />
       </div>
