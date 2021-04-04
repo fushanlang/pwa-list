@@ -145,19 +145,23 @@ const add = () => {
     var descriptionErrors = [];
     var iconErrors = [];
     // required
-    if (validateRequired(name)) nameErrors.push("Please put the App name");
-    if (validateRequired(link)) linkErrors.push("Please put the App link");
+    if (validateRequired(name)) nameErrors.push("The Name field is required");
+    if (validateRequired(link)) linkErrors.push("The Link field is required");
     if (validateRequired(category))
-      categoryErrors.push("Please put the App category");
+      categoryErrors.push("The Category field is required");
     if (validateRequired(description))
-      descriptionErrors.push("Please put the App description");
-    if (validateRequired(icon)) iconErrors.push("Please put the App icon");
+      descriptionErrors.push("The About this app field is required");
+    if (validateRequired(icon)) iconErrors.push("The Icon field is required");
+    if (validateRequired(email))
+      emailErrors.push("The Email field is required");
     // custom
-    if (validateUrl(link)) linkErrors.push("Please put the App Correct link");
-    if (validateEmail(email)) emailErrors.push("Please put your correct Email");
+    if (validateUrl(link)) linkErrors.push("Please enter the correct Link");
+    if (validateEmail(email))
+      emailErrors.push("Please enter the correct Email");
     if (validateAlphanum(name))
-      nameErrors.push("Please put App name validateAlphanum");
-    if (validateRequired(email)) emailErrors.push("Please put your email");
+      nameErrors.push(
+        "Please enter the name in single-byte alphanumeric characters"
+      );
     if (
       emailErrors.length ||
       nameErrors.length ||
