@@ -66,19 +66,11 @@ const ApplicationImageModal = ({
               />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
-              <img
-                className="rounded-lg align-middle inline"
-                src={application.imagePc1}
-              />
+              <img className="rounded-lg inline" src={application.imagePc1} />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
-              <img
-                className="rounded-lg align-middle inline"
-                src={application.imagePc2}
-              />
+              <img className="rounded-lg inline" src={application.imagePc2} />
             </SwiperSlide>
-            {/* <div className="swiper-button-prev swiper-button-black"></div>
-            <div className="swiper-button-next swiper-button-black"></div> */}
           </Swiper>
         </div>
       </Modal>

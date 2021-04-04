@@ -5,7 +5,9 @@ import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import ApplicationCard from "../components/ApplicationCard";
 const db = firebase.firestore();
-
+const logo = {
+  fontFamily: "'Nunito', sans-serif",
+};
 const Index = () => {
   const [newApps, setNewApps] = useState<Object | null>([]);
   const [featuredApps, setFeaturedApps] = useState<Object | null>([]);
@@ -60,7 +62,9 @@ const Index = () => {
   }, []);
   return (
     <Layout>
-      <div className="text-2xl font-bold ">PWA LIST</div>
+      <div className="text-3xl font-bold mt-3" style={logo}>
+        P<span className="text-green-500">W</span>A LIST
+      </div>
       <div className="text-xl font-bold mt-4">Featured</div>
       <div className="ml-1 mt-2">
         <ApplicationCard applications={featuredApps} />

@@ -6,6 +6,10 @@ const Layout = ({ children, title = "PWA Store" }) => {
   return (
     <div className="text-gray-600 text-sm font-mono">
       <Head>
+        <style>
+          @import
+          url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
+        </style>
         <title>{title}</title>
       </Head>
       <div className="h-screen flex">
