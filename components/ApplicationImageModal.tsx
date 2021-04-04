@@ -1,62 +1,84 @@
-import React, { useState } from "react";
-import Image from "next/image";
 import Modal from "react-modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/swiper-bundle.min.css";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");
 
+const modalStyle = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    backgroundColor: "rgba(0,0,0,0.85)",
+  },
+  content: {
+    position: "absolute",
+    top: "4rem",
+    left: "3rem",
+    right: "3rem",
+    bottom: "4rem",
+    backgroundColor: "white",
+    borderRadius: "1rem",
+    padding: "1.5rem",
+  },
+};
 const ApplicationImageModal = ({
   application,
-  modalsOpen,
-  setModalsOpen,
+  modalIsOpen,
+  setModalIsOpen,
   initialSlide,
 }) => {
   return (
     <div>
-      <Modal isOpen={modalsOpen} onRequestClose={() => setModalsOpen(false)}>
-        <div className="text-center mt-8">
+      <Modal
+        isOpen={modalIsOpen}
+        style={modalStyle}
+        onRequestClose={() => setModalIsOpen(false)}
+      >
+        <div className="text-center">
+          <button onClick={() => setModalIsOpen(false)}>
+            <FontAwesomeIcon
+              size="2x"
+              className="text-green-400 absolute top-5 right-5"
+              icon={faTimesCircle}
+            />
+          </button>
           <Swiper
+            className="mt-2"
             spaceBetween={50}
             slidesPerView={1}
             initialSlide={initialSlide}
             navigation
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
           >
             <SwiperSlide>
-              <Image
-                width={380}
-                height={680}
-                className="rounded-lg"
+              <img
+                className="rounded-lg inline"
                 src={application.imageMobile1}
               />
             </SwiperSlide>
             <SwiperSlide>
-              <Image
-                width={380}
-                height={680}
-                className="rounded-lg"
+              <img
+                className="rounded-lg inline"
                 src={application.imageMobile2}
               />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
-              <Image
-                width={1320}
-                height={680}
-                className="rounded-lg"
+              <img
+                className="rounded-lg align-middle inline"
                 src={application.imagePc1}
               />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
-              <Image
-                width={1320}
-                height={680}
-                className="rounded-lg"
+              <img
+                className="rounded-lg align-middle inline"
                 src={application.imagePc2}
               />
             </SwiperSlide>
+            {/* <div className="swiper-button-prev swiper-button-black"></div>
+            <div className="swiper-button-next swiper-button-black"></div> */}
           </Swiper>
         </div>
       </Modal>

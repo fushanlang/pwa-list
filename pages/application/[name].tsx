@@ -11,7 +11,7 @@ import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const db = firebase.firestore();
 const ApplicationName = (applicationData) => {
-  const [modalsOpen, setModalsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
   const application = applicationData.applicationData;
   return (
@@ -29,11 +29,7 @@ const ApplicationName = (applicationData) => {
           </button>
           <div className="flex items-center">
             <div className="mr-4 h-20 w-20">
-              <Image
-                src={application.icon || "/default-app-icon.png"}
-                width={80}
-                height={80}
-              />
+              <img src={application.icon || "/default-app-icon.png"} />
             </div>
             <div className="flex flex-col">
               <h1 className="font-bold text-2xl ml-1">{application.name}</h1>
@@ -71,7 +67,7 @@ const ApplicationName = (applicationData) => {
           <div className="flex mt-6 overflow-scroll">
             <img
               onClick={() => {
-                setModalsOpen(true);
+                setModalIsOpen(true);
                 setInitialSlide(0);
               }}
               className="rounded max-h-96 mx-2 cursor-pointer"
@@ -79,7 +75,7 @@ const ApplicationName = (applicationData) => {
             />
             <img
               onClick={() => {
-                setModalsOpen(true);
+                setModalIsOpen(true);
                 setInitialSlide(1);
               }}
               className="rounded max-h-96 mx-2 cursor-pointer"
@@ -87,7 +83,7 @@ const ApplicationName = (applicationData) => {
             />
             <img
               onClick={() => {
-                setModalsOpen(true);
+                setModalIsOpen(true);
                 setInitialSlide(2);
               }}
               className="rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
@@ -95,7 +91,7 @@ const ApplicationName = (applicationData) => {
             />
             <img
               onClick={() => {
-                setModalsOpen(true);
+                setModalIsOpen(true);
                 setInitialSlide(3);
               }}
               className="rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
@@ -108,8 +104,8 @@ const ApplicationName = (applicationData) => {
           </div>
           <ApplicationImageModal
             application={application}
-            modalsOpen={modalsOpen}
-            setModalsOpen={setModalsOpen}
+            modalIsOpen={modalIsOpen}
+            setModalIsOpen={setModalIsOpen}
             initialSlide={initialSlide}
           />
         </div>
