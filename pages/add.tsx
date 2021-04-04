@@ -108,12 +108,14 @@ const add = () => {
       );
     }
   };
-  const handleDeleteIcon = async () => {
+  const handleDeleteIcon = async (e) => {
+    e.preventDefault();
     setIcon(null);
     setIconUrl(null);
   };
 
-  const handleDeletePcImage = async (index) => {
+  const handleDeletePcImage = async (e, index) => {
+    e.preventDefault();
     tmpPcImageUrlList = [...pcImageUrlList];
     tmpPcImages = [...pcImages];
     tmpPcImages.splice(index, 1);
@@ -122,7 +124,8 @@ const add = () => {
     setPcImageUrlList(tmpPcImageUrlList);
   };
 
-  const handleDeleteMobileImage = async (index) => {
+  const handleDeleteMobileImage = async (e, index) => {
+    e.preventDefault();
     tmpMobileImageUrlList = [...mobileImageUrlList];
     tmpMobileImages = [...mobileImages];
     tmpMobileImages.splice(index, 1);
@@ -395,7 +398,7 @@ const add = () => {
               <ImagePreview
                 key={index}
                 imageUrl={pcImageUrl}
-                handleDeleteImage={() => handleDeletePcImage(index)}
+                handleDeleteImage={(event) => handleDeletePcImage(event, index)}
               />
             ))}
           </div>
@@ -419,7 +422,9 @@ const add = () => {
               <ImagePreview
                 key={index}
                 imageUrl={mobileImageUrl}
-                handleDeleteImage={() => handleDeleteMobileImage(index)}
+                handleDeleteImage={(event) =>
+                  handleDeleteMobileImage(event, index)
+                }
               />
             ))}
           </div>
