@@ -28,7 +28,7 @@ const add = () => {
   const [tag2, setTag2] = useState<string | null>(null);
   const [tag3, setTag3] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
-  const [icon, setIcon] = useState<File | null>(null);
+  const [icon, setIcon] = useState<any | null>(null);
   const [iconUrl, setIconUrl] = useState<any | null>(null);
   const [pcImages, setPcImages] = useState<any[]>([]);
   const [pcImageUrlList, setPcImageUrlList] = useState<any[]>([]);

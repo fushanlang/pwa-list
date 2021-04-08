@@ -16,7 +16,7 @@ const AddCompletedModal = ({ modalsOpen, setModalsOpen }) => {
           <div className="mt-4">
             <Link href="/" as="/">
               <button
-                className="w-48 bg-green-500 hover:bg-green-700 text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline"
+                className="w-48 bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Home
