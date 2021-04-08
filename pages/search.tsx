@@ -9,7 +9,7 @@ const db = firebase.firestore();
 
 const Search = () => {
   const [searchParam, setSearchParam] = useState<String | null>(null);
-  const [initialSearchParam, setInitialSearchParam] = useState<String | null>(
+  const [initialSearchParam, setInitialSearchParam] = useState<any | null>(
     null
   );
   const [searchedApp, setSearchedApp] = useState<Object | null>([]);
