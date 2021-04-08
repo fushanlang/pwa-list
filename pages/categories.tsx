@@ -45,7 +45,7 @@ const categories = () => {
   return (
     <div className="text-gray-600 text-sm font-mono">
       <Head>
-        <title>PWA Store</title>
+        <title>PWA List</title>
       </Head>
       <div className="h-screen flex">
         <SideBar />
