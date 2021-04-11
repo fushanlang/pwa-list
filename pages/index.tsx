@@ -10,32 +10,7 @@ const logo = {
 };
 const Index = () => {
   const [newApps, setNewApps] = useState<Object | null>([]);
-  const [featuredApps, setFeaturedApps] = useState<Object | null>([]);
   const date = new Date();
-  useEffect(() => {
-    const fetchFeaturedAppData = async () => {
-      const applicationsData = await db
-        .collection("applications")
-        .where("isFeatured", "==", true)
-        .where("isPublic", "==", true)
-        .orderBy("featureOrder")
-        .get();
-      setFeaturedApps(
-        applicationsData.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-          nameLowercase: doc.data().nameLowercase,
-          icon: doc.data().icon,
-          category: doc.data().category,
-          tag1: doc.data().tag1,
-          tag2: doc.data().tag2,
-          tag3: doc.data().tag3,
-          description: doc.data().description,
-        }))
-      );
-    };
-    fetchFeaturedAppData();
-  }, []);
   useEffect(() => {
     const fetchNewAppData = async () => {
       const applicationsData = await db
@@ -68,10 +43,6 @@ const Index = () => {
       />
       <div className="text-3xl font-bold mt-3" style={logo}>
         P<span className="text-green-500">W</span>A LIST
-      </div>
-      <div className="text-xl font-bold mt-4">Featured</div>
-      <div className="ml-1 mt-2">
-        <ApplicationCard applications={featuredApps} />
       </div>
       <div className="text-xl font-bold mt-10">New Apps</div>
       <div className="ml-1 mt-2">

@@ -81,7 +81,8 @@ const Search = () => {
     if (
       localStorage.saveKey !== null &&
       localStorage.saveKey !== "" &&
-      localStorage.saveKey !== "empty"
+      localStorage.saveKey !== "empty" &&
+      typeof localStorage.saveKey !== "undefined"
     ) {
       setInitialSearchParam(localStorage.saveKey);
       setSearchParam(localStorage.saveKey);
