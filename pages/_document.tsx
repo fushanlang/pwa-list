@@ -45,13 +45,18 @@ class MyDocument extends Document {
             sizes="180x180"
             href="/apple-touch-icon-180x180.png"
           />
-          {/* 一般 */}
+          {/* common */}
           <meta name="application-name" content="myapp" />
           <meta name="theme-color" content="#000" />
           <meta name="description" content="this is myapp" />
           <link rel="icon" sizes="192x192" href="/icon-192x192.png" />
           <link rel="icon" href="/favicon.ico" />
           <link rel="manifest" href="/favicons/manifest.json" />
+          {/* font */}
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap"
+          />
         </Head>
         <body>
           <Main />
