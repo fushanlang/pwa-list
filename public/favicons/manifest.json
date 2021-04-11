@@ -1,7 +1,7 @@
 {
-	"name":				"pwalist",
-	"short_name":		"pwalist",
-	"description":		"pwalist",
+	"name":				"PWALIST",
+	"short_name":		"PWALIST",
+	"description":		"PWALIST",
 	"start_url":		"/",
 	"display":			"standalone",
 	"orientation":		"any",
