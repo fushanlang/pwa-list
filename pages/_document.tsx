@@ -6,8 +6,6 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from "next/document";
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false;
 
 class MyDocument extends Document {
   static async getInitialProps(
