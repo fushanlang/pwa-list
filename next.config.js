@@ -1,4 +1,6 @@
-module.exports = {
+const withPWA = require("next-pwa");
+
+module.exports = withPWA({
   env: {
     FIREBASE_KEY: process.env.FIREBASE_KEY,
     FIREBASE_DOMAIN: process.env.FIREBASE_DOMAIN,
@@ -11,4 +13,6 @@ module.exports = {
   images: {
     domains: ["firebasestorage.googleapis.com", "placehold.jp"],
   },
-};
+  future: { webpack5: true },
+  pwa: { dest: "public" },
+});
