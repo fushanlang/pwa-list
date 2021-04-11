@@ -8,6 +8,8 @@ const db = firebase.firestore();
 const logo = {
   fontFamily: "'Nunito', sans-serif",
 };
+console.log(1111);
+console.log(process.env.FIREBASE_APP_ID);
 const Index = () => {
   const [newApps, setNewApps] = useState<Object | null>([]);
   const date = new Date();
