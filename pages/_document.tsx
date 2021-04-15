@@ -6,6 +6,9 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from "next/document";
+const title = "PWA LIST";
+const url = "https://pwalist.app/";
+const description = "You can find pwa apps by category or name at pwalist!";
 
 class MyDocument extends Document {
   static async getInitialProps(
@@ -51,10 +54,29 @@ class MyDocument extends Document {
           {/* common */}
           <meta name="application-name" content="PWA LIST" />
           <meta name="theme-color" content="#000" />
-          <meta name="description" content="this is PWA LIST" />
           <link rel="icon" sizes="192x192" href="/icon-192x192.png" />
           <link rel="icon" href="/favicons/favicon.ico" />
           <link rel="manifest" href="/favicons/manifest.json" />
+          <meta name="description" content={description} />
+          <meta
+            key="keywords"
+            name="keywords"
+            content="pwa, Progressive Web Apps"
+          />
+          <meta key="og:title" property="og:title" content={title} />
+          <meta key="og:site_name" property="og:site_name" content={title} />
+          <meta key="og:url" property="og:url" content={url} />
+          <meta key="og:image" property="og:image" content={"/pwalist.png"} />
+          <meta
+            key="og:description"
+            property="og:description"
+            content={description}
+          />
+          <meta
+            key="twitter:card"
+            property="twitter:card"
+            content="summary_large_image"
+          />
           {/* font */}
           <link
             rel="stylesheet"
