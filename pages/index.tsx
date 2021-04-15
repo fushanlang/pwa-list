@@ -46,7 +46,7 @@ const Index = () => {
       </div>
       <div className="text-center mt-12 block md:hidden">
         <Link href="/add" as="/add">
-          <a className="inline-block mb-2 px-7 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-600 hover:shadow-none transition ease-in-out">
+          <a className="inline-block mb-2 px-7 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
             <strong>Submit Your App</strong>
           </a>
         </Link>

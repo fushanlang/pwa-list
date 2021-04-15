@@ -7,7 +7,7 @@ import ApplicationCard from "../../components/ApplicationCard";
 
 const db = firebase.firestore();
 const ApplicationsCategory = () => {
-  const [applications, setApplications] = useState<Object>([{}]);
+  const [applications, setApplications] = useState<Object>([]);
   const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] = useState<
     string | null
   >(null);

@@ -118,7 +118,7 @@ const SideBar = () => {
       <div className="mt-1 mb-2 w-60 text-center">
         <div className="w-full border-t-2">
           <Link href="/add" as="/add">
-            <a className="inline-block mt-5 mb-1 px-4 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-600 hover:shadow-none transition ease-in-out">
+            <a className="inline-block mt-5 mb-1 px-4 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
               <strong>Submit Your App</strong>
             </a>
           </Link>
