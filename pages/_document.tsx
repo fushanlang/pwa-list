@@ -81,7 +81,6 @@ class MyDocument extends Document {
             content="summary_large_image"
           />
           <meta name="twitter:site" content="@masakifukunishi" />
-          <meta name="twitter:image" content={imageUrl} />
           {/* font */}
           <link
             rel="stylesheet"
