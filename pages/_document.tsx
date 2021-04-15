@@ -8,7 +8,9 @@ import Document, {
 } from "next/document";
 const title = "PWA LIST";
 const url = "https://pwalist.app/";
-const description = "You can find pwa apps by category or name at pwalist!";
+const description = "You can find pwa apps by category or name at PWA LIST!";
+const imageUrl =
+  "https://firebasestorage.googleapis.com/v0/b/pwa-list-b9174.appspot.com/o/common%2Fpwalist.png?alt=media&token=2247b98b-24d0-4304-92ad-f498607f0dcc";
 
 class MyDocument extends Document {
   static async getInitialProps(
@@ -66,7 +68,7 @@ class MyDocument extends Document {
           <meta key="og:title" property="og:title" content={title} />
           <meta key="og:site_name" property="og:site_name" content={title} />
           <meta key="og:url" property="og:url" content={url} />
-          <meta key="og:image" property="og:image" content={"/pwalist.png"} />
+          <meta key="og:image" property="og:image" content={imageUrl} />
           <meta
             key="og:description"
             property="og:description"
