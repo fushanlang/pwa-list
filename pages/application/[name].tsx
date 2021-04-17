@@ -70,7 +70,7 @@ const ApplicationName = (applicationData) => {
                 setModalIsOpen(true);
                 setInitialSlide(0);
               }}
-              className="rounded max-h-96 mx-2 cursor-pointer"
+              className="border rounded max-h-96 mx-2 cursor-pointer"
               src={application.imageMobile1}
             />
             <img
@@ -78,7 +78,7 @@ const ApplicationName = (applicationData) => {
                 setModalIsOpen(true);
                 setInitialSlide(1);
               }}
-              className="rounded max-h-96 mx-2 cursor-pointer"
+              className="border rounded max-h-96 mx-2 cursor-pointer"
               src={application.imageMobile2}
             />
             <img
@@ -86,7 +86,7 @@ const ApplicationName = (applicationData) => {
                 setModalIsOpen(true);
                 setInitialSlide(2);
               }}
-              className="rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
+              className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
               src={application.imagePc1}
             />
             <img
@@ -94,13 +94,18 @@ const ApplicationName = (applicationData) => {
                 setModalIsOpen(true);
                 setInitialSlide(3);
               }}
-              className="rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
+              className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
               src={application.imagePc2}
             />
           </div>
           <div className="mt-7 px-4">
             <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
-            <p className="text-left text-base">{application.description}</p>
+            <p
+              style={{ whiteSpace: "pre-line" }}
+              className="text-left text-base"
+            >
+              {application.description}
+            </p>
           </div>
           <ApplicationImageModal
             application={application}

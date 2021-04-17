@@ -55,25 +55,25 @@ const ApplicationImageModal = ({
           >
             <SwiperSlide>
               <img
-                className="rounded-lg inline"
+                className="border rounded-lg inline"
                 src={application.imageMobile1}
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
-                className="rounded-lg inline"
+                className="border rounded-lg inline"
                 src={application.imageMobile2}
               />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
               <img
-                className="rounded-lg inline w-11/12 mt-20 xl:mt-0"
+                className="border rounded-lg inline w-11/12 mt-20 xl:mt-0"
                 src={application.imagePc1}
               />
             </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
               <img
-                className="rounded-lg inline w-11/12 mt-20 xl:mt-0"
+                className="border rounded-lg inline w-11/12 mt-20 xl:mt-0"
                 src={application.imagePc2}
               />
             </SwiperSlide>

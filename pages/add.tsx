@@ -280,7 +280,7 @@ const add = () => {
               className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
               type="text"
               maxLength={120}
-              placeholder="https://"
+              placeholder="https://pwalist.app"
               onChange={(e) => {
                 setLink(e.target.value);
                 setErrors({ ...errors, link: [] });
@@ -353,8 +353,8 @@ const add = () => {
             </label>
             <textarea
               className="shadow form-textarea mt-1 block w-full border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-              rows={12}
-              maxLength={4000}
+              rows={10}
+              maxLength={2000}
               onChange={(e) => {
                 setDescription(e.target.value);
                 setErrors({ ...errors, description: [] });
@@ -368,9 +368,9 @@ const add = () => {
           {iconUrl && (
             <div className="flex mb-4">
               <div className="relative">
-                <img className="rounded max-h-20" src={iconUrl} />
+                <img className="border rounded max-h-20" src={iconUrl} />
                 <button
-                  className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3"
+                  className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1"
                   onClick={handleDeleteIcon}
                 >
                   <FontAwesomeIcon icon={faMinusCircle} size="lg" />

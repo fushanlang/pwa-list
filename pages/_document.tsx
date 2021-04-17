@@ -8,7 +8,8 @@ import Document, {
 } from "next/document";
 const title = "PWA LIST";
 const url = "https://pwalist.app/";
-const description = "You can find pwa apps by category or name in PWA LIST!";
+const description =
+  "You can find progressive web apps by category or name in PWA LIST!";
 const imageUrl =
   "https://firebasestorage.googleapis.com/v0/b/pwa-list-b9174.appspot.com/o/common%2Fpwalist.png?alt=media&token=2247b98b-24d0-4304-92ad-f498607f0dcc";
 
