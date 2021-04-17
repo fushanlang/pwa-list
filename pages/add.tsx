@@ -353,8 +353,8 @@ const add = () => {
             </label>
             <textarea
               className="shadow form-textarea mt-1 block w-full border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-              rows={5}
-              maxLength={500}
+              rows={12}
+              maxLength={4000}
               onChange={(e) => {
                 setDescription(e.target.value);
                 setErrors({ ...errors, description: [] });
