@@ -204,25 +204,40 @@ const add = () => {
     var tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
     var tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
     var iconUrl = icon
-      ? await uploadToStorage(iconsFolder, name, icon, "icon")
+      ? await uploadToStorage(iconsFolder, nameLowercase, icon, "icon")
       : null;
     var imagePc1Url = pcImages[0]
-      ? await uploadToStorage(imagesFolder, name, pcImages[0], "pc1")
+      ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1")
       : null;
     var imagePc2Url = pcImages[1]
-      ? await uploadToStorage(imagesFolder, name, pcImages[1], "pc2")
+      ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2")
       : null;
     var imagePc3Url = pcImages[2]
-      ? await uploadToStorage(imagesFolder, name, pcImages[2], "pc3")
+      ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3")
       : null;
     var imageMobile1Url = mobileImages[0]
-      ? await uploadToStorage(imagesFolder, name, mobileImages[0], "mobile1")
+      ? await uploadToStorage(
+          imagesFolder,
+          nameLowercase,
+          mobileImages[0],
+          "mobile1"
+        )
       : null;
     var imageMobile2Url = mobileImages[1]
-      ? await uploadToStorage(imagesFolder, name, mobileImages[1], "mobile2")
+      ? await uploadToStorage(
+          imagesFolder,
+          nameLowercase,
+          mobileImages[1],
+          "mobile2"
+        )
       : null;
     var imageMobile3Url = mobileImages[2]
-      ? await uploadToStorage(imagesFolder, name, mobileImages[2], "mobile3")
+      ? await uploadToStorage(
+          imagesFolder,
+          nameLowercase,
+          mobileImages[2],
+          "mobile3"
+        )
       : null;
     db.collection("applications").add({
       email: email,
