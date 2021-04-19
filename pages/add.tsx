@@ -6,10 +6,11 @@ import ErrorMessage from "../components/ErrorMessage";
 import ImagePreview from "../components/ImagePreview";
 import firebase from "../plugins/firebase";
 import fileLoad from "../plugins/fileLoad";
-import validateRequired from "../plugins/validateRequired";
-import validateUrl from "../plugins/validateUrl";
-import validateEmail from "../plugins/validateEmail";
-import validateAlphanum from "../plugins/validateAlphanum";
+import validateRequired from "../plugins/validation/validateRequired";
+import validateUrl from "../plugins/validation/validateUrl";
+import validateEmail from "../plugins/validation/validateEmail";
+import validateAlphanum from "../plugins/validation/validateAlphanum";
+import validateDuplicate from "../plugins/validation/validateDuplicate";
 import uploadToStorage from "../plugins/uploadToStorage";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -134,7 +135,7 @@ const add = () => {
     setMobileImageUrlList(tmpMobileImageUrlList);
   };
 
-  const validate = () => {
+  const validate = async () => {
     var emailErrors = [];
     var nameErrors = [];
     var linkErrors = [];
@@ -162,6 +163,8 @@ const add = () => {
       nameErrors.push(
         "Please enter the name in single-byte alphanumeric characters"
       );
+    if (await validateDuplicate(name, "nameLowercase"))
+      nameErrors.push("The app name has already been registered");
     if (
       emailErrors.length ||
       nameErrors.length ||
@@ -192,7 +195,7 @@ const add = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (!validate()) {
+    if (!(await validate())) {
       setIsSubmitting(false);
       return;
     }
