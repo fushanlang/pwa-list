@@ -1,7 +1,7 @@
 {
-	"name":				"PWA LIST",
-	"short_name":		"PWA LIST",
-	"description":		"PWA LIST",
+	"name":				"Pwa List",
+	"short_name":		"Pwa List",
+	"description":		"Pwa List",
 	"start_url":		"/",
 	"display":			"standalone",
 	"orientation":		"any",
