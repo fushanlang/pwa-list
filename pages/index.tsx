@@ -56,7 +56,7 @@ const Index = () => {
             className="text-green-500"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://twitter.com/masakifukunishi"
+            href="https://www.masakifukunishi.site/"
           >
             Masaki
           </a>
