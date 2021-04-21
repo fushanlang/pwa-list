@@ -57,7 +57,7 @@ const ApplicationName = (applicationData) => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href={application.url}
+              href={application.link}
               className="text-center w-60 mt-7 ml-1 py-1 inline-block tracking-wide text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out"
             >
               VIEW&nbsp;
@@ -139,7 +139,7 @@ ApplicationName.getInitialProps = async ({ query }) => {
     tag2: application.tag2,
     tag3: application.tag3,
     category: application.category,
-    url: application.url,
+    link: application.link,
     description: application.description,
     imagePc1: application.imagePc1,
     imagePc2: application.imagePc2,
