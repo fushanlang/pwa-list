@@ -2,7 +2,7 @@ import Head from "next/head";
 import SideBar from "../components/SideBar";
 import BottomBar from "../components/BottomBar";
 
-const Layout = ({ children, title = "PWA LIST" }) => {
+const Layout = ({ children, title = "PWA List" }) => {
   return (
     <div className="text-gray-600 text-sm font-mono">
       <Head>

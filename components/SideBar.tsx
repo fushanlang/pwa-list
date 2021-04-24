@@ -133,7 +133,7 @@ const SideBar = () => {
               Masaki
             </a>
           </p>
-          <p className="text-xs mt-2">&copy; PWA LIST {date.getFullYear()}</p>
+          <p className="text-xs mt-2">&copy; PWA List {date.getFullYear()}</p>
         </div>
       </div>
     </div>

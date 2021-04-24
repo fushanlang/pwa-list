@@ -6,10 +6,10 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from "next/document";
-const title = "PWA LIST";
+const title = "PWA List";
 const url = "https://pwalist.app/";
 const description =
-  "You can find progressive web apps by category or name in PWA LIST!";
+  "You can find progressive web apps by category or name in PWA List!";
 const imageUrl =
   "https://firebasestorage.googleapis.com/v0/b/pwa-list-b9174.appspot.com/o/common%2Fpwalist.png?alt=media&token=2247b98b-24d0-4304-92ad-f498607f0dcc";
 
@@ -48,14 +48,14 @@ class MyDocument extends Document {
             name="/faviconsapple-mobile-web-app-status-bar-style"
             content="#000"
           />
-          <meta name="/faviconsapple-mobile-web-app-title" content="PWA LIST" />
+          <meta name="/faviconsapple-mobile-web-app-title" content="PWA List" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
             href="/favicons/apple-touch-icon-180x180.png"
           />
           {/* common */}
-          <meta name="application-name" content="PWA LIST" />
+          <meta name="application-name" content="PWA List" />
           <meta name="theme-color" content="#000" />
           <link rel="icon" sizes="192x192" href="/icon-192x192.png" />
           <link rel="icon" href="/favicons/favicon.ico" />

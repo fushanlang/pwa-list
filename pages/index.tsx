@@ -61,7 +61,7 @@ const Index = () => {
             Masaki
           </a>
         </p>
-        <p className="text-xs">&copy; PWA LIST {date.getFullYear()}</p>
+        <p className="text-xs">&copy; PWA List {date.getFullYear()}</p>
       </div>
     </Layout>
   );
