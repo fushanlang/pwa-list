@@ -414,7 +414,7 @@ const add = () => {
             <ErrorMessage errors={errors.icon}></ErrorMessage>
           </div>
           <label className="block font-bold mb-2">
-            Image for PC (Up to 3 Images)
+            PC size screenshot (Up to 3 Images)
           </label>
           <div className="flex overflow-scroll">
             {pcImageUrlList.map((pcImageUrl, index) => (
@@ -438,7 +438,7 @@ const add = () => {
             </label>
           </div>
           <label className="block font-bold mb-2">
-            Image for Mobile (Up to 3 Images)
+            Mobile size screenshot (Up to 3 Images)
           </label>
           <div className="flex overflow-scroll">
             {mobileImageUrlList.map((mobileImageUrl, index) => (
