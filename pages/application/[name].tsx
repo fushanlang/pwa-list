@@ -27,8 +27,8 @@ const ApplicationName = (applicationData) => {
             <FontAwesomeIcon icon={faChevronLeft} />
             &nbsp;Back
           </button>
-          <div className="flex items-center">
-            <div className="mr-4 h-20 w-20">
+          <div className="flex items-center ml-1">
+            <div className="mr-4 w-20">
               <img src={application.icon || "/default-app-icon.png"} />
             </div>
             <div className="flex flex-col">
