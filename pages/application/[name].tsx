@@ -86,16 +86,32 @@ const ApplicationName = (applicationData) => {
                 setModalIsOpen(true);
                 setInitialSlide(2);
               }}
-              className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
-              src={application.imagePc1}
+              className="border rounded max-h-96 mx-2 cursor-pointer"
+              src={application.imageMobile3}
             />
             <img
               onClick={() => {
                 setModalIsOpen(true);
                 setInitialSlide(3);
               }}
+              className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
+              src={application.imagePc1}
+            />
+            <img
+              onClick={() => {
+                setModalIsOpen(true);
+                setInitialSlide(4);
+              }}
               className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
               src={application.imagePc2}
+            />
+            <img
+              onClick={() => {
+                setModalIsOpen(true);
+                setInitialSlide(5);
+              }}
+              className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
+              src={application.imagePc3}
             />
           </div>
           <div className="mt-7 px-4">
@@ -143,8 +159,10 @@ ApplicationName.getInitialProps = async ({ query }) => {
     description: application.description,
     imagePc1: application.imagePc1,
     imagePc2: application.imagePc2,
+    imagePc3: application.imagePc3,
     imageMobile1: application.imageMobile1,
     imageMobile2: application.imageMobile2,
+    imageMobile3: application.imageMobile3,
   };
   return {
     applicationData: returnApplicationData,

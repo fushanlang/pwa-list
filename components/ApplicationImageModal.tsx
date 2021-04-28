@@ -65,6 +65,12 @@ const ApplicationImageModal = ({
                 src={application.imageMobile2}
               />
             </SwiperSlide>
+            <SwiperSlide>
+              <img
+                className="border rounded-lg inline"
+                src={application.imageMobile3}
+              />
+            </SwiperSlide>
             <SwiperSlide className="hidden lg:inline-block">
               <img
                 className="border rounded-lg inline w-11/12 mt-20 xl:mt-0"
@@ -75,6 +81,12 @@ const ApplicationImageModal = ({
               <img
                 className="border rounded-lg inline w-11/12 mt-20 xl:mt-0"
                 src={application.imagePc2}
+              />
+            </SwiperSlide>
+            <SwiperSlide className="hidden lg:inline-block">
+              <img
+                className="border rounded-lg inline w-11/12 mt-20 xl:mt-0"
+                src={application.imagePc3}
               />
             </SwiperSlide>
           </Swiper>
