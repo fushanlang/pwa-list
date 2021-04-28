@@ -54,48 +54,60 @@ const ApplicationImageModal = ({
             navigation
           >
             <div>
-              <SwiperSlide>
-                <img
-                  style={{ maxHeight: "680px" }}
-                  className="border rounded-lg inline"
-                  src={application.imageMobile1}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  style={{ maxHeight: "680px" }}
-                  className="border rounded-lg inline"
-                  src={application.imageMobile2}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  style={{ maxHeight: "680px" }}
-                  className="border rounded-lg inline"
-                  src={application.imageMobile3}
-                />
-              </SwiperSlide>
-              <SwiperSlide className="hidden lg:inline-block">
-                <img
-                  style={{ maxHeight: "680px" }}
-                  className="border rounded-lg inline mt-20 xl:mt-0"
-                  src={application.imagePc1}
-                />
-              </SwiperSlide>
-              <SwiperSlide className="hidden lg:inline-block">
-                <img
-                  style={{ maxHeight: "680px" }}
-                  className="border rounded-lg inline mt-20 xl:mt-0"
-                  src={application.imagePc2}
-                />
-              </SwiperSlide>
-              <SwiperSlide className="hidden lg:inline-block">
-                <img
-                  style={{ maxHeight: "680px" }}
-                  className="border rounded-lg inline mt-20 xl:mt-0"
-                  src={application.imagePc3}
-                />
-              </SwiperSlide>
+              {application.imageMobile1 !== null && (
+                <SwiperSlide>
+                  <img
+                    style={{ maxHeight: "680px" }}
+                    className="border rounded-lg inline"
+                    src={application.imageMobile1}
+                  />
+                </SwiperSlide>
+              )}
+              {application.imageMobile2 !== null && (
+                <SwiperSlide>
+                  <img
+                    style={{ maxHeight: "680px" }}
+                    className="border rounded-lg inline"
+                    src={application.imageMobile2}
+                  />
+                </SwiperSlide>
+              )}
+              {application.imageMobile3 !== null && (
+                <SwiperSlide>
+                  <img
+                    style={{ maxHeight: "680px" }}
+                    className="border rounded-lg inline"
+                    src={application.imageMobile3}
+                  />
+                </SwiperSlide>
+              )}
+              {application.imagePc1 !== null && (
+                <SwiperSlide className="hidden lg:inline-block">
+                  <img
+                    style={{ maxHeight: "680px" }}
+                    className="border rounded-lg inline mt-20 xl:mt-0"
+                    src={application.imagePc1}
+                  />
+                </SwiperSlide>
+              )}
+              {application.imagePc2 !== null && (
+                <SwiperSlide className="hidden lg:inline-block">
+                  <img
+                    style={{ maxHeight: "680px" }}
+                    className="border rounded-lg inline mt-20 xl:mt-0"
+                    src={application.imagePc2}
+                  />
+                </SwiperSlide>
+              )}
+              {application.imagePc3 !== null && (
+                <SwiperSlide className="hidden lg:inline-block">
+                  <img
+                    style={{ maxHeight: "680px" }}
+                    className="border rounded-lg inline mt-20 xl:mt-0"
+                    src={application.imagePc3}
+                  />
+                </SwiperSlide>
+              )}
             </div>
           </Swiper>
         </div>
