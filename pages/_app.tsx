@@ -5,8 +5,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import Router from "next/router";
 import * as gtag from "../plugins/gtag";
 Router.events.on("routeChangeComplete", (url) => gtag.pageview(url));
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   return <Component {...pageProps} />;
-}
+};
 
 export default MyApp;
