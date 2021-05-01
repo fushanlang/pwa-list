@@ -34,6 +34,7 @@ const ApplicationName = (applicationData) => {
           property="og:description"
           content={application.description}
         />
+        <meta key="twitter:card" property="twitter:card" content="summary" />
       </Head>
       {application.name === undefined ? (
         <NotFound />
