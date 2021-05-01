@@ -90,22 +90,24 @@ const Search = () => {
   }, []);
   return (
     <Layout>
-      <div className="flex w-4/5 m-auto mt-5 rounded-md shadow h-11 bg-white">
-        <div className="m-auto ml-3">
-          <FontAwesomeIcon icon={faSearch} size="lg" />
+      <div className="px-2">
+        <div className="flex w-4/5 m-auto mt-5 rounded-md shadow h-11 bg-white">
+          <div className="m-auto ml-3">
+            <FontAwesomeIcon icon={faSearch} size="lg" />
+          </div>
+          <input
+            className="focus:outline-none ml-2 w-full pl-2 text-base rounded-md"
+            type="text"
+            placeholder="Search"
+            defaultValue={initialSearchParam}
+            onChange={(e) => {
+              setSearchParam(e.target.value);
+            }}
+          />
         </div>
-        <input
-          className="focus:outline-none ml-2 w-full pl-2 text-base rounded-md"
-          type="text"
-          placeholder="Search"
-          defaultValue={initialSearchParam}
-          onChange={(e) => {
-            setSearchParam(e.target.value);
-          }}
-        />
-      </div>
-      <div className="mt-8">
-        <ApplicationCard applications={searchedApp} />
+        <div className="mt-8">
+          <ApplicationCard applications={searchedApp} />
+        </div>
       </div>
     </Layout>
   );

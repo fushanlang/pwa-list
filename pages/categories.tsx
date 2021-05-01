@@ -1,4 +1,3 @@
-import Head from "next/head";
 import SideBar from "../components/SideBar";
 import BottomBar from "../components/BottomBar";
 import CategoryLinkForCategories from "../components/CategoryLinkForCategories";
@@ -43,10 +42,7 @@ library.add(
 );
 const categories = () => {
   return (
-    <div className="text-gray-600 text-sm font-mono">
-      <Head>
-        <title>PWA List</title>
-      </Head>
+    <div className="text-gray-600 text-sm">
       <div className="h-screen flex">
         <SideBar />
         <div className="flex-1 overflow-scroll bg-white p-5 pl-7 mb-7">

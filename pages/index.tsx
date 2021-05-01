@@ -37,31 +37,33 @@ const Index = () => {
   }, []);
   return (
     <Layout>
-      <div className="text-3xl font-bold mt-3" style={logo}>
-        P<span className="text-green-500">W</span>A LIST
-      </div>
-      <div className="text-xl font-bold mt-10">New Apps</div>
-      <div className="ml-1 mt-2">
-        <ApplicationCard applications={newApps} />
-      </div>
-      <div className="text-center mt-12 block md:hidden">
-        <Link href="/add" as="/add">
-          <a className="inline-block mb-2 px-7 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
-            <strong>Submit Your App</strong>
-          </a>
-        </Link>
-        <p className="text-sm">
-          Made By&nbsp;
-          <a
-            className="text-green-500"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://masakifukunishi.site"
-          >
-            Masaki
-          </a>
-        </p>
-        <p className="text-xs">&copy; PWA List {date.getFullYear()}</p>
+      <div className="px-2">
+        <div className="text-3xl font-bold mt-3" style={logo}>
+          P<span className="text-green-500">W</span>A LIST
+        </div>
+        <div className="text-xl font-bold mt-10">New Apps</div>
+        <div className="ml-1 mt-2">
+          <ApplicationCard applications={newApps} />
+        </div>
+        <div className="text-center mt-12 block md:hidden">
+          <Link href="/add" as="/add">
+            <a className="inline-block mb-2 px-7 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+              <strong>Submit Your App</strong>
+            </a>
+          </Link>
+          <p className="text-sm">
+            Made By&nbsp;
+            <a
+              className="text-green-500"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://masakifukunishi.site"
+            >
+              Masaki
+            </a>
+          </p>
+          <p className="text-xs">&copy; PWA List {date.getFullYear()}</p>
+        </div>
       </div>
     </Layout>
   );

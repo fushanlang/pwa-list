@@ -59,11 +59,13 @@ const ApplicationsCategory = () => {
   // }, []);
   return (
     <Layout>
-      <div className="text-2xl font-bold mb-4 mt-3">
-        {caategoryFirstUpperCase}
-      </div>
-      <div className="ml-1">
-        <ApplicationCard applications={applications} />
+      <div className="px-2">
+        <div className="text-2xl font-bold mb-4 mt-3">
+          {caategoryFirstUpperCase}
+        </div>
+        <div className="ml-1">
+          <ApplicationCard applications={applications} />
+        </div>
       </div>
     </Layout>
   );
