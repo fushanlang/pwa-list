@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Image from "next/image";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import Router from "next/router";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
@@ -14,8 +15,26 @@ const ApplicationName = (applicationData) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
   const application = applicationData.applicationData;
+  const router = useRouter();
+  const url = `https://www.pwalist.app${router.asPath}`;
   return (
     <Layout>
+      <Head>
+        <meta key="og:title" property="og:title" content={application.name} />
+        <meta
+          key="og:site_name"
+          property="og:site_name"
+          content={application.name}
+        />
+        <meta key="og:url" property="og:url" content={url} />
+        <meta key="og:image" property="og:image" content={application.icon} />
+        <meta property="og:type" content="website" />
+        <meta
+          key="og:description"
+          property="og:description"
+          content={application.description}
+        />
+      </Head>
       {application.name === undefined ? (
         <NotFound />
       ) : (
