@@ -45,6 +45,7 @@ const add = () => {
     tag3: [],
     description: [],
     icon: [],
+    screenshot: [],
   });
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
@@ -145,11 +146,13 @@ const add = () => {
     var tag3Errors = [];
     var descriptionErrors = [];
     var iconErrors = [];
+    var screenshotErrors = [];
     // required
     if (validateRequired(name)) nameErrors.push("The Name field is required");
     if (validateRequired(link)) linkErrors.push("The Link field is required");
     if (validateRequired(category))
       categoryErrors.push("The Category field is required");
+    if (validateRequired(tag1)) tag1Errors.push("The Tag field is required");
     if (validateRequired(description))
       descriptionErrors.push("The About this app field is required");
     if (validateRequired(icon)) iconErrors.push("The Icon field is required");
@@ -163,8 +166,25 @@ const add = () => {
       nameErrors.push(
         "Please enter the name in single-byte alphanumeric characters"
       );
+    if (validateAlphanum(tag1))
+      tag1Errors.push(
+        "Please enter the tag1 in single-byte alphanumeric characters"
+      );
+    if (validateAlphanum(tag2))
+      tag2Errors.push(
+        "Please enter the tag2 in single-byte alphanumeric characters"
+      );
+    if (validateAlphanum(tag3))
+      tag3Errors.push(
+        "Please enter the tag3 in single-byte alphanumeric characters"
+      );
+    if (pcImages[0] === undefined && mobileImages[0] === undefined)
+      screenshotErrors.push(
+        "Please enter either mobile size or PC size screenshot"
+      );
     if (await validateDuplicate(name, "nameLowercase"))
       nameErrors.push("The app name has already been registered");
+
     if (
       emailErrors.length ||
       nameErrors.length ||
@@ -174,7 +194,8 @@ const add = () => {
       tag2Errors.length ||
       tag3Errors.length ||
       descriptionErrors.length ||
-      iconErrors.length
+      iconErrors.length ||
+      screenshotErrors.length
     ) {
       setErrors({
         email: emailErrors,
@@ -186,6 +207,7 @@ const add = () => {
         tag3: tag3Errors,
         description: descriptionErrors,
         icon: iconErrors,
+        screenshot: screenshotErrors,
       });
       return false;
     }
@@ -329,7 +351,11 @@ const add = () => {
           </div>
           <div className="mb-4">
             <label className="block font-bold mb-1">
-              Tags<span className="text-red-400 ml-2"></span>
+              Tags
+              <span className="text-red-400 ml-2">*</span>
+              <span className="text-xs text-red-400 ml-2">
+                1 or more required
+              </span>
             </label>
             <input
               className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
@@ -413,6 +439,13 @@ const add = () => {
             </label>
             <ErrorMessage errors={errors.icon}></ErrorMessage>
           </div>
+          <p className="text-base font-bold mb-2">
+            screenshots
+            <span className="text-red-400 ml-2">*</span>
+            <span className="text-xs text-red-400 ml-2">
+              Either mobile or PC screenshot is required.
+            </span>
+          </p>
           <label className="block font-bold mb-2">
             PC size screenshots (Up to 3 Images)
           </label>
@@ -433,7 +466,10 @@ const add = () => {
                 className="hidden"
                 accept="image/*"
                 multiple
-                onChange={onChangePcImageHandler}
+                onChange={(e) => {
+                  onChangePcImageHandler(e);
+                  setErrors({ ...errors, screenshot: [] });
+                }}
               />
             </label>
           </div>
@@ -459,10 +495,14 @@ const add = () => {
                 className="hidden"
                 accept="image/*"
                 multiple
-                onChange={onChangeMobileImageHandler}
+                onChange={(e) => {
+                  onChangeMobileImageHandler(e);
+                  setErrors({ ...errors, screenshot: [] });
+                }}
               />
             </label>
           </div>
+          <ErrorMessage errors={errors.screenshot}></ErrorMessage>
         </div>
         <h2 className="text-lg font-bold">Personal</h2>
         <div className="ml-1 mt-1 mb-7">
