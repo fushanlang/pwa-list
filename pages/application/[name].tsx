@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Router from "next/router";
@@ -12,29 +12,6 @@ import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const db = firebase.firestore();
 const ApplicationName = (applicationData) => {
-  useEffect(() => {
-    var ref = document.referrer;
-    console.log(ref);
-    // var sStr = "^https?://localhost:3000";
-    // var rExp = new RegExp(sStr);
-    // if (ref.match(rExp)) {
-    //   setIsInternalLink(true);
-    // }
-    // // リファラ文字列を判別
-    // if (ref.length == 0) {
-    //   // リファラなしの場合
-    //   alert("リファラ情報がありません");
-    //   console.log(ref);
-    // } else if (ref.match(rExp)) {
-    //   // マッチした場合＝アクセス元が自サイト内の場合
-    //   alert("自サイト内から来ました");
-    //   console.log(ref);
-    // } else {
-    //   // マッチしない場合＝アクセス元がサイト外の場合
-    //   alert("他のサイトから訪れました");
-    //   console.log(ref);
-    // }
-  }, []);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
   const application = applicationData.applicationData;
