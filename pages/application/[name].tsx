@@ -24,9 +24,7 @@ const ApplicationName = (applicationData) => {
       document.referrer !== "" &&
       typeof document.referrer !== "undefined"
     ) {
-      console.log(11111);
       setExistBackPage(false);
-      console.log(document.referrer);
       Object.defineProperty(document, "referrer", { value: "" });
     }
   }, []);

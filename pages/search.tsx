@@ -87,6 +87,7 @@ const Search = () => {
       setInitialSearchParam(localStorage.searchParam);
       setSearchParam(localStorage.searchParam);
     }
+    Object.defineProperty(document, "referrer", { value: "" });
   }, []);
   return (
     <Layout>
