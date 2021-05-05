@@ -45,9 +45,6 @@ library.add(
   faHeart
 );
 const SideBar = () => {
-  useEffect(() => {
-    Object.defineProperty(document, "referrer", { value: "" });
-  }, []);
   const router = useRouter();
   const path = router.pathname;
   const date = new Date();

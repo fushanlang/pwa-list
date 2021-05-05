@@ -19,16 +19,6 @@ const ApplicationName = (applicationData) => {
   const router = useRouter();
   useEffect(() => {
     console.log(document.referrer);
-    if (
-      document.referrer !== null &&
-      document.referrer !== "" &&
-      typeof document.referrer !== "undefined"
-    ) {
-      setExistBackPage(false);
-      console.log(document.referrer);
-      console.log(11111);
-      Object.defineProperty(document, "referrer", { value: "" });
-    }
   }, []);
 
   const url = `https://www.pwalist.app${router.asPath}`;

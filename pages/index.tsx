@@ -11,9 +11,7 @@ const logo = {
 const Index = () => {
   const [newApps, setNewApps] = useState<Object | null>([]);
   const date = new Date();
-  useEffect(() => {
-    Object.defineProperty(document, "referrer", { value: "" });
-  }, []);
+
   useEffect(() => {
     const fetchNewAppData = async () => {
       const applicationsData = await db

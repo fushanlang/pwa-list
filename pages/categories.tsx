@@ -42,9 +42,6 @@ library.add(
   faHeart
 );
 const categories = () => {
-  useEffect(() => {
-    Object.defineProperty(document, "referrer", { value: "" });
-  }, []);
   return (
     <div className="text-gray-600 text-sm">
       <div className="h-screen flex">

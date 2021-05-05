@@ -19,9 +19,6 @@ import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 
 const add = () => {
-  useEffect(() => {
-    Object.defineProperty(document, "referrer", { value: "" });
-  }, []);
   const [modalsOpen, setModalsOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [email, setEmail] = useState<string | null>(null);
