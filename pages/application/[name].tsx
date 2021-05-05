@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Router from "next/router";
@@ -16,6 +16,11 @@ const ApplicationName = (applicationData) => {
   const [initialSlide, setInitialSlide] = useState(0);
   const application = applicationData.applicationData;
   const router = useRouter();
+  useEffect(() => {
+    var referrer = document.referrer;
+    console.log(referrer);
+  }, []);
+
   const url = `https://www.pwalist.app${router.asPath}`;
   return (
     <Layout>
@@ -42,7 +47,7 @@ const ApplicationName = (applicationData) => {
         <div className="bg-white px-4 py-7 rounded-lg">
           <button
             className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
-            onClick={() => Router.back()}
+            onClick={() => router.back()}
           >
             <FontAwesomeIcon icon={faChevronLeft} />
             &nbsp;Back
