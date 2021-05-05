@@ -56,7 +56,6 @@ const Index = () => {
             <a
               className="text-green-500"
               target="_blank"
-              rel="noopener noreferrer"
               href="https://masakifukunishi.site"
             >
               Masaki

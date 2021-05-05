@@ -91,7 +91,7 @@ const ApplicationName = (applicationData) => {
           <div>
             <a
               target="_blank"
-              rel="noopener noreferrer"
+              // rel="noopener noreferrer"
               href={application.link}
               className="text-center w-60 mt-7 ml-1 py-1 inline-block tracking-wide text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out"
             >
