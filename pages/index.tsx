@@ -17,7 +17,7 @@ const Index = () => {
         .collection("applications")
         .where("isNewApp", "==", true)
         .where("isPublic", "==", true)
-        .orderBy("newAppOrder")
+        .orderBy("newAppOrder", "desc")
         .get();
       setNewApps(
         applicationsData.docs.map((doc) => ({
