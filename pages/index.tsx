@@ -38,9 +38,9 @@ const Index = () => {
   return (
     <Layout>
       <div className="px-2">
-        <div className="text-3xl font-bold mt-3" style={logo}>
+        <h1 className="text-3xl font-bold mt-3" style={logo}>
           P<span className="text-green-500">W</span>A LIST
-        </div>
+        </h1>
         <div className="text-xl font-bold mt-10">New Apps</div>
         <div className="ml-1 mt-2">
           <ApplicationCard applications={newApps} />
