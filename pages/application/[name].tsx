@@ -14,7 +14,6 @@ const db = firebase.firestore();
 const ApplicationName = (applicationData) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
-  const [existBackPage, setExistBackPage] = useState(true);
   const application = applicationData.applicationData;
   const router = useRouter();
 
