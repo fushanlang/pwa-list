@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import SideBar from "../components/SideBar";
 import BottomBar from "../components/BottomBar";
 import CategoryLinkForCategories from "../components/CategoryLinkForCategories";
@@ -41,6 +42,9 @@ library.add(
   faHeart
 );
 const categories = () => {
+  useEffect(() => {
+    Object.defineProperty(document, "referrer", { value: "" });
+  }, []);
   return (
     <div className="text-gray-600 text-sm">
       <div className="h-screen flex">

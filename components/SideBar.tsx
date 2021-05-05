@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import CategoryLinkForSideBar from "./CategoryLinkForSideBar";
@@ -44,6 +45,9 @@ library.add(
   faHeart
 );
 const SideBar = () => {
+  useEffect(() => {
+    Object.defineProperty(document, "referrer", { value: "" });
+  }, []);
   const router = useRouter();
   const path = router.pathname;
   const date = new Date();

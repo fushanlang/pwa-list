@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import categories from "../consts/categories";
 import Layout from "../components/Layout";
 import AddCompletedModal from "../components/AddCompletedModal";
@@ -19,6 +19,9 @@ import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 
 const add = () => {
+  useEffect(() => {
+    Object.defineProperty(document, "referrer", { value: "" });
+  }, []);
   const [modalsOpen, setModalsOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [email, setEmail] = useState<string | null>(null);

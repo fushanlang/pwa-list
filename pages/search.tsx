@@ -75,18 +75,19 @@ const Search = () => {
       setSearchedApp(applicationData);
     };
     fetchApplicationsData();
-    localStorage.saveKey = searchParam;
+    localStorage.searchParam = searchParam;
   }, [searchParam]);
   useEffect(() => {
     if (
-      localStorage.saveKey !== null &&
-      localStorage.saveKey !== "" &&
-      localStorage.saveKey !== "empty" &&
-      typeof localStorage.saveKey !== "undefined"
+      localStorage.searchParam !== null &&
+      localStorage.searchParam !== "" &&
+      localStorage.searchParam !== "empty" &&
+      typeof localStorage.searchParam !== "undefined"
     ) {
-      setInitialSearchParam(localStorage.saveKey);
-      setSearchParam(localStorage.saveKey);
+      setInitialSearchParam(localStorage.searchParam);
+      setSearchParam(localStorage.searchParam);
     }
+    Object.defineProperty(document, "referrer", { value: "" });
   }, []);
   return (
     <Layout>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Router from "next/router";
+import Link from "next/link";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
@@ -14,11 +14,18 @@ const db = firebase.firestore();
 const ApplicationName = (applicationData) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
+  const [existBackPage, setExistBackPage] = useState(true);
   const application = applicationData.applicationData;
   const router = useRouter();
   useEffect(() => {
-    var referrer = document.referrer;
-    console.log(referrer);
+    if (
+      document.referrer !== null &&
+      document.referrer !== "" &&
+      typeof document.referrer !== "undefined"
+    ) {
+      setExistBackPage(false);
+      Object.defineProperty(document, "referrer", { value: "" });
+    }
   }, []);
 
   const url = `https://www.pwalist.app${router.asPath}`;
@@ -45,13 +52,22 @@ const ApplicationName = (applicationData) => {
         <NotFound />
       ) : (
         <div className="bg-white px-4 py-7 rounded-lg">
-          <button
-            className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
-            onClick={() => router.back()}
-          >
-            <FontAwesomeIcon icon={faChevronLeft} />
-            &nbsp;Back
-          </button>
+          {existBackPage ? (
+            <button
+              className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
+              onClick={() => router.back()}
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+              &nbsp;Back
+            </button>
+          ) : (
+            <Link href="/" as="/">
+              <button className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+                <FontAwesomeIcon icon={faChevronLeft} />
+                &nbsp;Back
+              </button>
+            </Link>
+          )}
           <div className="flex items-center ml-1">
             <div className="mr-4 w-20">
               <img src={application.icon || "/default-app-icon.png"} />
