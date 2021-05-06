@@ -52,7 +52,7 @@ const SideBar = () => {
       id="sideBar"
       className="bg-white border-r border-gray-300 w-60 hidden md:block overflow-scroll"
     >
-      <div id="sideBar" className="p-6">
+      <div id="sideBar" className="px-6 pt-3 pb-1">
         <div className="flex flex-col mt-3 ">
           <Link href="/" as="/">
             {path === "/" ? (
@@ -85,7 +85,6 @@ const SideBar = () => {
             categoryName="business"
             iconName="chart-bar"
           />
-          <CategoryLinkForSideBar categoryName="dating" iconName="heart" />
           <CategoryLinkForSideBar categoryName="design" iconName="palette" />
           <CategoryLinkForSideBar
             categoryName="education"
@@ -115,10 +114,22 @@ const SideBar = () => {
           <CategoryLinkForSideBar categoryName="travel" iconName="plane" />
         </div>
       </div>
-      <div className="mt-1 mb-2 w-60 text-center">
+      <div className="mb-2 w-60 text-center">
         <div className="w-full border-t-2">
+          <Link href="/about" as="/about">
+            <a className="w-44 inline-block mt-5 mb-1 py-1 text-gray-50 bg-gray-600 shadow-md rounded-md hover:bg-gray-700 hover:shadow-none transition ease-in-out">
+              <strong>What is a PWA</strong>
+            </a>
+          </Link>
+          <a
+            className="w-44 inline-block mt-2 mb-1 py-1 text-gray-50 bg-blue-400 shadow-md rounded-md hover:bg-blue-500 hover:shadow-none transition ease-in-out"
+            target="_blank"
+            href="https://masakifukunishi.site"
+          >
+            <strong>Contact Me</strong>
+          </a>
           <Link href="/add" as="/add">
-            <a className="inline-block mt-5 mb-1 px-4 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+            <a className="w-44 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
               <strong>Submit Your App</strong>
             </a>
           </Link>

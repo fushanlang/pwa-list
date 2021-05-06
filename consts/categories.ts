@@ -1,6 +1,5 @@
 const categories = [
   { label: "Business", value: "business" },
-  { label: "Dating", value: "dating" },
   { label: "Design", value: "design" },
   { label: "Education", value: "education" },
   { label: "Entertainment", value: "entertainment" },

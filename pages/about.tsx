@@ -1,9 +1,16 @@
 import Layout from "../components/Layout";
+import Link from "next/link";
 const about = () => {
+  const logo = {
+    fontFamily: "'Nunito', sans-serif",
+  };
   return (
     <Layout>
-      <div className="pl-6 pr-4 py-6 bg-white rounded-lg">
-        <h1 className="text-2xl font-bold">What is a PWA?</h1>
+      <div className="pl-6 pr-4 py-5 bg-white rounded-lg">
+        <h1 className="text-3xl font-bold mb-4" style={logo}>
+          P<span className="text-green-500">W</span>A LIST
+        </h1>
+        <h2 className="text-2xl font-bold">What is a PWA?</h2>
         <div className="mt-3 leading-relaxed text-base">
           <p>
             PWA stands for "Progressive Web Apps" and refers to websites that
@@ -58,6 +65,16 @@ const about = () => {
             Please find your favorite PWA!
           </p>
         </div>
+        <Link href="/" as="/">
+          <div className="text-center">
+            <button
+              className="bg-green-500 hover:bg-green-600 text-white font-bold mt-3 w-36 h-8 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Home
+            </button>
+          </div>
+        </Link>
       </div>
     </Layout>
   );

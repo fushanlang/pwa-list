@@ -52,7 +52,6 @@ const categories = () => {
               categoryName="business"
               iconName="chart-bar"
             />
-            <CategoryLinkForCategories categoryName="dating" iconName="heart" />
             <CategoryLinkForCategories
               categoryName="design"
               iconName="palette"
