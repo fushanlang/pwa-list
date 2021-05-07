@@ -4,10 +4,11 @@ import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import ApplicationCard from "../components/ApplicationCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 
 const Search = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchParam, setSearchParam] = useState<String | null>(null);
   const [initialSearchParam, setInitialSearchParam] = useState<any | null>(
     null
@@ -73,6 +74,7 @@ const Search = () => {
           self.findIndex((e) => e.id === element.id) === index
       );
       setSearchedApp(applicationData);
+      setIsLoading(false);
     };
     fetchApplicationsData();
     localStorage.searchParam = searchParam;
@@ -105,9 +107,15 @@ const Search = () => {
             }}
           />
         </div>
-        <div className="mt-8">
-          <ApplicationCard applications={searchedApp} />
-        </div>
+        {isLoading ? (
+          <div className="text-center mt-16">
+            <FontAwesomeIcon icon={faSpinner} size="4x" className="fa-spin" />
+          </div>
+        ) : (
+          <div className="mt-8">
+            <ApplicationCard applications={searchedApp} />
+          </div>
+        )}
       </div>
     </Layout>
   );
