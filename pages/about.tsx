@@ -28,7 +28,7 @@ const about = () => {
             Chrome.
           </p>
           {/* <h3 className="text-lg font-bold mt-4 mb-3">For Smartphones</h3> */}
-          <div className="ml-3 mt-5">
+          <div className="ml-3 mt-5 mb-3">
             <img
               style={{ height: "530px" }}
               src={"/about/mobile1.jpg"}
@@ -68,7 +68,7 @@ const about = () => {
         <Link href="/" as="/">
           <div className="text-center">
             <button
-              className="bg-green-500 hover:bg-green-600 text-white font-bold mt-3 w-36 h-8 rounded focus:outline-none focus:shadow-outline"
+              className="bg-green-400 hover:bg-green-500 text-white font-bold mt-3 w-36 h-8 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Home

@@ -18,7 +18,6 @@ import {
   faShoppingBag,
   faRunning,
   faShareAlt,
-  faNotesMedical,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
@@ -37,7 +36,6 @@ library.add(
   faShoppingBag,
   faRunning,
   faShareAlt,
-  faNotesMedical,
   faHeart
 );
 const categories = () => {
@@ -72,10 +70,6 @@ const categories = () => {
             <CategoryLinkForCategories
               categoryName="health"
               iconName="heartbeat"
-            />
-            <CategoryLinkForCategories
-              categoryName="medical"
-              iconName="notes-medical"
             />
             <CategoryLinkForCategories categoryName="music" iconName="music" />
             <CategoryLinkForCategories

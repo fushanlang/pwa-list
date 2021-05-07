@@ -41,13 +41,25 @@ const Index = () => {
         <h1 className="text-3xl font-bold mt-3" style={logo}>
           P<span className="text-green-500">W</span>A LIST
         </h1>
-        <div className="text-xl font-bold mt-10">New Apps</div>
-        <div className="ml-1 mt-2">
+        <div className="text-xl font-bold mt-6">New Apps</div>
+        <div className="mt-2">
           <ApplicationCard applications={newApps} />
         </div>
-        <div className="text-center mt-12 block md:hidden">
+        <div className="flex flex-col items-center text-center mt-7 md:hidden">
+          <Link href="/about" as="/about">
+            <a className="py-1 w-48 mb-3 text-gray-50 bg-gray-600 shadow-md rounded-md hover:bg-gray-700 hover:shadow-none transition ease-in-out">
+              <strong>What is a PWA</strong>
+            </a>
+          </Link>
+          <a
+            className="py-1 w-48 mb-3 text-gray-50 bg-blue-400 shadow-md rounded-md hover:bg-blue-500 hover:shadow-none transition ease-in-out"
+            target="_blank"
+            href="https://masakifukunishi.site"
+          >
+            <strong>Contact</strong>
+          </a>
           <Link href="/add" as="/add">
-            <a className="inline-block mb-2 px-7 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+            <a className="py-1 w-48 mb-6 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
               <strong>Submit Your App</strong>
             </a>
           </Link>
