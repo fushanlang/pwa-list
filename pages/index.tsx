@@ -47,7 +47,11 @@ const Index = () => {
         </h1>
         {isLoading ? (
           <div className="text-center mt-24">
-            <FontAwesomeIcon icon={faSpinner} size="4x" className="fa-spin" />
+            <FontAwesomeIcon
+              icon={faSpinner}
+              size="4x"
+              className="fa-spin text-green-300"
+            />
           </div>
         ) : (
           <div>

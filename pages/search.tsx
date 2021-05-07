@@ -109,7 +109,11 @@ const Search = () => {
         </div>
         {isLoading ? (
           <div className="text-center mt-16">
-            <FontAwesomeIcon icon={faSpinner} size="4x" className="fa-spin" />
+            <FontAwesomeIcon
+              icon={faSpinner}
+              size="4x"
+              className="fa-spin text-green-300"
+            />
           </div>
         ) : (
           <div className="mt-8">
