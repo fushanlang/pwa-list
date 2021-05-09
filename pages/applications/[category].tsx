@@ -7,6 +7,7 @@ import ApplicationCard from "../../components/ApplicationCard";
 
 const db = firebase.firestore();
 const ApplicationsCategory = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [applications, setApplications] = useState<Object>([]);
   const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] = useState<
     string | null
@@ -39,6 +40,7 @@ const ApplicationsCategory = () => {
           description: doc.data().description,
         }))
       );
+      setIsLoading(false);
     };
     fetchApplicationsData();
   }, [category]);
@@ -60,12 +62,20 @@ const ApplicationsCategory = () => {
   return (
     <Layout>
       <div className="px-2">
-        <div className="text-2xl font-bold mb-4 mt-3">
-          {caategoryFirstUpperCase}
-        </div>
-        <div className="ml-1">
-          <ApplicationCard applications={applications} />
-        </div>
+        {isLoading ? (
+          <div className="text-center mt-44">
+            <div className="loader" />
+          </div>
+        ) : (
+          <div>
+            <div className="text-2xl font-bold mb-4 mt-3">
+              {caategoryFirstUpperCase}
+            </div>
+            <div className="ml-1">
+              <ApplicationCard applications={applications} />
+            </div>
+          </div>
+        )}
       </div>
     </Layout>
   );

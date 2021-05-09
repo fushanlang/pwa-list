@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import ApplicationCard from "../components/ApplicationCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 const logo = {
   fontFamily: "'Nunito', sans-serif",
@@ -46,12 +44,8 @@ const Index = () => {
           P<span className="text-green-500">W</span>A LIST
         </h1>
         {isLoading ? (
-          <div className="text-center mt-24">
-            <FontAwesomeIcon
-              icon={faSpinner}
-              size="4x"
-              className="fa-spin text-green-300"
-            />
+          <div className="text-center mt-44">
+            <div className="loader" />
           </div>
         ) : (
           <div>

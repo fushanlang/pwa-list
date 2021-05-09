@@ -4,7 +4,7 @@ import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import ApplicationCard from "../components/ApplicationCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 
 const Search = () => {
@@ -108,12 +108,8 @@ const Search = () => {
           />
         </div>
         {isLoading ? (
-          <div className="text-center mt-16">
-            <FontAwesomeIcon
-              icon={faSpinner}
-              size="4x"
-              className="fa-spin text-green-300"
-            />
+          <div className="text-center mt-44">
+            <div className="loader" />
           </div>
         ) : (
           <div className="mt-8">
