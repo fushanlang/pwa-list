@@ -64,7 +64,10 @@ const ApplicationName = (applicationData) => {
           )}
           <div className="flex items-center ml-1">
             <div className="mr-4 w-20">
-              <img src={application.icon || "/default-app-icon.png"} />
+              <img
+                className="rounded-md"
+                src={application.icon || "/default-app-icon.png"}
+              />
             </div>
             <div className="flex flex-col">
               <h1 className="font-bold text-2xl ml-1">{application.name}</h1>

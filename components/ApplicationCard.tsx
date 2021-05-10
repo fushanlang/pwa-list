@@ -13,7 +13,10 @@ const ApplicationCard = ({ applications }) => {
             className="flex items-center bg-white shadow-md mb-1 px-4 rounded-md transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-none"
           >
             <div className="mr-4 w-20">
-              <img src={application.icon || "/default-app-icon.png"} />
+              <img
+                className="rounded-md"
+                src={application.icon || "/default-app-icon.png"}
+              />
             </div>
             <div className="flex flex-col">
               <div className="text-base font-bold">{application.name}</div>
