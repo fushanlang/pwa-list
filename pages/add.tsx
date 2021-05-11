@@ -447,33 +447,6 @@ const add = () => {
             </span>
           </p>
           <label className="block font-bold mb-2">
-            PC size screenshots (Up to 3 Images)
-          </label>
-          <div className="flex overflow-scroll">
-            {pcImageUrlList.map((pcImageUrl, index) => (
-              <ImagePreview
-                key={index}
-                imageUrl={pcImageUrl}
-                handleDeleteImage={(event) => handleDeletePcImage(event, index)}
-              />
-            ))}
-          </div>
-          <div className="mb-8">
-            <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
-              Choose
-              <input
-                type="file"
-                className="hidden"
-                accept="image/*"
-                multiple
-                onChange={(e) => {
-                  onChangePcImageHandler(e);
-                  setErrors({ ...errors, screenshot: [] });
-                }}
-              />
-            </label>
-          </div>
-          <label className="block font-bold mb-2">
             Mobile size screenshots (Up to 3 Images)
           </label>
           <div className="flex overflow-scroll">
@@ -497,6 +470,33 @@ const add = () => {
                 multiple
                 onChange={(e) => {
                   onChangeMobileImageHandler(e);
+                  setErrors({ ...errors, screenshot: [] });
+                }}
+              />
+            </label>
+          </div>
+          <label className="block font-bold mb-2">
+            PC size screenshots (Up to 3 Images)
+          </label>
+          <div className="flex overflow-scroll">
+            {pcImageUrlList.map((pcImageUrl, index) => (
+              <ImagePreview
+                key={index}
+                imageUrl={pcImageUrl}
+                handleDeleteImage={(event) => handleDeletePcImage(event, index)}
+              />
+            ))}
+          </div>
+          <div className="mb-8">
+            <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+              Choose
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                multiple
+                onChange={(e) => {
+                  onChangePcImageHandler(e);
                   setErrors({ ...errors, screenshot: [] });
                 }}
               />
