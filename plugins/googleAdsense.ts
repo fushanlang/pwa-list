@@ -1,0 +1,2 @@
+export const GOOGLE_ADSENSE_CLIENT =
+  process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT;

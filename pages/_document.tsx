@@ -7,6 +7,7 @@ import Document, {
   DocumentInitialProps,
 } from "next/document";
 import { GA_TRACKING_ID } from "../plugins/gtag";
+import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 const title = "PWA List";
 const url = "https://pwalist.app/";
 const description = "Find your favorite progressive web apps here";
@@ -41,6 +42,11 @@ class MyDocument extends Document {
           `,
             }}
           />
+          <script
+            data-ad-client={GOOGLE_ADSENSE_CLIENT}
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          ></script>
           {/* windows */}
           <meta
             name="msapplication-square70x70logo"
