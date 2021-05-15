@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import Link from "next/link";
+import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 const about = () => {
   const logo = {
     fontFamily: "'Nunito', sans-serif",
@@ -10,7 +11,9 @@ const about = () => {
         <h1 className="text-3xl font-bold mb-4" style={logo}>
           P<span className="text-green-500">W</span>A LIST
         </h1>
-        <h2 className="text-2xl font-bold">What is a PWA?</h2>
+        <h2 className="text-2xl font-bold">
+          What is a PWA?{GOOGLE_ADSENSE_CLIENT}
+        </h2>
         <div className="mt-3 leading-relaxed text-base">
           <p>
             PWA stands for "Progressive Web Apps" and refers to websites that
