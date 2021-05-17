@@ -9,9 +9,8 @@ const db = firebase.firestore();
 const ApplicationsCategory = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [applications, setApplications] = useState<Object>([]);
-  const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] = useState<
-    string | null
-  >(null);
+  const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] =
+    useState<string | null>(null);
   const router = useRouter();
   const { category } = router.query;
   useEffect(() => {
@@ -60,7 +59,7 @@ const ApplicationsCategory = () => {
   //   return () => unSub();
   // }, []);
   return (
-    <Layout>
+    <Layout title={caategoryFirstUpperCase}>
       <div className="px-2">
         {isLoading ? (
           <div className="text-center mt-44">

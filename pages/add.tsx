@@ -293,7 +293,7 @@ const add = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Submit">
       <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
         <h2 className="text-lg font-bold">Application</h2>
         <div className="ml-1 mt-1 mb-9">

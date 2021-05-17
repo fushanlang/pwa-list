@@ -24,8 +24,9 @@ const ApplicationName = (applicationData) => {
     }
   }, []);
   return (
-    <Layout>
+    <Layout title={application.name}>
       <Head>
+        <meta name="description" content={application.description} />
         <meta key="og:title" property="og:title" content={application.name} />
         <meta
           key="og:site_name"

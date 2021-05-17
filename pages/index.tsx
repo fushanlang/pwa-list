@@ -38,7 +38,7 @@ const Index = () => {
     fetchNewAppData();
   }, []);
   return (
-    <Layout>
+    <Layout title="Home">
       <div className="px-2">
         <h1 className="text-3xl font-bold mt-3" style={logo}>
           P<span className="text-green-500">W</span>A LIST

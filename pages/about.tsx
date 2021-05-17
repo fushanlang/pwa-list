@@ -5,7 +5,7 @@ const about = () => {
     fontFamily: "'Nunito', sans-serif",
   };
   return (
-    <Layout>
+    <Layout title="What is a PWA?">
       <div className="pl-6 pr-4 py-5 bg-white rounded-lg">
         <h1 className="text-3xl font-bold mb-4" style={logo}>
           P<span className="text-green-500">W</span>A LIST

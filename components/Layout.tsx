@@ -2,11 +2,11 @@ import Head from "next/head";
 import SideBar from "../components/SideBar";
 import BottomBar from "../components/BottomBar";
 
-const Layout = ({ children, title = "PWA List" }) => {
+const Layout = ({ children, title }) => {
   return (
     <div className="text-gray-600 text-sm font-mono">
       <Head>
-        <title>{title}</title>
+        <title>{title} | PWA List</title>
       </Head>
       <div className="h-screen flex">
         <SideBar />

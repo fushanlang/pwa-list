@@ -10,9 +10,8 @@ const db = firebase.firestore();
 const Search = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchParam, setSearchParam] = useState<String | null>(null);
-  const [initialSearchParam, setInitialSearchParam] = useState<any | null>(
-    null
-  );
+  const [initialSearchParam, setInitialSearchParam] =
+    useState<any | null>(null);
   const [searchedApp, setSearchedApp] = useState<Object | null>([]);
   var mergedApplicationData = [];
   useEffect(() => {
@@ -91,7 +90,7 @@ const Search = () => {
     }
   }, []);
   return (
-    <Layout>
+    <Layout title="Search">
       <div className="px-2">
         <div className="flex w-4/5 m-auto mt-5 rounded-md shadow h-11 bg-white">
           <div className="m-auto ml-3">
