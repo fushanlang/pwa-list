@@ -59,18 +59,18 @@ const Index = () => {
                   <strong>What is a PWA</strong>
                 </a>
               </Link>
+              <Link href="/add" as="/add">
+                <a className="py-1 w-48 mb-3 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+                  <strong>Submit Your App</strong>
+                </a>
+              </Link>
               <a
-                className="py-1 w-48 mb-3 text-gray-50 bg-blue-400 shadow-md rounded-md hover:bg-blue-500 hover:shadow-none transition ease-in-out"
+                className="py-1 w-48 mb-6 text-gray-50 bg-blue-400 shadow-md rounded-md hover:bg-blue-500 hover:shadow-none transition ease-in-out"
                 target="_blank"
                 href="https://masakifukunishi.site"
               >
                 <strong>Contact</strong>
               </a>
-              <Link href="/add" as="/add">
-                <a className="py-1 w-48 mb-6 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
-                  <strong>Submit Your App</strong>
-                </a>
-              </Link>
               <p className="text-sm">
                 Made By&nbsp;
                 <a

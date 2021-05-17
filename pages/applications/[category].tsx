@@ -67,10 +67,10 @@ const ApplicationsCategory = () => {
           </div>
         ) : (
           <div>
-            <div className="text-2xl font-bold mb-4 mt-3">
+            <div className="text-2xl font-bold mt-3">
               {caategoryFirstUpperCase}
             </div>
-            <div className="ml-1">
+            <div className="mt-2">
               <ApplicationCard applications={applications} />
             </div>
           </div>
