@@ -4,7 +4,7 @@ import BottomBar from "../components/BottomBar";
 
 const Layout = ({ children, title }) => {
   return (
-    <div className="text-gray-600 text-sm font-mono">
+    <div className="text-gray-600 text-sm font-sans">
       <Head>
         <title>{title} | PWA List</title>
       </Head>

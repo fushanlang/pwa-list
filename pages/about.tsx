@@ -11,7 +11,7 @@ const about = () => {
           P<span className="text-green-500">W</span>A LIST
         </h1>
         <h2 className="text-2xl font-bold">What is a PWA?</h2>
-        <div className="mt-3 leading-relaxed text-base">
+        <div className="mt-3 leading-relaxed text-lg">
           <p>
             PWA stands for "Progressive Web Apps" and refers to websites that
             can be installed on PCs and smartphones.

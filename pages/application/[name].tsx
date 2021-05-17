@@ -167,10 +167,7 @@ const ApplicationName = (applicationData) => {
           </div>
           <div className="mt-7 px-4">
             <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
-            <p
-              style={{ whiteSpace: "pre-line" }}
-              className="text-left text-base"
-            >
+            <p style={{ whiteSpace: "pre-line" }} className="text-left text-lg">
               {application.description}
             </p>
           </div>
