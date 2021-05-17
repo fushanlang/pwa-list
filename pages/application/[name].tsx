@@ -18,6 +18,13 @@ const ApplicationName = (applicationData) => {
   const application = applicationData.applicationData;
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
+  // setting the initial slide
+  var slideNum = [0, 1, 2, 3, 4, 5];
+  if (application.imageMobile1 === null) slideNum.splice(0, 0, null);
+  if (application.imageMobile2 === null) slideNum.splice(1, 0, null);
+  if (application.imageMobile3 === null) slideNum.splice(2, 0, null);
+
+  console.log(slideNum);
   useEffect(() => {
     if (typeof history.state.options.scroll === "undefined") {
       setExistsBackPage(false);
@@ -108,7 +115,7 @@ const ApplicationName = (applicationData) => {
               <img
                 onClick={() => {
                   setModalIsOpen(true);
-                  setInitialSlide(0);
+                  setInitialSlide(slideNum[0]);
                 }}
                 className="border rounded max-h-96 mx-2 cursor-pointer"
                 src={application.imageMobile1}
@@ -118,7 +125,7 @@ const ApplicationName = (applicationData) => {
               <img
                 onClick={() => {
                   setModalIsOpen(true);
-                  setInitialSlide(1);
+                  setInitialSlide(slideNum[1]);
                 }}
                 className="border rounded max-h-96 mx-2 cursor-pointer"
                 src={application.imageMobile2}
@@ -128,7 +135,7 @@ const ApplicationName = (applicationData) => {
               <img
                 onClick={() => {
                   setModalIsOpen(true);
-                  setInitialSlide(2);
+                  setInitialSlide(slideNum[2]);
                 }}
                 className="border rounded max-h-96 mx-2 cursor-pointer"
                 src={application.imageMobile3}
@@ -138,7 +145,7 @@ const ApplicationName = (applicationData) => {
               <img
                 onClick={() => {
                   setModalIsOpen(true);
-                  setInitialSlide(3);
+                  setInitialSlide(slideNum[3]);
                 }}
                 className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
                 src={application.imagePc1}
@@ -148,7 +155,7 @@ const ApplicationName = (applicationData) => {
               <img
                 onClick={() => {
                   setModalIsOpen(true);
-                  setInitialSlide(4);
+                  setInitialSlide(slideNum[4]);
                 }}
                 className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
                 src={application.imagePc2}
@@ -158,7 +165,7 @@ const ApplicationName = (applicationData) => {
               <img
                 onClick={() => {
                   setModalIsOpen(true);
-                  setInitialSlide(5);
+                  setInitialSlide(slideNum[5]);
                 }}
                 className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
                 src={application.imagePc3}

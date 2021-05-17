@@ -30,6 +30,7 @@ const ApplicationImageModal = ({
   setModalIsOpen,
   initialSlide,
 }) => {
+  console.log(initialSlide);
   return (
     <div>
       <Modal
