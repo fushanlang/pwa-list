@@ -42,6 +42,7 @@ class MyDocument extends Document {
           `,
             }}
           />
+          {/* Google Adsense */}
           <script
             data-ad-client={GOOGLE_ADSENSE_CLIENT}
             async
