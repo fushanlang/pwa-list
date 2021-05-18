@@ -20,7 +20,11 @@ const ApplicationCard = ({ applications }) => {
             </div>
             <div className="flex flex-col">
               <div className="text-base font-bold">{application.name}</div>
-              <div className="">{application.category}</div>
+              <div>
+                {/* Changed to upper case */}
+                {application.category.toString().charAt(0).toUpperCase() +
+                  application.category.slice(1)}
+              </div>
               <div className="mt-1">
                 {application.tag1 && (
                   <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-600 text-white">

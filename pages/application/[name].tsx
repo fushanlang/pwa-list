@@ -15,6 +15,8 @@ const ApplicationName = (applicationData) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
   const [existsBackPage, setExistsBackPage] = useState(true);
+  const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] =
+    useState<string | null>(null);
   const application = applicationData.applicationData;
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
@@ -24,11 +26,14 @@ const ApplicationName = (applicationData) => {
   if (application.imageMobile2 === null) slideNum.splice(1, 0, null);
   if (application.imageMobile3 === null) slideNum.splice(2, 0, null);
 
-  console.log(slideNum);
   useEffect(() => {
     if (typeof history.state.options.scroll === "undefined") {
       setExistsBackPage(false);
     }
+    setCaategoryFirstUpperCase(
+      application.category.toString().charAt(0).toUpperCase() +
+        application.category.slice(1)
+    );
   }, []);
   return (
     <Layout title={application.name}>
@@ -79,7 +84,7 @@ const ApplicationName = (applicationData) => {
             </div>
             <div className="flex flex-col">
               <h1 className="font-bold text-2xl ml-1">{application.name}</h1>
-              <h2 className="text-base ml-1">{application.category}</h2>
+              <h2 className="text-base ml-1">{caategoryFirstUpperCase}</h2>
               <div className="mt-1">
                 {application.tag1 && (
                   <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">
