@@ -8,7 +8,7 @@ const CategoryLinkForSideBar = ({ categoryName, iconName }) => {
   const categoryNameFirstUpperCase =
     categoryName.toString().charAt(0).toUpperCase() + categoryName.slice(1);
   return (
-    <Link href="/applications/[category]" as={`/applications/${categoryName}`}>
+    <Link href="/categories/[category]" as={`/categories/${categoryName}`}>
       {categoryName === category ? (
         <a className="mb-4 text-green-600">
           <FontAwesomeIcon icon={iconName} size="xs" className="mr-2" />

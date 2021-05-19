@@ -5,8 +5,8 @@ const ApplicationCard = ({ applications }) => {
       {applications.map((application, index) => (
         <Link
           key={index}
-          href="/application/[name]"
-          as={`/application/${application.nameLowercase}`}
+          href="/app/[name]"
+          as={`/app/${application.nameLowercase}`}
         >
           <a
             style={{ height: "104px" }}
