@@ -10,10 +10,10 @@ const uploadToStorage = async (
   if (image == null) {
     return null;
   }
-  await storage.ref(`${folder}/${name}/${fileName}`).put(image);
+  await storage.ref(`${folder}/${name}/${fileName}.png`).put(image);
   let res = await storage
     .ref(`${folder}`)
-    .child(`${name}/${fileName}`)
+    .child(`${name}/${fileName}.png`)
     .getDownloadURL();
   return res;
 };
