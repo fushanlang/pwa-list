@@ -30,10 +30,12 @@ const ApplicationName = (applicationData) => {
     if (typeof history.state.options.scroll === "undefined") {
       setExistsBackPage(false);
     }
-    setCaategoryFirstUpperCase(
-      application.category.toString().charAt(0).toUpperCase() +
-        application.category.slice(1)
-    );
+    if (application.category !== undefined) {
+      setCaategoryFirstUpperCase(
+        application.category.toString().charAt(0).toUpperCase() +
+          application.category.slice(1)
+      );
+    }
   }, []);
   return (
     <Layout title={application.name}>
