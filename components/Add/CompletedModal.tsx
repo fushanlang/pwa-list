@@ -2,7 +2,7 @@ import Modal from "react-modal";
 import Link from "next/link";
 Modal.setAppElement("#__next");
 
-const AddCompletedModal = ({ modalsOpen, setModalsOpen }) => {
+const CompletedModal = ({ modalsOpen, setModalsOpen }) => {
   return (
     <div>
       <Modal isOpen={modalsOpen}>
@@ -29,4 +29,4 @@ const AddCompletedModal = ({ modalsOpen, setModalsOpen }) => {
   );
 };
 
-export default AddCompletedModal;
+export default CompletedModal;

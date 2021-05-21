@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import categories from "../consts/categories";
 import Layout from "../components/Layout";
-import CompletedModal from "../components/Add/AddCompletedModal";
+import CompletedModal from "../components/Add/CompletedModal";
 import ErrorMessage from "../components/Common/ErrorMessage";
 import ImagePreview from "../components/ImagePreview";
 import firebase from "../plugins/firebase";
