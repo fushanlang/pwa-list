@@ -19,7 +19,7 @@ import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 
 const add = () => {
-  const [modalsOpen, setModalsOpen] = useState<boolean>(false);
+  const [modalsOpen, setModalsOpen] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [email, setEmail] = useState<string | null>(null);
   const [name, setName] = useState<string | null>(null);
