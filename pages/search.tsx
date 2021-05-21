@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
-import ApplicationCard from "../components/ApplicationCard";
+import ApplicationCard from "../components/App/ApplicationCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();

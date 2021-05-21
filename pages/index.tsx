@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
-import ApplicationCard from "../components/ApplicationCard";
+import ApplicationCard from "../components/App/ApplicationCard";
 const db = firebase.firestore();
 const logo = {
   fontFamily: "'Nunito', sans-serif",

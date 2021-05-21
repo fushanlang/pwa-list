@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
-import NotFound from "../../components/NotFound";
-import ApplicationImageModal from "../../components/ApplicationImageModal";
+import NotFound from "../../components/Common/NotFound";
+import ApplicationImageModal from "../../components/App/ApplicationImageModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 

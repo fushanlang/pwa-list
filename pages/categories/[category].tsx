@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
-import ApplicationCard from "../../components/ApplicationCard";
+import ApplicationCard from "../../components/App/ApplicationCard";
 
 const db = firebase.firestore();
 const ApplicationsCategory = () => {
