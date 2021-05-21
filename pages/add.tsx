@@ -221,6 +221,8 @@ const add = () => {
       setIsSubmitting(false);
       return;
     }
+    setIsSubmitting(false);
+    setModalsOpen(true);
     var nameLowercase = name.toLowerCase().replace(/\s+/g, "");
     var tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
     var tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
@@ -288,8 +290,6 @@ const add = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
-    setIsSubmitting(false);
-    setModalsOpen(true);
   };
 
   return (
