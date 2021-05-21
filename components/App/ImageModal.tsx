@@ -24,7 +24,7 @@ const modalStyle = {
     padding: "1.5rem",
   },
 };
-const ApplicationImageModal = ({
+const ImageModal = ({
   application,
   modalIsOpen,
   setModalIsOpen,
@@ -117,4 +117,4 @@ const ApplicationImageModal = ({
   );
 };
 
-export default ApplicationImageModal;
+export default ImageModal;

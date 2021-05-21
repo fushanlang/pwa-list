@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
-import ApplicationCard from "../../components/App/ApplicationCard";
+import Card from "../../components/App/Card";
 
 const db = firebase.firestore();
 const ApplicationsCategory = () => {
@@ -71,7 +71,7 @@ const ApplicationsCategory = () => {
               {caategoryFirstUpperCase}
             </div>
             <div className="mt-2">
-              <ApplicationCard applications={applications} />
+              <Card applications={applications} />
             </div>
           </div>
         )}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
-import ApplicationCard from "../components/App/ApplicationCard";
+import Card from "../components/App/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
@@ -112,7 +112,7 @@ const Search = () => {
           </div>
         ) : (
           <div className="mt-8">
-            <ApplicationCard applications={searchedApp} />
+            <Card applications={searchedApp} />
           </div>
         )}
       </div>

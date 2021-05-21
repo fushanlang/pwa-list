@@ -1,5 +1,5 @@
 import Link from "next/link";
-const ApplicationCard = ({ applications }) => {
+const Card = ({ applications }) => {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
       {applications.map((application, index) => (
@@ -49,4 +49,4 @@ const ApplicationCard = ({ applications }) => {
     </div>
   );
 };
-export default ApplicationCard;
+export default Card;

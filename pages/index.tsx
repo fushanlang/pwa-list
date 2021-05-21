@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
-import ApplicationCard from "../components/App/ApplicationCard";
+import Card from "../components/App/Card";
 const db = firebase.firestore();
 const logo = {
   fontFamily: "'Nunito', sans-serif",
@@ -51,7 +51,7 @@ const Index = () => {
           <div>
             <div className="text-xl font-bold mt-6">New Apps</div>
             <div className="mt-2">
-              <ApplicationCard applications={newApps} />
+              <Card applications={newApps} />
             </div>
             <div className="flex flex-col items-center text-center mt-7 md:hidden">
               <Link href="/about" as="/about">

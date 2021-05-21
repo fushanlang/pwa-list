@@ -6,7 +6,7 @@ import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
 import NotFound from "../../components/Common/NotFound";
-import ApplicationImageModal from "../../components/App/ApplicationImageModal";
+import ImageModal from "../../components/App/ImageModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -185,7 +185,7 @@ const ApplicationName = (applicationData) => {
               {application.description}
             </p>
           </div>
-          <ApplicationImageModal
+          <ImageModal
             application={application}
             modalIsOpen={modalIsOpen}
             setModalIsOpen={setModalIsOpen}

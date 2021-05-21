@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import categories from "../consts/categories";
 import Layout from "../components/Layout";
-import AddCompletedModal from "../components/Add/AddCompletedModal";
+import CompletedModal from "../components/Add/AddCompletedModal";
 import ErrorMessage from "../components/Common/ErrorMessage";
 import ImagePreview from "../components/ImagePreview";
 import firebase from "../plugins/firebase";
@@ -541,10 +541,7 @@ const add = () => {
           )}
         </div>
       </form>
-      <AddCompletedModal
-        modalsOpen={modalsOpen}
-        setModalsOpen={setModalsOpen}
-      />
+      <CompletedModal modalsOpen={modalsOpen} setModalsOpen={setModalsOpen} />
     </Layout>
   );
 };
