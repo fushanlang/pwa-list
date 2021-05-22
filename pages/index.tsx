@@ -4,6 +4,7 @@ import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import React from "react";
 import AdSense from "react-adsense";
+import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 import Layout from "../components/Layout";
 import Card from "../components/App/Card";
 const db = firebase.firestore();
@@ -58,7 +59,7 @@ const Index = () => {
             {/* Google Adsense */}
             <div className="text-center mt-10">
               <AdSense.Google
-                client="ca-pub-8730762338273010"
+                client={GOOGLE_ADSENSE_CLIENT}
                 slot="6767679949"
                 style={{ width: 900, height: 200 }}
                 format=""
