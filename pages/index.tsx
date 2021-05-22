@@ -56,11 +56,11 @@ const Index = () => {
               <Card applications={newApps} />
             </div>
             {/* Google Adsense */}
-            <div className="text-center">
+            <div className="text-center mt-10">
               <AdSense.Google
                 client="ca-pub-8730762338273010"
                 slot="6767679949"
-                style={{ width: 1000, height: 300 }}
+                style={{ width: 900, height: 200 }}
                 format=""
               />
             </div>
