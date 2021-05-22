@@ -202,7 +202,7 @@ const ApplicationName = (applicationData) => {
           </div>
         )}
         {/* Google Adsense */}
-        <div className="overflow-scroll text-center mt-10">
+        <div className="overflow-scroll text-center mt-7">
           <AdSense.Google
             client={GOOGLE_ADSENSE_CLIENT}
             slot="6767679949"
