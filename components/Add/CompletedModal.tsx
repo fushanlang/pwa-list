@@ -20,7 +20,7 @@ const CompletedModal = ({ modalsOpen, isSubmitting }) => {
             <div className="mt-1">
               This app will be published after checking.
             </div>
-            <div className="text-2xl mt-6 mb-7">Thank you</div>
+            <div className="text-2xl mt-6 mb-7">Thank you{isSubmitting}</div>
             <div className="mt-4">
               <Link href="/" as="/">
                 <button
