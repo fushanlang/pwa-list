@@ -57,7 +57,7 @@ const Index = () => {
               <Card applications={newApps} />
             </div>
             {/* Google Adsense */}
-            <div className="text-center mt-10">
+            <div className="overflow-scroll text-center mt-10">
               <AdSense.Google
                 client={GOOGLE_ADSENSE_CLIENT}
                 slot="6767679949"
