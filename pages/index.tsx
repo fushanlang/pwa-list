@@ -61,8 +61,9 @@ const Index = () => {
               <AdSense.Google
                 client={GOOGLE_ADSENSE_CLIENT}
                 slot="6767679949"
-                style={{ width: 970, height: 90 }}
-                format=""
+                style={{ display: "block" }}
+                layout="in-article"
+                format="fluid"
               />
             </div>
             {/* Google Adsense */}
