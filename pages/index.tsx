@@ -56,12 +56,14 @@ const Index = () => {
               <Card applications={newApps} />
             </div>
             {/* Google Adsense */}
-            <AdSense.Google
-              client="ca-pub-8730762338273010"
-              slot="6767679949"
-              style={{ width: 500, height: 300, textAlign: "center" }}
-              format=""
-            />
+            <div className="text-center">
+              <AdSense.Google
+                client="ca-pub-8730762338273010"
+                slot="6767679949"
+                style={{ width: 1000, height: 300 }}
+                format=""
+              />
+            </div>
             {/* Google Adsense */}
             <div className="flex flex-col items-center text-center mt-7 md:hidden">
               <Link href="/about" as="/about">
