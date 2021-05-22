@@ -74,7 +74,7 @@ const Index = () => {
               </Link>
               <Link href="/add" as="/add">
                 <a className="py-1 w-48 mb-3 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
-                  <strong>Submit Your App</strong>
+                  <strong>Submit App</strong>
                 </a>
               </Link>
               <a

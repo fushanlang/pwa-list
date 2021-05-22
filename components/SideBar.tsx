@@ -93,7 +93,7 @@ const SideBar = () => {
             iconName="star"
           />
           <CategoryLinkForSideBar categoryName="food" iconName="utensils" />
-          <CategoryLinkForSideBar categoryName="game" iconName="gamepad" />
+          <CategoryLinkForSideBar categoryName="games" iconName="gamepad" />
           <CategoryLinkForSideBar categoryName="health" iconName="heartbeat" />
           <CategoryLinkForSideBar categoryName="music" iconName="music" />
           <CategoryLinkForSideBar categoryName="news" iconName="newspaper" />
@@ -117,7 +117,7 @@ const SideBar = () => {
           </Link>
           <Link href="/add" as="/add">
             <a className="w-44 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
-              <strong>Submit Your App</strong>
+              <strong>Submit App</strong>
             </a>
           </Link>
           <a

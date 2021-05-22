@@ -4,7 +4,7 @@ const categories = [
   { label: "Education", value: "education" },
   { label: "Entertainment", value: "entertainment" },
   { label: "Food", value: "food" },
-  { label: "Game", value: "game" },
+  { label: "Games", value: "games" },
   { label: "Health", value: "health" },
   { label: "Music", value: "music" },
   { label: "News", value: "news" },

@@ -72,7 +72,7 @@ const categories = () => {
                 iconName="utensils"
               />
               <CategoryLinkForCategories
-                categoryName="game"
+                categoryName="games"
                 iconName="gamepad"
               />
               <CategoryLinkForCategories
