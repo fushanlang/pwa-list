@@ -199,18 +199,18 @@ const ApplicationName = (applicationData) => {
               setModalIsOpen={setModalIsOpen}
               initialSlide={initialSlide}
             />
-            {/* Google Adsense */}
-            <div className="overflow-scroll text-center mt-10">
-              <AdSense.Google
-                client={GOOGLE_ADSENSE_CLIENT}
-                slot="6767679949"
-                style={{ width: 970, height: 90 }}
-                format=""
-              />
-            </div>
-            {/* Google Adsense */}
           </div>
         )}
+        {/* Google Adsense */}
+        <div className="overflow-scroll text-center mt-10">
+          <AdSense.Google
+            client={GOOGLE_ADSENSE_CLIENT}
+            slot="6767679949"
+            style={{ width: 970, height: 90 }}
+            format=""
+          />
+        </div>
+        {/* Google Adsense */}
       </div>
     </Layout>
   );
