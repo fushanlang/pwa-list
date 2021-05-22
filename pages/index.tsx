@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
+import React from "react";
 import AdSense from "react-adsense";
 import Layout from "../components/Layout";
 import Card from "../components/App/Card";
@@ -58,6 +59,8 @@ const Index = () => {
             <AdSense.Google
               client="ca-pub-8730762338273010"
               slot="6767679949"
+              style={{ width: 500, height: 300, textAlign: "center" }}
+              format=""
             />
             {/* Google Adsense */}
             <div className="flex flex-col items-center text-center mt-7 md:hidden">
