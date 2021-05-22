@@ -61,7 +61,7 @@ const Index = () => {
               <AdSense.Google
                 client={GOOGLE_ADSENSE_CLIENT}
                 slot="6767679949"
-                style={{ width: 900, height: 200 }}
+                style={{ width: 970, height: 90 }}
                 format=""
               />
             </div>
