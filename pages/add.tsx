@@ -3,7 +3,7 @@ import categories from "../consts/categories";
 import Layout from "../components/Layout";
 import CompletedModal from "../components/Add/CompletedModal";
 import ErrorMessage from "../components/Common/ErrorMessage";
-import ImagePreview from "../components/ImagePreview";
+import ImagePreview from "../components/Common/ImagePreview";
 import firebase from "../plugins/firebase";
 import fileLoad from "../plugins/fileLoad";
 import validateRequired from "../plugins/validation/validateRequired";
