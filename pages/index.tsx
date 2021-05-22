@@ -1,8 +1,9 @@
-import Layout from "../components/Layout";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
+import AdSense from "react-adsense";
+import Layout from "../components/Layout";
 import Card from "../components/App/Card";
 const db = firebase.firestore();
 const logo = {
@@ -54,19 +55,10 @@ const Index = () => {
               <Card applications={newApps} />
             </div>
             {/* Google Adsense */}
-            <script
-              async
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-            ></script>
-            <ins
-              className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-client="ca-pub-8730762338273010"
-              data-ad-slot="6767679949"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            <AdSense.Google
+              client="ca-pub-8730762338273010"
+              slot="6767679949"
+            />
             {/* Google Adsense */}
             <div className="flex flex-col items-center text-center mt-7 md:hidden">
               <Link href="/about" as="/about">
