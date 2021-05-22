@@ -221,7 +221,6 @@ const add = () => {
       setIsSubmitting(false);
       return;
     }
-    setIsSubmitting(false);
     setModalsOpen(true);
     var nameLowercase = name.toLowerCase().replace(/\s+/g, "");
     var tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
@@ -290,6 +289,7 @@ const add = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
+    setIsSubmitting(false);
   };
 
   return (
@@ -523,25 +523,15 @@ const add = () => {
           <ErrorMessage errors={errors.email}></ErrorMessage>
         </div>
         <div className="ml-1 mt-10 mb-12">
-          {!isSubmitting && (
-            <button
-              className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Submit
-            </button>
-          )}
-          {isSubmitting && (
-            <button
-              disabled
-              className="w-48 bg-green-200 text-white font-bold py-2 px-4 rounded pointer-events-none"
-            >
-              Submiting...
-            </button>
-          )}
+          <button
+            className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Submit
+          </button>
         </div>
       </form>
-      <CompletedModal modalsOpen={modalsOpen} setModalsOpen={setModalsOpen} />
+      <CompletedModal modalsOpen={modalsOpen} isSubmitting={isSubmitting} />
     </Layout>
   );
 };
