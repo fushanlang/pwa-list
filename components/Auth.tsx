@@ -1,15 +1,7 @@
-import { FC, useEffect, useContext } from "react";
-import Router from "next/router";
+import { FC } from "react";
 import firebase from "../plugins/firebase";
-import { AuthContext } from "../contexts/Auth";
 
 const Auth: FC = () => {
-  const { currentUser } = useContext(AuthContext);
-
-  //   useEffect(() => {
-  //     currentUser && Router.push("/");
-  //   }, [currentUser]);
-
   const login = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithRedirect(provider);
@@ -19,11 +11,21 @@ const Auth: FC = () => {
   };
   return (
     <div>
-      <div className="container">
-        <button onClick={login}>googleでログインする</button>
-      </div>
-      <div className="container">
-        <button onClick={logout}>ログアウト</button>
+      <div>
+        <div className="flex justify-center">
+          <button
+            className="flex items-center justify-center w-56 font-bold h-10 border rounded hover:bg-gray-100"
+            onClick={login}
+          >
+            <div className="mr-3 w-6">
+              <img src={"/logo/Google.png"} />
+            </div>
+            Sign in with Google
+          </button>
+        </div>
+        <div>
+          <button onClick={logout}>ログアウト</button>
+        </div>
       </div>
     </div>
   );

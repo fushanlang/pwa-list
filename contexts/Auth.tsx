@@ -13,13 +13,11 @@ const AuthProvider: FC = ({ children }) => {
     useState<firebase.User | null | undefined>(undefined);
 
   useEffect(() => {
-    // ログイン状態が変化するとfirebaseのauthメソッドを呼び出す
     firebase.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
     });
   }, []);
 
-  /* 下階層のコンポーネントをラップする */
   return (
     <AuthContext.Provider value={{ currentUser: currentUser }}>
       {children}
