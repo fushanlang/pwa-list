@@ -11,7 +11,7 @@ const Auth: FC = () => {
       <div>
         <div className="flex justify-center">
           <button
-            className="flex items-center justify-center w-56 font-bold h-10 border rounded hover:bg-gray-100"
+            className="flex items-center justify-center w-56 font-bold h-10 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
             onClick={login}
           >
             <div className="mr-3 w-6">
