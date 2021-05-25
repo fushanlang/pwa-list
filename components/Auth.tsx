@@ -6,9 +6,6 @@ const Auth: FC = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithRedirect(provider);
   };
-  const logout = async () => {
-    firebase.auth().signOut();
-  };
   return (
     <div>
       <div>
@@ -22,9 +19,6 @@ const Auth: FC = () => {
             </div>
             Sign in with Google
           </button>
-        </div>
-        <div>
-          <button onClick={logout}>ログアウト</button>
         </div>
       </div>
     </div>
