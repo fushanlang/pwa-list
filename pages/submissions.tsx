@@ -1,4 +1,5 @@
 import { FC, useState, useEffect, useContext } from "react";
+import Link from "next/link";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import { AuthContext } from "../contexts/Auth";
@@ -12,9 +13,6 @@ const submissions = () => {
 
   useEffect(() => {
     currentUser === null && Router.push("sign-up");
-  }, [currentUser]);
-  useEffect(() => {
-    console.log(currentUser);
     const fetchNewAppData = async () => {
       const apps = await db
         .collection("applications")
@@ -32,19 +30,21 @@ const submissions = () => {
         }))
       );
     };
-    fetchNewAppData();
-  }, []);
+    if (currentUser) {
+      fetchNewAppData();
+    }
+  }, [currentUser]);
 
-  const logout = async () => {
+  const signOut = async () => {
     firebase.auth().signOut();
   };
   return (
     <Layout title="Submissions">
       {currentUser && (
         <div>
-          <div className="bg-white rounded-lg px-4 py-4">
-            <h1 className="text-2xl font-bold mb-1">submissions</h1>
-            <table className="text-base border-collapse border">
+          <div className="bg-white rounded-lg px-5 py-5">
+            <h1 className="text-2xl mb-4">submissions</h1>
+            <table className="text-base border-auto border">
               <thead>
                 <tr className="border h-10">
                   <th className="px-3">Name</th>
@@ -87,10 +87,15 @@ const submissions = () => {
                 ))}
               </tbody>
             </table>
-            <div>
+            <div className="mt-5">
+              <Link href="/add" as="/add">
+                <button className="px-5 mr-1 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100">
+                  New Submission
+                </button>
+              </Link>
               <button
-                className="w-48 font-bold h-8 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
-                onClick={logout}
+                className="px-5 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+                onClick={signOut}
               >
                 Sign Out
               </button>
