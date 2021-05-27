@@ -39,7 +39,7 @@ library.add(
   faShareAlt,
   faHeart
 );
-const categories = () => {
+const Categories = () => {
   return (
     <>
       <Head>
@@ -117,4 +117,4 @@ const categories = () => {
   );
 };
 
-export default categories;
+export default Categories;

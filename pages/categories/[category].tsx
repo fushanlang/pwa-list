@@ -6,7 +6,7 @@ import Layout from "../../components/Layout";
 import Card from "../../components/App/Card";
 
 const db = firebase.firestore();
-const ApplicationsCategory = () => {
+const Category = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [applications, setApplications] = useState<Object>([]);
   const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] =
@@ -62,7 +62,7 @@ const ApplicationsCategory = () => {
     <Layout title={caategoryFirstUpperCase}>
       <div className="px-2">
         {isLoading ? (
-          <div className="text-center mt-44">
+          <div className="text-center mt-52">
             <div className="loader" />
           </div>
         ) : (
@@ -80,4 +80,4 @@ const ApplicationsCategory = () => {
   );
 };
 
-export default ApplicationsCategory;
+export default Category;

@@ -107,7 +107,7 @@ const Search = () => {
           />
         </div>
         {isLoading ? (
-          <div className="text-center mt-44">
+          <div className="text-center mt-52">
             <div className="loader" />
           </div>
         ) : (
