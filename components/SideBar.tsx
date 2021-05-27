@@ -111,26 +111,35 @@ const SideBar = () => {
       <div className="mb-2 w-60 text-center">
         <div className="w-full border-t-2">
           <Link href="/about" as="/about">
-            <a className="w-44 inline-block mt-5 mb-1 py-1 text-gray-50 bg-gray-600 shadow-md rounded-md hover:bg-gray-700 hover:shadow-none transition ease-in-out">
+            <a className="w-40 inline-block mt-5 mb-1 py-1 text-gray-50 bg-gray-600 shadow-md rounded-md hover:bg-gray-700 hover:shadow-none transition ease-in-out">
               <strong>What is a PWA</strong>
             </a>
           </Link>
           <Link href="/add" as="/add">
-            <a className="w-44 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+            <a className="w-40 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
               <strong>Submit App</strong>
             </a>
           </Link>
-          <a
-            className="w-44 inline-block mt-2 mb-1 py-1 text-gray-50 bg-blue-400 shadow-md rounded-md hover:bg-blue-500 hover:shadow-none transition ease-in-out"
-            target="_blank"
-            href="https://masakifukunishi.site"
-          >
-            <strong>Contact</strong>
-          </a>
-          <p className="text-sm mt-8">
+          <div className="mt-3 text-xs text-green-500">
+            <div>
+              <Link href="/terms-privacy" as="/terms-privacy">
+                <a className="mt-1">Terms of Service & Privacy</a>
+              </Link>
+            </div>
+            <div>
+              <a
+                className="text-green-500"
+                target="_blank"
+                href="mailto:hello.pwalist@gmail.com"
+              >
+                Contact
+              </a>
+            </div>
+          </div>
+          <p className="mt-2">
             Made By&nbsp;
             <a
-              className="text-green-500"
+              className="text-green-500 text-base"
               target="_blank"
               href="https://masakifukunishi.site"
             >

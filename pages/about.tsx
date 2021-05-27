@@ -1,11 +1,19 @@
-import Layout from "../components/Layout";
+import Head from "next/head";
 import Link from "next/link";
-const about = () => {
+import Layout from "../components/Layout";
+const About = () => {
   const logo = {
     fontFamily: "'Nunito', sans-serif",
   };
   return (
     <Layout title="What is a PWA?">
+      <Head>
+        <meta
+          name="description"
+          content="PWA stands for 'Progressive Web Apps' and refers to websites that
+            can be installed on PCs and smartphones."
+        />
+      </Head>
       <div className="pl-6 pr-4 py-5 bg-white rounded-lg">
         <h1 className="text-3xl font-bold mb-4" style={logo}>
           P<span className="text-green-500">W</span>A LIST
@@ -13,7 +21,7 @@ const about = () => {
         <h2 className="text-2xl font-bold">What is a PWA?</h2>
         <div className="mt-3 leading-relaxed text-lg">
           <p>
-            PWA stands for "Progressive Web Apps" and refers to websites that
+            PWA stands for 'Progressive Web Apps' and refers to websites that
             can be installed on PCs and smartphones.
             <br />
             By installing a PWA, a website is added to the home screen, and you
@@ -79,4 +87,4 @@ const about = () => {
     </Layout>
   );
 };
-export default about;
+export default About;
