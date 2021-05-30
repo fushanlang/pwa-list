@@ -1,12 +1,12 @@
 import { FC, useEffect, useContext } from "react";
-import { AuthContext } from "../contexts/Auth";
-import Layout from "../components/Layout";
-import Auth from "../components/Auth";
+import { AuthContext } from "../../contexts/Auth";
+import Layout from "../../components/Layout";
+import Auth from "../../components/Auth";
 import Router from "next/router";
-const signUp = () => {
+const SignUp = () => {
   const { currentUser } = useContext(AuthContext);
   useEffect(() => {
-    currentUser && Router.push("submissions");
+    currentUser && Router.push("/submissions");
   }, [currentUser]);
   return (
     <Layout title="Sign-Up">
@@ -23,4 +23,4 @@ const signUp = () => {
     </Layout>
   );
 };
-export default signUp;
+export default SignUp;

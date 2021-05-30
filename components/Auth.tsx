@@ -6,12 +6,19 @@ const Auth: FC = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   const twitterProvider = new firebase.auth.TwitterAuthProvider();
   const facebookProvider = new firebase.auth.FacebookAuthProvider();
-  const handleTwitterSignUp = () =>
-    firebase.auth().signInWithRedirect(twitterProvider);
-  const handleGoogleSignUp = () =>
+
+  const handleGoogleSignUp = () => {
     firebase.auth().signInWithRedirect(googleProvider);
-  const handleFacebookSignIn = () =>
+    Router.push("/sign-up/loading");
+  };
+  const handleTwitterSignUp = () => {
+    firebase.auth().signInWithRedirect(twitterProvider);
+    Router.push("/sign-up/loading");
+  };
+  const handleFacebookSignIn = () => {
     firebase.auth().signInWithRedirect(facebookProvider);
+    Router.push("/sign-up/loading");
+  };
   return (
     <div>
       <div>

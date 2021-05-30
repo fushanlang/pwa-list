@@ -4,10 +4,12 @@ import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import { AuthContext } from "../contexts/Auth";
 import Layout from "../components/Layout";
+import Apps from "../components/Submissions/Apps";
 import Router from "next/router";
 const db = firebase.firestore();
 
 const submissions = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [apps, setApps] = useState<any>([]);
   const { currentUser } = useContext(AuthContext);
 
@@ -29,6 +31,7 @@ const submissions = () => {
           isPublic: doc.data().isPublic,
         }))
       );
+      setIsLoading(false);
     };
     if (currentUser) {
       fetchNewAppData();
@@ -41,69 +44,63 @@ const submissions = () => {
   return (
     <Layout title="Submissions">
       {currentUser && (
-        <div>
-          <div className="bg-white rounded-lg px-5 py-5">
-            <h1 className="text-2xl mb-4">submissions</h1>
-            <div className="overflow-scroll">
-              <table className="text-base border">
-                <thead>
-                  <tr className="border h-10">
-                    <th className="px-3">Name</th>
-                    <th className="px-4">Status</th>
-                    <th className="px-3">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {apps.map((app, index) => (
-                    <tr key={index} className="border">
-                      <td className="flex items-center px-3 h-20">
-                        <div className="mr-4 w-16">
-                          <img
-                            className="rounded-md"
-                            src={app.icon || "/default-app-icon.png"}
-                          />
-                        </div>
-                        {app.name}
-                      </td>
-                      <td className="px-4">
-                        {app.isPublic && "Public"}
-                        {!app.isPublic && "awaiting approval"}
-                      </td>
-                      <td className="px-3">
-                        <a
-                          className="h-10 px-2 py-1 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
-                          target="_blank"
-                          href={`/app/${app.nameLowercase}`}
-                        >
-                          View
-                        </a>
-                        <a className="h-7 px-2 py-1 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 pointer-events-none">
-                          Edit
-                        </a>
-                        <a className="h-7 px-2 py-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 pointer-events-none">
-                          Delete
-                        </a>
-                      </td>
+        <>
+          {isLoading ? (
+            <div className="text-center mt-52">
+              <div className="loader" />
+            </div>
+          ) : (
+            <div className="bg-white rounded-lg px-5 py-5">
+              <h1 className="text-2xl mb-4">submissions</h1>
+              <div className="overflow-scroll">
+                <table className="text-base border">
+                  <thead>
+                    <tr className="border h-10">
+                      <th className="px-3">Name</th>
+                      <th className="px-4">Status</th>
+                      <th className="px-3">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="mt-5">
-              <Link href="/add" as="/add">
-                <button className="px-5 mr-1 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100">
-                  New Submission
+                  </thead>
+                  <tbody>
+                    {Object.keys(apps).length ? (
+                      <Apps apps={apps} />
+                    ) : (
+                      <tr className="text-center">
+                        <td
+                          colSpan={3}
+                          style={{ width: 600 }}
+                          className="bg-gray-50 py-10"
+                        >
+                          <p className="text-gray-500 mb-2">
+                            Create your first submission
+                          </p>
+                          <Link href="/add" as="/add">
+                            <button className="text-sm text-white px-3 py-1 border rounded bg-green-400">
+                              New Submission
+                            </button>
+                          </Link>
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-5">
+                <Link href="/add" as="/add">
+                  <button className="px-5 mr-1 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100">
+                    New Submission
+                  </button>
+                </Link>
+                <button
+                  className="px-5 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+                  onClick={signOut}
+                >
+                  Sign Out
                 </button>
-              </Link>
-              <button
-                className="px-5 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
-                onClick={signOut}
-              >
-                Sign Out
-              </button>
+              </div>
             </div>
-          </div>
-        </div>
+          )}
+        </>
       )}
     </Layout>
   );
