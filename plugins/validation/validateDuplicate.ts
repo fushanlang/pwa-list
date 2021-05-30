@@ -10,7 +10,6 @@ const validateDuplicate = async (
   const result = await db
     .collection("applications")
     .where(field, "==", lowercaseProperty)
-    .where("isPublic", "==", true)
     .get();
   console.log(result.empty);
   if (result.empty) {

@@ -22,12 +22,12 @@ const CompletedModal = ({ modalsOpen, isSubmitting }) => {
             </div>
             <div className="text-2xl mt-6 mb-7">Thank you</div>
             <div className="mt-4">
-              <Link href="/" as="/">
+              <Link href="/submissions" as="/submissions">
                 <button
-                  className="h-8 w-36 bg-green-400 hover:bg-green-500 text-white font-bold rounded focus:outline-none focus:shadow-outline"
+                  className="py-1 px-5 bg-green-400 hover:bg-green-500 text-white font-bold rounded focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
-                  Home
+                  Check Submission
                 </button>
               </Link>
             </div>
