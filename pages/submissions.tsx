@@ -55,7 +55,7 @@ const submissions = () => {
               <div className="overflow-scroll">
                 <table className="text-base border">
                   <thead>
-                    <tr className="border h-10">
+                    <tr className="text-gray-500 border h-9">
                       <th className="px-3">Name</th>
                       <th className="px-4">Status</th>
                       <th className="px-3">Actions</th>
