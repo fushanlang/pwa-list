@@ -12,7 +12,6 @@ const validateDuplicate = async (
     .where(field, "==", lowercaseProperty)
     .where("isPublic", "==", true)
     .get();
-  console.log(result.empty);
   if (result.empty) {
     return false;
   }

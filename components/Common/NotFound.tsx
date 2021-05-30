@@ -1,4 +1,3 @@
-import Image from "next/image";
 const NotFound = () => {
   return (
     <div className="text-center">
