@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import React from "react";
@@ -7,11 +7,13 @@ import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 import Layout from "../components/Layout";
 import Card from "../components/App/Card";
+import { AuthContext } from "../contexts/Auth";
 const db = firebase.firestore();
 const logo = {
   fontFamily: "'Nunito', sans-serif",
 };
 const Index = () => {
+  const { currentUser } = useContext(AuthContext);
   const [newApps, setNewApps] = useState<Object | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const date = new Date();
@@ -72,11 +74,20 @@ const Index = () => {
                   <strong>What is a PWA</strong>
                 </a>
               </Link>
-              <Link href="/add" as="/add">
-                <a className="py-1 w-44 mb-3 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
-                  <strong>Submit App</strong>
-                </a>
-              </Link>
+
+              {currentUser ? (
+                <Link href="/submissions" as="/submissions">
+                  <a className="py-1 w-44 mb-3 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+                    <strong>Submit App</strong>
+                  </a>
+                </Link>
+              ) : (
+                <Link href="/sign-up" as="/sign-up">
+                  <a className="py-1 w-44 mb-3 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+                    <strong>Submit App</strong>
+                  </a>
+                </Link>
+              )}
               <div className="mt-2 text-xs text-green-500">
                 <div>
                   <Link href="/terms-privacy" as="/terms-privacy">

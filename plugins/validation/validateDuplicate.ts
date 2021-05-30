@@ -11,7 +11,6 @@ const validateDuplicate = async (
     .collection("applications")
     .where(field, "==", lowercaseProperty)
     .get();
-  console.log(result.empty);
   if (result.empty) {
     return false;
   }

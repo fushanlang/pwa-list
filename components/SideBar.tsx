@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useEffect, useContext } from "react";
+import { AuthContext } from "../contexts/Auth";
 import { useRouter } from "next/router";
 import CategoryLinkForSideBar from "./CategoryLinkForSideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -42,6 +44,7 @@ library.add(
   faHeart
 );
 const SideBar = () => {
+  const { currentUser } = useContext(AuthContext);
   const router = useRouter();
   const path = router.pathname;
   const date = new Date();
@@ -115,11 +118,19 @@ const SideBar = () => {
               <strong>What is a PWA</strong>
             </a>
           </Link>
-          <Link href="/add" as="/add">
-            <a className="w-40 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
-              <strong>Submit App</strong>
-            </a>
-          </Link>
+          {currentUser ? (
+            <Link href="/submissions" as="/submissions">
+              <a className="w-40 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+                <strong>Submit App</strong>
+              </a>
+            </Link>
+          ) : (
+            <Link href="/sign-up" as="/sign-up">
+              <a className="w-40 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+                <strong>Submit App</strong>
+              </a>
+            </Link>
+          )}
           <div className="mt-3 text-xs text-green-500">
             <div>
               <Link href="/terms-privacy" as="/terms-privacy">
