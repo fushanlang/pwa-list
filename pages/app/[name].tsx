@@ -40,8 +40,7 @@ const ApplicationName = (applicationData) => {
     }
   }, []);
   return (
-    <Layout>
-      {" "}
+    <Layout title="name">
       <div>
         <p className="text-2xl text-yellow-500 mt-6 mb-1">
           We are currently undergoing maintenance.
