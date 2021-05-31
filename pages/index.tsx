@@ -17,29 +17,29 @@ const Index = () => {
   const [newApps, setNewApps] = useState<Object | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const date = new Date();
+  const fetchNewAppData = async () => {
+    const applicationsData = await db
+      .collection("applications")
+      .where("isNewApp", "==", true)
+      .where("isPublic", "==", true)
+      .orderBy("newAppOrder", "desc")
+      .get();
+    setNewApps(
+      applicationsData.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        nameLowercase: doc.data().nameLowercase,
+        icon: doc.data().icon,
+        category: doc.data().category,
+        tag1: doc.data().tag1,
+        tag2: doc.data().tag2,
+        tag3: doc.data().tag3,
+        description: doc.data().description,
+      }))
+    );
+    setIsLoading(false);
+  };
   useEffect(() => {
-    const fetchNewAppData = async () => {
-      const applicationsData = await db
-        .collection("applications")
-        .where("isNewApp", "==", true)
-        .where("isPublic", "==", true)
-        .orderBy("newAppOrder", "desc")
-        .get();
-      setNewApps(
-        applicationsData.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-          nameLowercase: doc.data().nameLowercase,
-          icon: doc.data().icon,
-          category: doc.data().category,
-          tag1: doc.data().tag1,
-          tag2: doc.data().tag2,
-          tag3: doc.data().tag3,
-          description: doc.data().description,
-        }))
-      );
-      setIsLoading(false);
-    };
     fetchNewAppData();
   }, []);
   return (

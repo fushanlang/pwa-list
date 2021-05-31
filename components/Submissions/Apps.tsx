@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DeleteModal from "./DeleteModal";
 
-const Apps = ({ apps }) => {
+const Apps = ({ apps, fetchApps }) => {
   const [modalsOpen, setModalsOpen] = useState<boolean>(false);
   const [targetApp, setTargetApp] = useState<Object>([]);
   const handleDeleteApp = (app) => {

@@ -16,7 +16,7 @@ const modalStyle = {
     right: "0",
     margin: "auto",
     width: "355px",
-    height: "450px",
+    height: "440px",
     backgroundColor: "white",
     borderRadius: "1rem",
   },
@@ -24,6 +24,7 @@ const modalStyle = {
 const DeleteModal = ({ modalsOpen, setModalsOpen, targetApp }) => {
   const handleDeleteApp = async (app) => {
     await db.collection("applications").doc(app.id).delete();
+    setModalsOpen(false);
     await deleteFromStorage("application-icons", app.name, "icon");
     if (app.imageMobile1 !== null)
       await deleteFromStorage("application-images", app.name, "mobile1");
@@ -48,7 +49,7 @@ const DeleteModal = ({ modalsOpen, setModalsOpen, targetApp }) => {
         <div className="text-center mt-5">
           <img className="inline-block w-20" src={targetApp.icon} />
           <div className="text-xl mb-6">{targetApp.name}</div>
-          <div className="text-xl mb-5">
+          <div className="text-base mb-5">
             Are you sure you want to delete this submission?
           </div>
           <button
