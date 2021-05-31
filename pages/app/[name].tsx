@@ -14,31 +14,31 @@ import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const db = firebase.firestore();
 const ApplicationName = (applicationData) => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [initialSlide, setInitialSlide] = useState(0);
-  const [existsBackPage, setExistsBackPage] = useState(true);
-  const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] =
-    useState<string | null>(null);
-  const application = applicationData.applicationData;
-  const router = useRouter();
-  const url = `https://www.pwalist.app${router.asPath}`;
-  // setting the initial slide
-  var slideNum = [0, 1, 2, 3, 4, 5];
-  if (application.imageMobile1 === null) slideNum.splice(0, 0, null);
-  if (application.imageMobile2 === null) slideNum.splice(1, 0, null);
-  if (application.imageMobile3 === null) slideNum.splice(2, 0, null);
+  // const [modalIsOpen, setModalIsOpen] = useState(false);
+  // const [initialSlide, setInitialSlide] = useState(0);
+  // const [existsBackPage, setExistsBackPage] = useState(true);
+  // const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] =
+  //   useState<string | null>(null);
+  // const application = applicationData.applicationData;
+  // const router = useRouter();
+  // const url = `https://www.pwalist.app${router.asPath}`;
+  // // setting the initial slide
+  // var slideNum = [0, 1, 2, 3, 4, 5];
+  // if (application.imageMobile1 === null) slideNum.splice(0, 0, null);
+  // if (application.imageMobile2 === null) slideNum.splice(1, 0, null);
+  // if (application.imageMobile3 === null) slideNum.splice(2, 0, null);
 
-  useEffect(() => {
-    if (typeof history.state.options.scroll === "undefined") {
-      setExistsBackPage(false);
-    }
-    if (application.category !== undefined) {
-      setCaategoryFirstUpperCase(
-        application.category.toString().charAt(0).toUpperCase() +
-          application.category.slice(1)
-      );
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof history.state.options.scroll === "undefined") {
+  //     setExistsBackPage(false);
+  //   }
+  //   if (application.category !== undefined) {
+  //     setCaategoryFirstUpperCase(
+  //       application.category.toString().charAt(0).toUpperCase() +
+  //         application.category.slice(1)
+  //     );
+  //   }
+  // }, []);
   return (
     <Layout title="name">
       <div>
@@ -226,37 +226,37 @@ const ApplicationName = (applicationData) => {
   );
 };
 
-ApplicationName.getInitialProps = async ({ query }) => {
-  const { name } = query;
-  const applicationDataDb = await db
-    .collection("applications")
-    .where("nameLowercase", "==", name)
-    .where("isPublic", "==", true)
-    .get();
-  if (applicationDataDb.empty) {
-    return {
-      applicationData: [],
-    };
-  }
-  const application = applicationDataDb.docs[0].data();
-  const returnApplicationData = {
-    name: application.name,
-    icon: application.icon,
-    tag1: application.tag1,
-    tag2: application.tag2,
-    tag3: application.tag3,
-    category: application.category,
-    link: application.link,
-    description: application.description,
-    imagePc1: application.imagePc1,
-    imagePc2: application.imagePc2,
-    imagePc3: application.imagePc3,
-    imageMobile1: application.imageMobile1,
-    imageMobile2: application.imageMobile2,
-    imageMobile3: application.imageMobile3,
-  };
-  return {
-    applicationData: returnApplicationData,
-  };
-};
+// ApplicationName.getInitialProps = async ({ query }) => {
+//   const { name } = query;
+//   const applicationDataDb = await db
+//     .collection("applications")
+//     .where("nameLowercase", "==", name)
+//     .where("isPublic", "==", true)
+//     .get();
+//   if (applicationDataDb.empty) {
+//     return {
+//       applicationData: [],
+//     };
+//   }
+//   const application = applicationDataDb.docs[0].data();
+//   const returnApplicationData = {
+//     name: application.name,
+//     icon: application.icon,
+//     tag1: application.tag1,
+//     tag2: application.tag2,
+//     tag3: application.tag3,
+//     category: application.category,
+//     link: application.link,
+//     description: application.description,
+//     imagePc1: application.imagePc1,
+//     imagePc2: application.imagePc2,
+//     imagePc3: application.imagePc3,
+//     imageMobile1: application.imageMobile1,
+//     imageMobile2: application.imageMobile2,
+//     imageMobile3: application.imageMobile3,
+//   };
+//   return {
+//     applicationData: returnApplicationData,
+//   };
+// };
 export default ApplicationName;
