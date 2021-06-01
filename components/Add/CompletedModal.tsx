@@ -1,11 +1,28 @@
 import Modal from "react-modal";
 import Link from "next/link";
 Modal.setAppElement("#__next");
-
+const modalStyle = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    backgroundColor: "rgba(0,0,0,0.85)",
+  },
+  content: {
+    position: "absolute",
+    top: "4rem",
+    left: "3rem",
+    right: "3rem",
+    bottom: "4rem",
+    backgroundColor: "white",
+    borderRadius: "1rem",
+    padding: "1.5rem",
+  },
+};
 const CompletedModal = ({ modalsOpen, isSubmitting }) => {
   return (
     <div>
-      <Modal isOpen={modalsOpen}>
+      <Modal style={modalStyle} isOpen={modalsOpen}>
         {isSubmitting ? (
           <div className="text-center mt-64">
             <div className="loader-completed-modal" />
@@ -24,7 +41,7 @@ const CompletedModal = ({ modalsOpen, isSubmitting }) => {
             <div className="mt-4">
               <Link href="/submissions" as="/submissions">
                 <button
-                  className="py-1 px-5 bg-green-400 hover:bg-green-500 text-white font-bold rounded focus:outline-none focus:shadow-outline"
+                  className="py-1 px-5 bg-green-400 hover:bg-green-500 text-white rounded focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
                   Check Submission

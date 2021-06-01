@@ -47,7 +47,7 @@ const submissions = () => {
                   </thead>
                   <tbody>
                     {Object.keys(apps).length ? (
-                      <Apps apps={apps} />
+                      <Apps apps={apps} fetchApps={fetchApps} />
                     ) : (
                       <tr className="text-center">
                         <td colSpan={3} className="bg-gray-50 py-10">

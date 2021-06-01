@@ -53,6 +53,7 @@ const Apps = ({ apps, fetchApps }) => {
         modalsOpen={modalsOpen}
         setModalsOpen={setModalsOpen}
         targetApp={targetApp}
+        fetchApps={fetchApps}
       />
     </>
   );

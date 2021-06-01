@@ -16,14 +16,15 @@ const modalStyle = {
     right: "0",
     margin: "auto",
     width: "355px",
-    height: "440px",
+    height: "420px",
     backgroundColor: "white",
     borderRadius: "1rem",
   },
 };
-const DeleteModal = ({ modalsOpen, setModalsOpen, targetApp }) => {
+const DeleteModal = ({ modalsOpen, setModalsOpen, targetApp, fetchApps }) => {
   const handleDeleteApp = async (app) => {
     await db.collection("applications").doc(app.id).delete();
+    fetchApps();
     setModalsOpen(false);
     await deleteFromStorage("application-icons", app.name, "icon");
     if (app.imageMobile1 !== null)
