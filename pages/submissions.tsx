@@ -5,36 +5,20 @@ import "firebase/firestore";
 import { AuthContext } from "../contexts/Auth";
 import Layout from "../components/Layout";
 import Apps from "../components/Submissions/Apps";
+import fetchUserApps from "../plugins/fetchUserApps";
 import Router from "next/router";
-const db = firebase.firestore();
 
 const submissions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [apps, setApps] = useState<any>([]);
   const { currentUser } = useContext(AuthContext);
-
+  const fetchApps = () => {
+    fetchUserApps(setApps, setIsLoading, currentUser.uid);
+  };
   useEffect(() => {
     currentUser === null && Router.push("sign-up");
-    const fetchNewAppData = async () => {
-      const apps = await db
-        .collection("applications")
-        .where("userId", "==", currentUser.uid)
-        .orderBy("updatedAt", "desc")
-        .get();
-      setApps(
-        apps.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-          nameLowercase: doc.data().nameLowercase,
-          icon: doc.data().icon,
-          link: doc.data().link,
-          isPublic: doc.data().isPublic,
-        }))
-      );
-      setIsLoading(false);
-    };
     if (currentUser) {
-      fetchNewAppData();
+      fetchApps();
     }
   }, [currentUser]);
 
@@ -71,22 +55,18 @@ const submissions = () => {
               <div className="overflow-scroll mt-5">
                 <table className="text-base border">
                   <thead>
-                    <tr className="text-gray-500 border h-9">
-                      <th className="px-3">Name</th>
-                      <th className="px-4">Status</th>
-                      <th className="px-3">Actions</th>
+                    <tr className="text-gray-500 border flex items-center h-9">
+                      <th className="w-64">Name</th>
+                      <th className="w-32">Status</th>
+                      <th className="w-64">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {Object.keys(apps).length ? (
-                      <Apps apps={apps} />
+                      <Apps apps={apps} fetchApps={fetchApps} />
                     ) : (
                       <tr className="text-center">
-                        <td
-                          colSpan={3}
-                          style={{ width: 600 }}
-                          className="bg-gray-50 py-10"
-                        >
+                        <td colSpan={3} className="bg-gray-50 py-10">
                           <p className="text-gray-500 mb-2">
                             Create your first submission
                           </p>

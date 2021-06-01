@@ -17,29 +17,29 @@ const Index = () => {
   const [newApps, setNewApps] = useState<Object | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const date = new Date();
+  const fetchNewAppData = async () => {
+    const applicationsData = await db
+      .collection("applications")
+      .where("isNewApp", "==", true)
+      .where("isPublic", "==", true)
+      .orderBy("newAppOrder", "desc")
+      .get();
+    setNewApps(
+      applicationsData.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        nameLowercase: doc.data().nameLowercase,
+        icon: doc.data().icon,
+        category: doc.data().category,
+        tag1: doc.data().tag1,
+        tag2: doc.data().tag2,
+        tag3: doc.data().tag3,
+        description: doc.data().description,
+      }))
+    );
+    setIsLoading(false);
+  };
   useEffect(() => {
-    const fetchNewAppData = async () => {
-      const applicationsData = await db
-        .collection("applications")
-        .where("isNewApp", "==", true)
-        .where("isPublic", "==", true)
-        .orderBy("newAppOrder", "desc")
-        .get();
-      setNewApps(
-        applicationsData.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-          nameLowercase: doc.data().nameLowercase,
-          icon: doc.data().icon,
-          category: doc.data().category,
-          tag1: doc.data().tag1,
-          tag2: doc.data().tag2,
-          tag3: doc.data().tag3,
-          description: doc.data().description,
-        }))
-      );
-      setIsLoading(false);
-    };
     fetchNewAppData();
   }, []);
   return (
@@ -70,20 +70,20 @@ const Index = () => {
             {/* Google Adsense */}
             <div className="flex flex-col items-center text-center mt-7 md:hidden">
               <Link href="/about" as="/about">
-                <a className="py-1 w-44 mb-4 text-gray-50 bg-gray-600 shadow-md rounded-md hover:bg-gray-700 hover:shadow-none transition ease-in-out">
+                <a className="py-2 w-48 mb-4 text-gray-50 bg-gray-600 shadow-md rounded-md hover:bg-gray-700 hover:shadow-none transition ease-in-out">
                   <strong>What is a PWA</strong>
                 </a>
               </Link>
 
               {currentUser ? (
                 <Link href="/submissions" as="/submissions">
-                  <a className="py-1 w-44 mb-3 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+                  <a className="py-2 w-48 mb-3 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
                     <strong>Submit App</strong>
                   </a>
                 </Link>
               ) : (
                 <Link href="/sign-up" as="/sign-up">
-                  <a className="py-1 w-44 mb-3 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+                  <a className="py-2 w-48 mb-3 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
                     <strong>Submit App</strong>
                   </a>
                 </Link>
@@ -91,12 +91,12 @@ const Index = () => {
               <div className="mt-2 text-xs text-green-500">
                 <div>
                   <Link href="/terms-privacy" as="/terms-privacy">
-                    <a className="mt-1">Terms of Service & Privacy</a>
+                    <a className="text-base mt-1">Terms of Service & Privacy</a>
                   </Link>
                 </div>
                 <div>
                   <a
-                    className="text-green-500"
+                    className="text-base text-green-500"
                     target="_blank"
                     href="mailto:hello.pwalist@gmail.com"
                   >
@@ -114,9 +114,7 @@ const Index = () => {
                   Masaki
                 </a>
               </p>
-              <p className="text-xs mt-1">
-                &copy; PWA List {date.getFullYear()}
-              </p>
+              <p className="mt-1">&copy; PWA List {date.getFullYear()}</p>
             </div>
           </div>
         )}

@@ -1,10 +1,19 @@
-const Apps = ({ apps }) => {
+import { useState } from "react";
+import DeleteModal from "./DeleteModal";
+
+const Apps = ({ apps, fetchApps }) => {
+  const [modalsOpen, setModalsOpen] = useState<boolean>(false);
+  const [targetApp, setTargetApp] = useState<Object>([]);
+  const handleDeleteApp = (app) => {
+    setTargetApp(app);
+    setModalsOpen(true);
+  };
   return (
     <>
       {apps.map((app, index) => (
-        <tr key={index} className="border">
-          <td className="flex items-center px-3 h-20">
-            <div className="mr-4 w-16">
+        <tr key={index} className="border h-24 flex items-center">
+          <td className="w-64 flex items-center">
+            <div className="ml-3 mr-4 w-16">
               <img
                 className="rounded-md"
                 src={app.icon || "/default-app-icon.png"}
@@ -12,31 +21,40 @@ const Apps = ({ apps }) => {
             </div>
             {app.name}
           </td>
-          <td className="text-center px-4">
+          <td className="w-32 text-center">
             {app.isPublic && <span className="text-blue-400">Public</span>}
             {!app.isPublic && (
               <span className="text-yellow-400">awaiting approval</span>
             )}
           </td>
-          <td className="px-3">
+          <td className="w-64 flex justify-center">
             {app.isPublic && (
               <a
-                className="h-10 px-2 py-1 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+                className="inline-flex items-center h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
                 target="_blank"
                 href={`/app/${app.nameLowercase}`}
               >
                 View
               </a>
             )}
-            <a className="h-7 px-2 py-1 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 pointer-events-none">
+            <button className="h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 pointer-events-none">
               Edit
-            </a>
-            <a className="h-7 px-2 py-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 pointer-events-none">
+            </button>
+            <button
+              className="h-8 px-2 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+              onClick={() => handleDeleteApp(app)}
+            >
               Delete
-            </a>
+            </button>
           </td>
         </tr>
       ))}
+      <DeleteModal
+        modalsOpen={modalsOpen}
+        setModalsOpen={setModalsOpen}
+        targetApp={targetApp}
+        fetchApps={fetchApps}
+      />
     </>
   );
 };

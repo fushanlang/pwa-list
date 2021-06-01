@@ -13,6 +13,29 @@ const Category = () => {
     useState<string | null>(null);
   const router = useRouter();
   const { category } = router.query;
+
+  const fetchApplicationsData = async () => {
+    const applicationsData = await db
+      .collection("applications")
+      .where("category", "==", category)
+      .where("isPublic", "==", true)
+      .get();
+    setApplications(
+      applicationsData.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        nameLowercase: doc.data().nameLowercase,
+        icon: doc.data().icon,
+        category: doc.data().category,
+        tag1: doc.data().tag1,
+        tag2: doc.data().tag2,
+        tag3: doc.data().tag3,
+        description: doc.data().description,
+      }))
+    );
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     if (!category) {
       return;
@@ -20,34 +43,13 @@ const Category = () => {
     setCaategoryFirstUpperCase(
       category.toString().charAt(0).toUpperCase() + category.slice(1)
     );
-    const fetchApplicationsData = async () => {
-      const applicationsData = await db
-        .collection("applications")
-        .where("category", "==", category)
-        .where("isPublic", "==", true)
-        .get();
-      setApplications(
-        applicationsData.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-          nameLowercase: doc.data().nameLowercase,
-          icon: doc.data().icon,
-          category: doc.data().category,
-          tag1: doc.data().tag1,
-          tag2: doc.data().tag2,
-          tag3: doc.data().tag3,
-          description: doc.data().description,
-        }))
-      );
-      setIsLoading(false);
-    };
     fetchApplicationsData();
   }, [category]);
   // useEffect(() => {
   //   const unSub = db
   //     .collection("applications")
   //     .where("name", "==", "YouTube")
-  //     .get((snapshot) => {
+  //     .onSnapshot((snapshot) => {
   //       setApplications(
   //         snapshot.docs.map((doc) => ({
   //           id: doc.id,
