@@ -38,12 +38,12 @@ const submissions = () => {
               <h1 className="text-2xl mb-4">submissions</h1>
               <div className="">
                 <p className="text-yellow-500 text-lg">
-                  The edit and delete functions are currently under
-                  construction. Please wait for a while.
+                  The edit function is currently under construction. Please wait
+                  for a while.
                 </p>
                 <p className="text-yellow-500 text-lg">
-                  If you want to edit or delete submissions, please contact us
-                  at the following email address!
+                  If you want to edit submissions, please contact us at the
+                  following email address!
                 </p>
                 <a
                   className="text-yellow-500 text-lg"
