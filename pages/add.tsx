@@ -359,7 +359,7 @@ const add = () => {
                   className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   type="text"
                   maxLength={10}
-                  placeholder="Memo"
+                  placeholder="ToDo"
                   onChange={(e) => {
                     setTag1(e.target.value);
                     setErrors({ ...errors, tag1: [] });

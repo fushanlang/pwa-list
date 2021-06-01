@@ -36,7 +36,23 @@ const submissions = () => {
           ) : (
             <div className="bg-white rounded-lg px-5 py-5">
               <h1 className="text-2xl mb-4">submissions</h1>
-              <div className="overflow-scroll">
+              <div className="">
+                <p className="text-yellow-500 text-lg">
+                  The edit and delete functions are currently under
+                  construction. Please wait for a while.
+                </p>
+                <p className="text-yellow-500 text-lg">
+                  If you want to edit or delete submissions, please contact us
+                  at the following email address!
+                </p>
+                <a
+                  className="text-yellow-500 text-lg"
+                  href="mailto:hello.pwalist@gmail.com"
+                >
+                  hello.pwalist@gmail.com
+                </a>
+              </div>
+              <div className="overflow-scroll mt-5">
                 <table className="text-base border">
                   <thead>
                     <tr className="text-gray-500 border flex items-center h-9">
