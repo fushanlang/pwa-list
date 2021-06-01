@@ -7,6 +7,7 @@ import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 import Layout from "../components/Layout";
 import Card from "../components/App/Card";
+import Loading from "../components/Common/Loading";
 import { AuthContext } from "../contexts/Auth";
 const db = firebase.firestore();
 const logo = {
@@ -49,9 +50,7 @@ const Index = () => {
           P<span className="text-green-500">W</span>A LIST
         </h1>
         {isLoading ? (
-          <div className="text-center mt-52">
-            <div className="loader" />
-          </div>
+          <Loading />
         ) : (
           <div>
             <div className="text-xl font-bold mt-6">New Apps</div>

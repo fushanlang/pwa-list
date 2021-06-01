@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import Card from "../components/App/Card";
+import Loading from "../components/Common/Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
@@ -107,9 +108,7 @@ const Search = () => {
           />
         </div>
         {isLoading ? (
-          <div className="text-center mt-52">
-            <div className="loader" />
-          </div>
+          <Loading />
         ) : (
           <div className="mt-8">
             <Card applications={searchedApp} />

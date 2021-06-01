@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import DeleteModal from "./DeleteModal";
 
 const Apps = ({ apps, fetchApps }) => {
@@ -37,9 +38,11 @@ const Apps = ({ apps, fetchApps }) => {
                 View
               </a>
             )}
-            <button className="h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 pointer-events-none">
-              Edit
-            </button>
+            <Link href="/add" as="/add">
+              <button className="h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 pointer-events-none">
+                Edit
+              </button>
+            </Link>
             <button
               className="h-8 px-2 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
               onClick={() => handleDeleteApp(app)}

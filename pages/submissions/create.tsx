@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
 import Router from "next/router";
-import { AuthContext } from "../contexts/Auth";
-import categories from "../consts/categories";
-import Layout from "../components/Layout";
-import CompletedModal from "../components/Add/CompletedModal";
-import ErrorMessage from "../components/Common/ErrorMessage";
-import ImagePreview from "../components/Common/ImagePreview";
-import firebase from "../plugins/firebase";
-import fileLoad from "../plugins/fileLoad";
-import validateRequired from "../plugins/validation/validateRequired";
-import validateUrl from "../plugins/validation/validateUrl";
-import validateAlphanum from "../plugins/validation/validateAlphanum";
-import validateDuplicate from "../plugins/validation/validateDuplicate";
-import uploadToStorage from "../plugins/uploadToStorage";
+import { AuthContext } from "../../contexts/Auth";
+import categories from "../../consts/categories";
+import Layout from "../../components/Layout";
+import CompletedModal from "../../components/Submissions/create/CompletedModal";
+import ErrorMessage from "../../components/Common/ErrorMessage";
+import ImagePreview from "../../components/Common/ImagePreview";
+import firebase from "../../plugins/firebase";
+import fileLoad from "../../plugins/fileLoad";
+import validateRequired from "../../plugins/validation/validateRequired";
+import validateUrl from "../../plugins/validation/validateUrl";
+import validateAlphanum from "../../plugins/validation/validateAlphanum";
+import validateDuplicate from "../../plugins/validation/validateDuplicate";
+import uploadToStorage from "../../plugins/uploadToStorage";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
 const db = firebase.firestore();
-const add = () => {
+const create = () => {
   const { currentUser } = useContext(AuthContext);
   useEffect(() => {
     currentUser === null && Router.push("sign-up");
@@ -520,4 +520,4 @@ const add = () => {
   );
 };
 
-export default add;
+export default create;

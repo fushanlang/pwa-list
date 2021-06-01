@@ -4,6 +4,7 @@ import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
 import Card from "../../components/App/Card";
+import Loading from "../../components/Common/Loading";
 
 const db = firebase.firestore();
 const Category = () => {
@@ -64,9 +65,7 @@ const Category = () => {
     <Layout title={caategoryFirstUpperCase}>
       <div className="px-2">
         {isLoading ? (
-          <div className="text-center mt-52">
-            <div className="loader" />
-          </div>
+          <Loading />
         ) : (
           <div>
             <div className="text-2xl font-bold mt-3">

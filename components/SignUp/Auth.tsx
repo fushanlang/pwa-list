@@ -1,5 +1,5 @@
 import { FC } from "react";
-import firebase from "../plugins/firebase";
+import firebase from "../../plugins/firebase";
 import Router from "next/router";
 
 const Auth: FC = () => {

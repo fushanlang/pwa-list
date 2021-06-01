@@ -1,7 +1,7 @@
 import { FC, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/Auth";
 import Layout from "../../components/Layout";
-import Auth from "../../components/Auth";
+import Auth from "../../components/SignUp/Auth";
 import Router from "next/router";
 const SignUp = () => {
   const { currentUser } = useContext(AuthContext);
