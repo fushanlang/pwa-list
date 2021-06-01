@@ -74,14 +74,12 @@ const About = () => {
           </p>
         </div>
         <Link href="/" as="/">
-          <div className="text-center">
-            <button
-              className="bg-green-400 hover:bg-green-500 text-white font-bold mt-3 w-36 h-8 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Home
-            </button>
-          </div>
+          <button
+            className="bg-green-400 hover:bg-green-500 text-white font-bold mt-5 w-36 h-8 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Home
+          </button>
         </Link>
       </div>
     </Layout>
