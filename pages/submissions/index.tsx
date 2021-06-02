@@ -60,10 +60,10 @@ const submissions = () => {
                       <th className="w-64">Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {Object.keys(apps).length ? (
-                      <Apps apps={apps} fetchApps={fetchApps} />
-                    ) : (
+                  {Object.keys(apps).length ? (
+                    <Apps apps={apps} fetchApps={fetchApps} />
+                  ) : (
+                    <tbody>
                       <tr className="text-center">
                         <td colSpan={3} className="bg-gray-50 py-10">
                           <p className="text-gray-500 mb-2">
@@ -79,8 +79,8 @@ const submissions = () => {
                           </Link>
                         </td>
                       </tr>
-                    )}
-                  </tbody>
+                    </tbody>
+                  )}
                 </table>
               </div>
               <div className="mt-5">
