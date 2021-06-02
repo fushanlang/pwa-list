@@ -8,10 +8,7 @@ import ErrorMessage from "../../components/Common/ErrorMessage";
 import ImagePreview from "../../components/Common/ImagePreview";
 import firebase from "../../plugins/firebase";
 import fileLoad from "../../plugins/fileLoad";
-import validateRequired from "../../plugins/validation/validateRequired";
-import validateUrl from "../../plugins/validation/validateUrl";
-import validateAlphanum from "../../plugins/validation/validateAlphanum";
-import validateDuplicate from "../../plugins/validation/validateDuplicate";
+import createValidate from "../../plugins/submissions/createValidate";
 import uploadToStorage from "../../plugins/uploadToStorage";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -139,81 +136,24 @@ const create = () => {
     setMobileImageUrlList(tmpMobileImageUrlList);
   };
 
-  const validate = async () => {
-    var nameErrors = [];
-    var linkErrors = [];
-    var categoryErrors = [];
-    var tag1Errors = [];
-    var tag2Errors = [];
-    var tag3Errors = [];
-    var descriptionErrors = [];
-    var iconErrors = [];
-    var screenshotErrors = [];
-    // required
-    if (validateRequired(name)) nameErrors.push("The Name field is required");
-    if (validateRequired(link)) linkErrors.push("The Link field is required");
-    if (validateRequired(category))
-      categoryErrors.push("The Category field is required");
-    if (validateRequired(tag1)) tag1Errors.push("The Tag field is required");
-    if (validateRequired(description))
-      descriptionErrors.push("The About this app field is required");
-    if (validateRequired(icon)) iconErrors.push("The Icon field is required");
-    // custom
-    if (validateUrl(link)) linkErrors.push("Please enter the correct Link");
-    if (validateAlphanum(name))
-      nameErrors.push(
-        "Please enter the name in single-byte alphanumeric characters"
-      );
-    if (validateAlphanum(tag1))
-      tag1Errors.push(
-        "Please enter the tag1 in single-byte alphanumeric characters"
-      );
-    if (validateAlphanum(tag2))
-      tag2Errors.push(
-        "Please enter the tag2 in single-byte alphanumeric characters"
-      );
-    if (validateAlphanum(tag3))
-      tag3Errors.push(
-        "Please enter the tag3 in single-byte alphanumeric characters"
-      );
-    if (pcImages[0] === undefined && mobileImages[0] === undefined)
-      screenshotErrors.push(
-        "Please enter either mobile size or PC size screenshot"
-      );
-    if (await validateDuplicate(name, "nameLowercase"))
-      nameErrors.push("The app name has already been registered");
-
-    if (
-      nameErrors.length ||
-      linkErrors.length ||
-      categoryErrors.length ||
-      tag1Errors.length ||
-      tag2Errors.length ||
-      tag3Errors.length ||
-      descriptionErrors.length ||
-      iconErrors.length ||
-      screenshotErrors.length
-    ) {
-      setErrors({
-        name: nameErrors,
-        link: linkErrors,
-        category: categoryErrors,
-        tag1: tag1Errors,
-        tag2: tag2Errors,
-        tag3: tag3Errors,
-        description: descriptionErrors,
-        icon: iconErrors,
-        screenshot: screenshotErrors,
-      });
-      return false;
-    }
-    return true;
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (!(await validate())) {
+    if (
+      !(await createValidate(
+        setErrors,
+        name,
+        link,
+        category,
+        tag1,
+        tag2,
+        tag3,
+        description,
+        icon,
+        pcImages,
+        mobileImages
+      ))
+    ) {
       setIsSubmitting(false);
       return;
     }
@@ -222,19 +162,19 @@ const create = () => {
     var tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
     var tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
     var tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
-    var iconUrl = icon
+    var uploadedIconUrl = icon
       ? await uploadToStorage(iconsFolder, nameLowercase, icon, "icon")
       : null;
-    var imagePc1Url = pcImages[0]
+    var uploadedImagePc1Url = pcImages[0]
       ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1")
       : null;
-    var imagePc2Url = pcImages[1]
+    var uploadedImagePc2Url = pcImages[1]
       ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2")
       : null;
-    var imagePc3Url = pcImages[2]
+    var uploadedImagePc3Url = pcImages[2]
       ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3")
       : null;
-    var imageMobile1Url = mobileImages[0]
+    var uploadedImageMobile1Url = mobileImages[0]
       ? await uploadToStorage(
           imagesFolder,
           nameLowercase,
@@ -242,7 +182,7 @@ const create = () => {
           "mobile1"
         )
       : null;
-    var imageMobile2Url = mobileImages[1]
+    var uploadedImageMobile2Url = mobileImages[1]
       ? await uploadToStorage(
           imagesFolder,
           nameLowercase,
@@ -250,7 +190,7 @@ const create = () => {
           "mobile2"
         )
       : null;
-    var imageMobile3Url = mobileImages[2]
+    var uploadedImageMobile3Url = mobileImages[2]
       ? await uploadToStorage(
           imagesFolder,
           nameLowercase,
@@ -271,13 +211,13 @@ const create = () => {
       tag2Lowercase: tag2Lowercase,
       tag3Lowercase: tag3Lowercase,
       description: description,
-      icon: iconUrl,
-      imagePc1: imagePc1Url,
-      imagePc2: imagePc2Url,
-      imagePc3: imagePc3Url,
-      imageMobile1: imageMobile1Url,
-      imageMobile2: imageMobile2Url,
-      imageMobile3: imageMobile3Url,
+      icon: uploadedIconUrl,
+      imagePc1: uploadedImagePc1Url,
+      imagePc2: uploadedImagePc2Url,
+      imagePc3: uploadedImagePc3Url,
+      imageMobile1: uploadedImageMobile1Url,
+      imageMobile2: uploadedImageMobile2Url,
+      imageMobile3: uploadedImageMobile3Url,
       isPublic: false,
       isFeatured: false,
       isNewApp: false,
@@ -293,7 +233,6 @@ const create = () => {
       {currentUser && (
         <>
           <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
-            <h2 className="text-lg font-bold">Application</h2>
             <div className="ml-1 mt-1 mb-9">
               <div className="mb-4">
                 <label className="block font-bold mb-1">

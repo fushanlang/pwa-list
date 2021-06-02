@@ -38,8 +38,11 @@ const Apps = ({ apps, fetchApps }) => {
                 View
               </a>
             )}
-            <Link href="/add" as="/add">
-              <button className="h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 pointer-events-none">
+            <Link
+              href="/submissions/edit/[name]"
+              as={`/submissions/edit/${app.nameLowercase}`}
+            >
+              <button className="h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100">
                 Edit
               </button>
             </Link>
