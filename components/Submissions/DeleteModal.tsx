@@ -41,7 +41,7 @@ const DeleteModal = ({ modalsOpen, setModalsOpen, targetApp, fetchApps }) => {
       await deleteFromStorage("application-images", app.name, "pc3");
   };
   return (
-    <div>
+    <>
       <Modal
         style={modalStyle}
         isOpen={modalsOpen}
@@ -67,7 +67,7 @@ const DeleteModal = ({ modalsOpen, setModalsOpen, targetApp, fetchApps }) => {
           </button>
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 
