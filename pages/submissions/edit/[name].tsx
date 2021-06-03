@@ -25,6 +25,8 @@ const Edit = (appData) => {
   const [tag2, setTag2] = useState<string>("");
   const [tag3, setTag3] = useState<string>("");
   const [description, setDescription] = useState<string>(app.description);
+  const [icon, setIcon] = useState<any | null>(null);
+  const [iconUrl, setIconUrl] = useState<any | null>(app.icon);
   useEffect(() => {
     if (app.tag1 !== null) {
       setTag1(app.tag1);
@@ -47,7 +49,24 @@ const Edit = (appData) => {
     icon: [],
     screenshot: [],
   });
-
+  const handleDeleteIcon = async (e) => {
+    e.preventDefault();
+    setIcon(null);
+    setIconUrl(null);
+  };
+  const imagesFolder = "application-images";
+  const iconsFolder = "application-icons";
+  const onChangeIconHandler = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      setIconUrl(e.target.result);
+      setIcon(file);
+    };
+    reader.readAsDataURL(file);
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -60,7 +79,15 @@ const Edit = (appData) => {
     var tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
     var tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
     var tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
-
+    var uploadedIconUrl = iconUrl;
+    if (icon !== null) {
+      uploadedIconUrl = await uploadToStorage(
+        iconsFolder,
+        nameLowercase,
+        icon,
+        "icon"
+      );
+    }
     const appRef = db.collection("applications").doc(app.id);
     await appRef.update({
       name: name,
@@ -74,6 +101,7 @@ const Edit = (appData) => {
       tag2Lowercase: tag2Lowercase,
       tag3Lowercase: tag3Lowercase,
       description: description,
+      icon: uploadedIconUrl,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setIsSubmitting(false);
@@ -184,6 +212,38 @@ const Edit = (appData) => {
                 }}
               ></textarea>
               <ErrorMessage errors={errors.description}></ErrorMessage>
+            </div>
+            <label className="block font-bold mb-2">
+              Icon<span className="text-red-400 ml-2">*</span>
+            </label>
+            {iconUrl && (
+              <div className="flex mb-4">
+                <div className="relative">
+                  <img className="border rounded max-h-20" src={iconUrl} />
+                  <button
+                    className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1"
+                    onClick={handleDeleteIcon}
+                  >
+                    <FontAwesomeIcon icon={faMinusCircle} size="lg" />
+                  </button>
+                </div>
+              </div>
+            )}
+            <div className="mb-8">
+              <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+                Choose
+                <input
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => {
+                    onChangeIconHandler(e);
+                    setErrors({ ...errors, icon: [] });
+                  }}
+                />
+              </label>
+              <ErrorMessage errors={errors.icon}></ErrorMessage>
             </div>
           </div>
           <div className="ml-1 mt-10 mb-12">
