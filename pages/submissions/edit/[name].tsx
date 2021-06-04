@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import categories from "../../../consts/categories";
-import fileLoad from "../../../plugins/fileLoad";
+import fileLoad from "../../../plugins/fileLoadTmp";
 import editValidate from "../../../plugins/submissions/editValidate";
+import updateImage from "../../../plugins/submissions/updateImage";
+import setArray from "../../../plugins/common/setArray";
+import setNotNull from "../../../plugins/common/setNotNull";
 import firebase from "../../../plugins/firebase";
 import uploadToStorage from "../../../plugins/uploadToStorage";
 import "firebase/firestore";
@@ -27,17 +30,24 @@ const Edit = (appData) => {
   const [description, setDescription] = useState<string>(app.description);
   const [icon, setIcon] = useState<any | null>(null);
   const [iconUrl, setIconUrl] = useState<any | null>(app.icon);
+  const [mobileImages, setMobileImages] = useState<any[]>([]);
+  const [mobileImageUrlList, setMobileImageUrlList] = useState<any[]>([]);
+  const [pcImages, setPcImages] = useState<any[]>([]);
+  const [pcImageUrlList, setPcImageUrlList] = useState<any[]>([]);
   useEffect(() => {
-    if (app.tag1 !== null) {
-      setTag1(app.tag1);
-    }
-    if (app.tag2 !== null) {
-      setTag2(app.tag2);
-    }
-    if (app.tag3 !== null) {
-      setTag3(app.tag3);
-    }
+    setNotNull(setTag1, app.tag1);
+    setNotNull(setTag2, app.tag2);
+    setNotNull(setTag3, app.tag3);
+    setMobileImageUrlList([]);
+    setArray(setMobileImageUrlList, app.imageMobile1);
+    setArray(setMobileImageUrlList, app.imageMobile2);
+    setArray(setMobileImageUrlList, app.imageMobile3);
+    setPcImageUrlList([]);
+    setArray(setPcImageUrlList, app.imagePc1);
+    setArray(setPcImageUrlList, app.imagePc2);
+    setArray(setPcImageUrlList, app.imagePc3);
   }, []);
+
   const [errors, setErrors] = useState<any>({
     name: [],
     link: [],
@@ -49,13 +59,49 @@ const Edit = (appData) => {
     icon: [],
     screenshot: [],
   });
+  const imagesFolder = "application-images";
+  const iconsFolder = "application-icons";
   const handleDeleteIcon = async (e) => {
     e.preventDefault();
     setIcon(null);
     setIconUrl(null);
   };
-  const imagesFolder = "application-images";
-  const iconsFolder = "application-icons";
+  const onChangeMobileImageHandler = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    var files = e.target.files;
+    for (let i = 0; i < files.length; i++) {
+      if (mobileImageUrlList[2]) {
+        break;
+      }
+      var file = e.target.files[i];
+      await fileLoad(file, setMobileImageUrlList, setMobileImages);
+    }
+  };
+  const onChangePcImageHandler = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    var files = e.target.files;
+    for (let i = 0; i < files.length; i++) {
+      if (pcImageUrlList[2]) {
+        break;
+      }
+      var file = e.target.files[i];
+      await fileLoad(file, setPcImageUrlList, setPcImages);
+    }
+  };
+  const handleDeleteMobileImage = async (e, index) => {
+    e.preventDefault();
+    setMobileImageUrlList(mobileImageUrlList.filter((_, i) => i !== index));
+    setMobileImages(mobileImages.filter((_, i) => i !== index));
+  };
+
+  const handleDeletePcImage = async (e, index) => {
+    e.preventDefault();
+    setPcImageUrlList(pcImageUrlList.filter((_, i) => i !== index));
+    setPcImages(pcImages.filter((_, i) => i !== index));
+  };
+
   const onChangeIconHandler = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -75,11 +121,28 @@ const Edit = (appData) => {
       return;
     }
     setModalsOpen(true);
+    var mobileImageNum = 0;
+    var pcImageNum = 0;
     var nameLowercase = name.toLowerCase().replace(/\s+/g, "");
     var tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
     var tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
     var tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
     var uploadedIconUrl = iconUrl;
+
+    var uploadedImageMobile1Url =
+      mobileImageUrlList[0] !== undefined ? mobileImageUrlList[0] : null;
+    var uploadedImageMobile2Url =
+      mobileImageUrlList[1] !== undefined ? mobileImageUrlList[1] : null;
+    var uploadedImageMobile3Url =
+      mobileImageUrlList[2] !== undefined ? mobileImageUrlList[2] : null;
+
+    var uploadedImagePc1Url =
+      pcImageUrlList[0] !== undefined ? pcImageUrlList[0] : null;
+    var uploadedImagePc2Url =
+      pcImageUrlList[1] !== undefined ? pcImageUrlList[1] : null;
+    var uploadedImagePc3Url =
+      pcImageUrlList[2] !== undefined ? pcImageUrlList[2] : null;
+
     if (icon !== null) {
       uploadedIconUrl = await uploadToStorage(
         iconsFolder,
@@ -88,6 +151,54 @@ const Edit = (appData) => {
         "icon"
       );
     }
+    mobileImageNum = await updateImage(
+      imagesFolder,
+      uploadedImageMobile1Url,
+      mobileImages,
+      nameLowercase,
+      mobileImageNum,
+      "mobile1"
+    );
+    mobileImageNum = await updateImage(
+      imagesFolder,
+      uploadedImageMobile2Url,
+      mobileImages,
+      nameLowercase,
+      mobileImageNum,
+      "mobile2"
+    );
+    mobileImageNum = await updateImage(
+      imagesFolder,
+      uploadedImageMobile3Url,
+      mobileImages,
+      nameLowercase,
+      mobileImageNum,
+      "mobile3"
+    );
+    pcImageNum = await updateImage(
+      imagesFolder,
+      uploadedImagePc1Url,
+      pcImages,
+      nameLowercase,
+      pcImageNum,
+      "pc1"
+    );
+    pcImageNum = await updateImage(
+      imagesFolder,
+      uploadedImagePc2Url,
+      pcImages,
+      nameLowercase,
+      pcImageNum,
+      "pc2"
+    );
+    pcImageNum = await updateImage(
+      imagesFolder,
+      uploadedImagePc3Url,
+      pcImages,
+      nameLowercase,
+      pcImageNum,
+      "pc3"
+    );
     const appRef = db.collection("applications").doc(app.id);
     await appRef.update({
       name: name,
@@ -102,6 +213,12 @@ const Edit = (appData) => {
       tag3Lowercase: tag3Lowercase,
       description: description,
       icon: uploadedIconUrl,
+      imageMobile1: uploadedImageMobile1Url,
+      imageMobile2: uploadedImageMobile2Url,
+      imageMobile3: uploadedImageMobile3Url,
+      imagePc1: uploadedImagePc1Url,
+      imagePc2: uploadedImagePc2Url,
+      imagePc3: uploadedImagePc3Url,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setIsSubmitting(false);
@@ -245,6 +362,76 @@ const Edit = (appData) => {
               </label>
               <ErrorMessage errors={errors.icon}></ErrorMessage>
             </div>
+            <p className="text-base font-bold mb-2">
+              screenshots
+              <span className="text-red-400 ml-2">*</span>
+              <span className="text-xs text-red-400 ml-2">
+                Either mobile or PC screenshot is required.
+              </span>
+            </p>
+            <label className="block font-bold mb-2">
+              Mobile size screenshots (Up to 3 Images)
+            </label>
+            <div className="flex overflow-scroll">
+              {mobileImageUrlList.map((mobileImageUrl, index) => (
+                <ImagePreview
+                  key={index}
+                  imageUrl={mobileImageUrl}
+                  handleDeleteImage={(event) =>
+                    handleDeleteMobileImage(event, index)
+                  }
+                  isLast={mobileImageUrlList.length - 1 === index}
+                  isBtnLastOnlyDisplay={true}
+                />
+              ))}
+            </div>
+            <div className="mb-8">
+              <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+                Choose
+                <input
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => {
+                    onChangeMobileImageHandler(e);
+                    setErrors({ ...errors, screenshot: [] });
+                  }}
+                />
+              </label>
+            </div>
+            <label className="block font-bold mb-2">
+              PC size screenshots (Up to 3 Images)
+            </label>
+            <div className="flex overflow-scroll">
+              {pcImageUrlList.map((pcImageUrl, index) => (
+                <ImagePreview
+                  key={index}
+                  imageUrl={pcImageUrl}
+                  handleDeleteImage={(event) =>
+                    handleDeletePcImage(event, index)
+                  }
+                  isLast={pcImageUrlList.length - 1 === index}
+                  isBtnLastOnlyDisplay={true}
+                />
+              ))}
+            </div>
+            <div className="mb-8">
+              <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+                Choose
+                <input
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => {
+                    onChangePcImageHandler(e);
+                    setErrors({ ...errors, screenshot: [] });
+                  }}
+                />
+              </label>
+            </div>
+            <ErrorMessage errors={errors.screenshot}></ErrorMessage>
           </div>
           <div className="ml-1 mt-10 mb-12">
             <button
