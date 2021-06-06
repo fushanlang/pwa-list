@@ -8,18 +8,40 @@ import Apps from "../../components/Submissions/Apps";
 import Loading from "../../components/Common/Loading";
 import fetchUserApps from "../../plugins/fetchUserApps";
 import Router from "next/router";
+const db = firebase.firestore();
 
 const Submissions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [apps, setApps] = useState<any>([]);
   const { currentUser } = useContext(AuthContext);
-  const fetchApps = () => {
-    fetchUserApps(setApps, setIsLoading, currentUser.uid);
+  const fetchUserAppsData = async () => {
+    const apps = await db
+      .collection("applications")
+      .where("userId", "==", currentUser.uid)
+      .orderBy("updatedAt", "desc")
+      .get();
+    setApps(
+      apps.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        nameLowercase: doc.data().nameLowercase,
+        icon: doc.data().icon,
+        link: doc.data().link,
+        isPublic: doc.data().isPublic,
+        imageMobile1: doc.data().imageMobile1,
+        imageMobile2: doc.data().imageMobile2,
+        imageMobile3: doc.data().imageMobile3,
+        imagePc1: doc.data().imagePc1,
+        imagePc2: doc.data().imagePc2,
+        imagePc3: doc.data().imagePc3,
+      }))
+    );
+    setIsLoading(false);
   };
   useEffect(() => {
     currentUser === null && Router.push("sign-up");
     if (currentUser) {
-      fetchApps();
+      fetchUserAppsData();
     }
   }, [currentUser]);
 
@@ -45,7 +67,7 @@ const Submissions = () => {
                     </tr>
                   </thead>
                   {Object.keys(apps).length ? (
-                    <Apps apps={apps} fetchApps={fetchApps} />
+                    <Apps apps={apps} fetchApps={fetchUserAppsData} />
                   ) : (
                     <tbody>
                       <tr className="text-center">
