@@ -4,8 +4,8 @@ import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 interface Props {
   imageUrl: any;
   handleDeleteImage: any;
-  isLast: boolean;
-  isBtnLastOnlyDisplay: boolean;
+  isLast: boolean | null;
+  isBtnLastOnlyDisplay: boolean | null;
 }
 
 const ImagePreview: React.FC<Props> = ({
