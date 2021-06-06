@@ -9,7 +9,7 @@ import Loading from "../../components/Common/Loading";
 import fetchUserApps from "../../plugins/fetchUserApps";
 import Router from "next/router";
 
-const submissions = () => {
+const Submissions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [apps, setApps] = useState<any>([]);
   const { currentUser } = useContext(AuthContext);
@@ -103,4 +103,4 @@ const submissions = () => {
     </Layout>
   );
 };
-export default submissions;
+export default Submissions;
