@@ -6,7 +6,6 @@ import { AuthContext } from "../../contexts/Auth";
 import Layout from "../../components/Layout";
 import Apps from "../../components/Submissions/Apps";
 import Loading from "../../components/Common/Loading";
-import fetchUserApps from "../../plugins/fetchUserApps";
 import Router from "next/router";
 const db = firebase.firestore();
 
