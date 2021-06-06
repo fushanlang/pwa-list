@@ -15,10 +15,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
 const db = firebase.firestore();
-const create = () => {
+const Create = () => {
   const { currentUser } = useContext(AuthContext);
   useEffect(() => {
-    currentUser === null && Router.push("sign-up");
+    currentUser === null && Router.push("/sign-up");
   }, [currentUser]);
 
   const [modalsOpen, setModalsOpen] = useState<boolean>(false);
@@ -424,4 +424,4 @@ const create = () => {
   );
 };
 
-export default create;
+export default Create;
