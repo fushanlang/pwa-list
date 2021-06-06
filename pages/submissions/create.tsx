@@ -360,6 +360,8 @@ const Create: NextPage = () => {
                     handleDeleteImage={(event) =>
                       handleDeleteMobileImage(event, index)
                     }
+                    isLast={mobileImageUrlList.length - 1 === index}
+                    isBtnLastOnlyDisplay={false}
                   />
                 ))}
               </div>
@@ -389,6 +391,8 @@ const Create: NextPage = () => {
                     handleDeleteImage={(event) =>
                       handleDeletePcImage(event, index)
                     }
+                    isLast={pcImageUrlList.length - 1 === index}
+                    isBtnLastOnlyDisplay={false}
                   />
                 ))}
               </div>
