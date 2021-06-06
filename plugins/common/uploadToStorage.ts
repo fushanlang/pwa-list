@@ -1,4 +1,4 @@
-import firebase from "../plugins/firebase";
+import firebase from "../firebase";
 import "firebase/storage";
 const storage = firebase.storage();
 const uploadToStorage = async (

@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
-import deleteFromStorage from "../../plugins/deleteFromStorage";
+import deleteFromStorage from "../../plugins/common/deleteFromStorage";
 const db = firebase.firestore();
 Modal.setAppElement("#__next");
 const modalStyle = {

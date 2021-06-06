@@ -24,12 +24,7 @@ const modalStyle = {
     padding: "1.5rem",
   },
 };
-const ImageModal = ({
-  application,
-  modalIsOpen,
-  setModalIsOpen,
-  initialSlide,
-}) => {
+const ImageModal = ({ app, modalIsOpen, setModalIsOpen, initialSlide }) => {
   return (
     <div>
       <Modal
@@ -54,57 +49,57 @@ const ImageModal = ({
             navigation
           >
             <div>
-              {application.imageMobile1 !== null && (
+              {app.imageMobile1 !== null && (
                 <SwiperSlide>
                   <img
                     style={{ maxHeight: "680px" }}
                     className="border rounded-lg inline"
-                    src={application.imageMobile1}
+                    src={app.imageMobile1}
                   />
                 </SwiperSlide>
               )}
-              {application.imageMobile2 !== null && (
+              {app.imageMobile2 !== null && (
                 <SwiperSlide>
                   <img
                     style={{ maxHeight: "680px" }}
                     className="border rounded-lg inline"
-                    src={application.imageMobile2}
+                    src={app.imageMobile2}
                   />
                 </SwiperSlide>
               )}
-              {application.imageMobile3 !== null && (
+              {app.imageMobile3 !== null && (
                 <SwiperSlide>
                   <img
                     style={{ maxHeight: "680px" }}
                     className="border rounded-lg inline"
-                    src={application.imageMobile3}
+                    src={app.imageMobile3}
                   />
                 </SwiperSlide>
               )}
-              {application.imagePc1 !== null && (
+              {app.imagePc1 !== null && (
                 <SwiperSlide className="hidden lg:inline-block">
                   <img
                     style={{ maxHeight: "680px" }}
                     className="border rounded-lg inline mt-20 xl:mt-0"
-                    src={application.imagePc1}
+                    src={app.imagePc1}
                   />
                 </SwiperSlide>
               )}
-              {application.imagePc2 !== null && (
+              {app.imagePc2 !== null && (
                 <SwiperSlide className="hidden lg:inline-block">
                   <img
                     style={{ maxHeight: "680px" }}
                     className="border rounded-lg inline mt-20 xl:mt-0"
-                    src={application.imagePc2}
+                    src={app.imagePc2}
                   />
                 </SwiperSlide>
               )}
-              {application.imagePc3 !== null && (
+              {app.imagePc3 !== null && (
                 <SwiperSlide className="hidden lg:inline-block">
                   <img
                     style={{ maxHeight: "680px" }}
                     className="border rounded-lg inline mt-20 xl:mt-0"
-                    src={application.imagePc3}
+                    src={app.imagePc3}
                   />
                 </SwiperSlide>
               )}

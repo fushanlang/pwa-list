@@ -13,54 +13,49 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const db = firebase.firestore();
-const ApplicationName = (applicationData) => {
+const App = (appData) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
   const [existsBackPage, setExistsBackPage] = useState(true);
   const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] =
     useState<string | null>(null);
-  const application = applicationData.applicationData;
+  const app = appData.appData;
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
   // setting the initial slide
   var slideNum = [0, 1, 2, 3, 4, 5];
-  if (application.imageMobile1 === null) slideNum.splice(0, 0, null);
-  if (application.imageMobile2 === null) slideNum.splice(1, 0, null);
-  if (application.imageMobile3 === null) slideNum.splice(2, 0, null);
+  if (app.imageMobile1 === null) slideNum.splice(0, 0, null);
+  if (app.imageMobile2 === null) slideNum.splice(1, 0, null);
+  if (app.imageMobile3 === null) slideNum.splice(2, 0, null);
 
   useEffect(() => {
     if (typeof history.state.options.scroll === "undefined") {
       setExistsBackPage(false);
     }
-    if (application.category !== undefined) {
+    if (app.category !== undefined) {
       setCaategoryFirstUpperCase(
-        application.category.toString().charAt(0).toUpperCase() +
-          application.category.slice(1)
+        app.category.toString().charAt(0).toUpperCase() + app.category.slice(1)
       );
     }
   }, []);
   return (
-    <Layout title={application.name}>
+    <Layout title={app.name}>
       <Head>
-        <meta name="description" content={application.description} />
-        <meta key="og:title" property="og:title" content={application.name} />
-        <meta
-          key="og:site_name"
-          property="og:site_name"
-          content={application.name}
-        />
+        <meta name="description" content={app.description} />
+        <meta key="og:title" property="og:title" content={app.name} />
+        <meta key="og:site_name" property="og:site_name" content={app.name} />
         <meta key="og:url" property="og:url" content={url} />
-        <meta key="og:image" property="og:image" content={application.icon} />
+        <meta key="og:image" property="og:image" content={app.icon} />
         <meta property="og:type" content="website" />
         <meta
           key="og:description"
           property="og:description"
-          content={application.description}
+          content={app.description}
         />
         <meta key="twitter:card" property="twitter:card" content="summary" />
       </Head>
       <div>
-        {application.name === undefined ? (
+        {app.name === undefined ? (
           <NotFound />
         ) : (
           <div className="bg-white px-4 py-7 rounded-lg">
@@ -84,26 +79,26 @@ const ApplicationName = (applicationData) => {
               <div className="mr-4 w-20">
                 <img
                   className="rounded-md"
-                  src={application.icon || "/default-app-icon.png"}
+                  src={app.icon || "/default-app-icon.png"}
                 />
               </div>
               <div className="flex flex-col">
-                <h1 className="font-bold text-2xl ml-1">{application.name}</h1>
+                <h1 className="font-bold text-2xl ml-1">{app.name}</h1>
                 <h2 className="text-base ml-1">{caategoryFirstUpperCase}</h2>
                 <div className="mt-1">
-                  {application.tag1 && (
+                  {app.tag1 && (
                     <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">
-                      {application.tag1}
+                      {app.tag1}
                     </span>
                   )}
-                  {application.tag2 && (
+                  {app.tag2 && (
                     <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">
-                      {application.tag2}
+                      {app.tag2}
                     </span>
                   )}
-                  {application.tag3 && (
+                  {app.tag3 && (
                     <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">
-                      {application.tag3}
+                      {app.tag3}
                     </span>
                   )}
                 </div>
@@ -113,7 +108,7 @@ const ApplicationName = (applicationData) => {
               <a
                 target="_blank"
                 // rel="noopener noreferrer"
-                href={application.link}
+                href={app.link}
                 className="text-center w-60 mt-7 ml-1 py-1 inline-block tracking-wide text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out"
               >
                 VIEW&nbsp;
@@ -121,64 +116,64 @@ const ApplicationName = (applicationData) => {
               </a>
             </div>
             <div className="flex mt-6 overflow-scroll">
-              {application.imageMobile1 !== null && (
+              {app.imageMobile1 !== null && (
                 <img
                   onClick={() => {
                     setModalIsOpen(true);
                     setInitialSlide(slideNum[0]);
                   }}
                   className="border rounded max-h-96 mx-2 cursor-pointer"
-                  src={application.imageMobile1}
+                  src={app.imageMobile1}
                 />
               )}
-              {application.imageMobile2 !== null && (
+              {app.imageMobile2 !== null && (
                 <img
                   onClick={() => {
                     setModalIsOpen(true);
                     setInitialSlide(slideNum[1]);
                   }}
                   className="border rounded max-h-96 mx-2 cursor-pointer"
-                  src={application.imageMobile2}
+                  src={app.imageMobile2}
                 />
               )}
-              {application.imageMobile3 !== null && (
+              {app.imageMobile3 !== null && (
                 <img
                   onClick={() => {
                     setModalIsOpen(true);
                     setInitialSlide(slideNum[2]);
                   }}
                   className="border rounded max-h-96 mx-2 cursor-pointer"
-                  src={application.imageMobile3}
+                  src={app.imageMobile3}
                 />
               )}
-              {application.imagePc1 !== null && (
+              {app.imagePc1 !== null && (
                 <img
                   onClick={() => {
                     setModalIsOpen(true);
                     setInitialSlide(slideNum[3]);
                   }}
                   className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block"
-                  src={application.imagePc1}
+                  src={app.imagePc1}
                 />
               )}
-              {application.imagePc2 !== null && (
+              {app.imagePc2 !== null && (
                 <img
                   onClick={() => {
                     setModalIsOpen(true);
                     setInitialSlide(slideNum[4]);
                   }}
                   className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
-                  src={application.imagePc2}
+                  src={app.imagePc2}
                 />
               )}
-              {application.imagePc3 !== null && (
+              {app.imagePc3 !== null && (
                 <img
                   onClick={() => {
                     setModalIsOpen(true);
                     setInitialSlide(slideNum[5]);
                   }}
                   className="border rounded max-h-96 mx-2 cursor-pointer hidden lg:inline-block "
-                  src={application.imagePc3}
+                  src={app.imagePc3}
                 />
               )}
             </div>
@@ -190,11 +185,11 @@ const ApplicationName = (applicationData) => {
                 style={{ whiteSpace: "pre-line" }}
                 className="text-left text-lg"
               >
-                {application.description}
+                {app.description}
               </p>
             </div>
             <ImageModal
-              application={application}
+              app={app}
               modalIsOpen={modalIsOpen}
               setModalIsOpen={setModalIsOpen}
               initialSlide={initialSlide}
@@ -216,37 +211,37 @@ const ApplicationName = (applicationData) => {
   );
 };
 
-ApplicationName.getInitialProps = async ({ query }) => {
+App.getInitialProps = async ({ query }) => {
   const { name } = query;
-  const applicationDataDb = await db
+  const appDataDb = await db
     .collection("applications")
     .where("nameLowercase", "==", name)
     .where("isPublic", "==", true)
     .get();
-  if (applicationDataDb.empty) {
+  if (appDataDb.empty) {
     return {
-      applicationData: [],
+      appData: [],
     };
   }
-  const application = applicationDataDb.docs[0].data();
-  const returnApplicationData = {
-    name: application.name,
-    icon: application.icon,
-    tag1: application.tag1,
-    tag2: application.tag2,
-    tag3: application.tag3,
-    category: application.category,
-    link: application.link,
-    description: application.description,
-    imagePc1: application.imagePc1,
-    imagePc2: application.imagePc2,
-    imagePc3: application.imagePc3,
-    imageMobile1: application.imageMobile1,
-    imageMobile2: application.imageMobile2,
-    imageMobile3: application.imageMobile3,
+  const app = appDataDb.docs[0].data();
+  const returnAppData = {
+    name: app.name,
+    icon: app.icon,
+    tag1: app.tag1,
+    tag2: app.tag2,
+    tag3: app.tag3,
+    category: app.category,
+    link: app.link,
+    description: app.description,
+    imagePc1: app.imagePc1,
+    imagePc2: app.imagePc2,
+    imagePc3: app.imagePc3,
+    imageMobile1: app.imageMobile1,
+    imageMobile2: app.imageMobile2,
+    imageMobile3: app.imageMobile3,
   };
   return {
-    applicationData: returnApplicationData,
+    appData: returnAppData,
   };
 };
-export default ApplicationName;
+export default App;
