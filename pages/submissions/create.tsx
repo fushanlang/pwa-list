@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
+import { NextPage } from "next";
 import Router from "next/router";
 import { AuthContext } from "../../contexts/Auth";
 import categories from "../../consts/categories";
@@ -15,7 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
 const db = firebase.firestore();
-const Create = () => {
+const Create: NextPage = () => {
   const { currentUser } = useContext(AuthContext);
   useEffect(() => {
     currentUser === null && Router.push("/sign-up");

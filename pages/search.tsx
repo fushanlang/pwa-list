@@ -1,3 +1,4 @@
+import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import firebase from "../plugins/firebase";
@@ -8,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 
-const Search = () => {
+const Search: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchParam, setSearchParam] = useState<String | null>(null);
   const [initialSearchParam, setInitialSearchParam] =

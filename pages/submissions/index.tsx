@@ -1,4 +1,5 @@
-import { FC, useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
+import { NextPage } from "next";
 import Link from "next/link";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
@@ -9,7 +10,7 @@ import Loading from "../../components/Common/Loading";
 import Router from "next/router";
 const db = firebase.firestore();
 
-const Submissions = () => {
+const Submissions: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [apps, setApps] = useState<any>([]);
   const { currentUser } = useContext(AuthContext);

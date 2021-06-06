@@ -1,8 +1,8 @@
-import { FC, useEffect, useContext } from "react";
+import { NextPage } from "next";
 import firebase from "../../plugins/firebase";
 import Layout from "../../components/Layout";
 import Router from "next/router";
-const SignUpLoading = () => {
+const SignUpLoading: NextPage = () => {
   firebase.auth().onAuthStateChanged((user) => {
     user && Router.push("/submissions");
   });

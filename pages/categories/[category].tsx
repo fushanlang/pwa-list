@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
@@ -7,7 +8,7 @@ import Card from "../../components/App/Card";
 import Loading from "../../components/Common/Loading";
 
 const db = firebase.firestore();
-const Category = () => {
+const Category: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [applications, setApplications] = useState<Object>([]);
   const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] =

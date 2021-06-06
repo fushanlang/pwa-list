@@ -6,6 +6,14 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/swiper-bundle.min.css";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");
+
+interface Props {
+  app: any;
+  modalIsOpen: boolean;
+  setModalIsOpen: any;
+  initialSlide: number;
+}
+
 const modalStyle = {
   overlay: {
     position: "fixed",
@@ -24,7 +32,12 @@ const modalStyle = {
     padding: "1.5rem",
   },
 };
-const ImageModal = ({ app, modalIsOpen, setModalIsOpen, initialSlide }) => {
+const ImageModal: React.FC<Props> = ({
+  app,
+  modalIsOpen,
+  setModalIsOpen,
+  initialSlide,
+}) => {
   return (
     <div>
       <Modal

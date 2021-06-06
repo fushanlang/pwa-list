@@ -1,9 +1,10 @@
-import { FC, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
+import { NextPage } from "next";
 import { AuthContext } from "../../contexts/Auth";
 import Layout from "../../components/Layout";
 import Auth from "../../components/SignUp/Auth";
 import Router from "next/router";
-const SignUp = () => {
+const SignUp: NextPage = () => {
   const { currentUser } = useContext(AuthContext);
   useEffect(() => {
     currentUser && Router.push("/submissions");

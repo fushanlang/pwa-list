@@ -1,5 +1,6 @@
+import { NextPage } from "next";
 import Layout from "../components/Layout";
-const TermsPrivacy = () => {
+const TermsPrivacy: NextPage = () => {
   return (
     <Layout title="Terms of Service & Privacy">
       <div className="text-lg px-8 py-5 bg-white rounded-lg">

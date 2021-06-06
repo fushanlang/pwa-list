@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,8 +13,12 @@ import ImageModal from "../../components/App/ImageModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
+interface Props {
+  appData: any;
+}
+
 const db = firebase.firestore();
-const App = (appData) => {
+const App: NextPage<Props> = (appData) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
   const [existsBackPage, setExistsBackPage] = useState(true);

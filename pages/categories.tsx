@@ -1,3 +1,4 @@
+import { NextPage } from "next";
 import Head from "next/head";
 import SideBar from "../components/SideBar";
 import BottomBar from "../components/BottomBar";
@@ -39,7 +40,7 @@ library.add(
   faShareAlt,
   faHeart
 );
-const Categories = () => {
+const Categories: NextPage = () => {
   return (
     <>
       <Head>

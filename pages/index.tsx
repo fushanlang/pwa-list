@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { useState, useEffect, useContext } from "react";
+import { NextPage } from "next";
+import Link from "next/link";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import React from "react";
@@ -13,7 +14,7 @@ const db = firebase.firestore();
 const logo = {
   fontFamily: "'Nunito', sans-serif",
 };
-const Index = () => {
+const Index: NextPage = () => {
   const { currentUser } = useContext(AuthContext);
   const [newApps, setNewApps] = useState<Object | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
