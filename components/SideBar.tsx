@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../contexts/Auth";
 import { useRouter } from "next/router";
 import CategoryLinkForSideBar from "./CategoryLinkForSideBar";
@@ -43,7 +43,7 @@ library.add(
   faShareAlt,
   faHeart
 );
-const SideBar = () => {
+const SideBar: React.FC = () => {
   const { currentUser } = useContext(AuthContext);
   const router = useRouter();
   const path = router.pathname;

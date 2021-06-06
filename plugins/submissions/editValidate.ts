@@ -2,16 +2,16 @@ import validateRequired from "../validation/validateRequired";
 import validateUrl from "../validation/validateUrl";
 import validateAlphanum from "../validation/validateAlphanum";
 const editValidate = async (
-  setErrors,
-  link,
-  category,
-  tag1,
-  tag2,
-  tag3,
-  description,
-  iconUrl,
-  pcImageUrlList,
-  mobileImageUrlList
+  setErrors: any,
+  link: string,
+  category: string,
+  tag1: string,
+  tag2: string,
+  tag3: string,
+  description: string,
+  iconUrl: string,
+  pcImageUrlList: any,
+  mobileImageUrlList: any
 ) => {
   var nameErrors = [];
   var linkErrors = [];

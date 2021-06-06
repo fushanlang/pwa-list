@@ -1,4 +1,4 @@
-const setNotNull = (set, property) => {
+const setNotNull = (set: any, property: string) => {
   if (property !== null) set(property);
 };
 

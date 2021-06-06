@@ -2,7 +2,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CategoryLinkForSideBar = ({ categoryName, iconName }) => {
+interface Props {
+  categoryName: string;
+  iconName: any;
+}
+const CategoryLinkForSideBar: React.FC<Props> = ({
+  categoryName,
+  iconName,
+}) => {
   const router = useRouter();
   const { category } = router.query;
   const categoryNameFirstUpperCase =

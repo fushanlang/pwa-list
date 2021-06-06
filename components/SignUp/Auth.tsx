@@ -1,8 +1,7 @@
-import { FC } from "react";
 import firebase from "../../plugins/firebase";
 import Router from "next/router";
 
-const Auth: FC = () => {
+const Auth: React.FC = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   const twitterProvider = new firebase.auth.TwitterAuthProvider();
   const facebookProvider = new firebase.auth.FacebookAuthProvider();

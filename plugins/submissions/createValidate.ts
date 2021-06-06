@@ -3,17 +3,17 @@ import validateUrl from "../validation/validateUrl";
 import validateAlphanum from "../validation/validateAlphanum";
 import validateDuplicate from "../validation/validateDuplicate";
 const createValidate = async (
-  setErrors,
-  name,
-  link,
-  category,
-  tag1,
-  tag2,
-  tag3,
-  description,
-  icon,
-  pcImages,
-  mobileImages
+  setErrors: any,
+  name: string,
+  link: string,
+  category: string,
+  tag1: string,
+  tag2: string,
+  tag3: string,
+  description: string,
+  icon: string,
+  pcImages: any,
+  mobileImages: any
 ) => {
   var nameErrors = [];
   var linkErrors = [];

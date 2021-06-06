@@ -1,4 +1,7 @@
-const ErrorMessage = ({ errors }) => {
+interface Props {
+  errors: any;
+}
+const ErrorMessage: React.FC<Props> = ({ errors }) => {
   return (
     <div className="mt-1">
       {errors !== null &&

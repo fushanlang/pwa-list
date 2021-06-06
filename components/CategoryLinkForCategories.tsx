@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const CategoryLinkForCategories = ({ categoryName, iconName }) => {
+
+interface Props {
+  categoryName: string;
+  iconName: any;
+}
+const CategoryLinkForCategories: React.FC<Props> = ({
+  categoryName,
+  iconName,
+}) => {
   const categoryNameFirstUpperCase =
     categoryName.toString().charAt(0).toUpperCase() + categoryName.slice(1);
   return (

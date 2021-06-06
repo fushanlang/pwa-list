@@ -1,6 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
-const ImagePreview = ({
+
+interface Props {
+  imageUrl: any;
+  handleDeleteImage: any;
+  isLast: boolean;
+  isBtnLastOnlyDisplay: boolean;
+}
+
+const ImagePreview: React.FC<Props> = ({
   imageUrl,
   handleDeleteImage,
   isLast = false,

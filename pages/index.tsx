@@ -56,7 +56,7 @@ const Index: NextPage = () => {
           <div>
             <div className="text-xl font-bold mt-6">New Apps</div>
             <div className="mt-2">
-              <Card applications={newApps} />
+              <Card apps={newApps} />
             </div>
             {/* Google Adsense */}
             <div className="overflow-scroll text-center mt-10">

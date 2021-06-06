@@ -2,7 +2,12 @@ import { useState } from "react";
 import Link from "next/link";
 import DeleteModal from "./DeleteModal";
 
-const Apps = ({ apps, fetchApps }) => {
+interface Props {
+  apps: any;
+  fetchApps: any;
+}
+
+const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
   const [modalsOpen, setModalsOpen] = useState<boolean>(false);
   const [targetApp, setTargetApp] = useState<Object>([]);
   const handleDeleteApp = (app) => {

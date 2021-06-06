@@ -1,4 +1,4 @@
-const Forbidden = () => {
+const Forbidden: React.FC = () => {
   return (
     <div className="text-center text-lg">
       <div className="bg-white py-10 rounded-lg">

@@ -10,20 +10,20 @@ import Loading from "../../components/Common/Loading";
 const db = firebase.firestore();
 const Category: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [applications, setApplications] = useState<Object>([]);
+  const [apps, setApps] = useState<Object>([]);
   const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] =
     useState<string | null>(null);
   const router = useRouter();
   const { category } = router.query;
 
-  const fetchApplicationsData = async () => {
-    const applicationsData = await db
+  const fetchAppsData = async () => {
+    const appssData = await db
       .collection("applications")
       .where("category", "==", category)
       .where("isPublic", "==", true)
       .get();
-    setApplications(
-      applicationsData.docs.map((doc) => ({
+    setApps(
+      appssData.docs.map((doc) => ({
         id: doc.id,
         name: doc.data().name,
         nameLowercase: doc.data().nameLowercase,
@@ -45,14 +45,14 @@ const Category: NextPage = () => {
     setCaategoryFirstUpperCase(
       category.toString().charAt(0).toUpperCase() + category.slice(1)
     );
-    fetchApplicationsData();
+    fetchAppsData();
   }, [category]);
   // useEffect(() => {
   //   const unSub = db
-  //     .collection("applications")
+  //     .collection("apps")
   //     .where("name", "==", "YouTube")
   //     .onSnapshot((snapshot) => {
-  //       setApplications(
+  //       setApps(
   //         snapshot.docs.map((doc) => ({
   //           id: doc.id,
   //           name: doc.data().name,
@@ -73,7 +73,7 @@ const Category: NextPage = () => {
               {caategoryFirstUpperCase}
             </div>
             <div className="mt-2">
-              <Card applications={applications} />
+              <Card apps={apps} />
             </div>
           </div>
         )}

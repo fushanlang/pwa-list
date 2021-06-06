@@ -21,7 +21,20 @@ const modalStyle = {
     borderRadius: "1rem",
   },
 };
-const DeleteModal = ({ modalsOpen, setModalsOpen, targetApp, fetchApps }) => {
+
+interface Props {
+  modalsOpen: boolean;
+  setModalsOpen: any;
+  targetApp: any;
+  fetchApps: any;
+}
+
+const DeleteModal: React.FC<Props> = ({
+  modalsOpen,
+  setModalsOpen,
+  targetApp,
+  fetchApps,
+}) => {
   const handleDeleteApp = async (app) => {
     await db.collection("applications").doc(app.id).delete();
     fetchApps();

@@ -19,7 +19,13 @@ const modalStyle = {
     padding: "1.5rem",
   },
 };
-const CompletedModal = ({ modalsOpen, isSubmitting }) => {
+
+interface Props {
+  modalsOpen: boolean;
+  isSubmitting: boolean;
+}
+
+const CompletedModal: React.FC<Props> = ({ modalsOpen, isSubmitting }) => {
   return (
     <div>
       <Modal style={modalStyle} isOpen={modalsOpen}>

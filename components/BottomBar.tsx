@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faListUl, faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const BottomBar = () => {
+const BottomBar: React.FC = () => {
   const router = useRouter();
   const path = router.pathname;
   return (

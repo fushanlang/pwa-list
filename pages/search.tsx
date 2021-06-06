@@ -112,7 +112,7 @@ const Search: NextPage = () => {
           <Loading />
         ) : (
           <div className="mt-8">
-            <Card applications={searchedApp} />
+            <Card apps={searchedApp} />
           </div>
         )}
       </div>
