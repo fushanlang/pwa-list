@@ -84,19 +84,24 @@ const Create: NextPage = () => {
       await fileLoad(file, setMobileImageUrlList, setMobileImages);
     }
   };
-  const handleDeleteIcon = async (e) => {
-    e.preventDefault();
+  const handleDeleteIcon = async () => {
     setIcon(null);
     setIconUrl(null);
   };
 
-  const handleDeletePcImage = async (e, index) => {
+  const handleDeletePcImage = async (
+    e: React.FormEvent<HTMLFormElement>,
+    index: number
+  ) => {
     e.preventDefault();
     setPcImageUrlList(pcImageUrlList.filter((_, i) => i !== index));
     setPcImages(pcImages.filter((_, i) => i !== index));
   };
 
-  const handleDeleteMobileImage = async (e, index) => {
+  const handleDeleteMobileImage = async (
+    e: React.FormEvent<HTMLFormElement>,
+    index: number
+  ) => {
     e.preventDefault();
     setMobileImageUrlList(mobileImageUrlList.filter((_, i) => i !== index));
     setMobileImages(mobileImages.filter((_, i) => i !== index));
@@ -357,9 +362,9 @@ const Create: NextPage = () => {
                   <ImagePreview
                     key={index}
                     imageUrl={mobileImageUrl}
-                    handleDeleteImage={(event) =>
-                      handleDeleteMobileImage(event, index)
-                    }
+                    handleDeleteImage={(
+                      event: React.FormEvent<HTMLFormElement>
+                    ) => handleDeleteMobileImage(event, index)}
                     isLast={mobileImageUrlList.length - 1 === index}
                     isBtnLastOnlyDisplay={false}
                   />
@@ -388,9 +393,9 @@ const Create: NextPage = () => {
                   <ImagePreview
                     key={index}
                     imageUrl={pcImageUrl}
-                    handleDeleteImage={(event) =>
-                      handleDeletePcImage(event, index)
-                    }
+                    handleDeleteImage={(
+                      event: React.FormEvent<HTMLFormElement>
+                    ) => handleDeletePcImage(event, index)}
                     isLast={pcImageUrlList.length - 1 === index}
                     isBtnLastOnlyDisplay={false}
                   />

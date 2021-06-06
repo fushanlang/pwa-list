@@ -73,8 +73,7 @@ const Edit: NextPage<Props> = (appData) => {
   });
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
-  const handleDeleteIcon = async (e) => {
-    e.preventDefault();
+  const handleDeleteIcon = async () => {
     setIcon(null);
     setIconUrl(null);
   };
@@ -98,13 +97,19 @@ const Edit: NextPage<Props> = (appData) => {
       await fileLoad(file, setPcImageUrlList, setPcImages);
     }
   };
-  const handleDeleteMobileImage = async (e, index) => {
+  const handleDeleteMobileImage = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     e.preventDefault();
     setMobileImageUrlList(mobileImageUrlList.filter((_, i) => i !== index));
     setMobileImages(mobileImages.filter((_, i) => i !== index));
   };
 
-  const handleDeletePcImage = async (e, index) => {
+  const handleDeletePcImage = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     e.preventDefault();
     setPcImageUrlList(pcImageUrlList.filter((_, i) => i !== index));
     setPcImages(pcImages.filter((_, i) => i !== index));
@@ -401,9 +406,9 @@ const Edit: NextPage<Props> = (appData) => {
                     <ImagePreview
                       key={index}
                       imageUrl={mobileImageUrl}
-                      handleDeleteImage={(event) =>
-                        handleDeleteMobileImage(event, index)
-                      }
+                      handleDeleteImage={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => handleDeleteMobileImage(event, index)}
                       isLast={mobileImageUrlList.length - 1 === index}
                       isBtnLastOnlyDisplay={true}
                     />
@@ -432,9 +437,9 @@ const Edit: NextPage<Props> = (appData) => {
                     <ImagePreview
                       key={index}
                       imageUrl={pcImageUrl}
-                      handleDeleteImage={(event) =>
-                        handleDeletePcImage(event, index)
-                      }
+                      handleDeleteImage={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => handleDeletePcImage(event, index)}
                       isLast={pcImageUrlList.length - 1 === index}
                       isBtnLastOnlyDisplay={true}
                     />
