@@ -19,9 +19,9 @@ interface Props {
 
 const db = firebase.firestore();
 const App: NextPage<Props> = (appData) => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [initialSlide, setInitialSlide] = useState(0);
-  const [existsBackPage, setExistsBackPage] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [initialSlide, setInitialSlide] = useState<number>(0);
+  const [existsBackPage, setExistsBackPage] = useState<boolean>(true);
   const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] =
     useState<string | null>(null);
   const app = appData.appData;
