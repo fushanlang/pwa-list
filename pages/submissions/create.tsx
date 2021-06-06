@@ -49,10 +49,6 @@ const create = () => {
   });
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
-  var tmpPcImages = [];
-  var tmpPcImageUrlList = [];
-  var tmpMobileImages = [];
-  var tmpMobileImageUrlList = [];
   const onChangeIconHandler = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -69,22 +65,10 @@ const create = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     var files = e.target.files;
-    tmpPcImageUrlList = [...pcImageUrlList];
-    tmpPcImages = [...pcImages];
     for (let i = 0; i < files.length; i++) {
-      if (tmpPcImages[2]) {
-        break;
-      }
+      if (pcImageUrlList[2]) break;
       var file = e.target.files[i];
-      await fileLoad(
-        file,
-        i,
-        files.length,
-        setPcImageUrlList,
-        setPcImages,
-        tmpPcImageUrlList,
-        tmpPcImages
-      );
+      await fileLoad(file, setPcImageUrlList, setPcImages);
     }
   };
 
@@ -92,22 +76,11 @@ const create = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     var files = e.target.files;
-    tmpMobileImageUrlList = [...mobileImageUrlList];
-    tmpMobileImages = [...mobileImages];
     for (let i = 0; i < files.length; i++) {
-      if (tmpMobileImages[2]) {
-        break;
-      }
+      if (mobileImageUrlList[2]) break;
+
       var file = e.target.files[i];
-      await fileLoad(
-        file,
-        i,
-        files.length,
-        setMobileImageUrlList,
-        setMobileImages,
-        tmpMobileImageUrlList,
-        tmpMobileImages
-      );
+      await fileLoad(file, setMobileImageUrlList, setMobileImages);
     }
   };
   const handleDeleteIcon = async (e) => {
@@ -118,22 +91,14 @@ const create = () => {
 
   const handleDeletePcImage = async (e, index) => {
     e.preventDefault();
-    tmpPcImageUrlList = [...pcImageUrlList];
-    tmpPcImages = [...pcImages];
-    tmpPcImages.splice(index, 1);
-    tmpPcImageUrlList.splice(index, 1);
-    setPcImages(tmpPcImages);
-    setPcImageUrlList(tmpPcImageUrlList);
+    setPcImageUrlList(pcImageUrlList.filter((_, i) => i !== index));
+    setPcImages(pcImages.filter((_, i) => i !== index));
   };
 
   const handleDeleteMobileImage = async (e, index) => {
     e.preventDefault();
-    tmpMobileImageUrlList = [...mobileImageUrlList];
-    tmpMobileImages = [...mobileImages];
-    tmpMobileImages.splice(index, 1);
-    tmpMobileImageUrlList.splice(index, 1);
-    setMobileImages(tmpMobileImages);
-    setMobileImageUrlList(tmpMobileImageUrlList);
+    setMobileImageUrlList(mobileImageUrlList.filter((_, i) => i !== index));
+    setMobileImages(mobileImages.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

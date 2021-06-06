@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import categories from "../../../consts/categories";
-import fileLoad from "../../../plugins/fileLoadTmp";
+import fileLoad from "../../../plugins/fileLoad";
 import editValidate from "../../../plugins/submissions/editValidate";
 import updateImage from "../../../plugins/submissions/updateImage";
 import setArray from "../../../plugins/common/setArray";
@@ -71,9 +71,7 @@ const Edit = (appData) => {
   ) => {
     var files = e.target.files;
     for (let i = 0; i < files.length; i++) {
-      if (mobileImageUrlList[2]) {
-        break;
-      }
+      if (mobileImageUrlList[2]) break;
       var file = e.target.files[i];
       await fileLoad(file, setMobileImageUrlList, setMobileImages);
     }
@@ -83,9 +81,7 @@ const Edit = (appData) => {
   ) => {
     var files = e.target.files;
     for (let i = 0; i < files.length; i++) {
-      if (pcImageUrlList[2]) {
-        break;
-      }
+      if (pcImageUrlList[2]) break;
       var file = e.target.files[i];
       await fileLoad(file, setPcImageUrlList, setPcImages);
     }
@@ -116,7 +112,20 @@ const Edit = (appData) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (false) {
+    if (
+      !(await editValidate(
+        setErrors,
+        link,
+        category,
+        tag1,
+        tag2,
+        tag3,
+        description,
+        iconUrl,
+        pcImageUrlList,
+        mobileImageUrlList
+      ))
+    ) {
       setIsSubmitting(false);
       return;
     }

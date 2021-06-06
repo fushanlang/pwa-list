@@ -9,9 +9,9 @@ const editValidate = async (
   tag2,
   tag3,
   description,
-  icon,
-  pcImages,
-  mobileImages
+  iconUrl,
+  pcImageUrlList,
+  mobileImageUrlList
 ) => {
   var nameErrors = [];
   var linkErrors = [];
@@ -29,7 +29,7 @@ const editValidate = async (
   if (validateRequired(tag1)) tag1Errors.push("The Tag field is required");
   if (validateRequired(description))
     descriptionErrors.push("The About this app field is required");
-  if (validateRequired(icon)) iconErrors.push("The Icon field is required");
+  if (validateRequired(iconUrl)) iconErrors.push("The Icon field is required");
   // custom
   if (validateUrl(link)) linkErrors.push("Please enter the correct Link");
   if (validateAlphanum(tag1))
@@ -44,7 +44,7 @@ const editValidate = async (
     tag3Errors.push(
       "Please enter the tag3 in single-byte alphanumeric characters"
     );
-  if (pcImages[0] === undefined && mobileImages[0] === undefined)
+  if (pcImageUrlList[0] === undefined && mobileImageUrlList[0] === undefined)
     screenshotErrors.push(
       "Please enter either mobile size or PC size screenshot"
     );

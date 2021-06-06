@@ -1,22 +1,9 @@
-const fileLoad = (
-  file: File,
-  i: number,
-  fileLengh: number,
-  setImageUrlList: any,
-  setImages: any,
-  tmpImageUrlList: any[],
-  tmpImages: any[]
-) => {
+const fileLoad = (file: File, setImageUrlList: any, setImages: any) => {
   return new Promise((resolve, reject) => {
-    var end = fileLengh - 1;
     var reader = new FileReader();
-    tmpImages.push(file);
     reader.onload = (e) => {
-      tmpImageUrlList.push(e.target.result);
-      if (i == end) {
-        setImageUrlList(tmpImageUrlList);
-        setImages(tmpImages);
-      }
+      setImageUrlList((array) => [...array, e.target.result]);
+      setImages((array) => [...array, file]);
       resolve("success");
     };
     reader.readAsDataURL(file);
