@@ -6,9 +6,9 @@
 
 # [PWAList](https://pwalist.app/)
 
-The best place to find PWAs :bulb:
+The best place to find PWAs :mag:
 
-Check it on [Product Hunt](https://www.producthunt.com/posts/pwa-list-3) :cat:
+Check it on [Product Hunt](https://www.producthunt.com/posts/pwa-list-3) :cat2:
 
 <a href="https://nextjs.org/" target="_blank">
   <img width="110" alt="nextjs-logo" src="https://user-images.githubusercontent.com/42294938/136691563-435dd6e4-81ad-4f10-af5e-463420396d38.png" />
