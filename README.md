@@ -53,7 +53,7 @@ Developers can submit PWAs, and users can search for them by name, category, or 
 - Search Apps
 - Sign Up / Log In with Google, Twitter and FaceBook
 
-## :bowtie: Author
+## :simple_smile: Author
 
 - [Product Hunt](https://www.producthunt.com/@masaki_fukunishi)
 - [Twitter](https://twitter.com/masakiapp)
