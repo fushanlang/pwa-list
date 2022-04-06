@@ -6,7 +6,7 @@ const Layout = ({ children, title }) => {
   return (
     <div className="text-gray-600 text-sm font-sans">
       <Head>
-        <title>{title} | PWA List</title>
+        <title>{`${title} | PWA List`}</title>
       </Head>
       <div className="h-screen flex">
         <SideBar />
