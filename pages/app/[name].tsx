@@ -22,8 +22,9 @@ const App: NextPage<Props> = (appData) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [initialSlide, setInitialSlide] = useState<number>(0);
   const [existsBackPage, setExistsBackPage] = useState<boolean>(true);
-  const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] =
-    useState<string | null>(null);
+  const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] = useState<
+    string | null
+  >(null);
   const app = appData.appData;
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
@@ -46,7 +47,7 @@ const App: NextPage<Props> = (appData) => {
   return (
     <Layout title={app.name}>
       <Head>
-        <meta name="description" content={app.description} />
+        <meta name="description" content="testsetts" />
         <meta key="og:title" property="og:title" content={app.name} />
         <meta key="og:site_name" property="og:site_name" content={app.name} />
         <meta key="og:url" property="og:url" content={url} />
