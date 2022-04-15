@@ -47,7 +47,7 @@ const App: NextPage<Props> = (appData) => {
   return (
     <Layout title={app.name}>
       <Head>
-        <meta name="description" content="testsetts" />
+        <meta name="description" content={app.description} />
         <meta key="og:title" property="og:title" content={app.name} />
         <meta key="og:site_name" property="og:site_name" content={app.name} />
         <meta key="og:url" property="og:url" content={url} />
