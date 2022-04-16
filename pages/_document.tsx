@@ -90,7 +90,7 @@ class MyDocument extends Document {
             name="keywords"
             content="pwa, Progressive Web Apps"
           />
-          {/* <meta key="og:title" property="og:title" content={title} />
+          <meta key="og:title" property="og:title" content={title} />
           <meta key="og:site_name" property="og:site_name" content={title} />
           <meta key="og:url" property="og:url" content={url} />
           <meta key="og:image" property="og:image" content={imageUrl} />
@@ -105,7 +105,7 @@ class MyDocument extends Document {
             property="twitter:card"
             content="summary_large_image"
           />
-          <meta name="twitter:site" content="@masakifukunishi" /> */}
+          <meta name="twitter:site" content="@masakifukunishi" />
           {/* font */}
           <link
             rel="stylesheet"
