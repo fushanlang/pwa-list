@@ -83,7 +83,7 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#000" />
           <link rel="icon" sizes="192x192" href="/favicons/icon-192x192.png" />
           <link rel="icon" href="/favicons/favicon.ico" />
-          <link rel="manifest" href="/favicons/manifest.json" />
+          <link rel="manifest" href="/manifest.json" />
           <meta name="description" content={description} />
           <meta
             key="keywords"
