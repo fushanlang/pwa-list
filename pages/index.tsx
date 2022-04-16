@@ -58,16 +58,16 @@ const Index: NextPage = () => {
             <div className="mt-2">
               <Card apps={newApps} />
             </div>
-            {/* Google Adsense */}
-            <div className="overflow-scroll text-center mt-10">
+            {/* Google Adsense start*/}
+            {/* <div className="overflow-scroll text-center mt-10">
               <AdSense.Google
                 client={GOOGLE_ADSENSE_CLIENT}
                 slot="6767679949"
                 style={{ width: 970, height: 90 }}
                 format=""
               />
-            </div>
-            {/* Google Adsense */}
+            </div> */}
+            {/* Google Adsense end*/}
             <div className="flex flex-col items-center text-center mt-7 md:hidden">
               <Link href="/about" as="/about">
                 <a className="py-2 w-48 mb-4 text-gray-50 bg-gray-600 shadow-md rounded-md hover:bg-gray-700 hover:shadow-none transition ease-in-out">

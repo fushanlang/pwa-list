@@ -43,11 +43,11 @@ class MyDocument extends Document {
             }}
           />
           {/* Google Adsense */}
-          <script
+          {/* <script
             data-ad-client={GOOGLE_ADSENSE_CLIENT}
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          ></script>
+          ></script> */}
           {/* windows */}
           <meta
             name="msapplication-square70x70logo"
