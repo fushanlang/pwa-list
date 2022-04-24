@@ -1,8 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import Link from "next/link";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import React from "react";
+import { NextPage } from "next";
 import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 import Layout from "../components/Layout";
@@ -12,7 +13,10 @@ const db = firebase.firestore();
 const logo = {
   fontFamily: "'Nunito', sans-serif",
 };
-const Index = ({ apps }) => {
+interface Props {
+  apps: object;
+}
+const Index: NextPage<Props> = ({ apps }) => {
   const { currentUser } = useContext(AuthContext);
   const date = new Date();
   return (
@@ -89,16 +93,14 @@ const Index = ({ apps }) => {
     </Layout>
   );
 };
-export default Index;
-
 export async function getStaticProps() {
-  const applicationsData = await db
+  const applications = await db
     .collection("applications")
     .where("isNewApp", "==", true)
     .where("isPublic", "==", true)
     .orderBy("newAppOrder", "desc")
     .get();
-  const apps = applicationsData.docs.map((doc) => ({
+  const apps = applications.docs.map((doc) => ({
     id: doc.id,
     name: doc.data().name,
     nameLowercase: doc.data().nameLowercase,
@@ -115,3 +117,5 @@ export async function getStaticProps() {
     revalidate: 10,
   };
 }
+
+export default Index;

@@ -13,55 +13,60 @@ import ImageModal from "../../components/App/ImageModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
+const db = firebase.firestore();
 interface Props {
-  appData: any;
+  app: any;
+  isFound: boolean;
 }
 
-const db = firebase.firestore();
-const App: NextPage<Props> = (appData) => {
+const App: NextPage<Props> = (props) => {
+  const { app, isFound } = props;
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [initialSlide, setInitialSlide] = useState<number>(0);
   const [existsBackPage, setExistsBackPage] = useState<boolean>(true);
   const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] = useState<
     string | null
   >(null);
-  const app = appData.appData;
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
   // setting the initial slide
   var slideNum = [0, 1, 2, 3, 4, 5];
-  if (app.imageMobile1 === null) slideNum.splice(0, 0, null);
-  if (app.imageMobile2 === null) slideNum.splice(1, 0, null);
-  if (app.imageMobile3 === null) slideNum.splice(2, 0, null);
+  if (isFound) {
+    if (app.imageMobile1 === null) slideNum.splice(0, 0, null);
+    if (app.imageMobile2 === null) slideNum.splice(1, 0, null);
+    if (app.imageMobile3 === null) slideNum.splice(2, 0, null);
+  }
 
   useEffect(() => {
     if (typeof history.state.options.scroll === "undefined") {
       setExistsBackPage(false);
     }
-    if (app.category !== undefined) {
+    if (isFound) {
       setCaategoryFirstUpperCase(
         app.category.toString().charAt(0).toUpperCase() + app.category.slice(1)
       );
     }
   }, []);
   return (
-    <Layout title={app.name}>
-      <Head>
-        <meta name="description" content={app.description} />
-        <meta key="og:title" property="og:title" content={app.name} />
-        <meta key="og:site_name" property="og:site_name" content={app.name} />
-        <meta key="og:url" property="og:url" content={url} />
-        <meta key="og:image" property="og:image" content={app.icon} />
-        <meta property="og:type" content="website" />
-        <meta
-          key="og:description"
-          property="og:description"
-          content={app.description}
-        />
-        <meta key="twitter:card" property="twitter:card" content="summary" />
-      </Head>
+    <Layout title={isFound ? app.name : "Not Found"}>
+      {isFound && (
+        <Head>
+          <meta name="description" content={app.description} />
+          <meta key="og:title" property="og:title" content={app.name} />
+          <meta key="og:site_name" property="og:site_name" content={app.name} />
+          <meta key="og:url" property="og:url" content={url} />
+          <meta key="og:image" property="og:image" content={app.icon} />
+          <meta property="og:type" content="website" />
+          <meta
+            key="og:description"
+            property="og:description"
+            content={app.description}
+          />
+          <meta key="twitter:card" property="twitter:card" content="summary" />
+        </Head>
+      )}
       <div>
-        {app.name === undefined ? (
+        {!isFound ? (
           <NotFound />
         ) : (
           <div className="bg-white px-4 py-7 rounded-lg">
@@ -216,38 +221,43 @@ const App: NextPage<Props> = (appData) => {
     </Layout>
   );
 };
-
-App.getInitialProps = async ({ query }) => {
-  const { name } = query;
-  const appDataDb = await db
+export const getStaticPaths = async () => {
+  const apps = await db
     .collection("applications")
-    .where("nameLowercase", "==", name)
     .where("isPublic", "==", true)
     .get();
-  if (appDataDb.empty) {
+  const paths = apps.docs.map((app: any) => ({
+    params: {
+      name: app.data().nameLowercase,
+    },
+  }));
+  return {
+    paths,
+    fallback: true,
+  };
+};
+export const getStaticProps = async (context) => {
+  const { name } = context.params;
+  const res = await db
+    .collection("applications")
+    .where("nameLowercase", "==", name)
+    .get();
+  const app = res.docs.map((res) => res.data());
+  if (app.length == 0) {
     return {
-      appData: [],
+      props: {
+        app: {},
+        isFound: false,
+      },
     };
   }
-  const app = appDataDb.docs[0].data();
-  const returnAppData = {
-    name: app.name,
-    icon: app.icon,
-    tag1: app.tag1,
-    tag2: app.tag2,
-    tag3: app.tag3,
-    category: app.category,
-    link: app.link,
-    description: app.description,
-    imagePc1: app.imagePc1,
-    imagePc2: app.imagePc2,
-    imagePc3: app.imagePc3,
-    imageMobile1: app.imageMobile1,
-    imageMobile2: app.imageMobile2,
-    imageMobile3: app.imageMobile3,
-  };
+  delete app[0]["createdAt"];
+  delete app[0]["updatedAt"];
   return {
-    appData: returnAppData,
+    props: {
+      app: app[0],
+      isFound: true,
+    },
   };
 };
 export default App;
