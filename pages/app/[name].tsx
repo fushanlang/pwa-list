@@ -24,9 +24,6 @@ const App: NextPage<Props> = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [initialSlide, setInitialSlide] = useState<number>(0);
   const [existsBackPage, setExistsBackPage] = useState<boolean>(true);
-  const [caategoryFirstUpperCase, setCaategoryFirstUpperCase] = useState<
-    string | null
-  >(null);
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
   // setting the initial slide
@@ -40,11 +37,6 @@ const App: NextPage<Props> = (props) => {
   useEffect(() => {
     if (typeof history.state.options.scroll === "undefined") {
       setExistsBackPage(false);
-    }
-    if (isFound) {
-      setCaategoryFirstUpperCase(
-        app.category.toString().charAt(0).toUpperCase() + app.category.slice(1)
-      );
     }
   }, []);
   return (
@@ -95,7 +87,7 @@ const App: NextPage<Props> = (props) => {
               </div>
               <div className="flex flex-col">
                 <h1 className="font-bold text-2xl ml-1">{app.name}</h1>
-                <h2 className="text-base ml-1">{caategoryFirstUpperCase}</h2>
+                <h2 className="text-base ml-1">{app.category}</h2>
                 <div className="mt-1">
                   {app.tag1 && (
                     <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">
@@ -118,7 +110,6 @@ const App: NextPage<Props> = (props) => {
             <div>
               <a
                 target="_blank"
-                // rel="noopener noreferrer"
                 href={app.link}
                 className="text-center w-60 mt-7 ml-1 py-1 inline-block tracking-wide text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out"
               >
@@ -251,6 +242,10 @@ export const getStaticProps = async (context) => {
       },
     };
   }
+  app[0]["category"] =
+    app[0]["category"].toString().charAt(0).toUpperCase() +
+    app[0]["category"].slice(1);
+
   delete app[0]["createdAt"];
   delete app[0]["updatedAt"];
   return {

@@ -12,7 +12,6 @@ interface Props {
 }
 const Category: NextPage<Props> = (props) => {
   const { apps, category } = props;
-  const router = useRouter();
   return (
     <Layout title={category}>
       <div className="px-2">
