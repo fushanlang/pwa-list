@@ -1,4 +1,4 @@
-import uploadToStorage from "../common/uploadToStorage";
+import uploadToStorage from "../image/uploadToStorage";
 const updateImage = async (
   imagesFolder: any,
   imageUrl: string,
