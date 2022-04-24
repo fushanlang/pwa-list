@@ -4,7 +4,6 @@ import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
 import Card from "../../components/App/Card";
-import Loading from "../../components/Common/Loading";
 
 const db = firebase.firestore();
 interface Props {
@@ -17,16 +16,12 @@ const Category: NextPage<Props> = (props) => {
   return (
     <Layout title={category}>
       <div className="px-2">
-        {router.isFallback ? (
-          <Loading />
-        ) : (
-          <div>
-            <div className="text-2xl font-bold mt-3">{category}</div>
-            <div className="mt-2">
-              <Card apps={apps} />
-            </div>
+        <div>
+          <div className="text-2xl font-bold mt-3">{category}</div>
+          <div className="mt-2">
+            <Card apps={apps} />
           </div>
-        )}
+        </div>
       </div>
     </Layout>
   );
@@ -43,7 +38,7 @@ export const getStaticPaths = async () => {
   }));
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
