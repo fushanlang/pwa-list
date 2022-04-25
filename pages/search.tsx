@@ -17,7 +17,7 @@ const Search: NextPage = () => {
     fetchApps();
   }, [inputParam]);
   const fetchApps = async () => {
-    let searchParam = inputParam ? inputParam.toLowerCase().replace(/\s+/g, "") : -1;
+    let searchParam = inputParam.trim() ? inputParam.toLowerCase().replace(/\s+/g, "").trim() : -1;
     const appsName = await db
       .collection("applications")
       .orderBy("nameLowercase")

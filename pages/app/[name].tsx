@@ -203,7 +203,6 @@ export const getStaticProps = async (context) => {
     };
   }
   app[0]["category"] = changeFirstUpperCase(app[0]["category"]);
-
   delete app[0]["createdAt"];
   delete app[0]["updatedAt"];
   return {
