@@ -6,14 +6,10 @@ interface Props {
   categoryName: string;
   iconName: any;
 }
-const CategoryLinkForSideBar: React.FC<Props> = ({
-  categoryName,
-  iconName,
-}) => {
+const CategoryLinkForSideBar: React.FC<Props> = ({ categoryName, iconName }) => {
   const router = useRouter();
   const { category } = router.query;
-  const categoryNameFirstUpperCase =
-    categoryName.toString().charAt(0).toUpperCase() + categoryName.slice(1);
+  const categoryNameFirstUpperCase = categoryName.toString().charAt(0).toUpperCase() + categoryName.slice(1);
   return (
     <Link href="/categories/[category]" as={`/categories/${categoryName}`}>
       {categoryName === category ? (

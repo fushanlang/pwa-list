@@ -67,22 +67,14 @@ const Index: NextPage<Props> = ({ apps }) => {
                 </Link>
               </div>
               <div>
-                <a
-                  className="text-base text-green-500"
-                  target="_blank"
-                  href="mailto:hello.pwalist@gmail.com"
-                >
+                <a className="text-base text-green-500" target="_blank" href="mailto:hello.pwalist@gmail.com">
                   Contact
                 </a>
               </div>
             </div>
             <p className="mt-2">
               Made By&nbsp;
-              <a
-                className="text-green-500 text-base"
-                target="_blank"
-                href="https://masakifukunishi.site"
-              >
+              <a className="text-green-500 text-base" target="_blank" href="https://masakifukunishi.site">
                 Masaki
               </a>
             </p>

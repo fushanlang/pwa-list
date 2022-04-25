@@ -25,10 +25,7 @@ const Category: NextPage<Props> = (props) => {
   );
 };
 export const getStaticPaths = async () => {
-  const apps = await db
-    .collection("applications")
-    .where("isPublic", "==", true)
-    .get();
+  const apps = await db.collection("applications").where("isPublic", "==", true).get();
   const paths = apps.docs.map((app: any) => ({
     params: {
       category: app.data().category,
@@ -42,8 +39,7 @@ export const getStaticPaths = async () => {
 
 export async function getStaticProps(context) {
   const { category } = context.params;
-  const categoryFirstUpperCase =
-    category.toString().charAt(0).toUpperCase() + category.slice(1);
+  const categoryFirstUpperCase = category.toString().charAt(0).toUpperCase() + category.slice(1);
   const applications = await db
     .collection("applications")
     .where("isPublic", "==", true)

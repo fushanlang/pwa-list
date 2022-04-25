@@ -50,9 +50,7 @@ const Create: NextPage = () => {
   });
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
-  const onChangeIconHandler = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangeIconHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     var file = e.target.files[0];
     var reader = new FileReader();
     reader.onload = (e) => {
@@ -62,9 +60,7 @@ const Create: NextPage = () => {
     reader.readAsDataURL(file);
   };
 
-  const onChangePcImageHandler = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangePcImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     var files = e.target.files;
     for (let i = 0; i < files.length; i++) {
       if (pcImageUrlList[2]) break;
@@ -73,9 +69,7 @@ const Create: NextPage = () => {
     }
   };
 
-  const onChangeMobileImageHandler = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangeMobileImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     var files = e.target.files;
     for (let i = 0; i < files.length; i++) {
       if (mobileImageUrlList[2]) break;
@@ -89,19 +83,13 @@ const Create: NextPage = () => {
     setIconUrl(null);
   };
 
-  const handleDeletePcImage = async (
-    e: React.FormEvent<HTMLFormElement>,
-    index: number
-  ) => {
+  const handleDeletePcImage = async (e: React.FormEvent<HTMLFormElement>, index: number) => {
     e.preventDefault();
     setPcImageUrlList(pcImageUrlList.filter((_, i) => i !== index));
     setPcImages(pcImages.filter((_, i) => i !== index));
   };
 
-  const handleDeleteMobileImage = async (
-    e: React.FormEvent<HTMLFormElement>,
-    index: number
-  ) => {
+  const handleDeleteMobileImage = async (e: React.FormEvent<HTMLFormElement>, index: number) => {
     e.preventDefault();
     setMobileImageUrlList(mobileImageUrlList.filter((_, i) => i !== index));
     setMobileImages(mobileImages.filter((_, i) => i !== index));
@@ -133,9 +121,7 @@ const Create: NextPage = () => {
     var tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
     var tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
     var tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
-    var uploadedIconUrl = icon
-      ? await uploadToStorage(iconsFolder, nameLowercase, icon, "icon")
-      : null;
+    var uploadedIconUrl = icon ? await uploadToStorage(iconsFolder, nameLowercase, icon, "icon") : null;
     var uploadedImagePc1Url = pcImages[0]
       ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1")
       : null;
@@ -146,28 +132,13 @@ const Create: NextPage = () => {
       ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3")
       : null;
     var uploadedImageMobile1Url = mobileImages[0]
-      ? await uploadToStorage(
-          imagesFolder,
-          nameLowercase,
-          mobileImages[0],
-          "mobile1"
-        )
+      ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[0], "mobile1")
       : null;
     var uploadedImageMobile2Url = mobileImages[1]
-      ? await uploadToStorage(
-          imagesFolder,
-          nameLowercase,
-          mobileImages[1],
-          "mobile2"
-        )
+      ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2")
       : null;
     var uploadedImageMobile3Url = mobileImages[2]
-      ? await uploadToStorage(
-          imagesFolder,
-          nameLowercase,
-          mobileImages[2],
-          "mobile3"
-        )
+      ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[2], "mobile3")
       : null;
     db.collection("applications").add({
       userId: currentUser.uid,
@@ -261,9 +232,7 @@ const Create: NextPage = () => {
                 <label className="block font-bold mb-1">
                   Tags
                   <span className="text-red-400 ml-2">*</span>
-                  <span className="text-xs text-red-400 ml-2">
-                    1 or more required
-                  </span>
+                  <span className="text-xs text-red-400 ml-2">1 or more required</span>
                 </label>
                 <input
                   className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
@@ -350,21 +319,17 @@ const Create: NextPage = () => {
               <p className="text-base font-bold mb-2">
                 screenshots
                 <span className="text-red-400 ml-2">*</span>
-                <span className="text-xs text-red-400 ml-2">
-                  Either mobile or PC screenshot is required.
-                </span>
+                <span className="text-xs text-red-400 ml-2">Either mobile or PC screenshot is required.</span>
               </p>
-              <label className="block font-bold mb-2">
-                Mobile size screenshots (Up to 3 Images)
-              </label>
+              <label className="block font-bold mb-2">Mobile size screenshots (Up to 3 Images)</label>
               <div className="flex overflow-scroll">
                 {mobileImageUrlList.map((mobileImageUrl, index) => (
                   <ImagePreview
                     key={index}
                     imageUrl={mobileImageUrl}
-                    handleDeleteImage={(
-                      event: React.FormEvent<HTMLFormElement>
-                    ) => handleDeleteMobileImage(event, index)}
+                    handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) =>
+                      handleDeleteMobileImage(event, index)
+                    }
                     isLast={mobileImageUrlList.length - 1 === index}
                     isBtnLastOnlyDisplay={false}
                   />
@@ -385,17 +350,15 @@ const Create: NextPage = () => {
                   />
                 </label>
               </div>
-              <label className="block font-bold mb-2">
-                PC size screenshots (Up to 3 Images)
-              </label>
+              <label className="block font-bold mb-2">PC size screenshots (Up to 3 Images)</label>
               <div className="flex overflow-scroll">
                 {pcImageUrlList.map((pcImageUrl, index) => (
                   <ImagePreview
                     key={index}
                     imageUrl={pcImageUrl}
-                    handleDeleteImage={(
-                      event: React.FormEvent<HTMLFormElement>
-                    ) => handleDeletePcImage(event, index)}
+                    handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) =>
+                      handleDeletePcImage(event, index)
+                    }
                     isLast={pcImageUrlList.length - 1 === index}
                     isBtnLastOnlyDisplay={false}
                   />

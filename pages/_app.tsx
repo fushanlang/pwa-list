@@ -26,22 +26,11 @@ const WrappedApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <meta key="og:url" property="og:url" content={url} />
         <meta key="og:image" property="og:image" content={imageUrl} />
         <meta property="og:type" content="website" />
-        <meta
-          key="og:description"
-          property="og:description"
-          content={description}
-        />
-        <meta
-          key="twitter:card"
-          property="twitter:card"
-          content="summary_large_image"
-        />
+        <meta key="og:description" property="og:description" content={description} />
+        <meta key="twitter:card" property="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@masakifukunishi" />
         {/* font */}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap"
-        />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" />
       </Head>
       <AuthProvider>
         <Component {...pageProps} />

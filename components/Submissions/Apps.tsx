@@ -21,18 +21,13 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
           <tr key={index} className="border h-24 flex items-center">
             <td className="w-64 flex items-center">
               <span className="ml-3 mr-4 w-16">
-                <img
-                  className="rounded-md"
-                  src={app.icon || "/default-app-icon.png"}
-                />
+                <img className="rounded-md" src={app.icon || "/default-app-icon.png"} />
               </span>
               {app.name}
             </td>
             <td className="w-32 text-center">
               {app.isPublic && <span className="text-blue-400">Public</span>}
-              {!app.isPublic && (
-                <span className="text-yellow-400">awaiting approval</span>
-              )}
+              {!app.isPublic && <span className="text-yellow-400">awaiting approval</span>}
             </td>
             <td className="w-64 flex justify-center">
               {app.isPublic && (
@@ -44,10 +39,7 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
                   View
                 </a>
               )}
-              <Link
-                href="/submissions/edit/[name]"
-                as={`/submissions/edit/${app.nameLowercase}`}
-              >
+              <Link href="/submissions/edit/[name]" as={`/submissions/edit/${app.nameLowercase}`}>
                 <button className="h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100">
                   Edit
                 </button>

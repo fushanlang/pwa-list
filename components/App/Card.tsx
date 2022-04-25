@@ -13,33 +13,23 @@ const Card: React.FC<Props> = ({ apps }) => {
             className="flex items-center bg-white shadow-md mb-1 px-4 rounded-md transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-none"
           >
             <div className="mr-4 w-20">
-              <img
-                className="rounded-md"
-                src={app.icon || "/default-app-icon.png"}
-              />
+              <img className="rounded-md" src={app.icon || "/default-app-icon.png"} />
             </div>
             <div className="flex flex-col">
               <div className="text-base font-bold">{app.name}</div>
               <div>
                 {/* Changed to upper case */}
-                {app.category.toString().charAt(0).toUpperCase() +
-                  app.category.slice(1)}
+                {app.category.toString().charAt(0).toUpperCase() + app.category.slice(1)}
               </div>
               <div className="mt-1">
                 {app.tag1 && (
-                  <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-600 text-white">
-                    {app.tag1}
-                  </span>
+                  <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-600 text-white">{app.tag1}</span>
                 )}
                 {app.tag2 && (
-                  <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-600 text-white">
-                    {app.tag2}
-                  </span>
+                  <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-600 text-white">{app.tag2}</span>
                 )}
                 {app.tag3 && (
-                  <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-600 text-white">
-                    {app.tag3}
-                  </span>
+                  <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-600 text-white">{app.tag3}</span>
                 )}
               </div>
             </div>

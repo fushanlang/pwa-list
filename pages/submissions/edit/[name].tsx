@@ -77,9 +77,7 @@ const Edit: NextPage<Props> = (appData) => {
     setIcon(null);
     setIconUrl(null);
   };
-  const onChangeMobileImageHandler = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangeMobileImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     var files = e.target.files;
     for (let i = 0; i < files.length; i++) {
       if (mobileImageUrlList[2]) break;
@@ -87,9 +85,7 @@ const Edit: NextPage<Props> = (appData) => {
       await fileLoad(file, setMobileImageUrlList, setMobileImages);
     }
   };
-  const onChangePcImageHandler = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangePcImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     var files = e.target.files;
     for (let i = 0; i < files.length; i++) {
       if (pcImageUrlList[2]) break;
@@ -97,27 +93,19 @@ const Edit: NextPage<Props> = (appData) => {
       await fileLoad(file, setPcImageUrlList, setPcImages);
     }
   };
-  const handleDeleteMobileImage = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleDeleteMobileImage = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     e.preventDefault();
     setMobileImageUrlList(mobileImageUrlList.filter((_, i) => i !== index));
     setMobileImages(mobileImages.filter((_, i) => i !== index));
   };
 
-  const handleDeletePcImage = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleDeletePcImage = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     e.preventDefault();
     setPcImageUrlList(pcImageUrlList.filter((_, i) => i !== index));
     setPcImages(pcImages.filter((_, i) => i !== index));
   };
 
-  const onChangeIconHandler = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangeIconHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     var file = e.target.files[0];
     var reader = new FileReader();
     reader.onload = (e) => {
@@ -155,27 +143,16 @@ const Edit: NextPage<Props> = (appData) => {
     var tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
     var uploadedIconUrl = iconUrl;
 
-    var uploadedImageMobile1Url =
-      mobileImageUrlList[0] !== undefined ? mobileImageUrlList[0] : null;
-    var uploadedImageMobile2Url =
-      mobileImageUrlList[1] !== undefined ? mobileImageUrlList[1] : null;
-    var uploadedImageMobile3Url =
-      mobileImageUrlList[2] !== undefined ? mobileImageUrlList[2] : null;
+    var uploadedImageMobile1Url = mobileImageUrlList[0] !== undefined ? mobileImageUrlList[0] : null;
+    var uploadedImageMobile2Url = mobileImageUrlList[1] !== undefined ? mobileImageUrlList[1] : null;
+    var uploadedImageMobile3Url = mobileImageUrlList[2] !== undefined ? mobileImageUrlList[2] : null;
 
-    var uploadedImagePc1Url =
-      pcImageUrlList[0] !== undefined ? pcImageUrlList[0] : null;
-    var uploadedImagePc2Url =
-      pcImageUrlList[1] !== undefined ? pcImageUrlList[1] : null;
-    var uploadedImagePc3Url =
-      pcImageUrlList[2] !== undefined ? pcImageUrlList[2] : null;
+    var uploadedImagePc1Url = pcImageUrlList[0] !== undefined ? pcImageUrlList[0] : null;
+    var uploadedImagePc2Url = pcImageUrlList[1] !== undefined ? pcImageUrlList[1] : null;
+    var uploadedImagePc3Url = pcImageUrlList[2] !== undefined ? pcImageUrlList[2] : null;
 
     if (icon !== null) {
-      uploadedIconUrl = await uploadToStorage(
-        iconsFolder,
-        nameLowercase,
-        icon,
-        "icon"
-      );
+      uploadedIconUrl = await uploadToStorage(iconsFolder, nameLowercase, icon, "icon");
     }
     mobileImageNum = await updateImage(
       imagesFolder,
@@ -252,9 +229,7 @@ const Edit: NextPage<Props> = (appData) => {
   return (
     <Layout title={`${app.name} - Edit`}>
       <>
-        {currentUser &&
-        currentUser.uid === app.userId &&
-        app.name !== undefined ? (
+        {currentUser && currentUser.uid === app.userId && app.name !== undefined ? (
           <>
             <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
               <div className="ml-1 mt-1 mb-9">
@@ -305,9 +280,7 @@ const Edit: NextPage<Props> = (appData) => {
                   <label className="block font-bold mb-1">
                     Tags
                     <span className="text-red-400 ml-2">*</span>
-                    <span className="text-xs text-red-400 ml-2">
-                      1 or more required
-                    </span>
+                    <span className="text-xs text-red-400 ml-2">1 or more required</span>
                   </label>
                   <input
                     className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
@@ -399,17 +372,15 @@ const Edit: NextPage<Props> = (appData) => {
                     Either mobile or PC screenshot is required.
                   </span>
                 </p>
-                <label className="block font-bold mb-2">
-                  Mobile size screenshots (Up to 3 Images)
-                </label>
+                <label className="block font-bold mb-2">Mobile size screenshots (Up to 3 Images)</label>
                 <div className="flex overflow-scroll">
                   {mobileImageUrlList.map((mobileImageUrl, index) => (
                     <ImagePreview
                       key={index}
                       imageUrl={mobileImageUrl}
-                      handleDeleteImage={(
-                        event: React.ChangeEvent<HTMLInputElement>
-                      ) => handleDeleteMobileImage(event, index)}
+                      handleDeleteImage={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        handleDeleteMobileImage(event, index)
+                      }
                       isLast={mobileImageUrlList.length - 1 === index}
                       isBtnLastOnlyDisplay={true}
                     />
@@ -430,17 +401,15 @@ const Edit: NextPage<Props> = (appData) => {
                     />
                   </label>
                 </div>
-                <label className="block font-bold mb-2">
-                  PC size screenshots (Up to 3 Images)
-                </label>
+                <label className="block font-bold mb-2">PC size screenshots (Up to 3 Images)</label>
                 <div className="flex overflow-scroll">
                   {pcImageUrlList.map((pcImageUrl, index) => (
                     <ImagePreview
                       key={index}
                       imageUrl={pcImageUrl}
-                      handleDeleteImage={(
-                        event: React.ChangeEvent<HTMLInputElement>
-                      ) => handleDeletePcImage(event, index)}
+                      handleDeleteImage={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        handleDeletePcImage(event, index)
+                      }
                       isLast={pcImageUrlList.length - 1 === index}
                       isBtnLastOnlyDisplay={true}
                     />
@@ -472,10 +441,7 @@ const Edit: NextPage<Props> = (appData) => {
                 </button>
               </div>
             </form>
-            <CompletedModal
-              modalsOpen={modalsOpen}
-              isSubmitting={isSubmitting}
-            />
+            <CompletedModal modalsOpen={modalsOpen} isSubmitting={isSubmitting} />
           </>
         ) : (
           <>
@@ -489,10 +455,7 @@ const Edit: NextPage<Props> = (appData) => {
 
 Edit.getInitialProps = async ({ query }) => {
   const { name } = query;
-  const getAppData = await db
-    .collection("applications")
-    .where("nameLowercase", "==", name)
-    .get();
+  const getAppData = await db.collection("applications").where("nameLowercase", "==", name).get();
   if (getAppData.empty) {
     return {
       appData: [],

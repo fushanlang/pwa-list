@@ -49,10 +49,7 @@ const SideBar: React.FC = () => {
   const path = router.pathname;
   const date = new Date();
   return (
-    <div
-      id="sideBar"
-      className="bg-white border-r border-gray-300 w-60 hidden md:block overflow-scroll"
-    >
+    <div id="sideBar" className="bg-white border-r border-gray-300 w-60 hidden md:block overflow-scroll">
       <div id="sideBar" className="px-6 pt-3">
         <div className="flex flex-col mt-3 ">
           <Link href="/" as="/">
@@ -82,28 +79,16 @@ const SideBar: React.FC = () => {
             )}
           </Link>
           <p className="uppercase text-gray-600 mb-3 mt-1">categories</p>
-          <CategoryLinkForSideBar
-            categoryName="business"
-            iconName="chart-bar"
-          />
+          <CategoryLinkForSideBar categoryName="business" iconName="chart-bar" />
           <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-          <CategoryLinkForSideBar
-            categoryName="education"
-            iconName="book-open"
-          />
-          <CategoryLinkForSideBar
-            categoryName="entertainment"
-            iconName="star"
-          />
+          <CategoryLinkForSideBar categoryName="education" iconName="book-open" />
+          <CategoryLinkForSideBar categoryName="entertainment" iconName="star" />
           <CategoryLinkForSideBar categoryName="food" iconName="utensils" />
           <CategoryLinkForSideBar categoryName="games" iconName="gamepad" />
           <CategoryLinkForSideBar categoryName="health" iconName="heartbeat" />
           <CategoryLinkForSideBar categoryName="music" iconName="music" />
           <CategoryLinkForSideBar categoryName="news" iconName="newspaper" />
-          <CategoryLinkForSideBar
-            categoryName="shopping"
-            iconName="shopping-bag"
-          />
+          <CategoryLinkForSideBar categoryName="shopping" iconName="shopping-bag" />
           <CategoryLinkForSideBar categoryName="social" iconName="share-alt" />
           <CategoryLinkForSideBar categoryName="sports" iconName="running" />
           <CategoryLinkForSideBar categoryName="tech" iconName="code" />
@@ -138,22 +123,14 @@ const SideBar: React.FC = () => {
               </Link>
             </div>
             <div>
-              <a
-                className="text-green-500"
-                target="_blank"
-                href="mailto:hello.pwalist@gmail.com"
-              >
+              <a className="text-green-500" target="_blank" href="mailto:hello.pwalist@gmail.com">
                 Contact
               </a>
             </div>
           </div>
           <p className="mt-2">
             Made By&nbsp;
-            <a
-              className="text-green-500 text-base"
-              target="_blank"
-              href="https://masakifukunishi.site"
-            >
+            <a className="text-green-500 text-base" target="_blank" href="https://masakifukunishi.site">
               Masaki
             </a>
           </p>

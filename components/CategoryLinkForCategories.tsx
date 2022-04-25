@@ -5,12 +5,8 @@ interface Props {
   categoryName: string;
   iconName: any;
 }
-const CategoryLinkForCategories: React.FC<Props> = ({
-  categoryName,
-  iconName,
-}) => {
-  const categoryNameFirstUpperCase =
-    categoryName.toString().charAt(0).toUpperCase() + categoryName.slice(1);
+const CategoryLinkForCategories: React.FC<Props> = ({ categoryName, iconName }) => {
+  const categoryNameFirstUpperCase = categoryName.toString().charAt(0).toUpperCase() + categoryName.slice(1);
   return (
     <Link href="categories/[category]" as={`/categories/${categoryName}`}>
       <a className="mb-9 text-base transition duration-500 ease-in-out hover:text-green-600">

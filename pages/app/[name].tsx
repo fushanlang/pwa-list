@@ -33,7 +33,6 @@ const App: NextPage<Props> = (props) => {
     if (app.imageMobile2 === null) slideNum.splice(1, 0, null);
     if (app.imageMobile3 === null) slideNum.splice(2, 0, null);
   }
-
   useEffect(() => {
     if (typeof history.state.options.scroll === "undefined") {
       setExistsBackPage(false);
@@ -49,11 +48,7 @@ const App: NextPage<Props> = (props) => {
           <meta key="og:url" property="og:url" content={url} />
           <meta key="og:image" property="og:image" content={app.icon} />
           <meta property="og:type" content="website" />
-          <meta
-            key="og:description"
-            property="og:description"
-            content={app.description}
-          />
+          <meta key="og:description" property="og:description" content={app.description} />
           <meta key="twitter:card" property="twitter:card" content="summary" />
         </Head>
       )}
@@ -80,29 +75,20 @@ const App: NextPage<Props> = (props) => {
             )}
             <div className="flex items-center ml-1">
               <div className="mr-4 w-20">
-                <img
-                  className="rounded-md"
-                  src={app.icon || "/default-app-icon.png"}
-                />
+                <img className="rounded-md" src={app.icon || "/default-app-icon.png"} />
               </div>
               <div className="flex flex-col">
                 <h1 className="font-bold text-2xl ml-1">{app.name}</h1>
                 <h2 className="text-base ml-1">{app.category}</h2>
                 <div className="mt-1">
                   {app.tag1 && (
-                    <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">
-                      {app.tag1}
-                    </span>
+                    <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">{app.tag1}</span>
                   )}
                   {app.tag2 && (
-                    <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">
-                      {app.tag2}
-                    </span>
+                    <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">{app.tag2}</span>
                   )}
                   {app.tag3 && (
-                    <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">
-                      {app.tag3}
-                    </span>
+                    <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">{app.tag3}</span>
                   )}
                 </div>
               </div>
@@ -180,13 +166,8 @@ const App: NextPage<Props> = (props) => {
               )}
             </div>
             <div className="mt-7 px-4">
-              <h3 className="text-left font-bold text-xl mb-2">
-                About this app
-              </h3>
-              <p
-                style={{ whiteSpace: "pre-line" }}
-                className="text-left text-lg"
-              >
+              <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
+              <p style={{ whiteSpace: "pre-line" }} className="text-left text-lg">
                 {app.description}
               </p>
             </div>
@@ -213,10 +194,7 @@ const App: NextPage<Props> = (props) => {
   );
 };
 export const getStaticPaths = async () => {
-  const apps = await db
-    .collection("applications")
-    .where("isPublic", "==", true)
-    .get();
+  const apps = await db.collection("applications").where("isPublic", "==", true).get();
   const paths = apps.docs.map((app: any) => ({
     params: {
       name: app.data().nameLowercase,
@@ -229,10 +207,7 @@ export const getStaticPaths = async () => {
 };
 export const getStaticProps = async (context) => {
   const { name } = context.params;
-  const res = await db
-    .collection("applications")
-    .where("nameLowercase", "==", name)
-    .get();
+  const res = await db.collection("applications").where("nameLowercase", "==", name).get();
   const app = res.docs.map((res) => res.data());
   if (app.length == 0) {
     return {
@@ -242,9 +217,7 @@ export const getStaticProps = async (context) => {
       },
     };
   }
-  app[0]["category"] =
-    app[0]["category"].toString().charAt(0).toUpperCase() +
-    app[0]["category"].slice(1);
+  app[0]["category"] = app[0]["category"].toString().charAt(0).toUpperCase() + app[0]["category"].slice(1);
 
   delete app[0]["createdAt"];
   delete app[0]["updatedAt"];

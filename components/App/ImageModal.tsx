@@ -32,19 +32,10 @@ const modalStyle = {
     padding: "1.5rem",
   },
 };
-const ImageModal: React.FC<Props> = ({
-  app,
-  modalIsOpen,
-  setModalIsOpen,
-  initialSlide,
-}) => {
+const ImageModal: React.FC<Props> = ({ app, modalIsOpen, setModalIsOpen, initialSlide }) => {
   return (
     <div>
-      <Modal
-        isOpen={modalIsOpen}
-        style={modalStyle}
-        onRequestClose={() => setModalIsOpen(false)}
-      >
+      <Modal isOpen={modalIsOpen} style={modalStyle} onRequestClose={() => setModalIsOpen(false)}>
         <div className="text-center">
           <button onClick={() => setModalIsOpen(false)}>
             <FontAwesomeIcon
