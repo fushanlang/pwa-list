@@ -11,13 +11,19 @@ const db = firebase.firestore();
 
 const Search: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [inputParam, setInputParam] = useState<String>("");
+  const [inputParam, setInputParam] = useState<string>("");
   const [searchedApps, setSearchedApps] = useState<Object | null>([]);
+  useEffect(() => {
+    localStorage.inputSearchParam && setInputParam(localStorage.inputSearchParam);
+  }, []);
+
   useEffect(() => {
     fetchApps();
   }, [inputParam]);
+
   const fetchApps = async () => {
     let searchParam = inputParam.trim() ? inputParam.toLowerCase().replace(/\s+/g, "").trim() : -1;
+    localStorage.inputSearchParam = inputParam;
     const appsName = await db
       .collection("applications")
       .orderBy("nameLowercase")
@@ -76,6 +82,7 @@ const Search: NextPage = () => {
             className="focus:outline-none ml-2 w-full pl-2 text-base rounded-md"
             type="text"
             placeholder="Search"
+            defaultValue={inputParam}
             onChange={(e) => {
               setInputParam(e.target.value);
             }}
