@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { changeFirstUpperCase } from "../plugins/common/functions";
+import { changeFirstUpperCase } from "../../plugins/common/functions";
 
 interface Props {
   categoryName: string;

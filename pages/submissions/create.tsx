@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import Router from "next/router";
 import { AuthContext } from "../../contexts/Auth";
 import categories from "../../consts/categories";
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import CompletedModal from "../../components/Submissions/CompletedModal";
 import ErrorMessage from "../../components/Common/ErrorMessage";
 import ImagePreview from "../../components/Common/ImagePreview";

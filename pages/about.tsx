@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 const About: NextPage = () => {
   const logo = {
     fontFamily: "'Nunito', sans-serif",

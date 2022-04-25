@@ -10,7 +10,7 @@ import { setArray, setIfNotNull } from "../../../plugins/common/functions";
 import firebase from "../../../plugins/firebase";
 import uploadToStorage from "../../../plugins/image/uploadToStorage";
 import "firebase/firestore";
-import Layout from "../../../components/Layout";
+import Layout from "../../../components/Layout/Layout";
 import Forbidden from "../../../components/Common/Forbidden";
 import ErrorMessage from "../../../components/Common/ErrorMessage";
 import ImagePreview from "../../../components/Common/ImagePreview";

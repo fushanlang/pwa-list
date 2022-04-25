@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import "firebase/firestore";
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import Card from "../../components/App/Card";
 import firebase from "../../plugins/firebase";
 import { changeFirstUpperCase } from "../../plugins/common/functions";

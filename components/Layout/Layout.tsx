@@ -1,6 +1,6 @@
 import Head from "next/head";
-import SideBar from "../components/SideBar";
-import BottomBar from "../components/BottomBar";
+import SideBar from "./SideBar";
+import BottomBar from "./BottomBar";
 
 const Layout = ({ children, title }) => {
   return (

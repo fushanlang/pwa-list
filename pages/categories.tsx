@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import SideBar from "../components/SideBar";
-import BottomBar from "../components/BottomBar";
-import CategoryLinkForCategories from "../components/CategoryLinkForCategories";
+import SideBar from "../components/Layout/SideBar";
+import BottomBar from "../components/Layout/BottomBar";
+import CategoryLinkForCategories from "../components/Layout/CategoryLinkForCategories";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faStar,

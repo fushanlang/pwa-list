@@ -4,7 +4,7 @@ import Link from "next/link";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import { AuthContext } from "../../contexts/Auth";
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import Apps from "../../components/Submissions/Apps";
 import Loading from "../../components/Common/Loading";
 import Router from "next/router";

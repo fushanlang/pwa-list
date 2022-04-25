@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useState, useEffect } from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import Card from "../components/App/Card";

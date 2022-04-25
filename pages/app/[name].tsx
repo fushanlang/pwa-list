@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import "firebase/firestore";
 import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../../plugins/googleAdsense";
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import NotFound from "../../components/Common/NotFound";
 import ImageModal from "../../components/App/ImageModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

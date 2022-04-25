@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import firebase from "../../plugins/firebase";
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layout/Layout";
 import Router from "next/router";
 const SignUpLoading: NextPage = () => {
   firebase.auth().onAuthStateChanged((user) => {

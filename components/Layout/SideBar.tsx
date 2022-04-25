@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useContext } from "react";
-import { AuthContext } from "../contexts/Auth";
+import { AuthContext } from "../../contexts/Auth";
 import { useRouter } from "next/router";
 import CategoryLinkForSideBar from "./CategoryLinkForSideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
