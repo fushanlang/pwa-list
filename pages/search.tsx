@@ -12,72 +12,71 @@ const db = firebase.firestore();
 const Search: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchParam, setSearchParam] = useState<String | null>(null);
-  const [initialSearchParam, setInitialSearchParam] =
-    useState<any | null>(null);
-  const [searchedApp, setSearchedApp] = useState<Object | null>([]);
-  var mergedApplicationData = [];
+  const [initialSearchParam, setInitialSearchParam] = useState<any | null>(
+    null
+  );
+  const [searchedApps, setSearchedApps] = useState<Object | null>([]);
   useEffect(() => {
     if (searchParam === null || searchParam === "") {
       setSearchParam("empty");
       return;
     }
-    const fetchApplicationsData = async () => {
-      var searchParamLowercase = searchParam
+    const fetchAppsData = async () => {
+      let searchParamLowercase = searchParam
         ? searchParam.toLowerCase().replace(/\s+/g, "")
         : null;
-      const applicationsDataName = await db
+      const appsName = await db
         .collection("applications")
         .orderBy("nameLowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
         .where("isPublic", "==", true)
         .get();
-      const applicationsDataTag1 = await db
+      const appsTag1 = await db
         .collection("applications")
         .orderBy("tag1Lowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
         .where("isPublic", "==", true)
         .get();
-      const applicationsDataTag2 = await db
+      const appsTag2 = await db
         .collection("applications")
         .orderBy("tag2Lowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
         .where("isPublic", "==", true)
         .get();
-      const applicationsDataTag3 = await db
+      const appsTag3 = await db
         .collection("applications")
         .orderBy("tag3Lowercase")
         .startAt(searchParamLowercase)
         .endAt(searchParamLowercase + "\uf8ff")
         .where("isPublic", "==", true)
         .get();
-      mergedApplicationData.push(...applicationsDataName.docs);
-      mergedApplicationData.push(...applicationsDataTag1.docs);
-      mergedApplicationData.push(...applicationsDataTag2.docs);
-      mergedApplicationData.push(...applicationsDataTag3.docs);
-      var applicationDataDuplicateInclude = mergedApplicationData.map(
-        (doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-          nameLowercase: doc.data().nameLowercase,
-          icon: doc.data().icon,
-          category: doc.data().category,
-          tag1: doc.data().tag1,
-          tag2: doc.data().tag2,
-          tag3: doc.data().tag3,
-          description: doc.data().description,
-        })
-      );
-      const applicationData = applicationDataDuplicateInclude.filter(
+      let mergedApps = [];
+      mergedApps.push(...appsName.docs);
+      mergedApps.push(...appsTag1.docs);
+      mergedApps.push(...appsTag2.docs);
+      mergedApps.push(...appsTag3.docs);
+      var appsDuplicateInclude = mergedApps.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        nameLowercase: doc.data().nameLowercase,
+        icon: doc.data().icon,
+        category: doc.data().category,
+        tag1: doc.data().tag1,
+        tag2: doc.data().tag2,
+        tag3: doc.data().tag3,
+        description: doc.data().description,
+      }));
+      const apps = appsDuplicateInclude.filter(
         (element, index, self) =>
           self.findIndex((e) => e.id === element.id) === index
       );
-      setSearchedApp(applicationData);
+      setSearchedApps(apps);
       setIsLoading(false);
     };
-    fetchApplicationsData();
+    fetchAppsData();
     localStorage.searchParam = searchParam;
   }, [searchParam]);
   useEffect(() => {
@@ -112,7 +111,7 @@ const Search: NextPage = () => {
           <Loading />
         ) : (
           <div className="mt-8">
-            <Card apps={searchedApp} />
+            <Card apps={searchedApps} />
           </div>
         )}
       </div>

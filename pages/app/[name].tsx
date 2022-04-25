@@ -3,7 +3,6 @@ import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../../plugins/googleAdsense";
@@ -12,6 +11,7 @@ import NotFound from "../../components/Common/NotFound";
 import ImageModal from "../../components/App/ImageModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import firebase from "../../plugins/firebase";
 
 const db = firebase.firestore();
 interface Props {

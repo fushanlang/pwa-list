@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import Layout from "../../components/Layout";
 import Card from "../../components/App/Card";
+import firebase from "../../plugins/firebase";
 
 const db = firebase.firestore();
 interface Props {

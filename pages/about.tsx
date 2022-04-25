@@ -36,7 +36,6 @@ const About: NextPage = () => {
             The following is an explanation of how to install in the case of
             Chrome.
           </p>
-          {/* <h3 className="text-lg font-bold mt-4 mb-3">For Smartphones</h3> */}
           <div className="ml-3 mt-5 mb-3">
             <img
               style={{ height: "530px" }}
@@ -54,14 +53,6 @@ const About: NextPage = () => {
               className="mr-8 mb-3 rounded-md inline"
             />
           </div>
-          {/* <h3 className="text-lg font-bold mt-3 mb-3">For PCs</h3>
-          <div className="ml-3 mb-5">
-            <img
-              style={{ maxHeight: "530px" }}
-              src={"/about/pc1.png"}
-              className="mr-8 mb-2 rounded-md "
-            />
-          </div> */}
           <p>
             The procedure is a little different depending on the browser, but
             basically it is just this.
