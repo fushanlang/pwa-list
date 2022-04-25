@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { changeFirstUpperCase } from "../../plugins/common/functions";
 
 interface Props {
   apps: any;
@@ -17,10 +18,7 @@ const Card: React.FC<Props> = ({ apps }) => {
             </div>
             <div className="flex flex-col">
               <div className="text-base font-bold">{app.name}</div>
-              <div>
-                {/* Changed to upper case */}
-                {app.category.toString().charAt(0).toUpperCase() + app.category.slice(1)}
-              </div>
+              <div>{changeFirstUpperCase(app.category)}</div>
               <div className="mt-1">
                 {app.tag1 && (
                   <span className="text-xs px-2 py-1 mr-1 rounded bg-gray-600 text-white">{app.tag1}</span>

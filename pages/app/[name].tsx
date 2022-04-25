@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import "firebase/firestore";
 import AdSense from "react-adsense";
@@ -12,6 +11,7 @@ import ImageModal from "../../components/App/ImageModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import firebase from "../../plugins/firebase";
+import { changeFirstUpperCase } from "../../plugins/common/functions";
 
 const db = firebase.firestore();
 interface Props {
@@ -23,7 +23,6 @@ const App: NextPage<Props> = (props) => {
   const { app, isFound } = props;
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [initialSlide, setInitialSlide] = useState<number>(0);
-  const [existsBackPage, setExistsBackPage] = useState<boolean>(true);
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
   // setting the initial slide
@@ -33,11 +32,6 @@ const App: NextPage<Props> = (props) => {
     if (app.imageMobile2 === null) slideNum.splice(1, 0, null);
     if (app.imageMobile3 === null) slideNum.splice(2, 0, null);
   }
-  useEffect(() => {
-    if (typeof history.state.options.scroll === "undefined") {
-      setExistsBackPage(false);
-    }
-  }, []);
   return (
     <Layout title={isFound ? app.name : "Not Found"}>
       {isFound && (
@@ -57,22 +51,13 @@ const App: NextPage<Props> = (props) => {
           <NotFound />
         ) : (
           <div className="bg-white px-4 py-7 rounded-lg">
-            {existsBackPage ? (
-              <button
-                className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
-                onClick={() => router.back()}
-              >
-                <FontAwesomeIcon icon={faChevronLeft} />
-                &nbsp;Back
-              </button>
-            ) : (
-              <Link href="/" as="/">
-                <button className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
-                  <FontAwesomeIcon icon={faChevronLeft} />
-                  &nbsp;Back
-                </button>
-              </Link>
-            )}
+            <button
+              className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
+              onClick={() => router.back()}
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+              &nbsp;Back
+            </button>
             <div className="flex items-center ml-1">
               <div className="mr-4 w-20">
                 <img className="rounded-md" src={app.icon || "/default-app-icon.png"} />
@@ -217,7 +202,7 @@ export const getStaticProps = async (context) => {
       },
     };
   }
-  app[0]["category"] = app[0]["category"].toString().charAt(0).toUpperCase() + app[0]["category"].slice(1);
+  app[0]["category"] = changeFirstUpperCase(app[0]["category"]);
 
   delete app[0]["createdAt"];
   delete app[0]["updatedAt"];

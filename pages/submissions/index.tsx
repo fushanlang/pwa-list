@@ -14,7 +14,7 @@ const Submissions: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [apps, setApps] = useState<any>([]);
   const { currentUser } = useContext(AuthContext);
-  const fetchUserAppsData = async () => {
+  const fetchUserApps = async () => {
     const apps = await db
       .collection("applications")
       .where("userId", "==", currentUser.uid)
@@ -39,10 +39,8 @@ const Submissions: NextPage = () => {
     setIsLoading(false);
   };
   useEffect(() => {
-    currentUser === null && Router.push("sign-up");
-    if (currentUser) {
-      fetchUserAppsData();
-    }
+    !currentUser && Router.push("sign-up");
+    fetchUserApps();
   }, [currentUser]);
 
   const signOut = async () => {
@@ -67,7 +65,7 @@ const Submissions: NextPage = () => {
                     </tr>
                   </thead>
                   {Object.keys(apps).length ? (
-                    <Apps apps={apps} fetchApps={fetchUserAppsData} />
+                    <Apps apps={apps} fetchApps={fetchUserApps} />
                   ) : (
                     <tbody>
                       <tr className="text-center">

@@ -3,6 +3,7 @@ import "firebase/firestore";
 import Layout from "../../components/Layout";
 import Card from "../../components/App/Card";
 import firebase from "../../plugins/firebase";
+import { changeFirstUpperCase } from "../../plugins/common/functions";
 
 const db = firebase.firestore();
 interface Props {
@@ -39,7 +40,6 @@ export const getStaticPaths = async () => {
 
 export async function getStaticProps(context) {
   const { category } = context.params;
-  const categoryFirstUpperCase = category.toString().charAt(0).toUpperCase() + category.slice(1);
   const applications = await db
     .collection("applications")
     .where("isPublic", "==", true)
@@ -61,7 +61,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       apps: apps,
-      category: categoryFirstUpperCase,
+      category: changeFirstUpperCase(category),
     },
     revalidate: 10,
   };
