@@ -81,9 +81,9 @@ const Search: NextPage = () => {
           <input
             className="focus:outline-none ml-2 w-full pl-2 text-base rounded-md"
             type="text"
-            placeholder="Search"
+            placeholder="App name or Tag"
             defaultValue={inputParam}
-            onChange={(e) => {
+            onKeyDown={(e) => {
               setInputParam(e.target.value);
             }}
           />

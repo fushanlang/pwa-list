@@ -64,16 +64,22 @@ const App: NextPage<Props> = (props) => {
               </div>
               <div className="flex flex-col">
                 <h1 className="font-bold text-2xl ml-1">{app.name}</h1>
-                <h2 className="text-base ml-1">{app.category}</h2>
-                <div className="mt-1">
+                <h2 className="text-base text-gray-500 font-semibold ml-1">{app.category}</h2>
+                <div className="mt-2">
                   {app.tag1 && (
-                    <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">{app.tag1}</span>
+                    <span className="text-sm px-1.5 py-0.5 mr-1 rounded-xl border-2 border-gray-300 text-gray-500 font-semibold">
+                      {app.tag1}
+                    </span>
                   )}
                   {app.tag2 && (
-                    <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">{app.tag2}</span>
+                    <span className="text-sm px-1.5 py-0.5 mr-1 rounded-xl border-2 border-gray-300 text-gray-500 font-semibold">
+                      {app.tag2}
+                    </span>
                   )}
                   {app.tag3 && (
-                    <span className="text-xs px-2 py-1 mr-2 rounded bg-gray-600 text-white">{app.tag3}</span>
+                    <span className="text-sm px-1.5 py-0.5 mr-1 rounded-xl border-2 border-gray-300 text-gray-500 font-semibold">
+                      {app.tag3}
+                    </span>
                   )}
                 </div>
               </div>
