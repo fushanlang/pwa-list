@@ -18,6 +18,7 @@ const Search: NextPage = () => {
   }, []);
 
   useEffect(() => {
+    console.log(111);
     fetchApps();
   }, [inputParam]);
 
@@ -74,7 +75,7 @@ const Search: NextPage = () => {
   return (
     <Layout title="Search">
       <div className="px-2">
-        <div className="flex w-4/5 m-auto mt-5 rounded-md shadow h-11 bg-white">
+        <div className="flex w-4/5 m-auto mt-5 rounded-md shadow h-11 bg-white focus-within:ring focus-within:ring-green-400">
           <div className="m-auto ml-3">
             <FontAwesomeIcon icon={faSearch} size="lg" />
           </div>
@@ -83,8 +84,11 @@ const Search: NextPage = () => {
             type="text"
             placeholder="App name or Label"
             defaultValue={inputParam}
-            onChange={(e) => {
-              setInputParam(e.target.value);
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                setInputParam((e.target as HTMLInputElement).value);
+                e.currentTarget.blur();
+              }
             }}
           />
         </div>
