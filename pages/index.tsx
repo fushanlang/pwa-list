@@ -26,7 +26,9 @@ const Index: NextPage<Props> = ({ apps }) => {
           P<span className="text-green-500">W</span>A LIST
         </h1>
         <div>
-          <div className="text-xl font-bold mt-6">New Apps</div>
+          <div className="text-xl font-bold mt-3">
+            <span className="text-xl px-2 py-0.5 mr-1 text-green-400">!! New Apps !!</span>
+          </div>
           <div className="mt-2">
             <Card apps={apps} />
           </div>
