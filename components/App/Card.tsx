@@ -21,17 +21,17 @@ const Card: React.FC<Props> = ({ apps }) => {
               <div>{changeFirstUpperCase(app.category)}</div>
               <div className="mt-2">
                 {app.tag1 && (
-                  <span className="text-xs px-1.5 py-0.5 mr-1 rounded-xl border-2 border-gray-300 text-gray-500 font-semibold">
+                  <span className="text-xs px-1.5 py-0.5 mr-1 rounded-xl border-2 border-green-300 text-gray-600 font-semibold">
                     {app.tag1}
                   </span>
                 )}
                 {app.tag2 && (
-                  <span className="text-xs px-1.5 py-0.5 mr-1 rounded-xl border-2 border-gray-300 text-gray-500 font-semibold">
+                  <span className="text-xs px-1.5 py-0.5 mr-1 rounded-xl border-2 border-green-300 text-gray-600 font-semibold">
                     {app.tag2}
                   </span>
                 )}
                 {app.tag3 && (
-                  <span className="text-xs px-1.5 py-0.5 mr-1 rounded-xl border-2 border-gray-300 text-gray-500 font-semibold">
+                  <span className="text-xs px-1.5 py-0.5 mr-1 rounded-xl border-2 border-green-300 text-gray-600 font-semibold">
                     {app.tag3}
                   </span>
                 )}
