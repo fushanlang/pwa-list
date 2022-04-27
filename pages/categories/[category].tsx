@@ -16,7 +16,7 @@ const Category: NextPage<Props> = (props) => {
     <Layout title={category}>
       <div className="px-2">
         <div>
-          <div className="text-2xl font-bold mt-3">{category}</div>
+          <div className="text-2xl font-bold mt-3 ml-1">{category}</div>
           <div className="mt-2">
             <Card apps={apps} />
           </div>
