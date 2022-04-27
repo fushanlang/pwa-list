@@ -99,19 +99,19 @@ const SideBar: React.FC = () => {
       <div className="mb-2 w-60 text-center">
         <div className="w-full border-t-2">
           <Link href="/about" as="/about">
-            <a className="w-40 inline-block mt-5 mb-1 py-1 text-gray-50 bg-gray-600 shadow-md rounded-md hover:bg-gray-700 hover:shadow-none transition ease-in-out">
+            <a className="w-40 inline-block mt-5 mb-1 py-1 text-gray-50 bg-gray-600 shadow-md rounded-2xl hover:bg-gray-700 hover:shadow-none transition ease-in-out">
               <strong>What is a PWA</strong>
             </a>
           </Link>
           {currentUser ? (
             <Link href="/submissions" as="/submissions">
-              <a className="w-40 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+              <a className="w-40 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-2xl hover:bg-green-500 hover:shadow-none transition ease-in-out">
                 <strong>Submit App</strong>
               </a>
             </Link>
           ) : (
             <Link href="/sign-up" as="/sign-up">
-              <a className="w-40 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-md hover:bg-green-500 hover:shadow-none transition ease-in-out">
+              <a className="w-40 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-2xl hover:bg-green-500 hover:shadow-none transition ease-in-out">
                 <strong>Submit App</strong>
               </a>
             </Link>
