@@ -10,7 +10,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 
 const Search: NextPage = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [inputParam, setInputParam] = useState<string>("");
   const [searchedApps, setSearchedApps] = useState<Object | null>([]);
   useEffect(() => {
@@ -22,7 +22,12 @@ const Search: NextPage = () => {
   }, [inputParam]);
 
   const fetchApps = async () => {
-    let searchParam = inputParam.trim() ? inputParam.toLowerCase().replace(/\s+/g, "").trim() : -1;
+    if (!inputParam.trim()) {
+      setSearchedApps([]);
+      return;
+    }
+    setIsLoading(true);
+    let searchParam = inputParam.toLowerCase().replace(/\s+/g, "").trim();
     localStorage.inputSearchParam = inputParam;
     const appsName = await db
       .collection("applications")
