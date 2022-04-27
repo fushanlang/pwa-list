@@ -18,7 +18,6 @@ const Search: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log(111);
     fetchApps();
   }, [inputParam]);
 
@@ -82,7 +81,7 @@ const Search: NextPage = () => {
           <input
             className="focus:outline-none ml-2 w-full pl-2 text-base rounded-md"
             type="text"
-            placeholder="App name or Label"
+            placeholder="App name or Tag"
             defaultValue={inputParam}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
