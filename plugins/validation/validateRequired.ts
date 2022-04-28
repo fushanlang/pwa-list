@@ -1,6 +1,8 @@
-const validateRequired = (property: string) => {
-  const error = property === "" || property === null ? true : false;
-  return error;
+const validateRequired = (property: any) => {
+  if (property === "" || property === null) {
+    return true;
+  }
+  return false;
 };
 
 export default validateRequired;

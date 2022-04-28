@@ -10,7 +10,6 @@ import ImagePreview from "../../components/Common/ImagePreview";
 import createValidate from "../../plugins/submissions/createValidate";
 import uploadToStorage from "../../plugins/image/uploadToStorage";
 import firebase from "../../plugins/firebase";
-import fileLoad from "../../plugins/image/fileLoad";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
@@ -24,20 +23,20 @@ const Create: NextPage = () => {
 
   const [modalsOpen, setModalsOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [name, setName] = useState<string | null>(null);
-  const [link, setLink] = useState<string | null>(null);
-  const [category, setCategory] = useState<string | null>(null);
-  const [tag1, setTag1] = useState<string | null>(null);
-  const [tag2, setTag2] = useState<string | null>(null);
-  const [tag3, setTag3] = useState<string | null>(null);
-  const [description, setDescription] = useState<string | null>(null);
-  const [icon, setIcon] = useState<any | null>(null);
-  const [iconUrl, setIconUrl] = useState<any | null>(null);
-  const [pcImages, setPcImages] = useState<any[]>([]);
-  const [pcImageUrlList, setPcImageUrlList] = useState<any[]>([]);
-  const [mobileImages, setMobileImages] = useState<any[]>([]);
-  const [mobileImageUrlList, setMobileImageUrlList] = useState<any[]>([]);
-  const [errors, setErrors] = useState<any | null>({
+  const [name, setName] = useState<string>("");
+  const [link, setLink] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [tag1, setTag1] = useState<string>("");
+  const [tag2, setTag2] = useState<string>("");
+  const [tag3, setTag3] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [icon, setIcon] = useState<File | null>(null);
+  const [iconUrl, setIconUrl] = useState<string>("");
+  const [pcImages, setPcImages] = useState<Array<File>>([]);
+  const [pcImageUrlList, setPcImageUrlList] = useState<Array<string>>([]);
+  const [mobileImages, setMobileImages] = useState<Array<File>>([]);
+  const [mobileImageUrlList, setMobileImageUrlList] = useState<Array<string>>([]);
+  const [errors, setErrors] = useState<any>({
     name: [],
     link: [],
     category: [],
@@ -50,37 +49,37 @@ const Create: NextPage = () => {
   });
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
+  const MAX_PC_IMAGE_NUM = 3;
+  const MAX_MOBILE_IMAGE_NUM = 3;
+
   const onChangeIconHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    var file = e.target.files[0];
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      setIconUrl(e.target.result);
-      setIcon(file);
-    };
-    reader.readAsDataURL(file);
+    const { files } = e.target;
+    setIconUrl(window.URL.createObjectURL(files[0]));
+    setIcon(files[0]);
   };
 
   const onChangePcImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    var files = e.target.files;
-    for (let i = 0; i < files.length; i++) {
-      if (pcImageUrlList[2]) break;
-      var file = e.target.files[i];
-      await fileLoad(file, setPcImageUrlList, setPcImages);
-    }
+    const { files } = e.target;
+    const filesArr = Object.entries(files).map(([key, value]) => value);
+    filesArr.splice(MAX_PC_IMAGE_NUM);
+    filesArr.map((value) => {
+      setPcImageUrlList((urls) => [...urls, window.URL.createObjectURL(value)]);
+      setPcImages((images) => [...images, value]);
+    });
   };
 
   const onChangeMobileImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    var files = e.target.files;
-    for (let i = 0; i < files.length; i++) {
-      if (mobileImageUrlList[2]) break;
-
-      var file = e.target.files[i];
-      await fileLoad(file, setMobileImageUrlList, setMobileImages);
-    }
+    const { files } = e.target;
+    const filesArr = Object.entries(files).map(([key, value]) => value);
+    filesArr.splice(MAX_MOBILE_IMAGE_NUM);
+    filesArr.map((value) => {
+      setMobileImageUrlList((urls) => [...urls, window.URL.createObjectURL(value)]);
+      setMobileImages((images) => [...images, value]);
+    });
   };
   const handleDeleteIcon = async () => {
     setIcon(null);
-    setIconUrl(null);
+    setIconUrl("");
   };
 
   const handleDeletePcImage = async (e: React.FormEvent<HTMLFormElement>, index: number) => {
@@ -98,46 +97,26 @@ const Create: NextPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (
-      !(await createValidate(
-        setErrors,
-        name,
-        link,
-        category,
-        tag1,
-        tag2,
-        tag3,
-        description,
-        icon,
-        pcImages,
-        mobileImages
-      ))
-    ) {
+    if (!(await createValidate(setErrors, name, link, category, tag1, tag2, tag3, description, icon, pcImages, mobileImages))) {
       setIsSubmitting(false);
       return;
     }
     setModalsOpen(true);
-    var nameLowercase = name.toLowerCase().replace(/\s+/g, "");
-    var tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
-    var tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
-    var tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
-    var uploadedIconUrl = icon ? await uploadToStorage(iconsFolder, nameLowercase, icon, "icon") : null;
-    var uploadedImagePc1Url = pcImages[0]
-      ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1")
-      : null;
-    var uploadedImagePc2Url = pcImages[1]
-      ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2")
-      : null;
-    var uploadedImagePc3Url = pcImages[2]
-      ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3")
-      : null;
-    var uploadedImageMobile1Url = mobileImages[0]
+    const nameLowercase = name.toLowerCase().replace(/\s+/g, "");
+    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
+    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
+    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
+    const storageIconUrl = icon ? await uploadToStorage(iconsFolder, nameLowercase, icon, "icon") : null;
+    const storagePc1Url = pcImages[0] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1") : null;
+    const storagePc2Url = pcImages[1] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2") : null;
+    const storagePc3Url = pcImages[2] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3") : null;
+    const storageMobile1Url = mobileImages[0]
       ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[0], "mobile1")
       : null;
-    var uploadedImageMobile2Url = mobileImages[1]
+    const storageMobile2Url = mobileImages[1]
       ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2")
       : null;
-    var uploadedImageMobile3Url = mobileImages[2]
+    const storageMobile3Url = mobileImages[2]
       ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[2], "mobile3")
       : null;
     db.collection("applications").add({
@@ -153,13 +132,13 @@ const Create: NextPage = () => {
       tag2Lowercase: tag2Lowercase,
       tag3Lowercase: tag3Lowercase,
       description: description,
-      icon: uploadedIconUrl,
-      imagePc1: uploadedImagePc1Url,
-      imagePc2: uploadedImagePc2Url,
-      imagePc3: uploadedImagePc3Url,
-      imageMobile1: uploadedImageMobile1Url,
-      imageMobile2: uploadedImageMobile2Url,
-      imageMobile3: uploadedImageMobile3Url,
+      icon: storageIconUrl,
+      imagePc1: storagePc1Url,
+      imagePc2: storagePc2Url,
+      imagePc3: storagePc3Url,
+      imageMobile1: storageMobile1Url,
+      imageMobile2: storageMobile2Url,
+      imageMobile3: storageMobile3Url,
       isPublic: false,
       isFeatured: false,
       isNewApp: false,
@@ -248,7 +227,7 @@ const Create: NextPage = () => {
                   className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   type="text"
                   maxLength={10}
-                  placeholder="Map"
+                  placeholder="Timer"
                   onChange={(e) => {
                     setTag2(e.target.value);
                     setErrors({ ...errors, tag2: [] });
@@ -258,7 +237,7 @@ const Create: NextPage = () => {
                   className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   type="text"
                   maxLength={10}
-                  placeholder="IoT"
+                  placeholder="Management"
                   onChange={(e) => {
                     setTag3(e.target.value);
                     setErrors({ ...errors, tag3: [] });
@@ -327,9 +306,7 @@ const Create: NextPage = () => {
                   <ImagePreview
                     key={index}
                     imageUrl={mobileImageUrl}
-                    handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) =>
-                      handleDeleteMobileImage(event, index)
-                    }
+                    handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) => handleDeleteMobileImage(event, index)}
                     isLast={mobileImageUrlList.length - 1 === index}
                     isBtnLastOnlyDisplay={false}
                   />
@@ -356,9 +333,7 @@ const Create: NextPage = () => {
                   <ImagePreview
                     key={index}
                     imageUrl={pcImageUrl}
-                    handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) =>
-                      handleDeletePcImage(event, index)
-                    }
+                    handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) => handleDeletePcImage(event, index)}
                     isLast={pcImageUrlList.length - 1 === index}
                     isBtnLastOnlyDisplay={false}
                   />
