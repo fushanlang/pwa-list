@@ -15,11 +15,7 @@ const Submissions: NextPage = () => {
   const [apps, setApps] = useState<any>([]);
   const { currentUser } = useContext(AuthContext);
   const fetchUserApps = async () => {
-    const apps = await db
-      .collection("applications")
-      .where("userId", "==", currentUser.uid)
-      .orderBy("updatedAt", "desc")
-      .get();
+    const apps = await db.collection("applications").where("userId", "==", currentUser.uid).orderBy("updatedAt", "desc").get();
     setApps(
       apps.docs.map((doc) => ({
         id: doc.id,
@@ -72,9 +68,7 @@ const Submissions: NextPage = () => {
                         <td colSpan={3} className="bg-gray-50 py-10">
                           <p className="text-gray-500 mb-2">Create your first submission</p>
                           <Link href="/submissions/create" as="/submissions/create">
-                            <button className="text-sm text-white px-3 py-1 border rounded bg-green-400">
-                              New Submission
-                            </button>
+                            <button className="text-sm text-white px-3 py-1 border rounded bg-green-400">New Submission</button>
                           </Link>
                         </td>
                       </tr>

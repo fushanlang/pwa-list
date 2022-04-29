@@ -30,7 +30,7 @@ const createValidate = async (
   if (validateRequired(category)) categoryErrors.push("The Category field is required");
   if (validateRequired(tag1)) tag1Errors.push("The Tag field is required");
   if (validateRequired(description)) descriptionErrors.push("The About this app field is required");
-  if (validateRequired(icon)) iconErrors.push("The Icon required");
+  if (validateRequired(icon)) iconErrors.push("The Icon is required");
   // custom
   if (validateUrl(link)) linkErrors.push("Please enter the correct Link");
   if (validateAlphanum(name)) nameErrors.push("Please enter the name in single-byte alphanumeric characters");

@@ -3,10 +3,8 @@ import { NextPage } from "next";
 import Router from "next/router";
 import { AuthContext } from "../../../contexts/Auth";
 import categories from "../../../consts/categories";
-import fileLoad from "../../../plugins/image/fileLoad";
 import editValidate from "../../../plugins/submissions/editValidate";
 import updateImage from "../../../plugins/submissions/updateImage";
-import { setArray, setIfNotNull } from "../../../plugins/common/functions";
 import firebase from "../../../plugins/firebase";
 import uploadToStorage from "../../../plugins/image/uploadToStorage";
 import "firebase/firestore";
@@ -20,16 +18,17 @@ import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 
 interface Props {
-  appData: any;
+  app: any;
+  isFound: boolean;
 }
 
-const Edit: NextPage<Props> = (appData) => {
+const Edit: NextPage<Props> = (props) => {
+  const { app, isFound } = props;
   const { currentUser } = useContext(AuthContext);
   useEffect(() => {
     currentUser === null && Router.push("/sign-up");
   }, [currentUser]);
 
-  const app = appData.appData;
   const [modalsOpen, setModalsOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [name, setName] = useState<string>(app.name);
@@ -40,23 +39,22 @@ const Edit: NextPage<Props> = (appData) => {
   const [tag3, setTag3] = useState<string>("");
   const [description, setDescription] = useState<string>(app.description);
   const [icon, setIcon] = useState<any | null>(null);
-  const [iconUrl, setIconUrl] = useState<any | null>(app.icon);
-  const [mobileImages, setMobileImages] = useState<any[]>([]);
-  const [mobileImageUrlList, setMobileImageUrlList] = useState<any[]>([]);
-  const [pcImages, setPcImages] = useState<any[]>([]);
-  const [pcImageUrlList, setPcImageUrlList] = useState<any[]>([]);
+  const [iconUrl, setIconUrl] = useState<string>(app.icon);
+  const [mobileImages, setMobileImages] = useState<Array<File>>([]);
+  const [mobileImageUrlList, setMobileImageUrlList] = useState<Array<string>>([]);
+  const [pcImages, setPcImages] = useState<Array<File>>([]);
+  const [pcImageUrlList, setPcImageUrlList] = useState<Array<string>>([]);
+
   useEffect(() => {
-    setIfNotNull(setTag1, app.tag1);
-    setIfNotNull(setTag2, app.tag2);
-    setIfNotNull(setTag3, app.tag3);
-    setMobileImageUrlList([]);
-    setArray(setMobileImageUrlList, app.imageMobile1);
-    setArray(setMobileImageUrlList, app.imageMobile2);
-    setArray(setMobileImageUrlList, app.imageMobile3);
-    setPcImageUrlList([]);
-    setArray(setPcImageUrlList, app.imagePc1);
-    setArray(setPcImageUrlList, app.imagePc2);
-    setArray(setPcImageUrlList, app.imagePc3);
+    app.tag1 && setTag1(app.tag1);
+    app.tag2 && setTag2(app.tag2);
+    app.tag3 && setTag3(app.tag3);
+    app.imageMobile1 && setMobileImageUrlList((images) => [...images, app.imageMobile1]);
+    app.imageMobile2 && setMobileImageUrlList((images) => [...images, app.imageMobile2]);
+    app.imageMobile3 && setMobileImageUrlList((images) => [...images, app.imageMobile3]);
+    app.imagePc1 && setMobileImageUrlList((images) => [...images, app.imagePc1]);
+    app.imagePc2 && setMobileImageUrlList((images) => [...images, app.imagePc2]);
+    app.imagePc3 && setMobileImageUrlList((images) => [...images, app.imagePc3]);
   }, []);
 
   const [errors, setErrors] = useState<any>({
@@ -72,26 +70,40 @@ const Edit: NextPage<Props> = (appData) => {
   });
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
+  const MAX_PC_IMAGE_NUM = 3;
+  const MAX_MOBILE_IMAGE_NUM = 3;
+
+  const onChangeIconHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    setIconUrl(window.URL.createObjectURL(files[0]));
+    setIcon(files[0]);
+  };
+
+  const onChangeMobileImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    const filesArr = Object.entries(files).map(([key, value]) => value);
+    filesArr.splice(MAX_MOBILE_IMAGE_NUM);
+    filesArr.map((value) => {
+      setMobileImageUrlList((urls) => [...urls, window.URL.createObjectURL(value)]);
+      setMobileImages((images) => [...images, value]);
+    });
+  };
+
+  const onChangePcImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    const filesArr = Object.entries(files).map(([key, value]) => value);
+    filesArr.splice(MAX_PC_IMAGE_NUM);
+    filesArr.map((value) => {
+      setPcImageUrlList((urls) => [...urls, window.URL.createObjectURL(value)]);
+      setPcImages((images) => [...images, value]);
+    });
+  };
+
   const handleDeleteIcon = async () => {
     setIcon(null);
     setIconUrl(null);
   };
-  const onChangeMobileImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    var files = e.target.files;
-    for (let i = 0; i < files.length; i++) {
-      if (mobileImageUrlList[2]) break;
-      var file = e.target.files[i];
-      await fileLoad(file, setMobileImageUrlList, setMobileImages);
-    }
-  };
-  const onChangePcImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    var files = e.target.files;
-    for (let i = 0; i < files.length; i++) {
-      if (pcImageUrlList[2]) break;
-      var file = e.target.files[i];
-      await fileLoad(file, setPcImageUrlList, setPcImages);
-    }
-  };
+
   const handleDeleteMobileImage = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     e.preventDefault();
     setMobileImageUrlList(mobileImageUrlList.filter((_, i) => i !== index));
@@ -104,51 +116,29 @@ const Edit: NextPage<Props> = (appData) => {
     setPcImages(pcImages.filter((_, i) => i !== index));
   };
 
-  const onChangeIconHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    var file = e.target.files[0];
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      setIconUrl(e.target.result);
-      setIcon(file);
-    };
-    reader.readAsDataURL(file);
-  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     if (
-      !(await editValidate(
-        setErrors,
-        link,
-        category,
-        tag1,
-        tag2,
-        tag3,
-        description,
-        iconUrl,
-        pcImageUrlList,
-        mobileImageUrlList
-      ))
+      !(await editValidate(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrlList, mobileImageUrlList))
     ) {
       setIsSubmitting(false);
       return;
     }
     setModalsOpen(true);
-    var mobileImageNum = 0;
-    var pcImageNum = 0;
-    var nameLowercase = name.toLowerCase().replace(/\s+/g, "");
-    var tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
-    var tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
-    var tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
-    var uploadedIconUrl = iconUrl;
-
-    var uploadedImageMobile1Url = mobileImageUrlList[0] !== undefined ? mobileImageUrlList[0] : null;
-    var uploadedImageMobile2Url = mobileImageUrlList[1] !== undefined ? mobileImageUrlList[1] : null;
-    var uploadedImageMobile3Url = mobileImageUrlList[2] !== undefined ? mobileImageUrlList[2] : null;
-
-    var uploadedImagePc1Url = pcImageUrlList[0] !== undefined ? pcImageUrlList[0] : null;
-    var uploadedImagePc2Url = pcImageUrlList[1] !== undefined ? pcImageUrlList[1] : null;
-    var uploadedImagePc3Url = pcImageUrlList[2] !== undefined ? pcImageUrlList[2] : null;
+    let mobileImageNum = 0;
+    let pcImageNum = 0;
+    let nameLowercase = name.toLowerCase().replace(/\s+/g, "");
+    let tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
+    let tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
+    let tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
+    let uploadedIconUrl = iconUrl;
+    let uploadedImageMobile1Url = mobileImageUrlList[0] !== undefined ? mobileImageUrlList[0] : null;
+    let uploadedImageMobile2Url = mobileImageUrlList[1] !== undefined ? mobileImageUrlList[1] : null;
+    let uploadedImageMobile3Url = mobileImageUrlList[2] !== undefined ? mobileImageUrlList[2] : null;
+    let uploadedImagePc1Url = pcImageUrlList[0] !== undefined ? pcImageUrlList[0] : null;
+    let uploadedImagePc2Url = pcImageUrlList[1] !== undefined ? pcImageUrlList[1] : null;
+    let uploadedImagePc3Url = pcImageUrlList[2] !== undefined ? pcImageUrlList[2] : null;
 
     if (icon !== null) {
       uploadedIconUrl = await uploadToStorage(iconsFolder, nameLowercase, icon, "icon");
@@ -177,30 +167,9 @@ const Edit: NextPage<Props> = (appData) => {
       mobileImageNum,
       "mobile3"
     );
-    pcImageNum = await updateImage(
-      imagesFolder,
-      uploadedImagePc1Url,
-      pcImages,
-      nameLowercase,
-      pcImageNum,
-      "pc1"
-    );
-    pcImageNum = await updateImage(
-      imagesFolder,
-      uploadedImagePc2Url,
-      pcImages,
-      nameLowercase,
-      pcImageNum,
-      "pc2"
-    );
-    pcImageNum = await updateImage(
-      imagesFolder,
-      uploadedImagePc3Url,
-      pcImages,
-      nameLowercase,
-      pcImageNum,
-      "pc3"
-    );
+    pcImageNum = await updateImage(imagesFolder, uploadedImagePc1Url, pcImages, nameLowercase, pcImageNum, "pc1");
+    pcImageNum = await updateImage(imagesFolder, uploadedImagePc2Url, pcImages, nameLowercase, pcImageNum, "pc2");
+    pcImageNum = await updateImage(imagesFolder, uploadedImagePc3Url, pcImages, nameLowercase, pcImageNum, "pc3");
     const appRef = db.collection("applications").doc(app.id);
     await appRef.update({
       nameLowercase: nameLowercase,
@@ -228,7 +197,7 @@ const Edit: NextPage<Props> = (appData) => {
   return (
     <Layout title={`${app.name} - Edit`}>
       <>
-        {currentUser && currentUser.uid === app.userId && app.name !== undefined ? (
+        {currentUser && currentUser.uid === app.userId && isFound ? (
           <>
             <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
               <div className="ml-1 mt-1 mb-9">
@@ -367,9 +336,7 @@ const Edit: NextPage<Props> = (appData) => {
                 <p className="text-base font-bold mb-2">
                   screenshots
                   <span className="text-red-400 ml-2">*</span>
-                  <span className="text-xs text-red-400 ml-2">
-                    Either mobile or PC screenshot is required.
-                  </span>
+                  <span className="text-xs text-red-400 ml-2">Either mobile or PC screenshot is required.</span>
                 </p>
                 <label className="block font-bold mb-2">Mobile size screenshots (Up to 3 Images)</label>
                 <div className="flex overflow-scroll">
@@ -377,9 +344,7 @@ const Edit: NextPage<Props> = (appData) => {
                     <ImagePreview
                       key={index}
                       imageUrl={mobileImageUrl}
-                      handleDeleteImage={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        handleDeleteMobileImage(event, index)
-                      }
+                      handleDeleteImage={(event: React.ChangeEvent<HTMLInputElement>) => handleDeleteMobileImage(event, index)}
                       isLast={mobileImageUrlList.length - 1 === index}
                       isBtnLastOnlyDisplay={true}
                     />
@@ -406,9 +371,7 @@ const Edit: NextPage<Props> = (appData) => {
                     <ImagePreview
                       key={index}
                       imageUrl={pcImageUrl}
-                      handleDeleteImage={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        handleDeletePcImage(event, index)
-                      }
+                      handleDeleteImage={(event: React.ChangeEvent<HTMLInputElement>) => handleDeletePcImage(event, index)}
                       isLast={pcImageUrlList.length - 1 === index}
                       isBtnLastOnlyDisplay={true}
                     />
@@ -451,36 +414,25 @@ const Edit: NextPage<Props> = (appData) => {
     </Layout>
   );
 };
-
-Edit.getInitialProps = async ({ query }) => {
-  const { name } = query;
-  const getAppData = await db.collection("applications").where("nameLowercase", "==", name).get();
-  if (getAppData.empty) {
+export const getServerSideProps = async (context) => {
+  const { name } = context.params;
+  const res = await db.collection("applications").where("nameLowercase", "==", name).get();
+  const app = res.docs.map((res) => res.data());
+  if (app.length == 0) {
     return {
-      appData: [],
+      props: {
+        app: {},
+        isFound: false,
+      },
     };
   }
-  const app = getAppData.docs[0].data();
-  const returnApp = {
-    id: getAppData.docs[0].id,
-    name: app.name,
-    icon: app.icon,
-    tag1: app.tag1,
-    tag2: app.tag2,
-    tag3: app.tag3,
-    category: app.category,
-    link: app.link,
-    description: app.description,
-    imagePc1: app.imagePc1,
-    imagePc2: app.imagePc2,
-    imagePc3: app.imagePc3,
-    imageMobile1: app.imageMobile1,
-    imageMobile2: app.imageMobile2,
-    imageMobile3: app.imageMobile3,
-    userId: app.userId,
-  };
+  delete app[0]["createdAt"];
+  delete app[0]["updatedAt"];
   return {
-    appData: returnApp,
+    props: {
+      app: app[0],
+      isFound: true,
+    },
   };
 };
 export default Edit;
