@@ -11,7 +11,7 @@ const Card: React.FC<Props> = ({ apps }) => {
         <Link key={index} href="/app/[name]" as={`/app/${app.nameLowercase}`}>
           <a
             style={{ height: "120px" }}
-            className="flex items-center border-2 border-gray-200 bg-white mb-1 px-4 rounded-xl transition duration-300 ease-in-out hover:bg-opacity-10"
+            className="flex items-center border-2 border-gray-200 mb-1 px-4 rounded-xl transition duration-200 ease-in-out hover:bg-gray-100"
           >
             <div className="mr-4 w-20">
               <img className="rounded-md" src={app.icon || "/default-app-icon.png"} />
