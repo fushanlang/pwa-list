@@ -155,18 +155,6 @@ const Edit: NextPage<Props> = (props) => {
     let storagePc2Url = pcImageUrlList[1] ? pcImageUrlList[1] : null;
     let storagePc3Url = pcImageUrlList[2] ? pcImageUrlList[2] : null;
     if (icon) storageIconUrl = await uploadToStorage(iconsFolder, nameLowercase, icon, "icon");
-    console.log(mobileImages[0]);
-    console.log(mobileImages[1]);
-    console.log(mobileImages[2]);
-    if (mobileImages[0]) {
-      console.log(111);
-    }
-    if (mobileImages[1]) {
-      console.log(222);
-    }
-    if (mobileImages[2]) {
-      console.log(333);
-    }
     if (mobileImages[0]) storageMobile1Url = await uploadToStorage(imagesFolder, nameLowercase, mobileImages[0], "mobile1");
     if (mobileImages[1]) storageMobile2Url = await uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2");
     if (mobileImages[2]) storageMobile3Url = await uploadToStorage(imagesFolder, nameLowercase, mobileImages[2], "mobile3");
