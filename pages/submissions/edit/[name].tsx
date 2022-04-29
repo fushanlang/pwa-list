@@ -203,7 +203,7 @@ const Edit: NextPage<Props> = (props) => {
                     <span className="text-red-400 ml-2">*</span>
                   </label>
                   <input
-                    className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                    className="ring-2 ring-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                     type="text"
                     maxLength={120}
                     placeholder="https://pwalist.app"
@@ -220,7 +220,7 @@ const Edit: NextPage<Props> = (props) => {
                     Category<span className="text-red-400 ml-2">*</span>
                   </label>
                   <select
-                    className="shadow w-44 border py-2 px-3 rounded leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                    className="ring-2 ring-gray-300 w-44 py-2 px-3 rounded leading-tight focus:outline-none focus:ring focus:ring-green-400"
                     value={category}
                     onChange={(e) => {
                       setCategory(e.target.value);
@@ -243,7 +243,7 @@ const Edit: NextPage<Props> = (props) => {
                     <span className="text-xs text-red-400 ml-2">1 or more required</span>
                   </label>
                   <input
-                    className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                    className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                     type="text"
                     maxLength={10}
                     value={tag1}
@@ -253,7 +253,7 @@ const Edit: NextPage<Props> = (props) => {
                     }}
                   />
                   <input
-                    className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                    className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                     type="text"
                     maxLength={10}
                     value={tag2}
@@ -263,7 +263,7 @@ const Edit: NextPage<Props> = (props) => {
                     }}
                   />
                   <input
-                    className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                    className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                     type="text"
                     maxLength={10}
                     value={tag3}
@@ -282,7 +282,7 @@ const Edit: NextPage<Props> = (props) => {
                     <span className="text-red-400 ml-2">*</span>
                   </label>
                   <textarea
-                    className="shadow form-textarea mt-1 block w-full border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                    className="ring-2 ring-gray-300 form-textarea mt-1 block w-full rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                     rows={10}
                     maxLength={2000}
                     value={description}

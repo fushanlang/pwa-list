@@ -45,7 +45,7 @@
   content: "";
 }
 .loader:after {
-  background: rgba(243, 244, 246, var(--tw-bg-opacity));
+  background: #ffffff;
   width: 85%;
   height: 85%;
   border-radius: 50%;

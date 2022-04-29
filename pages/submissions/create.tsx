@@ -160,7 +160,7 @@ const Create: NextPage = () => {
                   Name<span className="text-red-400 ml-2">*</span>
                 </label>
                 <input
-                  className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                  className="ring-2 ring-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   type="text"
                   maxLength={28}
                   onChange={(e) => {
@@ -176,7 +176,7 @@ const Create: NextPage = () => {
                   <span className="text-red-400 ml-2">*</span>
                 </label>
                 <input
-                  className="shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                  className="ring-2 ring-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   type="text"
                   maxLength={120}
                   placeholder="https://pwalist.app"
@@ -192,7 +192,7 @@ const Create: NextPage = () => {
                   Category<span className="text-red-400 ml-2">*</span>
                 </label>
                 <select
-                  className="shadow w-44 border py-2 px-3 rounded leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                  className="ring-2 ring-gray-300 w-44 py-2 px-3 rounded leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   onChange={(e) => {
                     setCategory(e.target.value);
                     setErrors({ ...errors, category: [] });
@@ -214,7 +214,7 @@ const Create: NextPage = () => {
                   <span className="text-xs text-red-400 ml-2">1 or more required</span>
                 </label>
                 <input
-                  className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                  className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   type="text"
                   maxLength={10}
                   placeholder="ToDo"
@@ -224,7 +224,7 @@ const Create: NextPage = () => {
                   }}
                 />
                 <input
-                  className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                  className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   type="text"
                   maxLength={10}
                   placeholder="Timer"
@@ -234,7 +234,7 @@ const Create: NextPage = () => {
                   }}
                 />
                 <input
-                  className="shadow border rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                  className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   type="text"
                   maxLength={10}
                   placeholder="Management"
@@ -253,7 +253,7 @@ const Create: NextPage = () => {
                   <span className="text-red-400 ml-2">*</span>
                 </label>
                 <textarea
-                  className="shadow form-textarea mt-1 block w-full border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                  className="ring-2 ring-gray-300 form-textarea mt-1 block w-full rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   rows={10}
                   maxLength={2000}
                   onChange={(e) => {

@@ -50,7 +50,7 @@ const App: NextPage<Props> = (props) => {
         {!isFound ? (
           <NotFound />
         ) : (
-          <div className="bg-white px-4 py-7 rounded-lg">
+          <div className="border border-green-200 px-4 py-7 rounded-lg">
             <button
               className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
               onClick={() => router.back()}
@@ -162,12 +162,7 @@ const App: NextPage<Props> = (props) => {
                 {app.description}
               </p>
             </div>
-            <ImageModal
-              app={app}
-              modalIsOpen={modalIsOpen}
-              setModalIsOpen={setModalIsOpen}
-              initialSlide={initialSlide}
-            />
+            <ImageModal app={app} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} initialSlide={initialSlide} />
           </div>
         )}
         {/* Google Adsense start*/}

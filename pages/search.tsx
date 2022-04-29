@@ -70,16 +70,14 @@ const Search: NextPage = () => {
       tag3: doc.data().tag3,
       description: doc.data().description,
     }));
-    const noDupApps = apps.filter(
-      (element, index, self) => self.findIndex((e) => e.id === element.id) === index
-    );
+    const noDupApps = apps.filter((element, index, self) => self.findIndex((e) => e.id === element.id) === index);
     setSearchedApps(noDupApps);
     setIsLoading(false);
   };
   return (
     <Layout title="Search">
       <div className="px-2">
-        <div className="flex w-4/5 m-auto mt-5 rounded-md shadow h-11 bg-white focus-within:ring focus-within:ring-green-400">
+        <div className="flex w-4/5 m-auto mt-5 rounded-md h-11 ring-2 ring-gray-400 focus-within:ring focus-within:ring-green-400">
           <div className="m-auto ml-3">
             <FontAwesomeIcon icon={faSearch} size="lg" />
           </div>
