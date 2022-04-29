@@ -52,9 +52,9 @@ const Edit: NextPage<Props> = (props) => {
     app.imageMobile1 && setMobileImageUrlList((images) => [...images, app.imageMobile1]);
     app.imageMobile2 && setMobileImageUrlList((images) => [...images, app.imageMobile2]);
     app.imageMobile3 && setMobileImageUrlList((images) => [...images, app.imageMobile3]);
-    app.imagePc1 && setMobileImageUrlList((images) => [...images, app.imagePc1]);
-    app.imagePc2 && setMobileImageUrlList((images) => [...images, app.imagePc2]);
-    app.imagePc3 && setMobileImageUrlList((images) => [...images, app.imagePc3]);
+    app.imagePc1 && setPcImageUrlList((images) => [...images, app.imagePc1]);
+    app.imagePc2 && setPcImageUrlList((images) => [...images, app.imagePc2]);
+    app.imagePc3 && setPcImageUrlList((images) => [...images, app.imagePc3]);
   }, []);
 
   const [errors, setErrors] = useState<any>({
