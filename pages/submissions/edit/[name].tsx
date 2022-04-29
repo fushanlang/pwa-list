@@ -409,7 +409,8 @@ const Edit: NextPage<Props> = (props) => {
 export const getServerSideProps = async (context) => {
   const { name } = context.params;
   const res = await db.collection("applications").where("nameLowercase", "==", name).get();
-  const app = res.docs.map((res) => res.data());
+  let app = res.docs.map((res) => res.data());
+
   if (app.length == 0) {
     return {
       props: {
@@ -418,6 +419,7 @@ export const getServerSideProps = async (context) => {
       },
     };
   }
+  app[0].id = res.docs[0].id;
   delete app[0]["createdAt"];
   delete app[0]["updatedAt"];
   return {
