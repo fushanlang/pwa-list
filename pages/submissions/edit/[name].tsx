@@ -49,12 +49,30 @@ const Edit: NextPage<Props> = (props) => {
     app.tag1 && setTag1(app.tag1);
     app.tag2 && setTag2(app.tag2);
     app.tag3 && setTag3(app.tag3);
-    app.imageMobile1 && setMobileImageUrlList((images) => [...images, app.imageMobile1]);
-    app.imageMobile2 && setMobileImageUrlList((images) => [...images, app.imageMobile2]);
-    app.imageMobile3 && setMobileImageUrlList((images) => [...images, app.imageMobile3]);
-    app.imagePc1 && setPcImageUrlList((images) => [...images, app.imagePc1]);
-    app.imagePc2 && setPcImageUrlList((images) => [...images, app.imagePc2]);
-    app.imagePc3 && setPcImageUrlList((images) => [...images, app.imagePc3]);
+    if (app.imageMobile1) {
+      setMobileImages((images) => [...images, null]);
+      setMobileImageUrlList((urls) => [...urls, app.imageMobile1]);
+    }
+    if (app.imageMobile2) {
+      setMobileImages((images) => [...images, null]);
+      setMobileImageUrlList((urls) => [...urls, app.imageMobile2]);
+    }
+    if (app.imageMobile3) {
+      setMobileImages((images) => [...images, null]);
+      setMobileImageUrlList((urls) => [...urls, app.imageMobile3]);
+    }
+    if (app.imagePc1) {
+      setPcImages((images) => [...images, null]);
+      setPcImageUrlList((urls) => [...urls, app.imagePc1]);
+    }
+    if (app.imagePc2) {
+      setPcImages((images) => [...images, null]);
+      setPcImageUrlList((urls) => [...urls, app.imagePc2]);
+    }
+    if (app.imagePc3) {
+      setPcImages((images) => [...images, null]);
+      setPcImageUrlList((urls) => [...urls, app.imagePc3]);
+    }
   }, []);
 
   const [errors, setErrors] = useState<any>({
@@ -126,50 +144,37 @@ const Edit: NextPage<Props> = (props) => {
       return;
     }
     setModalsOpen(true);
-    let mobileImageNum = 0;
-    let pcImageNum = 0;
-    let nameLowercase = name.toLowerCase().replace(/\s+/g, "");
-    let tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
-    let tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
-    let tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
-    let uploadedIconUrl = iconUrl;
-    let uploadedImageMobile1Url = mobileImageUrlList[0] !== undefined ? mobileImageUrlList[0] : null;
-    let uploadedImageMobile2Url = mobileImageUrlList[1] !== undefined ? mobileImageUrlList[1] : null;
-    let uploadedImageMobile3Url = mobileImageUrlList[2] !== undefined ? mobileImageUrlList[2] : null;
-    let uploadedImagePc1Url = pcImageUrlList[0] !== undefined ? pcImageUrlList[0] : null;
-    let uploadedImagePc2Url = pcImageUrlList[1] !== undefined ? pcImageUrlList[1] : null;
-    let uploadedImagePc3Url = pcImageUrlList[2] !== undefined ? pcImageUrlList[2] : null;
-
-    if (icon !== null) {
-      uploadedIconUrl = await uploadToStorage(iconsFolder, nameLowercase, icon, "icon");
+    const nameLowercase = name.toLowerCase().replace(/\s+/g, "");
+    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s+/g, "") : null;
+    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s+/g, "") : null;
+    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s+/g, "") : null;
+    let storageIconUrl = iconUrl;
+    let storageMobile1Url = mobileImageUrlList[0] ? mobileImageUrlList[0] : null;
+    let storageMobile2Url = mobileImageUrlList[1] ? mobileImageUrlList[1] : null;
+    let storageMobile3Url = mobileImageUrlList[2] ? mobileImageUrlList[2] : null;
+    let storagePc1Url = pcImageUrlList[0] ? pcImageUrlList[0] : null;
+    let storagePc2Url = pcImageUrlList[1] ? pcImageUrlList[1] : null;
+    let storagePc3Url = pcImageUrlList[2] ? pcImageUrlList[2] : null;
+    if (icon) storageIconUrl = await uploadToStorage(iconsFolder, nameLowercase, icon, "icon");
+    console.log(mobileImages[0]);
+    console.log(mobileImages[1]);
+    console.log(mobileImages[2]);
+    if (mobileImages[0]) {
+      console.log(111);
     }
-    mobileImageNum = await updateImage(
-      imagesFolder,
-      uploadedImageMobile1Url,
-      mobileImages,
-      nameLowercase,
-      mobileImageNum,
-      "mobile1"
-    );
-    mobileImageNum = await updateImage(
-      imagesFolder,
-      uploadedImageMobile2Url,
-      mobileImages,
-      nameLowercase,
-      mobileImageNum,
-      "mobile2"
-    );
-    mobileImageNum = await updateImage(
-      imagesFolder,
-      uploadedImageMobile3Url,
-      mobileImages,
-      nameLowercase,
-      mobileImageNum,
-      "mobile3"
-    );
-    pcImageNum = await updateImage(imagesFolder, uploadedImagePc1Url, pcImages, nameLowercase, pcImageNum, "pc1");
-    pcImageNum = await updateImage(imagesFolder, uploadedImagePc2Url, pcImages, nameLowercase, pcImageNum, "pc2");
-    pcImageNum = await updateImage(imagesFolder, uploadedImagePc3Url, pcImages, nameLowercase, pcImageNum, "pc3");
+    if (mobileImages[1]) {
+      console.log(222);
+    }
+    if (mobileImages[2]) {
+      console.log(333);
+    }
+    if (mobileImages[0]) storageMobile1Url = await uploadToStorage(imagesFolder, nameLowercase, mobileImages[0], "mobile1");
+    if (mobileImages[1]) storageMobile2Url = await uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2");
+    if (mobileImages[2]) storageMobile3Url = await uploadToStorage(imagesFolder, nameLowercase, mobileImages[2], "mobile3");
+    if (pcImages[0]) storagePc1Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1");
+    if (pcImages[1]) storagePc2Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2");
+    if (pcImages[2]) storagePc3Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3");
+
     const appRef = db.collection("applications").doc(app.id);
     await appRef.update({
       nameLowercase: nameLowercase,
@@ -182,13 +187,13 @@ const Edit: NextPage<Props> = (props) => {
       tag2Lowercase: tag2Lowercase,
       tag3Lowercase: tag3Lowercase,
       description: description,
-      icon: uploadedIconUrl,
-      imageMobile1: uploadedImageMobile1Url,
-      imageMobile2: uploadedImageMobile2Url,
-      imageMobile3: uploadedImageMobile3Url,
-      imagePc1: uploadedImagePc1Url,
-      imagePc2: uploadedImagePc2Url,
-      imagePc3: uploadedImagePc3Url,
+      icon: storageIconUrl,
+      imageMobile1: storageMobile1Url,
+      imageMobile2: storageMobile2Url,
+      imageMobile3: storageMobile3Url,
+      imagePc1: storagePc1Url,
+      imagePc2: storagePc2Url,
+      imagePc3: storagePc3Url,
       isPublic: false,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
