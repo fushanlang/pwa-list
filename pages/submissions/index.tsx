@@ -15,6 +15,7 @@ const Submissions: NextPage = () => {
   const [apps, setApps] = useState<any>([]);
   const { currentUser } = useContext(AuthContext);
   const fetchUserApps = async () => {
+    if (!currentUser) return;
     const apps = await db.collection("applications").where("userId", "==", currentUser.uid).orderBy("updatedAt", "desc").get();
     setApps(
       apps.docs.map((doc) => ({
