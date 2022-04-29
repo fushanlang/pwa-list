@@ -4,7 +4,6 @@ import Router from "next/router";
 import { AuthContext } from "../../../contexts/Auth";
 import categories from "../../../consts/categories";
 import editValidate from "../../../plugins/submissions/editValidate";
-import updateImage from "../../../plugins/submissions/updateImage";
 import firebase from "../../../plugins/firebase";
 import uploadToStorage from "../../../plugins/image/uploadToStorage";
 import "firebase/firestore";
