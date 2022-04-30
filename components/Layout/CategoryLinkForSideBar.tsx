@@ -13,12 +13,12 @@ const CategoryLinkForSideBar: React.FC<Props> = ({ categoryName, iconName }) => 
   return (
     <Link href="/categories/[category]" as={`/categories/${categoryName}`}>
       {categoryName === category ? (
-        <a className="mb-4 text-green-600">
+        <a className="mb-4 text-green-500">
           <FontAwesomeIcon icon={iconName} size="xs" className="mr-2" />
           {changeFirstUpperCase(categoryName)}
         </a>
       ) : (
-        <a className="mb-4 transition duration-500 ease-in-out hover:text-green-600">
+        <a className="mb-4 transitions hover:text-green-500">
           <FontAwesomeIcon icon={iconName} size="xs" className="mr-2" />
           {changeFirstUpperCase(categoryName)}
         </a>

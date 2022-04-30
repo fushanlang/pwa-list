@@ -31,7 +31,7 @@ const Card: React.FC<Props> = ({ apps }) => {
                   </span>
                 )}
                 {app.tag3 && (
-                  <span className="text-xs px-1.5 py-0.5 mr-1 rounded-xl border-2 font-semibold border-green-300 ">
+                  <span className="text-xs px-1.5 py-0.5 mr-1 rounded-xl border-2 font-semibold border-green-300">
                     {app.tag3}
                   </span>
                 )}

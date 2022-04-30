@@ -55,7 +55,7 @@ const TermsPrivacy: NextPage = () => {
         </p>
         <h2>Contact Us</h2>
         <p>If you have any questions or concerns, please contact us by sending email.</p>
-        <a className="text-green-600" href="mailto:hello.pwalist@gmail.com">
+        <a className="text-green-500" href="mailto:hello.pwalist@gmail.com">
           hello.pwalist@gmail.com
         </a>
       </div>

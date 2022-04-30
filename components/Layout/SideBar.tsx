@@ -54,12 +54,12 @@ const SideBar: React.FC = () => {
         <div className="flex flex-col mt-3 ">
           <Link href="/" as="/">
             {path === "/" ? (
-              <a className="text-base mb-3 text-green-600">
+              <a className="text-base mb-3 text-green-500">
                 <FontAwesomeIcon icon={faHome} size="xs" className="mr-2" />
                 Home
               </a>
             ) : (
-              <a className="text-base mb-3 transition duration-500 ease-in-out hover:text-green-600">
+              <a className="text-base mb-3 transition duration-500 ease-in-out hover:text-green-500">
                 <FontAwesomeIcon icon={faHome} size="xs" className="mr-2" />
                 Home
               </a>
@@ -67,12 +67,12 @@ const SideBar: React.FC = () => {
           </Link>
           <Link href="/search" as="/search">
             {path === "/search" ? (
-              <a className="text-base mb-3 text-green-600">
+              <a className="text-base mb-3 text-green-500">
                 <FontAwesomeIcon icon={faSearch} size="xs" className="mr-2" />
                 Search
               </a>
             ) : (
-              <a className="text-base mb-3 transition duration-500 ease-in-out hover:text-green-600">
+              <a className="text-base mb-3 hover:text-green-500">
                 <FontAwesomeIcon icon={faSearch} size="xs" className="mr-2" />
                 Search
               </a>

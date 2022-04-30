@@ -51,11 +51,11 @@ const Submissions: NextPage = () => {
             <Loading />
           ) : (
             <div className="rounded-lg px-5 py-5">
-              <h1 className="text-2xl font-semibold mb-4">Submissions</h1>
-              <div className="overflow-scroll mt-5">
+              <h1 className="text-2xl font-semibold">Submissions</h1>
+              <div className="overflow-scroll mt-3">
                 <table className="text-base border">
                   <thead>
-                    <tr className="text-gray-500 border flex items-center h-9">
+                    <tr className="border flex items-center h-9">
                       <th className="w-64">Name</th>
                       <th className="w-32">Status</th>
                       <th className="w-64">Actions</th>
@@ -67,7 +67,7 @@ const Submissions: NextPage = () => {
                     <tbody>
                       <tr className="text-center">
                         <td colSpan={3} className="bg-gray-50 py-10">
-                          <p className="text-gray-500 mb-2">Create your first submission</p>
+                          <p className="mb-2">Create your first submission</p>
                           <Link href="/submissions/create" as="/submissions/create">
                             <button className="text-white px-3 py-1 border rounded bg-green-400">New Submission</button>
                           </Link>
@@ -79,12 +79,12 @@ const Submissions: NextPage = () => {
               </div>
               <div className="mt-5">
                 <Link href="/submissions/create" as="/submissions/create">
-                  <button className="px-5 mr-1 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100">
+                  <button className="px-5 mr-1 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 dark:hover:bg-gray-700">
                     New Submission
                   </button>
                 </Link>
                 <button
-                  className="px-5 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+                  className="px-5 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 dark:hover:bg-gray-700"
                   onClick={signOut}
                 >
                   Sign Out
