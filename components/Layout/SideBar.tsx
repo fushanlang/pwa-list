@@ -49,8 +49,8 @@ const SideBar: React.FC = () => {
   const path = router.pathname;
   const date = new Date();
   return (
-    <div id="sideBar" className="bg-white border-r border-gray-300 w-60 hidden md:block overflow-scroll">
-      <div id="sideBar" className="px-6 pt-3">
+    <div className="border-r border-gray-300 w-60 hidden md:block overflow-scroll">
+      <div className="px-6 pt-3">
         <div className="flex flex-col mt-3 ">
           <Link href="/" as="/">
             {path === "/" ? (
@@ -78,7 +78,7 @@ const SideBar: React.FC = () => {
               </a>
             )}
           </Link>
-          <p className="uppercase text-gray-600 mb-3 mt-1">categories</p>
+          <p className="mb-3 mt-1">CATEGORIES</p>
           <CategoryLinkForSideBar categoryName="business" iconName="chart-bar" />
           <CategoryLinkForSideBar categoryName="design" iconName="palette" />
           <CategoryLinkForSideBar categoryName="education" iconName="book-open" />

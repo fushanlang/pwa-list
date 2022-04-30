@@ -7,7 +7,7 @@ const BottomBar: React.FC = () => {
   const router = useRouter();
   const path = router.pathname;
   return (
-    <div className="bottom-0 w-full border-t bg-white fixed md:hidden">
+    <div className="bottom-0 w-full border-t fixed md:hidden">
       <ul className="flex h-14 justify-around items-center pt-1">
         <li className="text-center pr-6">
           <Link href="/">

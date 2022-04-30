@@ -52,7 +52,7 @@ const App: NextPage<Props> = (props) => {
         ) : (
           <div className="border border-green-200 px-4 py-7 rounded-lg">
             <button
-              className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
+              className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
               onClick={() => router.back()}
             >
               <FontAwesomeIcon icon={faChevronLeft} />
@@ -67,17 +67,17 @@ const App: NextPage<Props> = (props) => {
                 <h2 className="text-base text-gray-500 font-semibold ml-1">{app.category}</h2>
                 <div className="mt-2">
                   {app.tag1 && (
-                    <span className="text-sm px-1.5 py-0.5 mr-1 rounded-xl border-2 border-green-300 text-gray-500 font-semibold">
+                    <span className="px-1.5 py-0.5 mr-1 rounded-xl border-2 border-green-300 text-gray-500 font-semibold">
                       {app.tag1}
                     </span>
                   )}
                   {app.tag2 && (
-                    <span className="text-sm px-1.5 py-0.5 mr-1 rounded-xl border-2 border-green-300 text-gray-500 font-semibold">
+                    <span className="px-1.5 py-0.5 mr-1 rounded-xl border-2 border-green-300 text-gray-500 font-semibold">
                       {app.tag2}
                     </span>
                   )}
                   {app.tag3 && (
-                    <span className="text-sm px-1.5 py-0.5 mr-1 rounded-xl border-2 border-green-300 text-gray-500 font-semibold">
+                    <span className="px-1.5 py-0.5 mr-1 rounded-xl border-2 border-green-300 text-gray-500 font-semibold">
                       {app.tag3}
                     </span>
                   )}

@@ -15,18 +15,17 @@ const About: NextPage = () => {
             can be installed on PCs and smartphones."
         />
       </Head>
-      <div className="pl-6 pr-4 py-5 bg-white rounded-lg">
+      <div className="pl-6 pr-4 py-5 ">
         <h1 className="text-3xl font-bold mb-4" style={logo}>
           P<span className="text-green-500">W</span>A LIST
         </h1>
         <h2 className="text-2xl font-bold">What is a PWA?</h2>
         <div className="mt-3 leading-relaxed text-lg">
           <p>
-            PWA stands for 'Progressive Web Apps' and refers to websites that can be installed on PCs and
-            smartphones.
+            PWA stands for 'Progressive Web Apps' and refers to websites that can be installed on PCs and smartphones.
             <br />
-            By installing a PWA, a website is added to the home screen, and you can use the website with a
-            native application-like feel.
+            By installing a PWA, a website is added to the home screen, and you can use the website with a native application-like
+            feel.
           </p>
           <h2 className="text-xl font-bold mt-5 mb-1">How to install</h2>
           <p>
@@ -35,21 +34,9 @@ const About: NextPage = () => {
             The following is an explanation of how to install in the case of Chrome.
           </p>
           <div className="ml-3 mt-5 mb-3">
-            <img
-              style={{ height: "530px" }}
-              src={"/about/mobile1.jpg"}
-              className="mr-8 mb-3 rounded-md inline"
-            />
-            <img
-              style={{ maxHeight: "530px" }}
-              src={"/about/mobile2.jpg"}
-              className="mr-8 mb-3 rounded-md inline"
-            />
-            <img
-              style={{ maxHeight: "530px" }}
-              src={"/about/mobile3.jpg"}
-              className="mr-8 mb-3 rounded-md inline"
-            />
+            <img style={{ height: "530px" }} src={"/about/mobile1.jpg"} className="mr-8 mb-3 rounded-md inline" />
+            <img style={{ maxHeight: "530px" }} src={"/about/mobile2.jpg"} className="mr-8 mb-3 rounded-md inline" />
+            <img style={{ maxHeight: "530px" }} src={"/about/mobile3.jpg"} className="mr-8 mb-3 rounded-md inline" />
           </div>
           <p>The procedure is a little different depending on the browser, but basically it is just this.</p>
           <h2 className="text-xl font-bold mt-5 mb-1">What is PWA List?</h2>

@@ -310,7 +310,7 @@ const Edit: NextPage<Props> = (props) => {
                   </div>
                 )}
                 <div className="mb-8">
-                  <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+                  <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
                     Choose
                     <input
                       type="file"
@@ -343,7 +343,7 @@ const Edit: NextPage<Props> = (props) => {
                   ))}
                 </div>
                 <div className="mb-8">
-                  <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+                  <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
                     Choose
                     <input
                       type="file"
@@ -370,7 +370,7 @@ const Edit: NextPage<Props> = (props) => {
                   ))}
                 </div>
                 <div className="mb-8">
-                  <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 bg-white shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+                  <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
                     Choose
                     <input
                       type="file"

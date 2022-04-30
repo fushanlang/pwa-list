@@ -52,7 +52,7 @@ class MyDocument extends Document {
           <meta name="description" content={description} />
           <meta key="keywords" name="keywords" content="pwa, Progressive Web Apps" />
         </Head>
-        <body>
+        <body className="text-sm font-sans text-gray-600">
           <Main />
           <NextScript />
         </body>
