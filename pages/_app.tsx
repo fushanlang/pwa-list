@@ -8,6 +8,7 @@ import { AppProps } from "next/app";
 import Router from "next/router";
 import * as gtag from "../plugins/gtag";
 import { AuthProvider } from "../contexts/Auth";
+import { ThemeProvider } from "next-themes";
 import Head from "next/head";
 Router.events.on("routeChangeComplete", (url) => gtag.pageview(url));
 
@@ -32,9 +33,11 @@ const WrappedApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         {/* font */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" />
       </Head>
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
+      <ThemeProvider attribute="class" defaultTheme="light">
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
+      </ThemeProvider>
     </>
   );
 };

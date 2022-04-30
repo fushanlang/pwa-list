@@ -2,13 +2,14 @@ import { useContext } from "react";
 import Link from "next/link";
 import firebase from "../plugins/firebase";
 import "firebase/firestore";
-import React from "react";
 import { NextPage } from "next";
 import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
+import ChangeThemeButton from "../components/Common/ChangeThemeButton";
 import { AuthContext } from "../contexts/Auth";
+
 const db = firebase.firestore();
 const logo = {
   fontFamily: "'Nunito', sans-serif",
@@ -22,9 +23,14 @@ const Index: NextPage<Props> = ({ apps }) => {
   return (
     <Layout title="Home">
       <div className="px-2">
-        <h1 className="text-3xl font-bold mt-3" style={logo}>
-          P<span className="text-green-500">W</span>A LIST
-        </h1>
+        <div className="flex mt-3 justify-between">
+          <h1 className="text-3xl font-bold" style={logo}>
+            P<span className="text-green-500">W</span>A LIST
+          </h1>
+          <span className="mr-6">
+            <ChangeThemeButton />
+          </span>
+        </div>
         <div>
           <div className="text-xl font-bold mt-3">
             <span className="text-xl px-2 py-0.5 mr-1 text-gray-500">!! New Apps !!</span>
