@@ -280,7 +280,7 @@ const Create: NextPage = () => {
                 </div>
               )}
               <div className="mb-8">
-                <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+                <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
                   Choose
                   <input
                     type="file"
@@ -313,7 +313,7 @@ const Create: NextPage = () => {
                 ))}
               </div>
               <div className="mb-8">
-                <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+                <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
                   Choose
                   <input
                     type="file"
@@ -340,7 +340,7 @@ const Create: NextPage = () => {
                 ))}
               </div>
               <div className="mb-8">
-                <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out">
+                <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
                   Choose
                   <input
                     type="file"

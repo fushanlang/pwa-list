@@ -1,9 +1,11 @@
 import Modal from "react-modal";
+import { useTheme } from "next-themes";
 import firebase from "../../plugins/firebase";
 import "firebase/firestore";
 import deleteFromStorage from "../../plugins/image/deleteFromStorage";
 const db = firebase.firestore();
 Modal.setAppElement("#__next");
+
 const modalStyle = {
   overlay: {
     position: "fixed",
@@ -21,6 +23,8 @@ const modalStyle = {
     borderRadius: "1rem",
   },
 };
+let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
+modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
 
 interface Props {
   modalsOpen: boolean;
@@ -42,9 +46,15 @@ const DeleteModal: React.FC<Props> = ({ modalsOpen, setModalsOpen, targetApp, fe
     if (app.imagePc2 !== null) await deleteFromStorage("application-images", app.name, "pc2");
     if (app.imagePc3 !== null) await deleteFromStorage("application-images", app.name, "pc3");
   };
+  const { theme } = useTheme();
+
   return (
     <>
-      <Modal style={modalStyle} isOpen={modalsOpen} onRequestClose={() => setModalsOpen(false)}>
+      <Modal
+        style={theme === "dark" ? modalStyleDarkMode : modalStyle}
+        isOpen={modalsOpen}
+        onRequestClose={() => setModalsOpen(false)}
+      >
         <div className="text-center mt-5">
           <img className="inline-block w-20" src={targetApp.icon} />
           <div className="text-xl mb-6">{targetApp.name}</div>
@@ -56,7 +66,7 @@ const DeleteModal: React.FC<Props> = ({ modalsOpen, setModalsOpen, targetApp, fe
             Delete
           </button>
           <button
-            className="text-lg h-10 px-3 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+            className="text-lg h-10 px-3 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 dark:hover:bg-gray-700"
             onClick={() => setModalsOpen(false)}
           >
             Cancel
