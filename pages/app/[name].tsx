@@ -52,7 +52,7 @@ const App: NextPage<Props> = (props) => {
         ) : (
           <div className="border border-green-200 px-4 py-7 rounded-lg">
             <button
-              className="text-center mb-5 py-1 px-5 inline-block tracking-wide border-2 border-black shadow-md rounded-md hover:bg-gray-200 hover:shadow-none transition ease-in-out"
+              className="text-center mb-5 py-1 px-5 inline-block tracking-wide rounded-md border-2 border-black dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               onClick={() => router.back()}
             >
               <FontAwesomeIcon icon={faChevronLeft} />
