@@ -48,7 +48,9 @@ const Submissions: NextPage = () => {
       {currentUser && (
         <>
           {isLoading ? (
-            <Loading />
+            <div className="mt-64">
+              <Loading />
+            </div>
           ) : (
             <div className="rounded-lg px-5 py-5">
               <h1 className="text-2xl font-semibold">Submissions</h1>

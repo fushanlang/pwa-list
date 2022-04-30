@@ -1,8 +1,6 @@
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import "../styles/swiper.css";
-import "../styles/loading.css";
-import "../styles/loadingCompletedModal.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { AppProps } from "next/app";
 import Router from "next/router";

@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import Link from "next/link";
+import Loading from "../../components/Common/Loading";
 Modal.setAppElement("#__next");
 const modalStyle = {
   overlay: {
@@ -31,7 +32,7 @@ const CompletedModal: React.FC<Props> = ({ modalsOpen, isSubmitting }) => {
       <Modal style={modalStyle} isOpen={modalsOpen}>
         {isSubmitting ? (
           <div className="text-center mt-64">
-            <div className="loader-completed-modal" />
+            <Loading />
             <div className="text-xl mt-10">submitting...</div>
           </div>
         ) : (
