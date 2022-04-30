@@ -156,7 +156,7 @@ const App: NextPage<Props> = (props) => {
                 />
               )}
             </div>
-            <div className="mt-7 px-4">
+            <div className="mt-7 px-4 break-words">
               <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
               <p style={{ whiteSpace: "pre-line" }} className="text-left text-lg">
                 {app.description}
