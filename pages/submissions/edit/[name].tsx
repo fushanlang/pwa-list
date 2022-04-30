@@ -195,10 +195,10 @@ const Edit: NextPage<Props> = (props) => {
               <div className="ml-1 mt-1 mb-9">
                 <div className="mb-4">
                   <div className="block font-bold">Name</div>
-                  <div className="text-xl font-bold ml-1">{name}</div>
+                  <div className="text-xl font-bold">{name}</div>
                 </div>
-                <div className="mb-4">
-                  <label className="block font-bold mb-1">
+                <div className="mb-6">
+                  <label className="block font-bold mb-2">
                     Link
                     <span className="text-red-400 ml-2">*</span>
                   </label>
@@ -215,8 +215,8 @@ const Edit: NextPage<Props> = (props) => {
                   />
                   <ErrorMessage errors={errors.link}></ErrorMessage>
                 </div>
-                <div className="mb-4">
-                  <label className="block font-bold mb-1">
+                <div className="mb-6">
+                  <label className="block font-bold mb-2">
                     Category<span className="text-red-400 ml-2">*</span>
                   </label>
                   <select
@@ -236,11 +236,11 @@ const Edit: NextPage<Props> = (props) => {
                   </select>
                   <ErrorMessage errors={errors.category}></ErrorMessage>
                 </div>
-                <div className="mb-4">
-                  <label className="block font-bold mb-1">
-                    Tags
+                <div className="mb-6">
+                  <label className="block mb-2">
+                    <span className="font-bold">Tags</span>
                     <span className="text-red-400 ml-2">*</span>
-                    <span className="text-xs text-red-400 ml-2">1 or more required</span>
+                    <span className="ml-2">1 or more required</span>
                   </label>
                   <input
                     className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
@@ -276,8 +276,8 @@ const Edit: NextPage<Props> = (props) => {
                   <ErrorMessage errors={errors.tag2}></ErrorMessage>
                   <ErrorMessage errors={errors.tag3}></ErrorMessage>
                 </div>
-                <div className="mb-4">
-                  <label className="block font-bold mb-1">
+                <div className="mb-6">
+                  <label className="block font-bold mb-2">
                     About this app
                     <span className="text-red-400 ml-2">*</span>
                   </label>
@@ -325,10 +325,10 @@ const Edit: NextPage<Props> = (props) => {
                   </label>
                   <ErrorMessage errors={errors.icon}></ErrorMessage>
                 </div>
-                <p className="text-base font-bold mb-2">
-                  screenshots
+                <p className="mb-2">
+                  <span className="font-bold text-base">screenshots</span>
                   <span className="text-red-400 ml-2">*</span>
-                  <span className="text-xs text-red-400 ml-2">Either mobile or PC screenshot is required.</span>
+                  <span className="ml-2">Either mobile or PC screenshot is required.</span>
                 </p>
                 <label className="block font-bold mb-2">Mobile size screenshots (Up to 3 Images)</label>
                 <div className="flex overflow-scroll">
