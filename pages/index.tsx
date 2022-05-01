@@ -50,20 +50,20 @@ const Index: NextPage<Props> = ({ apps }) => {
           {/* Google Adsense end*/}
           <div className="flex flex-col items-center text-center mt-7 md:hidden">
             <Link href="/about" as="/about">
-              <a className="py-2 w-48 mb-4 text-gray-50 bg-gray-600 shadow-md rounded-2xl hover:bg-gray-700 hover:shadow-none transition ease-in-out">
+              <a className="py-2 w-48 mb-4 text-white bg-gray-500 rounded-2xl hover:bg-gray-600">
                 <strong>What is a PWA</strong>
               </a>
             </Link>
 
             {currentUser ? (
               <Link href="/submissions" as="/submissions">
-                <a className="py-2 w-48 mb-3 text-gray-50 bg-green-400 shadow-md rounded-2xl hover:bg-green-500 hover:shadow-none transition ease-in-out">
+                <a className="py-2 w-48 mb-3 text-white bg-green-500 rounded-2xl hover:bg-green-600">
                   <strong>Submit App</strong>
                 </a>
               </Link>
             ) : (
               <Link href="/sign-up" as="/sign-up">
-                <a className="py-2 w-48 mb-3 text-gray-50 bg-green-400 shadow-md rounded-2xl hover:bg-green-500 hover:shadow-none transition ease-in-out">
+                <a className="py-2 w-48 mb-3 text-white bg-green-400 rounded-2xl hover:bg-green-500">
                   <strong>Submit App</strong>
                 </a>
               </Link>
