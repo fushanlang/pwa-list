@@ -27,7 +27,7 @@ const Index: NextPage<Props> = ({ apps }) => {
           <h1 className="text-3xl font-bold" style={logo}>
             P<span className="text-green-500">W</span>A LIST
           </h1>
-          <span className="mr-6">
+          <span className="mr-2">
             <ChangeThemeButton />
           </span>
         </div>

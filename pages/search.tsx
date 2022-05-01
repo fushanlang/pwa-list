@@ -36,29 +36,29 @@ const Search: NextPage = () => {
       .endAt(searchParam + "\uf8ff")
       .where("isPublic", "==", true)
       .get();
-    // const appsTag1 = await db
-    //   .collection("applications")
-    //   .orderBy("tag1Lowercase")
-    //   .startAt(searchParam)
-    //   .endAt(searchParam + "\uf8ff")
-    //   .where("isPublic", "==", true)
-    //   .get();
-    // const appsTag2 = await db
-    //   .collection("applications")
-    //   .orderBy("tag2Lowercase")
-    //   .startAt(searchParam)
-    //   .endAt(searchParam + "\uf8ff")
-    //   .where("isPublic", "==", true)
-    //   .get();
-    // const appsTag3 = await db
-    //   .collection("applications")
-    //   .orderBy("tag3Lowercase")
-    //   .startAt(searchParam)
-    //   .endAt(searchParam + "\uf8ff")
-    //   .where("isPublic", "==", true)
-    //   .get();
+    const appsTag1 = await db
+      .collection("applications")
+      .orderBy("tag1Lowercase")
+      .startAt(searchParam)
+      .endAt(searchParam + "\uf8ff")
+      .where("isPublic", "==", true)
+      .get();
+    const appsTag2 = await db
+      .collection("applications")
+      .orderBy("tag2Lowercase")
+      .startAt(searchParam)
+      .endAt(searchParam + "\uf8ff")
+      .where("isPublic", "==", true)
+      .get();
+    const appsTag3 = await db
+      .collection("applications")
+      .orderBy("tag3Lowercase")
+      .startAt(searchParam)
+      .endAt(searchParam + "\uf8ff")
+      .where("isPublic", "==", true)
+      .get();
     let mergedApps = [];
-    mergedApps.push(...appsName.docs);
+    mergedApps.push(...appsName.docs, ...appsTag1.docs, ...appsTag2.docs, ...appsTag3.docs);
     const apps = mergedApps.map((doc) => ({
       id: doc.id,
       name: doc.data().name,
