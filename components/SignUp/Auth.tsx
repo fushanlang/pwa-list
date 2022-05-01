@@ -23,7 +23,7 @@ const Auth: React.FC = () => {
       <div>
         <div className="flex justify-center flex-wrap">
           <button
-            className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+            className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
             onClick={handleGoogleSignUp}
           >
             <div className="mr-3 w-6">
@@ -32,7 +32,7 @@ const Auth: React.FC = () => {
             Sign in with Google
           </button>
           <button
-            className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+            className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
             onClick={handleTwitterSignUp}
           >
             <div className="mr-3 w-7">
@@ -41,7 +41,7 @@ const Auth: React.FC = () => {
             Sign in with Twitter
           </button>
           <button
-            className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+            className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
             onClick={handleFacebookSignIn}
           >
             <div className="mr-3 w-5">

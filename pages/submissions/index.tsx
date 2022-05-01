@@ -81,14 +81,11 @@ const Submissions: NextPage = () => {
               </div>
               <div className="mt-5">
                 <Link href="/submissions/create" as="/submissions/create">
-                  <button className="px-5 mr-1 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <button className="px-5 mr-1 font-bold h-9 border rounded hover:bg-gray-100 dark:hover:bg-gray-700">
                     New Submission
                   </button>
                 </Link>
-                <button
-                  className="px-5 font-bold h-9 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 dark:hover:bg-gray-700"
-                  onClick={signOut}
-                >
+                <button className="px-5 font-bold h-9 border rounded hover:bg-gray-100 dark:hover:bg-gray-700" onClick={signOut}>
                   Sign Out
                 </button>
               </div>

@@ -388,7 +388,7 @@ const Edit: NextPage<Props> = (props) => {
               </div>
               <div className="ml-1 mt-10 mb-12">
                 <button
-                  className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none"
                   type="submit"
                 >
                   Submit

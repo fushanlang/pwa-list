@@ -48,7 +48,7 @@ const About: NextPage = () => {
         </div>
         <Link href="/" as="/">
           <button
-            className="bg-green-400 hover:bg-green-500 text-white font-bold mt-5 w-36 h-8 rounded focus:outline-none focus:shadow-outline"
+            className="bg-green-400 hover:bg-green-500 text-white font-bold mt-5 w-36 h-8 rounded focus:outline-none"
             type="submit"
           >
             Home

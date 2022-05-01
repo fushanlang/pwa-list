@@ -43,10 +43,7 @@ const CompletedModal: React.FC<Props> = ({ modalsOpen, isSubmitting }) => {
             <div className="text-2xl mt-6 mb-7">Thank you</div>
             <div className="mt-4">
               <Link href="/submissions" as="/submissions">
-                <button
-                  className="py-1 px-5 bg-green-400 hover:bg-green-500 text-white rounded focus:outline-none focus:shadow-outline"
-                  type="submit"
-                >
+                <button className="py-1 px-5 bg-green-400 hover:bg-green-500 text-white rounded focus:outline-none" type="submit">
                   Check Submission
                 </button>
               </Link>

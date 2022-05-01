@@ -60,13 +60,13 @@ const DeleteModal: React.FC<Props> = ({ modalsOpen, setModalsOpen, targetApp, fe
           <div className="text-xl mb-6">{targetApp.name}</div>
           <div className="text-base mb-5">Are you sure you want to delete this submission?</div>
           <button
-            className="text-lg h-10 px-3 mr-2 border rounded shadow-sm text-white bg-red-500 hover:shadow-none hover:bg-red-600"
+            className="text-lg h-10 px-3 mr-2 border rounded text-white bg-red-500 hover:bg-red-600"
             onClick={() => handleDeleteApp(targetApp)}
           >
             Delete
           </button>
           <button
-            className="text-lg h-10 px-3 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="text-lg h-10 px-3 border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
             onClick={() => setModalsOpen(false)}
           >
             Cancel
