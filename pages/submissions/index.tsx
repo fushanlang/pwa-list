@@ -68,10 +68,10 @@ const Submissions: NextPage = () => {
                   ) : (
                     <tbody>
                       <tr className="text-center">
-                        <td colSpan={3} className="bg-gray-50 py-10">
+                        <td colSpan={3} className="py-10">
                           <p className="mb-2">Create your first submission</p>
                           <Link href="/submissions/create" as="/submissions/create">
-                            <button className="text-white px-3 py-1 border rounded bg-green-400">New Submission</button>
+                            <button className="text-white px-3 py-1 rounded bg-green-400">New Submission</button>
                           </Link>
                         </td>
                       </tr>
