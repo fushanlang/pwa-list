@@ -49,17 +49,17 @@ const SideBar: React.FC = () => {
   const path = router.pathname;
   const date = new Date();
   return (
-    <div id="sideBar" className="bg-white border-r border-gray-300 w-60 hidden md:block overflow-scroll">
-      <div id="sideBar" className="px-6 pt-3">
+    <div className="border-r border-gray-300 w-60 hidden md:block overflow-scroll">
+      <div className="px-6 pt-3">
         <div className="flex flex-col mt-3 ">
           <Link href="/" as="/">
             {path === "/" ? (
-              <a className="text-base mb-3 text-green-600">
+              <a className="text-base mb-3 text-green-500">
                 <FontAwesomeIcon icon={faHome} size="xs" className="mr-2" />
                 Home
               </a>
             ) : (
-              <a className="text-base mb-3 transition duration-500 ease-in-out hover:text-green-600">
+              <a className="text-base mb-3 transition duration-500 ease-in-out hover:text-green-500">
                 <FontAwesomeIcon icon={faHome} size="xs" className="mr-2" />
                 Home
               </a>
@@ -67,18 +67,18 @@ const SideBar: React.FC = () => {
           </Link>
           <Link href="/search" as="/search">
             {path === "/search" ? (
-              <a className="text-base mb-3 text-green-600">
+              <a className="text-base mb-3 text-green-500">
                 <FontAwesomeIcon icon={faSearch} size="xs" className="mr-2" />
                 Search
               </a>
             ) : (
-              <a className="text-base mb-3 transition duration-500 ease-in-out hover:text-green-600">
+              <a className="text-base mb-3 hover:text-green-500">
                 <FontAwesomeIcon icon={faSearch} size="xs" className="mr-2" />
                 Search
               </a>
             )}
           </Link>
-          <p className="uppercase text-gray-600 mb-3 mt-1">categories</p>
+          <p className="mb-3 mt-1">CATEGORIES</p>
           <CategoryLinkForSideBar categoryName="business" iconName="chart-bar" />
           <CategoryLinkForSideBar categoryName="design" iconName="palette" />
           <CategoryLinkForSideBar categoryName="education" iconName="book-open" />
@@ -99,19 +99,19 @@ const SideBar: React.FC = () => {
       <div className="mb-2 w-60 text-center">
         <div className="w-full border-t-2">
           <Link href="/about" as="/about">
-            <a className="w-40 inline-block mt-5 mb-1 py-1 text-gray-50 bg-gray-600 shadow-md rounded-2xl hover:bg-gray-700 hover:shadow-none transition ease-in-out">
+            <a className="w-40 inline-block mt-5 mb-1 py-1 text-white bg-gray-500 rounded-2xl hover:bg-gray-600">
               <strong>What is a PWA</strong>
             </a>
           </Link>
           {currentUser ? (
             <Link href="/submissions" as="/submissions">
-              <a className="w-40 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-2xl hover:bg-green-500 hover:shadow-none transition ease-in-out">
+              <a className="w-40 inline-block mt-2 mb-1 py-1 text-white bg-green-400 rounded-2xl hover:bg-green-500">
                 <strong>Submit App</strong>
               </a>
             </Link>
           ) : (
             <Link href="/sign-up" as="/sign-up">
-              <a className="w-40 inline-block mt-2 mb-1 py-1 text-gray-50 bg-green-400 shadow-md rounded-2xl hover:bg-green-500 hover:shadow-none transition ease-in-out">
+              <a className="w-40 inline-block mt-2 mb-1 py-1 text-white bg-green-400 rounded-2xl hover:bg-green-500">
                 <strong>Submit App</strong>
               </a>
             </Link>

@@ -7,17 +7,17 @@ const BottomBar: React.FC = () => {
   const router = useRouter();
   const path = router.pathname;
   return (
-    <div className="bottom-0 w-full border-t bg-white fixed md:hidden">
+    <div className="bottom-0 w-full border-t fixed bg-white dark:bg-gray-800 md:hidden">
       <ul className="flex h-14 justify-around items-center pt-1">
         <li className="text-center pr-6">
           <Link href="/">
             {path === "/" ? (
-              <a className="block text-green-600">
+              <a className="block text-green-500">
                 <FontAwesomeIcon icon={faHome} size="lg" className="" />
                 <span className="text-xs block">Home</span>
               </a>
             ) : (
-              <a className="block transition duration-500 ease-in-out hover:text-green-600">
+              <a className="block hover:text-green-500">
                 <FontAwesomeIcon icon={faHome} size="lg" className="" />
                 <span className="text-xs block">Home</span>
               </a>
@@ -27,12 +27,12 @@ const BottomBar: React.FC = () => {
         <li className="text-center">
           <Link href="/search">
             {path === "/search" ? (
-              <a className="block text-green-600">
+              <a className="block text-green-500">
                 <FontAwesomeIcon icon={faSearch} size="lg" className="" />
                 <span className="text-xs block">Search</span>
               </a>
             ) : (
-              <a className="block transition duration-500 ease-in-out hover:text-green-600">
+              <a className="block hover:text-green-500">
                 <FontAwesomeIcon icon={faSearch} size="lg" className="" />
                 <span className="text-xs block">Search</span>
               </a>
@@ -42,12 +42,12 @@ const BottomBar: React.FC = () => {
         <li className="text-center">
           <Link href="/categories">
             {path === "/categories" ? (
-              <a className="block text-green-600">
+              <a className="block text-green-500">
                 <FontAwesomeIcon icon={faListUl} size="lg" className="" />
                 <span className="text-xs block">Categories</span>
               </a>
             ) : (
-              <a className="block transition duration-500 ease-in-out hover:text-green-600">
+              <a className="block hover:text-green-500">
                 <FontAwesomeIcon icon={faListUl} size="lg" className="" />
                 <span className="text-xs block">Categories</span>
               </a>

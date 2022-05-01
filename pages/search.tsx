@@ -95,7 +95,9 @@ const Search: NextPage = () => {
           />
         </div>
         {isLoading ? (
-          <Loading />
+          <div className="mt-64">
+            <Loading />
+          </div>
         ) : (
           <div className="mt-8">
             <Card apps={searchedApps} />

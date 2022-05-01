@@ -32,7 +32,7 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
             <td className="w-64 flex justify-center">
               {app.isPublic && (
                 <a
-                  className="inline-flex items-center h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+                  className="inline-flex items-center h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 dark:hover:bg-gray-700"
                   target="_blank"
                   href={`/app/${app.nameLowercase}`}
                 >
@@ -40,12 +40,12 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
                 </a>
               )}
               <Link href="/submissions/edit/[name]" as={`/submissions/edit/${app.nameLowercase}`}>
-                <button className="h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100">
+                <button className="h-8 px-2 mr-1 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 dark:hover:bg-gray-700">
                   Edit
                 </button>
               </Link>
               <button
-                className="h-8 px-2 border rounded shadow-sm hover:shadow-none hover:bg-gray-100"
+                className="h-8 px-2 border rounded shadow-sm hover:shadow-none hover:bg-gray-100 dark:hover:bg-gray-700"
                 onClick={() => handleDeleteApp(app)}
               >
                 Delete
@@ -54,12 +54,7 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
           </tr>
         ))}
       </tbody>
-      <DeleteModal
-        modalsOpen={modalsOpen}
-        setModalsOpen={setModalsOpen}
-        targetApp={targetApp}
-        fetchApps={fetchApps}
-      />
+      <DeleteModal modalsOpen={modalsOpen} setModalsOpen={setModalsOpen} targetApp={targetApp} fetchApps={fetchApps} />
     </>
   );
 };
