@@ -62,19 +62,13 @@ const App: NextPage<Props> = (props) => {
               <div className="mr-4 w-20">
                 <img className="rounded-md" src={app.icon || "/default-app-icon.png"} />
               </div>
-              <div className="flex flex-col">
-                <h1 className="font-bold text-2xl ml-1">{app.name}</h1>
-                <h2 className="text-base font-semibold ml-1">{app.category}</h2>
-                <div className="mt-2">
-                  {app.tag1 && (
-                    <span className="px-1.5 py-0.5 mr-1 rounded-xl border-2 border-gray-300  font-semibold">{app.tag1}</span>
-                  )}
-                  {app.tag2 && (
-                    <span className="px-1.5 py-0.5 mr-1 rounded-xl border-2 border-gray-300 font-semibold">{app.tag2}</span>
-                  )}
-                  {app.tag3 && (
-                    <span className="px-1.5 py-0.5 mr-1 rounded-xl border-2 border-gray-300 font-semibold">{app.tag3}</span>
-                  )}
+              <div className="flex flex-col ml-1">
+                <h1 className="font-bold text-2xl">{app.name}</h1>
+                <h2 className="text-base font-semibold">{app.category}</h2>
+                <div className="mt-1 text-base font-semibold">
+                  {app.tag1 && <span>{app.tag1}</span>}
+                  {app.tag2 && <span> / {app.tag2}</span>}
+                  {app.tag3 && <span> / {app.tag3}</span>}
                 </div>
               </div>
             </div>
