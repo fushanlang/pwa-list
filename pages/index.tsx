@@ -32,9 +32,7 @@ const Index: NextPage<Props> = ({ apps }) => {
           </span>
         </div>
         <div>
-          <div className="text-xl font-bold mt-3">
-            <span className="text-xl px-2 py-0.5 mr-1">!! New Apps !!</span>
-          </div>
+          <h2 className="text-xl font-bold mt-3 ml-1">!! New Apps !!</h2>
           <div className="mt-2">
             <Card apps={apps} />
           </div>
