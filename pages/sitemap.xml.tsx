@@ -1,6 +1,7 @@
 // pages/sitemap.xml.ts
 import { GetServerSidePropsContext } from "next";
 import React from "react";
+import "firebase/firestore";
 import firebase from "../plugins/firebase";
 
 const db = firebase.firestore();
