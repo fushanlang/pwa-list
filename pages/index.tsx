@@ -77,7 +77,7 @@ const Index: NextPage<Props> = ({ apps }) => {
               </Link>
             </div>
           </div>
-          <p className="mt-2">
+          <p className="mt-3">
             Made By&nbsp;
             <a className="text-base" target="_blank" href="https://masakifukunishi.site">
               Masaki

@@ -97,8 +97,8 @@ const SideBar: React.FC = () => {
         </div>
       </div>
       <div className="mb-2 w-60 text-center">
-        <div className="w-full border-t-2">
-          <div className="text-xs mt-4">
+        <div className="w-full text-xs border-t-2">
+          <div className="mt-4">
             <div>
               <Link href="/about" as="/about">
                 <a className="mr-2">About</a>
@@ -122,13 +122,13 @@ const SideBar: React.FC = () => {
               </Link>
             </div>
           </div>
-          <p className="mt-2">
+          <p className="mt-3">
             Made By&nbsp;
             <a target="_blank" href="https://masakifukunishi.site">
               Masaki
             </a>
           </p>
-          <p className="text-xs mt-2">&copy; PWA List {date.getFullYear()}</p>
+          <p className="mt-1">&copy; PWA List {date.getFullYear()}</p>
         </div>
       </div>
     </div>
