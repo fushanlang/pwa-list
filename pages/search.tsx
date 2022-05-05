@@ -76,7 +76,7 @@ const Search: NextPage = () => {
   };
   return (
     <Layout title="Search">
-      <div className="px-5 py-6">
+      <div className="p-6">
         <div className="flex w-4/5 m-auto mt-5 rounded-md h-11 ring-2 ring-gray-400 focus-within:ring focus-within:ring-green-400">
           <div className="m-auto ml-3">
             <FontAwesomeIcon icon={faSearch} size="lg" />
