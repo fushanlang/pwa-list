@@ -98,39 +98,33 @@ const SideBar: React.FC = () => {
       </div>
       <div className="mb-2 w-60 text-center">
         <div className="w-full border-t-2">
-          <Link href="/about" as="/about">
-            <a className="w-40 inline-block mt-5 mb-1 py-1 text-white bg-gray-500 rounded-2xl hover:bg-gray-600">
-              <strong>What is a PWA</strong>
-            </a>
-          </Link>
-          {currentUser ? (
-            <Link href="/submissions" as="/submissions">
-              <a className="w-40 inline-block mt-2 mb-1 py-1 text-white bg-green-400 rounded-2xl hover:bg-green-500">
-                <strong>Submit App</strong>
-              </a>
-            </Link>
-          ) : (
-            <Link href="/sign-up" as="/sign-up">
-              <a className="w-40 inline-block mt-2 mb-1 py-1 text-white bg-green-400 rounded-2xl hover:bg-green-500">
-                <strong>Submit App</strong>
-              </a>
-            </Link>
-          )}
-          <div className="mt-3 text-xs text-green-500">
+          <div className="text-xs mt-4">
             <div>
-              <Link href="/terms-privacy" as="/terms-privacy">
-                <a className="mt-1">Terms of Service & Privacy</a>
+              <Link href="/about" as="/about">
+                <a className="mr-2">About</a>
               </Link>
-            </div>
-            <div>
-              <a className="text-green-500" target="_blank" href="mailto:hello.pwalist@gmail.com">
+              {currentUser ? (
+                <Link href="/submissions" as="/submissions">
+                  <a className="mr-2">Submit app</a>
+                </Link>
+              ) : (
+                <Link href="/sign-up" as="/sign-up">
+                  <a className="mr-2">Submit app</a>
+                </Link>
+              )}
+              <a className="mr-2" target="_blank" href="mailto:hello.pwalist@gmail.com">
                 Contact
               </a>
+            </div>
+            <div className="mt-1">
+              <Link href="/terms-privacy" as="/terms-privacy">
+                <a className="mr-2">Terms of Service & Privacy</a>
+              </Link>
             </div>
           </div>
           <p className="mt-2">
             Made By&nbsp;
-            <a className="text-green-500 text-base" target="_blank" href="https://masakifukunishi.site">
+            <a target="_blank" href="https://masakifukunishi.site">
               Masaki
             </a>
           </p>

@@ -10,7 +10,7 @@ const Layout = ({ children, title }) => {
       </Head>
       <div className="h-screen flex">
         <SideBar />
-        <div className="flex-1 px-4 py-6 mb-12 md:mb-0 overflow-scroll">{children}</div>
+        <div className="flex-1 pb-16 md:pb-0 overflow-scroll">{children}</div>
         <BottomBar />
       </div>
     </>

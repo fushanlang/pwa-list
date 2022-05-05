@@ -22,25 +22,26 @@ const Index: NextPage<Props> = ({ apps }) => {
   const date = new Date();
   return (
     <Layout title="Home">
-      <div className="px-2">
-        <div className="flex mt-3 justify-between">
-          <h1 className="text-3xl font-bold" style={logo}>
-            P<span className="text-green-500">W</span>A LIST
-          </h1>
-          <span className="mr-2">
-            <ChangeThemeButton />
-          </span>
-        </div>
-        <div>
-          <div className="ml-1.5 my-2">
-            <h2 className="text-xl font-bold">New Apps</h2>
-            <p className="text-base text-gray-500 dark:text-gray-300">Recently added Progressive Web Apps.</p>
+      <>
+        <div className="p-6">
+          <div className="flex mt-3 justify-between">
+            <h1 className="text-3xl font-bold" style={logo}>
+              P<span className="text-green-500">W</span>A LIST
+            </h1>
+            <span className="mr-2">
+              <ChangeThemeButton />
+            </span>
           </div>
-          <>
-            <Card apps={apps} />
-          </>
-          {/* Google Adsense start*/}
-          {/* <div className="overflow-scroll text-center mt-10">
+          <div>
+            <div className="ml-1.5 my-2">
+              <h2 className="text-xl font-bold">New Apps</h2>
+              <p className="text-base text-gray-500 dark:text-gray-300">Recently added Progressive Web Apps.</p>
+            </div>
+            <>
+              <Card apps={apps} />
+            </>
+            {/* Google Adsense start*/}
+            {/* <div className="overflow-scroll text-center mt-10">
               <AdSense.Google
                 client={GOOGLE_ADSENSE_CLIENT}
                 slot="6767679949"
@@ -48,49 +49,43 @@ const Index: NextPage<Props> = ({ apps }) => {
                 format=""
               />
             </div> */}
-          {/* Google Adsense end*/}
-          <div className="flex flex-col items-center text-center mt-7 md:hidden">
-            <Link href="/about" as="/about">
-              <a className="py-2 w-48 mb-4 text-white bg-gray-500 rounded-2xl hover:bg-gray-600">
-                <strong>What is a PWA</strong>
-              </a>
-            </Link>
-
-            {currentUser ? (
-              <Link href="/submissions" as="/submissions">
-                <a className="py-2 w-48 mb-3 text-white bg-green-500 rounded-2xl hover:bg-green-600">
-                  <strong>Submit App</strong>
-                </a>
-              </Link>
-            ) : (
-              <Link href="/sign-up" as="/sign-up">
-                <a className="py-2 w-48 mb-3 text-white bg-green-400 rounded-2xl hover:bg-green-500">
-                  <strong>Submit App</strong>
-                </a>
-              </Link>
-            )}
-            <div className="mt-2 text-xs text-green-500">
-              <div>
-                <Link href="/terms-privacy" as="/terms-privacy">
-                  <a className="text-base mt-1">Terms of Service & Privacy</a>
-                </Link>
-              </div>
-              <div>
-                <a className="text-base text-green-500" target="_blank" href="mailto:hello.pwalist@gmail.com">
-                  Contact
-                </a>
-              </div>
-            </div>
-            <p className="mt-2">
-              Made By&nbsp;
-              <a className="text-green-500 text-base" target="_blank" href="https://masakifukunishi.site">
-                Masaki
-              </a>
-            </p>
-            <p className="mt-1">&copy; PWA List {date.getFullYear()}</p>
+            {/* Google Adsense end*/}
           </div>
         </div>
-      </div>
+        <div className="flex flex-col items-center border-t-2 text-center mt-7 mb-3 md:hidden">
+          <div className="text-base mt-5">
+            <div>
+              <Link href="/about" as="/about">
+                <a className="mr-3">About</a>
+              </Link>
+              {currentUser ? (
+                <Link href="/submissions" as="/submissions">
+                  <a className="mr-3">Submit app</a>
+                </Link>
+              ) : (
+                <Link href="/sign-up" as="/sign-up">
+                  <a className="mr-3">Submit app</a>
+                </Link>
+              )}
+              <a className="mr-3" target="_blank" href="mailto:hello.pwalist@gmail.com">
+                Contact
+              </a>
+            </div>
+            <div className="mt-1">
+              <Link href="/terms-privacy" as="/terms-privacy">
+                <a className="mr-2">Terms of Service & Privacy</a>
+              </Link>
+            </div>
+          </div>
+          <p className="mt-2">
+            Made By&nbsp;
+            <a className="text-base" target="_blank" href="https://masakifukunishi.site">
+              Masaki
+            </a>
+          </p>
+          <p className="mt-1">&copy; PWA List {date.getFullYear()}</p>
+        </div>
+      </>
     </Layout>
   );
 };

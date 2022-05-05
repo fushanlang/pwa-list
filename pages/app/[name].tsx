@@ -46,7 +46,7 @@ const App: NextPage<Props> = (props) => {
           <meta key="twitter:card" property="twitter:card" content="summary" />
         </Head>
       )}
-      <div>
+      <div className="px-4 py-6">
         {!isFound ? (
           <NotFound />
         ) : (

@@ -3,7 +3,7 @@ import Layout from "../components/Layout/Layout";
 const TermsPrivacy: NextPage = () => {
   return (
     <Layout title="Terms of Service & Privacy">
-      <div className="text-lg px-8 py-5">
+      <div className="text-lg px-7 py-9">
         <h1 className="text-3xl font-bold mb-4">Terms and Conditions</h1>
         <p>
           These terms and conditions govern the access to and the use of PWA List' services and platforms, through the website.

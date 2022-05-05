@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
+import Layout from "../components/Layout/Layout";
 import SideBar from "../components/Layout/SideBar";
 import BottomBar from "../components/Layout/BottomBar";
 import CategoryLinkForCategories from "../components/Layout/CategoryLinkForCategories";
@@ -42,35 +43,28 @@ library.add(
 );
 const Categories: NextPage = () => {
   return (
-    <>
-      <Head>
-        <title>Categories | PWA List</title>
-      </Head>
-      <div className="h-screen flex">
-        <SideBar />
-        <div className="flex-1 overflow-scroll p-5 pl-7 mb-7">
-          <p className="text-lg mt-1 mb-6">Categories</p>
-          <div className="flex flex-col ml-1">
-            <CategoryLinkForCategories categoryName="business" iconName="chart-bar" />
-            <CategoryLinkForCategories categoryName="design" iconName="palette" />
-            <CategoryLinkForCategories categoryName="education" iconName="book-open" />
-            <CategoryLinkForCategories categoryName="entertainment" iconName="star" />
-            <CategoryLinkForCategories categoryName="food" iconName="utensils" />
-            <CategoryLinkForCategories categoryName="games" iconName="gamepad" />
-            <CategoryLinkForCategories categoryName="health" iconName="heartbeat" />
-            <CategoryLinkForCategories categoryName="music" iconName="music" />
-            <CategoryLinkForCategories categoryName="news" iconName="newspaper" />
-            <CategoryLinkForCategories categoryName="shopping" iconName="shopping-bag" />
-            <CategoryLinkForCategories categoryName="social" iconName="share-alt" />
-            <CategoryLinkForCategories categoryName="sports" iconName="running" />
-            <CategoryLinkForCategories categoryName="tech" iconName="code" />
-            <CategoryLinkForCategories categoryName="tools" iconName="hammer" />
-            <CategoryLinkForCategories categoryName="travel" iconName="plane" />
-          </div>
+    <Layout title="Categories">
+      <div className="flex-1 overflow-scroll pt-5 pl-7">
+        <p className="text-lg mt-1 mb-6">Categories</p>
+        <div className="flex flex-col ml-1">
+          <CategoryLinkForCategories categoryName="business" iconName="chart-bar" />
+          <CategoryLinkForCategories categoryName="design" iconName="palette" />
+          <CategoryLinkForCategories categoryName="education" iconName="book-open" />
+          <CategoryLinkForCategories categoryName="entertainment" iconName="star" />
+          <CategoryLinkForCategories categoryName="food" iconName="utensils" />
+          <CategoryLinkForCategories categoryName="games" iconName="gamepad" />
+          <CategoryLinkForCategories categoryName="health" iconName="heartbeat" />
+          <CategoryLinkForCategories categoryName="music" iconName="music" />
+          <CategoryLinkForCategories categoryName="news" iconName="newspaper" />
+          <CategoryLinkForCategories categoryName="shopping" iconName="shopping-bag" />
+          <CategoryLinkForCategories categoryName="social" iconName="share-alt" />
+          <CategoryLinkForCategories categoryName="sports" iconName="running" />
+          <CategoryLinkForCategories categoryName="tech" iconName="code" />
+          <CategoryLinkForCategories categoryName="tools" iconName="hammer" />
+          <CategoryLinkForCategories categoryName="travel" iconName="plane" />
         </div>
-        <BottomBar />
       </div>
-    </>
+    </Layout>
   );
 };
 

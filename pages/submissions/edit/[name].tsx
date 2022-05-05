@@ -190,7 +190,7 @@ const Edit: NextPage<Props> = (props) => {
     <Layout title={`${app.name} - Edit`}>
       <>
         {currentUser && currentUser.uid === app.userId && isFound ? (
-          <>
+          <div className="px-5 py-6">
             <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
               <div className="ml-1 mt-1 mb-9">
                 <div className="mb-4">
@@ -396,7 +396,7 @@ const Edit: NextPage<Props> = (props) => {
               </div>
             </form>
             <CompletedModal modalsOpen={modalsOpen} isSubmitting={isSubmitting} />
-          </>
+          </div>
         ) : (
           <>
             <Forbidden />

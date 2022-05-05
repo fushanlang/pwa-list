@@ -15,12 +15,12 @@ const About: NextPage = () => {
             can be installed on PCs and smartphones."
         />
       </Head>
-      <div className="pl-6 pr-4 py-5 ">
-        <h1 className="text-3xl font-bold mb-4" style={logo}>
+      <div className="px-7 py-6 ">
+        <h1 className="text-3xl font-bold mb-3" style={logo}>
           P<span className="text-green-500">W</span>A LIST
         </h1>
         <h2 className="text-2xl font-bold">What is a PWA?</h2>
-        <div className="mt-3 leading-relaxed text-lg">
+        <div className="mt-1 leading-relaxed text-lg">
           <p>
             PWA stands for 'Progressive Web Apps' and refers to websites that can be installed on PCs and smartphones.
             <br />
