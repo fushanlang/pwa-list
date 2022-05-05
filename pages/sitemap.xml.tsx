@@ -119,7 +119,7 @@ const createSitemap = (apps) => {
           .map(({ nameLowercase, updatedAt }) => {
             return `
                     <url>
-                        <loc>${`${siteUrl}/apps/${nameLowercase}`}</loc>
+                        <loc>${`${siteUrl}/app/${nameLowercase}`}</loc>
                         <lastmod>${updatedAt}</lastmod>
                         <priority>0.70</priority>
                     </url>
