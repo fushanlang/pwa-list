@@ -1,9 +1,3 @@
-# *
 User-agent: *
-Allow: /
-
-# Host
-Host: https://www.pwalist.app
-
-# Sitemaps
+Disallow:
 Sitemap: https://www.pwalist.app/sitemap.xml
