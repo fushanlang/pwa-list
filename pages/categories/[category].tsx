@@ -44,7 +44,7 @@ export async function getStaticProps(context) {
     .collection("applications")
     .where("isPublic", "==", true)
     .where("category", "==", category)
-    .orderBy("nameLowercase", "desc")
+    .orderBy("nameLowercase")
     .get();
   const apps = applications.docs.map((doc) => ({
     id: doc.id,
