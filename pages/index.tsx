@@ -32,10 +32,13 @@ const Index: NextPage<Props> = ({ apps }) => {
           </span>
         </div>
         <div>
-          <h2 className="text-xl font-bold mt-3 ml-1">!! New Apps !!</h2>
-          <div className="mt-2">
-            <Card apps={apps} />
+          <div className="ml-1.5 my-2">
+            <h2 className="text-xl font-bold">New Apps</h2>
+            <p className="text-base text-gray-500 dark:text-gray-300">Recently added Progressive Web Apps.</p>
           </div>
+          <>
+            <Card apps={apps} />
+          </>
           {/* Google Adsense start*/}
           {/* <div className="overflow-scroll text-center mt-10">
               <AdSense.Google
