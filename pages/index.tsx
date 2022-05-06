@@ -23,7 +23,7 @@ const Index: NextPage<Props> = ({ apps }) => {
   return (
     <Layout title="Home">
       <>
-        <div className="p-6">
+        <div className="min-h-screen p-6">
           <div className="flex mt-3 justify-between">
             <h1 className="text-3xl font-bold" style={logo}>
               P<span className="text-green-500">W</span>A LIST
@@ -52,7 +52,19 @@ const Index: NextPage<Props> = ({ apps }) => {
             {/* Google Adsense end*/}
           </div>
         </div>
-        <div className="flex flex-col items-center border-t-2 text-center mt-7 mb-3 md:hidden">
+        <div className="bg-gray-50 dark:bg-gray-900 p-8">
+          <h2 className="text-lg font-semibold mb-1">What is PWA List?</h2>
+          <div className="text-base text-gray-500 dark:text-gray-300">
+            <p>In PWA List, you can search for Progressive Web Apps by category, tag, and app name.</p>
+            <p>
+              <span className="mr-2">PWA runs on a web browser and can also be installed like a native app.</span>
+              <Link href="/about" as="/about">
+                <a className="text-blue-400">Learn more.</a>
+              </Link>
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-col items-center border-t-2 text-center mb-3 md:hidden">
           <div className="text-base mt-5">
             <div>
               <Link href="/about" as="/about">
