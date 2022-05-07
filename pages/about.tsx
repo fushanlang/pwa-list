@@ -7,43 +7,48 @@ const About: NextPage = () => {
     fontFamily: "'Nunito', sans-serif",
   };
   return (
-    <Layout title="What is a PWA?">
+    <Layout title="About">
       <Head>
-        <meta
-          name="description"
-          content="PWA stands for 'Progressive Web Apps' and refers to websites that
-            can be installed on PCs and smartphones."
-        />
+        <meta name="description" content="In PWA List, you can search for Progressive Web Apps by category, tag, and app name." />
       </Head>
       <div className="px-7 py-6 ">
         <h1 className="text-3xl font-bold mb-3" style={logo}>
-          P<span className="text-green-500">W</span>A LIST
+          About
         </h1>
-        <h2 className="text-2xl font-bold">What is a PWA?</h2>
-        <div className="mt-1 leading-relaxed text-lg">
+        <h2 className="text-xl font-bold">Welcome to PWA List</h2>
+        <div className="mt-1 mb-5 text-lg">
+          <p>In PWA List, you can search for Progressive Web Apps by category, tag, and app name.</p>
+        </div>
+        <h2 className="text-xl font-bold">What are Progressive Web Apps?</h2>
+        <div className="mt-1 mb-5 text-lg">
           <p>
-            PWA stands for 'Progressive Web Apps' and refers to websites that can be installed on PCs and smartphones.
-            <br />
-            By installing a PWA, a website is added to the home screen, and you can use the website with a native application-like
-            feel.
+            Progressive Web Applications (PWAs) are apps made with web technologies. They can be used from a web browser without
+            installation, or installed and used like native apps.
           </p>
-          <h2 className="text-xl font-bold mt-5 mb-1">How to install</h2>
+          <p>PWAs are built with features like push notifications and the ability to work offline.</p>
+        </div>
+        <h2 className="text-xl font-bold mb-1">How to install</h2>
+        <div className="mt-1 mb-5 text-lg">
+          <p>Installation is not required, but it will make it easier to use.</p>
           <p>
-            To install, simply visit a PWA-enabled website and click the install button.
-            <br />
-            The following is an explanation of how to install in the case of Chrome.
+            To install, access the app in a web browser and click the Install button. The following is an explanation of how to
+            install in the case of Chrome.
           </p>
-          <div className="ml-3 mt-5 mb-3">
+          <div className="mt-4 ml-2 mb-1">
             <img style={{ height: "530px" }} src={"/about/mobile1.jpg"} className="mr-8 mb-3 rounded-md inline" />
             <img style={{ maxHeight: "530px" }} src={"/about/mobile2.jpg"} className="mr-8 mb-3 rounded-md inline" />
             <img style={{ maxHeight: "530px" }} src={"/about/mobile3.jpg"} className="mr-8 mb-3 rounded-md inline" />
           </div>
-          <p>The procedure is a little different depending on the browser, but basically it is just this.</p>
-          <h2 className="text-xl font-bold mt-5 mb-1">What is PWA List?</h2>
+          <p>The procedure is slightly different depending on the browser, but it is almost the same.</p>
+        </div>
+        <h2 className="text-xl font-bold mb-1">How to submit to PWA List</h2>
+        <div className="mt-1 mb-4 text-lg">
           <p>
-            The PWA List is a site where you can search for PWAs by category, tag, or name.
-            <br />
-            Please find your favorite PWA!
+            If you know a good Progressive Web App, please submit it using
+            <Link href="/about" as="/about">
+              <a className="text-blue-400"> this form</a>
+            </Link>
+            .
           </p>
         </div>
         <Link href="/" as="/">
