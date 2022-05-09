@@ -25,6 +25,8 @@ const Submissions: NextPage = () => {
         icon: doc.data().icon,
         link: doc.data().link,
         isPublic: doc.data().isPublic,
+        isRejected: doc.data().isRejected,
+        rejectionMessage: doc.data().rejectionMessage,
         imageMobile1: doc.data().imageMobile1,
         imageMobile2: doc.data().imageMobile2,
         imageMobile3: doc.data().imageMobile3,

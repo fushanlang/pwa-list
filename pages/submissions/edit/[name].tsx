@@ -182,6 +182,7 @@ const Edit: NextPage<Props> = (props) => {
       imagePc2: storagePc2Url,
       imagePc3: storagePc3Url,
       isPublic: false,
+      isRejected: false,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setIsSubmitting(false);
