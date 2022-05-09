@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import Loading from "../../components/Common/Loading";
 Modal.setAppElement("#__next");
@@ -20,6 +21,8 @@ const modalStyle = {
     padding: "1.5rem",
   },
 };
+let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
+modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
 
 interface Props {
   modalsOpen: boolean;
@@ -27,9 +30,10 @@ interface Props {
 }
 
 const CompletedModal: React.FC<Props> = ({ modalsOpen, isSubmitting }) => {
+  const { theme } = useTheme();
   return (
     <div>
-      <Modal style={modalStyle} isOpen={modalsOpen}>
+      <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={modalsOpen}>
         {isSubmitting ? (
           <div className="text-center mt-64">
             <Loading />
