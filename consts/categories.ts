@@ -10,7 +10,7 @@ const categories = [
   { label: "News", value: "news" },
   { label: "Shopping", value: "shopping" },
   { label: "Social", value: "social" },
-  { label: "Sports", value: "shopping" },
+  { label: "Sports", value: "sports" },
   { label: "Tech", value: "tech" },
   { label: "Tools", value: "tools" },
   { label: "Travel", value: "travel" },
