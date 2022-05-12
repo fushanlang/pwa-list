@@ -102,7 +102,7 @@ const Create: NextPage = () => {
       return;
     }
     setModalsOpen(true);
-    const nameLowercase = name.toLowerCase().trim().replace(/-/g, "");
+    const nameLowercase = name.toLowerCase().replace(/\s|-/g, "");
     const tag1Lowercase = tag1 ? tag1.toLowerCase().trim() : null;
     const tag2Lowercase = tag2 ? tag2.toLowerCase().trim() : null;
     const tag3Lowercase = tag3 ? tag3.toLowerCase().trim() : null;
