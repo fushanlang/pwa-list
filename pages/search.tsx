@@ -22,12 +22,12 @@ const Search: NextPage = () => {
   }, [inputParam]);
 
   const fetchApps = async () => {
-    if (!inputParam.trim()) {
+    if (!inputParam.replace(/\s|-/g, "")) {
       setSearchedApps([]);
       return;
     }
     setIsLoading(true);
-    let searchParam = inputParam.toLowerCase().replace(/\s+/g, "").trim();
+    let searchParam = inputParam.toLowerCase().replace(/\s|-/g, "").trim();
     localStorage.inputSearchParam = inputParam;
     const appsName = await db
       .collection("applications")
