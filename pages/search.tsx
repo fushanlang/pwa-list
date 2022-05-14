@@ -22,6 +22,7 @@ const Search: NextPage = () => {
   }, [inputParam]);
 
   const fetchApps = async () => {
+    // remove hyphen and space
     if (!inputParam.replace(/\s|-/g, "")) {
       setSearchedApps([]);
       return;
