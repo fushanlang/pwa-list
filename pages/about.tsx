@@ -1,8 +1,11 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/Auth";
 import Layout from "../components/Layout/Layout";
 const About: NextPage = () => {
+  const { currentUser } = useContext(AuthContext);
   const logo = {
     fontFamily: "'Nunito', sans-serif",
   };
@@ -45,9 +48,15 @@ const About: NextPage = () => {
         <div className="mt-1 mb-4 text-lg">
           <p>
             If you know a good Progressive Web App, please submit it using
-            <Link href="/about" as="/about">
-              <a className="text-blue-400"> this form</a>
-            </Link>
+            {currentUser ? (
+              <Link href="/submissions" as="/submissions">
+                <a className="text-blue-400"> this form</a>
+              </Link>
+            ) : (
+              <Link href="/sign-up" as="/sign-up">
+                <a className="text-blue-400"> this form</a>
+              </Link>
+            )}
             .
           </p>
         </div>
