@@ -102,10 +102,10 @@ const Create: NextPage = () => {
       return;
     }
     setModalsOpen(true);
-    const nameLowercase = name.toLowerCase().replace(/\s|-/g, "");
-    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-/g, "") : null;
-    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-/g, "") : null;
-    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-/g, "") : null;
+    const nameLowercase = name.toLowerCase().replace(/\s|-|./g, "");
+    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|./g, "") : null;
+    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|./g, "") : null;
+    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-|./g, "") : null;
     const storageIconUrl = icon ? await uploadToStorage(iconsFolder, nameLowercase, icon, "icon") : null;
     const storagePc1Url = pcImages[0] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1") : null;
     const storagePc2Url = pcImages[1] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2") : null;

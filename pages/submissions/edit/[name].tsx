@@ -143,10 +143,10 @@ const Edit: NextPage<Props> = (props) => {
       return;
     }
     setModalsOpen(true);
-    const nameLowercase = name.toLowerCase().replace(/\s|-/g, "");
-    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-/g, "") : null;
-    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-/g, "") : null;
-    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-/g, "") : null;
+    const nameLowercase = name.toLowerCase().replace(/\s|-|./g, "");
+    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|./g, "") : null;
+    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|./g, "") : null;
+    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-|./g, "") : null;
     let storageIconUrl = iconUrl;
     let storageMobile1Url = mobileImageUrlList[0] ? mobileImageUrlList[0] : null;
     let storageMobile2Url = mobileImageUrlList[1] ? mobileImageUrlList[1] : null;
