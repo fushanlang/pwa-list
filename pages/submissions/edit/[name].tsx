@@ -136,17 +136,15 @@ const Edit: NextPage<Props> = (props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (
-      !(await editValidate(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrlList, mobileImageUrlList))
-    ) {
+    if (!(await editValidate(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrlList, mobileImageUrlList))) {
       setIsSubmitting(false);
       return;
     }
     setModalsOpen(true);
-    const nameLowercase = name.toLowerCase().replace(/\s|-|./g, "");
-    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|./g, "") : null;
-    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|./g, "") : null;
-    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-|./g, "") : null;
+    const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
+    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
+    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
+    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-|\./g, "") : null;
     let storageIconUrl = iconUrl;
     let storageMobile1Url = mobileImageUrlList[0] ? mobileImageUrlList[0] : null;
     let storageMobile2Url = mobileImageUrlList[1] ? mobileImageUrlList[1] : null;
@@ -301,10 +299,7 @@ const Edit: NextPage<Props> = (props) => {
                   <div className="flex mb-4">
                     <div className="relative">
                       <img className="border rounded max-h-20" src={iconUrl} />
-                      <button
-                        className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1"
-                        onClick={handleDeleteIcon}
-                      >
+                      <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1" onClick={handleDeleteIcon}>
                         <FontAwesomeIcon icon={faMinusCircle} size="lg" />
                       </button>
                     </div>
@@ -388,10 +383,7 @@ const Edit: NextPage<Props> = (props) => {
                 <ErrorMessage errors={errors.screenshot}></ErrorMessage>
               </div>
               <div className="ml-1 mt-10 mb-12">
-                <button
-                  className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none"
-                  type="submit"
-                >
+                <button className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none" type="submit">
                   Submit
                 </button>
               </div>

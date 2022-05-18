@@ -102,23 +102,17 @@ const Create: NextPage = () => {
       return;
     }
     setModalsOpen(true);
-    const nameLowercase = name.toLowerCase().replace(/\s|-|./g, "");
-    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|./g, "") : null;
-    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|./g, "") : null;
-    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-|./g, "") : null;
+    const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
+    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
+    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
+    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-|\./g, "") : null;
     const storageIconUrl = icon ? await uploadToStorage(iconsFolder, nameLowercase, icon, "icon") : null;
     const storagePc1Url = pcImages[0] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1") : null;
     const storagePc2Url = pcImages[1] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2") : null;
     const storagePc3Url = pcImages[2] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3") : null;
-    const storageMobile1Url = mobileImages[0]
-      ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[0], "mobile1")
-      : null;
-    const storageMobile2Url = mobileImages[1]
-      ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2")
-      : null;
-    const storageMobile3Url = mobileImages[2]
-      ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[2], "mobile3")
-      : null;
+    const storageMobile1Url = mobileImages[0] ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[0], "mobile1") : null;
+    const storageMobile2Url = mobileImages[1] ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2") : null;
+    const storageMobile3Url = mobileImages[2] ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[2], "mobile3") : null;
     db.collection("applications").add({
       userId: currentUser.uid,
       name: name,
@@ -272,10 +266,7 @@ const Create: NextPage = () => {
                 <div className="flex mb-4">
                   <div className="relative">
                     <img className="border rounded max-h-20" src={iconUrl} />
-                    <button
-                      className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1"
-                      onClick={handleDeleteIcon}
-                    >
+                    <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1" onClick={handleDeleteIcon}>
                       <FontAwesomeIcon icon={faMinusCircle} size="lg" />
                     </button>
                   </div>
@@ -359,10 +350,7 @@ const Create: NextPage = () => {
               <ErrorMessage errors={errors.screenshot}></ErrorMessage>
             </div>
             <div className="ml-1 mt-10 mb-12">
-              <button
-                className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none"
-                type="submit"
-              >
+              <button className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none" type="submit">
                 Submit
               </button>
             </div>
