@@ -1,45 +1,38 @@
 import { NextPage } from "next";
-import Head from "next/head";
 import Layout from "../components/Layout/Layout";
-import SideBar from "../components/Layout/SideBar";
-import BottomBar from "../components/Layout/BottomBar";
 import CategoryLinkForCategories from "../components/Layout/CategoryLinkForCategories";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faStar,
-  faHammer,
-  faGamepad,
-  faPlane,
-  faChartBar,
   faBookOpen,
+  faChartBar,
+  faChild,
   faCode,
-  faHeartbeat,
-  faPalette,
-  faUtensils,
+  faGamepad,
+  faHammer,
   faMusic,
   faNewspaper,
-  faShoppingBag,
-  faRunning,
+  faPalette,
+  faPlane,
   faShareAlt,
-  faHeart,
+  faShoppingBag,
+  faStar,
+  faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
-  faStar,
-  faHammer,
-  faGamepad,
-  faPlane,
-  faChartBar,
   faBookOpen,
+  faChartBar,
+  faChild,
   faCode,
-  faHeartbeat,
-  faPalette,
-  faUtensils,
+  faGamepad,
+  faHammer,
   faMusic,
   faNewspaper,
-  faShoppingBag,
-  faRunning,
+  faPalette,
+  faPlane,
   faShareAlt,
-  faHeart
+  faShoppingBag,
+  faStar,
+  faUtensils
 );
 const Categories: NextPage = () => {
   return (
@@ -53,12 +46,11 @@ const Categories: NextPage = () => {
           <CategoryLinkForCategories categoryName="entertainment" iconName="star" />
           <CategoryLinkForCategories categoryName="food" iconName="utensils" />
           <CategoryLinkForCategories categoryName="games" iconName="gamepad" />
-          <CategoryLinkForCategories categoryName="health" iconName="heartbeat" />
+          <CategoryLinkForCategories categoryName="lifestyle" iconName="child" />
           <CategoryLinkForCategories categoryName="music" iconName="music" />
           <CategoryLinkForCategories categoryName="news" iconName="newspaper" />
           <CategoryLinkForCategories categoryName="shopping" iconName="shopping-bag" />
           <CategoryLinkForCategories categoryName="social" iconName="share-alt" />
-          <CategoryLinkForCategories categoryName="sports" iconName="running" />
           <CategoryLinkForCategories categoryName="tech" iconName="code" />
           <CategoryLinkForCategories categoryName="tools" iconName="hammer" />
           <CategoryLinkForCategories categoryName="travel" iconName="plane" />

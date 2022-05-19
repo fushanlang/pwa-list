@@ -55,7 +55,7 @@ const createSitemap = (apps) => {
             <priority>0.80</priority>
           </url>
           <url>
-            <loc>https://www.pwalist.app/categories/health</loc>
+            <loc>https://www.pwalist.app/categories/lifestyle</loc>
             <lastmod>2022-05-05T04:15:45+00:00</lastmod>
             <priority>0.80</priority>
           </url>
@@ -76,11 +76,6 @@ const createSitemap = (apps) => {
           </url>
           <url>
             <loc>https://www.pwalist.app/categories/social</loc>
-            <lastmod>2022-05-05T04:15:45+00:00</lastmod>
-            <priority>0.80</priority>
-          </url>
-          <url>
-            <loc>https://www.pwalist.app/categories/sports</loc>
             <lastmod>2022-05-05T04:15:45+00:00</lastmod>
             <priority>0.80</priority>
           </url>

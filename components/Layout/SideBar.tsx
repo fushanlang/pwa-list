@@ -6,42 +6,38 @@ import CategoryLinkForSideBar from "./CategoryLinkForSideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faHome,
-  faSearch,
-  faStar,
-  faHammer,
-  faGamepad,
-  faPlane,
-  faChartBar,
   faBookOpen,
+  faChartBar,
+  faChild,
   faCode,
-  faHeartbeat,
-  faPalette,
-  faUtensils,
+  faGamepad,
+  faHammer,
+  faHome,
   faMusic,
   faNewspaper,
-  faShoppingBag,
-  faRunning,
+  faPalette,
+  faPlane,
+  faSearch,
   faShareAlt,
-  faHeart,
+  faShoppingBag,
+  faStar,
+  faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
-  faStar,
-  faHammer,
-  faGamepad,
-  faPlane,
-  faChartBar,
   faBookOpen,
+  faChartBar,
+  faChild,
   faCode,
-  faHeartbeat,
-  faPalette,
-  faUtensils,
+  faGamepad,
+  faHammer,
   faMusic,
   faNewspaper,
-  faShoppingBag,
-  faRunning,
+  faPalette,
+  faPlane,
   faShareAlt,
-  faHeart
+  faShoppingBag,
+  faStar,
+  faUtensils
 );
 const SideBar: React.FC = () => {
   const { currentUser } = useContext(AuthContext);
@@ -51,7 +47,7 @@ const SideBar: React.FC = () => {
   return (
     <div className="border-r border-gray-300 w-60 hidden md:block overflow-scroll">
       <div className="px-6 pt-3">
-        <div className="flex flex-col mt-3 ">
+        <div className="flex flex-col mt-4 ">
           <Link href="/" as="/">
             {path === "/" ? (
               <a className="text-base mb-3 text-green-500">
@@ -78,19 +74,18 @@ const SideBar: React.FC = () => {
               </a>
             )}
           </Link>
-          <p className="mb-3 mt-1">CATEGORIES</p>
+          <p className="mb-3 mt-2">CATEGORIES</p>
           <CategoryLinkForSideBar categoryName="business" iconName="chart-bar" />
           <CategoryLinkForSideBar categoryName="design" iconName="palette" />
           <CategoryLinkForSideBar categoryName="education" iconName="book-open" />
           <CategoryLinkForSideBar categoryName="entertainment" iconName="star" />
           <CategoryLinkForSideBar categoryName="food" iconName="utensils" />
           <CategoryLinkForSideBar categoryName="games" iconName="gamepad" />
-          <CategoryLinkForSideBar categoryName="health" iconName="heartbeat" />
+          <CategoryLinkForSideBar categoryName="lifestyle" iconName="child" />
           <CategoryLinkForSideBar categoryName="music" iconName="music" />
           <CategoryLinkForSideBar categoryName="news" iconName="newspaper" />
           <CategoryLinkForSideBar categoryName="shopping" iconName="shopping-bag" />
           <CategoryLinkForSideBar categoryName="social" iconName="share-alt" />
-          <CategoryLinkForSideBar categoryName="sports" iconName="running" />
           <CategoryLinkForSideBar categoryName="tech" iconName="code" />
           <CategoryLinkForSideBar categoryName="tools" iconName="hammer" />
           <CategoryLinkForSideBar categoryName="travel" iconName="plane" />
