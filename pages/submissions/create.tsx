@@ -289,11 +289,11 @@ const Create: NextPage = () => {
                 <ErrorMessage errors={errors.icon}></ErrorMessage>
               </div>
               <p className="mb-2">
-                <span className="font-bold text-base">screenshots</span>
+                <span className="font-bold text-base">Screenshots</span>
                 <span className="text-red-400 ml-2">*</span>
                 <span className="ml-2">Either mobile or PC screenshot is required.</span>
               </p>
-              <label className="block font-bold mb-2">Mobile size screenshots (Up to 3 Images)</label>
+              <label className="block font-bold mb-2">Mobile size (Up to 3 Images)</label>
               <div className="flex overflow-scroll">
                 {mobileImageUrlList.map((mobileImageUrl, index) => (
                   <ImagePreview
@@ -320,7 +320,9 @@ const Create: NextPage = () => {
                   />
                 </label>
               </div>
-              <label className="block font-bold mb-2">PC size screenshots (Up to 3 Images)</label>
+              <label className="block mb-2">
+                <span className="font-bold">PC size (Up to 3 Images)</span> <span className="ml-2">These screenshots only show PC size display.</span>
+              </label>
               <div className="flex overflow-scroll">
                 {pcImageUrlList.map((pcImageUrl, index) => (
                   <ImagePreview
