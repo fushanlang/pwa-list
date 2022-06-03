@@ -114,8 +114,11 @@ const SideBar: React.FC = () => {
               </div>
               <div className="mt-1">
                 <Link href="/terms-privacy" as="/terms-privacy">
-                  <a className="mr-2">Terms of Service & Privacy</a>
+                  <a className="mr-2">Terms & Privacy</a>
                 </Link>
+                <a className="mr-2" target="_blank" href="https://twitter.com/pwalist">
+                  Twitter
+                </a>
               </div>
             </div>
             <p className="mt-3">

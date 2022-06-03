@@ -85,8 +85,11 @@ const Index: NextPage<Props> = ({ apps }) => {
             </div>
             <div className="mt-1">
               <Link href="/terms-privacy" as="/terms-privacy">
-                <a className="mr-2">Terms of Service & Privacy</a>
+                <a className="mr-2">Terms & Privacy</a>
               </Link>
+              <a className="mr-2" target="_blank" href="https://twitter.com/pwalist">
+                Twitter
+              </a>
             </div>
           </div>
           <p className="mt-3">
@@ -102,12 +105,7 @@ const Index: NextPage<Props> = ({ apps }) => {
   );
 };
 export async function getStaticProps() {
-  const applications = await db
-    .collection("applications")
-    .where("isNewApp", "==", true)
-    .where("isPublic", "==", true)
-    .orderBy("newAppOrder", "desc")
-    .get();
+  const applications = await db.collection("applications").where("isNewApp", "==", true).where("isPublic", "==", true).orderBy("newAppOrder", "desc").get();
   const apps = applications.docs.map((doc) => ({
     id: doc.id,
     name: doc.data().name,
