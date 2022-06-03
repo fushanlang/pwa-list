@@ -45,8 +45,8 @@ const SideBar: React.FC = () => {
   const path = router.pathname;
   const date = new Date();
   return (
-    <div className="border-r border-gray-300">
-      <div className="w-60 hidden md:block overflow-scroll">
+    <div className="hidden md:block border-r border-gray-300">
+      <div className="w-60 overflow-scroll">
         <div className="px-6 pt-3">
           <div className="flex flex-col mt-4 ">
             <Link href="/" as="/">
