@@ -47,6 +47,8 @@ const WrappedApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <meta name="/faviconsapple-mobile-web-app-capable" content="yes" />
         <meta name="/faviconsapple-mobile-web-app-status-bar-style" content="#000" />
         <meta name="/faviconsapple-mobile-web-app-title" content="PWA List" />
+        {/* SaasHub */}
+        <meta name="saashub-verification" content="Efw6yi79gPQZ" />
         <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png" />
         {/* font */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" />
