@@ -198,6 +198,7 @@ export const getStaticProps = async (context) => {
     props: {
       app: app[0],
       isFound: true,
+      revalidate: 10,
     },
   };
 };
