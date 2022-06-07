@@ -181,7 +181,7 @@ export const getStaticPaths = async () => {
 };
 export const getStaticProps = async (context) => {
   const { name } = context.params;
-  const res = await db.collection("applications").where("nameLowercase", "==", name).get();
+  const res = await db.collection("applications").where("nameLowercase", "==", name).where("isPublic", "==", true).get();
   const app = res.docs.map((res) => res.data());
   if (app.length == 0) {
     return {
@@ -189,7 +189,6 @@ export const getStaticProps = async (context) => {
         app: {},
         isFound: false,
       },
-      revalidate: 10,
     };
   }
   app[0]["category"] = changeFirstUpperCase(app[0]["category"]);
