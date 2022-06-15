@@ -26,7 +26,7 @@ class MyDocument extends Document {
             }}
           />
           {/* Google Adsense */}
-          <script data-ad-client={GOOGLE_ADSENSE_CLIENT} async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          {/* <script data-ad-client={GOOGLE_ADSENSE_CLIENT} async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> */}
         </Head>
         <body className="text-sm font-sans text-gray-600 dark:text-gray-200 dark:bg-gray-800">
           <Main />
