@@ -41,14 +41,9 @@ const Index: NextPage<Props> = ({ apps }) => {
               <Card apps={apps} />
             </>
             {/* Google Adsense start*/}
-            {/* <div className="overflow-scroll text-center mt-10">
-              <AdSense.Google
-                client={GOOGLE_ADSENSE_CLIENT}
-                slot="6767679949"
-                style={{ width: 970, height: 90 }}
-                format=""
-              />
-            </div> */}
+            <div className="overflow-scroll text-center mt-10">
+              <AdSense.Google client={GOOGLE_ADSENSE_CLIENT} slot="6767679949" style={{ width: 970, height: 90 }} format="" />
+            </div>
             {/* Google Adsense end*/}
           </div>
         </div>
