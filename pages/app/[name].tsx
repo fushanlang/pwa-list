@@ -3,13 +3,13 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import "firebase/firestore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../../plugins/googleAdsense";
 import Layout from "../../components/Layout/Layout";
 import NotFound from "../../components/Common/NotFound";
 import ImageModal from "../../components/App/ImageModal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import firebase from "../../plugins/firebase";
 import { changeFirstUpperCase } from "../../plugins/common/functions";
 

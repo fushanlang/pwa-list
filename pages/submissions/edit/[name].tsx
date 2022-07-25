@@ -1,19 +1,19 @@
 import { useState, useEffect, useContext } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
+import "firebase/firestore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../../contexts/Auth";
 import categories from "../../../consts/categories";
 import editValidate from "../../../plugins/submissions/editValidate";
 import firebase from "../../../plugins/firebase";
 import uploadToStorage from "../../../plugins/image/uploadToStorage";
-import "firebase/firestore";
 import Layout from "../../../components/Layout/Layout";
 import Forbidden from "../../../components/Common/Forbidden";
 import ErrorMessage from "../../../components/Common/ErrorMessage";
 import ImagePreview from "../../../components/Common/ImagePreview";
 import CompletedModal from "../../../components/Submissions/CompletedModal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 const db = firebase.firestore();
 
 interface Props {

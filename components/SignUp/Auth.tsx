@@ -1,5 +1,5 @@
-import firebase from "../../plugins/firebase";
 import Router from "next/router";
+import firebase from "../../plugins/firebase";
 
 const Auth: React.FC = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();

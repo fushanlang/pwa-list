@@ -1,7 +1,7 @@
 import { NextPage } from "next";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import Layout from "../components/Layout/Layout";
 import CategoryLinkForCategories from "../components/Layout/CategoryLinkForCategories";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faBookOpen,
   faChartBar,

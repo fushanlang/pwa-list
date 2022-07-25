@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import Link from "next/link";
-import firebase from "../plugins/firebase";
 import "firebase/firestore";
 import { NextPage } from "next";
 import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
+import firebase from "../plugins/firebase";
+import { AuthContext } from "../contexts/Auth";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import ChangeThemeButton from "../components/Common/ChangeThemeButton";
-import { AuthContext } from "../contexts/Auth";
 
 const db = firebase.firestore();
 const logo = {
@@ -100,7 +100,12 @@ const Index: NextPage<Props> = ({ apps }) => {
   );
 };
 export async function getStaticProps() {
-  const applications = await db.collection("applications").where("isNewApp", "==", true).where("isPublic", "==", true).orderBy("newAppOrder", "desc").get();
+  const applications = await db
+    .collection("applications")
+    .where("isNewApp", "==", true)
+    .where("isPublic", "==", true)
+    .orderBy("newAppOrder", "desc")
+    .get();
   const apps = applications.docs.map((doc) => ({
     id: doc.id,
     name: doc.data().name,

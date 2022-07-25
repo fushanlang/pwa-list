@@ -1,9 +1,9 @@
 import { useEffect, useContext } from "react";
 import { NextPage } from "next";
+import Router from "next/router";
 import { AuthContext } from "../../contexts/Auth";
 import Layout from "../../components/Layout/Layout";
 import Auth from "../../components/SignUp/Auth";
-import Router from "next/router";
 const logo = {
   fontFamily: "'Nunito', sans-serif",
 };

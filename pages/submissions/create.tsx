@@ -2,6 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
 import { AuthContext } from "../../contexts/Auth";
+import "firebase/firestore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import categories from "../../consts/categories";
 import Layout from "../../components/Layout/Layout";
 import CompletedModal from "../../components/Submissions/CompletedModal";
@@ -10,9 +13,6 @@ import ImagePreview from "../../components/Common/ImagePreview";
 import createValidate from "../../plugins/submissions/createValidate";
 import uploadToStorage from "../../plugins/image/uploadToStorage";
 import firebase from "../../plugins/firebase";
-import "firebase/firestore";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
 const db = firebase.firestore();
 const Create: NextPage = () => {
