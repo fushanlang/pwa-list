@@ -191,6 +191,7 @@ const Create: NextPage = () => {
                 </label>
                 <select
                   className="ring-2 ring-gray-300 w-44 py-2 px-3 rounded leading-tight focus:outline-none focus:ring focus:ring-green-400"
+                  value={category}
                   onChange={(e) => {
                     setCategory(e.target.value);
                     setErrors({ ...errors, category: [] });
