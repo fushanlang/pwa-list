@@ -13,6 +13,7 @@ const SignUp: NextPage = () => {
   useEffect(() => {
     currentUser && Router.push("/submissions");
   }, [currentUser]);
+
   return (
     <Layout title="Sign-Up">
       {!currentUser && (

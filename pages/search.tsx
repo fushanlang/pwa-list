@@ -9,12 +9,12 @@ import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import Loading from "../components/Common/Loading";
 
-const db = firebase.firestore();
-
 const Search: NextPage = () => {
+  const db = firebase.firestore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [inputParam, setInputParam] = useState<string>("");
   const [searchedApps, setSearchedApps] = useState<Object | null>([]);
+
   useEffect(() => {
     localStorage.inputSearchParam && setInputParam(localStorage.inputSearchParam);
   }, []);
@@ -79,6 +79,7 @@ const Search: NextPage = () => {
     setSearchedApps(noDupApps);
     setIsLoading(false);
   };
+
   return (
     <Layout title="Search">
       <div className="p-6">

@@ -4,35 +4,35 @@ import Link from "next/link";
 
 import Loading from "../../components/Common/Loading";
 
-Modal.setAppElement("#__next");
-const modalStyle = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    backgroundColor: "rgba(0,0,0,0.85)",
-  },
-  content: {
-    position: "absolute",
-    top: "4rem",
-    left: "3rem",
-    right: "3rem",
-    bottom: "4rem",
-    backgroundColor: "white",
-    borderRadius: "1rem",
-    padding: "1.5rem",
-  },
-};
-let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
-modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
-
 interface Props {
   modalOpen: boolean;
   isSubmitting: boolean;
 }
 
 const CompletedModal: React.FC<Props> = ({ modalOpen, isSubmitting }) => {
+  Modal.setAppElement("#__next");
+  const modalStyle = {
+    overlay: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      backgroundColor: "rgba(0,0,0,0.85)",
+    },
+    content: {
+      position: "absolute",
+      top: "4rem",
+      left: "3rem",
+      right: "3rem",
+      bottom: "4rem",
+      backgroundColor: "white",
+      borderRadius: "1rem",
+      padding: "1.5rem",
+    },
+  };
+  let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
+  modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
   const { theme } = useTheme();
+
   return (
     <div>
       <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={modalOpen}>

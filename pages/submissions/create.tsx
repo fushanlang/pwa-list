@@ -308,7 +308,7 @@ const Create: NextPage = () => {
                     imageUrl={mobileImageUrl}
                     handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) => handleDeleteMobileImage(event, index)}
                     isLast={mobileImageUrlList.length - 1 === index}
-                    isBtnLastOnlyDisplay={false}
+                    isDisplayDeleteIcon={false}
                   />
                 ))}
               </div>
@@ -338,7 +338,7 @@ const Create: NextPage = () => {
                     imageUrl={pcImageUrl}
                     handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) => handleDeletePcImage(event, index)}
                     isLast={pcImageUrlList.length - 1 === index}
-                    isBtnLastOnlyDisplay={false}
+                    isDisplayDeleteIcon={false}
                   />
                 ))}
               </div>

@@ -5,29 +5,6 @@ import "firebase/firestore";
 import firebase from "../../plugins/firebase";
 import deleteFromStorage from "../../plugins/image/deleteFromStorage";
 
-const db = firebase.firestore();
-Modal.setAppElement("#__next");
-
-const modalStyle = {
-  overlay: {
-    position: "fixed",
-    backgroundColor: "rgba(0,0,0,0.85)",
-    textAlign: "center",
-  },
-  content: {
-    position: "absolute",
-    left: "0",
-    right: "0",
-    margin: "auto",
-    width: "355px",
-    height: "420px",
-    backgroundColor: "white",
-    borderRadius: "1rem",
-  },
-};
-let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
-modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
-
 interface Props {
   modalOpen: boolean;
   setModalOpen: any;
@@ -36,6 +13,29 @@ interface Props {
 }
 
 const DeleteModal: React.FC<Props> = ({ modalOpen, setModalOpen, targetApp, fetchApps }) => {
+  const db = firebase.firestore();
+  Modal.setAppElement("#__next");
+
+  const modalStyle = {
+    overlay: {
+      position: "fixed",
+      backgroundColor: "rgba(0,0,0,0.85)",
+      textAlign: "center",
+    },
+    content: {
+      position: "absolute",
+      left: "0",
+      right: "0",
+      margin: "auto",
+      width: "355px",
+      height: "420px",
+      backgroundColor: "white",
+      borderRadius: "1rem",
+    },
+  };
+  let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
+  modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
+
   const handleDeleteApp = async (app) => {
     await db.collection("applications").doc(app.id).delete();
     fetchApps();

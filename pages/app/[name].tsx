@@ -14,7 +14,6 @@ import ImageModal from "../../components/App/ImageModal";
 import firebase from "../../plugins/firebase";
 import { changeFirstUpperCase } from "../../plugins/common/functions";
 
-const db = firebase.firestore();
 interface Props {
   app: any;
   isFound: boolean;
@@ -169,6 +168,7 @@ const App: NextPage<Props> = (props) => {
   );
 };
 export const getStaticPaths = async () => {
+  const db = firebase.firestore();
   const apps = await db.collection("applications").where("isPublic", "==", true).get();
   const paths = apps.docs.map((app: any) => ({
     params: {
@@ -181,6 +181,7 @@ export const getStaticPaths = async () => {
   };
 };
 export const getStaticProps = async (context) => {
+  const db = firebase.firestore();
   const { name } = context.params;
   const res = await db.collection("applications").where("nameLowercase", "==", name).where("isPublic", "==", true).get();
   const app = res.docs.map((res) => res.data());

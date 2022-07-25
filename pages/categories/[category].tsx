@@ -5,7 +5,6 @@ import Card from "../../components/App/Card";
 import firebase from "../../plugins/firebase";
 import { changeFirstUpperCase } from "../../plugins/common/functions";
 
-const db = firebase.firestore();
 interface Props {
   apps: any;
   category: string;
@@ -26,6 +25,7 @@ const Category: NextPage<Props> = (props) => {
   );
 };
 export const getStaticPaths = async () => {
+  const db = firebase.firestore();
   const apps = await db.collection("applications").where("isPublic", "==", true).get();
   const paths = apps.docs.map((app: any) => ({
     params: {
@@ -39,6 +39,7 @@ export const getStaticPaths = async () => {
 };
 
 export async function getStaticProps(context) {
+  const db = firebase.firestore();
   const { category } = context.params;
   const applications = await db
     .collection("applications")

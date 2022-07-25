@@ -33,18 +33,16 @@ const modalStyle = {
     padding: "1.5rem",
   },
 };
-let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
-modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
 
 const ImageModal: React.FC<Props> = ({ app, modalIsOpen, setModalIsOpen, initialSlide }) => {
+  let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
+  modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
+
   const { theme } = useTheme();
+
   return (
     <div>
-      <Modal
-        isOpen={modalIsOpen}
-        style={theme === "dark" ? modalStyleDarkMode : modalStyle}
-        onRequestClose={() => setModalIsOpen(false)}
-      >
+      <Modal isOpen={modalIsOpen} style={theme === "dark" ? modalStyleDarkMode : modalStyle} onRequestClose={() => setModalIsOpen(false)}>
         <div className="text-center">
           <button onClick={() => setModalIsOpen(false)}>
             <FontAwesomeIcon size="2x" className="text-green-400 absolute top-5 right-5" icon={faTimesCircle} />

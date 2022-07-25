@@ -335,7 +335,7 @@ const Edit: NextPage<Props> = (props) => {
                       imageUrl={mobileImageUrl}
                       handleDeleteImage={(event: React.ChangeEvent<HTMLInputElement>) => handleDeleteMobileImage(event, index)}
                       isLast={mobileImageUrlList.length - 1 === index}
-                      isBtnLastOnlyDisplay={true}
+                      isDisplayDeleteIcon={true}
                     />
                   ))}
                 </div>
@@ -365,7 +365,7 @@ const Edit: NextPage<Props> = (props) => {
                       imageUrl={pcImageUrl}
                       handleDeleteImage={(event: React.ChangeEvent<HTMLInputElement>) => handleDeletePcImage(event, index)}
                       isLast={pcImageUrlList.length - 1 === index}
-                      isBtnLastOnlyDisplay={true}
+                      isDisplayDeleteIcon={true}
                     />
                   ))}
                 </div>

@@ -5,31 +5,20 @@ interface Props {
   imageUrl: any;
   handleDeleteImage: any;
   isLast: boolean | null;
-  isBtnLastOnlyDisplay: boolean | null;
+  isDisplayDeleteIcon: boolean | null;
 }
 
-const ImagePreview: React.FC<Props> = ({
-  imageUrl,
-  handleDeleteImage,
-  isLast = false,
-  isBtnLastOnlyDisplay = false,
-}) => {
+const ImagePreview: React.FC<Props> = ({ imageUrl, handleDeleteImage, isLast = false, isDisplayDeleteIcon = false }) => {
   return (
     <div className="relative mb-4">
       <img className="border rounded max-h-60 mx-2" src={imageUrl} />
-      {!isBtnLastOnlyDisplay && (
-        <button
-          className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3"
-          onClick={handleDeleteImage}
-        >
+      {!isDisplayDeleteIcon && (
+        <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3" onClick={handleDeleteImage}>
           <FontAwesomeIcon icon={faMinusCircle} size="2x" />
         </button>
       )}
       {isLast && (
-        <button
-          className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3"
-          onClick={handleDeleteImage}
-        >
+        <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3" onClick={handleDeleteImage}>
           <FontAwesomeIcon icon={faMinusCircle} size="2x" />
         </button>
       )}

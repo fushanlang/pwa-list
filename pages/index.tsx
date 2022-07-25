@@ -11,16 +11,14 @@ import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import ChangeThemeButton from "../components/Common/ChangeThemeButton";
 
-const db = firebase.firestore();
-const logo = {
-  fontFamily: "'Nunito', sans-serif",
-};
 interface Props {
   apps: object;
 }
 const Index: NextPage<Props> = ({ apps }) => {
+  const logo = { fontFamily: "'Nunito', sans-serif" };
   const { currentUser } = useContext(AuthContext);
   const date = new Date();
+
   return (
     <Layout title="Home">
       <>
@@ -101,6 +99,7 @@ const Index: NextPage<Props> = ({ apps }) => {
   );
 };
 export async function getStaticProps() {
+  const db = firebase.firestore();
   const applications = await db
     .collection("applications")
     .where("isNewApp", "==", true)

@@ -4,8 +4,6 @@ import "firebase/firestore";
 
 import firebase from "../plugins/firebase";
 
-const db = firebase.firestore();
-
 const createSitemap = (apps) => {
   const siteUrl = "https://www.pwalist.app";
 
@@ -126,6 +124,7 @@ const createSitemap = (apps) => {
 };
 
 export const getServerSideProps = async ({ res }: GetServerSidePropsContext) => {
+  const db = firebase.firestore();
   const applications = await db.collection("applications").where("isPublic", "==", true).orderBy("updatedAt").get();
   const apps = applications.docs.map((doc) => ({
     nameLowercase: doc.data().nameLowercase,

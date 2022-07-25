@@ -9,9 +9,9 @@ import firebase from "../../plugins/firebase";
 import Layout from "../../components/Layout/Layout";
 import Apps from "../../components/Submissions/Apps";
 import Loading from "../../components/Common/Loading";
-const db = firebase.firestore();
 
 const Submissions: NextPage = () => {
+  const db = firebase.firestore();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [apps, setApps] = useState<any>([]);
   const { currentUser } = useContext(AuthContext);
@@ -46,6 +46,7 @@ const Submissions: NextPage = () => {
   const signOut = async () => {
     firebase.auth().signOut();
   };
+
   return (
     <Layout title="Submissions">
       {currentUser && (
