@@ -8,11 +8,11 @@ interface Props {
 }
 
 const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
-  const [modalsOpen, setModalsOpen] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [targetApp, setTargetApp] = useState<Object>([]);
   const handleDeleteApp = (app) => {
     setTargetApp(app);
-    setModalsOpen(true);
+    setModalOpen(true);
   };
   return (
     <>
@@ -44,10 +44,7 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
                 <Link href="/submissions/edit/[name]" as={`/submissions/edit/${app.nameLowercase}`}>
                   <button className="h-8 px-2 mr-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700">Edit</button>
                 </Link>
-                <button
-                  className="h-8 px-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-                  onClick={() => handleDeleteApp(app)}
-                >
+                <button className="h-8 px-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => handleDeleteApp(app)}>
                   Delete
                 </button>
               </td>
@@ -62,7 +59,7 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
           </Fragment>
         ))}
       </tbody>
-      <DeleteModal modalsOpen={modalsOpen} setModalsOpen={setModalsOpen} targetApp={targetApp} fetchApps={fetchApps} />
+      <DeleteModal modalOpen={modalOpen} setModalOpen={setModalOpen} targetApp={targetApp} fetchApps={fetchApps} />
     </>
   );
 };

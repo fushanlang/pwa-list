@@ -28,7 +28,7 @@ const Edit: NextPage<Props> = (props) => {
     currentUser === null && Router.push("/sign-up");
   }, [currentUser]);
 
-  const [modalsOpen, setModalsOpen] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [name, setName] = useState<string>(app.name);
   const [link, setLink] = useState<string>(app.link);
@@ -140,7 +140,7 @@ const Edit: NextPage<Props> = (props) => {
       setIsSubmitting(false);
       return;
     }
-    setModalsOpen(true);
+    setModalOpen(true);
     const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
     const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
     const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
@@ -354,7 +354,8 @@ const Edit: NextPage<Props> = (props) => {
                   </label>
                 </div>
                 <label className="block mb-2">
-                  <span className="font-bold">PC size (Up to 3 Images)</span> <span className="ml-2">These screenshots only show PC size display.</span>
+                  <span className="font-bold">PC size (Up to 3 Images)</span>{" "}
+                  <span className="ml-2">These screenshots only show PC size display.</span>
                 </label>
                 <div className="flex overflow-scroll">
                   {pcImageUrlList.map((pcImageUrl, index) => (
@@ -385,12 +386,15 @@ const Edit: NextPage<Props> = (props) => {
                 <ErrorMessage errors={errors.screenshot}></ErrorMessage>
               </div>
               <div className="ml-1 mt-10 mb-12">
-                <button className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none" type="submit">
+                <button
+                  className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none"
+                  type="submit"
+                >
                   Submit
                 </button>
               </div>
             </form>
-            <CompletedModal modalsOpen={modalsOpen} isSubmitting={isSubmitting} />
+            <CompletedModal modalOpen={modalOpen} isSubmitting={isSubmitting} />
           </div>
         ) : (
           <>

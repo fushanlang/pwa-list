@@ -25,15 +25,15 @@ let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
 modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
 
 interface Props {
-  modalsOpen: boolean;
+  modalOpen: boolean;
   isSubmitting: boolean;
 }
 
-const CompletedModal: React.FC<Props> = ({ modalsOpen, isSubmitting }) => {
+const CompletedModal: React.FC<Props> = ({ modalOpen, isSubmitting }) => {
   const { theme } = useTheme();
   return (
     <div>
-      <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={modalsOpen}>
+      <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={modalOpen}>
         {isSubmitting ? (
           <div className="text-center mt-64">
             <Loading />
