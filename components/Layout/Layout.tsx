@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import SideBar from "./SideBar";
 import BottomBar from "./BottomBar";
 

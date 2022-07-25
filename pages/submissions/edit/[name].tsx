@@ -4,6 +4,7 @@ import Router from "next/router";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+
 import { AuthContext } from "../../../contexts/Auth";
 import categories from "../../../consts/categories";
 import editValidate from "../../../plugins/submissions/editValidate";

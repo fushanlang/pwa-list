@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "firebase/firestore";
+
 import firebase from "../plugins/firebase";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import Loading from "../components/Common/Loading";
+
 const db = firebase.firestore();
 
 const Search: NextPage = () => {

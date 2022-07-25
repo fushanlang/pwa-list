@@ -1,8 +1,10 @@
 import Modal from "react-modal";
 import { useTheme } from "next-themes";
 import "firebase/firestore";
+
 import firebase from "../../plugins/firebase";
 import deleteFromStorage from "../../plugins/image/deleteFromStorage";
+
 const db = firebase.firestore();
 Modal.setAppElement("#__next");
 

@@ -4,10 +4,12 @@ import "../styles/swiper.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { AppProps } from "next/app";
 import Router from "next/router";
-import * as gtag from "../plugins/gtag";
-import { AuthProvider } from "../contexts/Auth";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
+
+import * as gtag from "../plugins/gtag";
+import { AuthProvider } from "../contexts/Auth";
+
 Router.events.on("routeChangeComplete", (url) => gtag.pageview(url));
 
 const title = "PWA List";

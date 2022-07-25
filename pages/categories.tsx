@@ -1,7 +1,5 @@
 import { NextPage } from "next";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import Layout from "../components/Layout/Layout";
-import CategoryLinkForCategories from "../components/Layout/CategoryLinkForCategories";
 import {
   faBookOpen,
   faChartBar,
@@ -34,6 +32,10 @@ library.add(
   faStar,
   faUtensils
 );
+
+import Layout from "../components/Layout/Layout";
+import CategoryLinkForCategories from "../components/Layout/CategoryLinkForCategories";
+
 const Categories: NextPage = () => {
   return (
     <Layout title="Categories">

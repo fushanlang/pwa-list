@@ -1,4 +1,5 @@
 import Router from "next/router";
+
 import firebase from "../../plugins/firebase";
 
 const Auth: React.FC = () => {

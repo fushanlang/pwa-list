@@ -1,7 +1,9 @@
 import Modal from "react-modal";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+
 import Loading from "../../components/Common/Loading";
+
 Modal.setAppElement("#__next");
 const modalStyle = {
   overlay: {

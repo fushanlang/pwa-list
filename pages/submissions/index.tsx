@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import Router from "next/router";
 import "firebase/firestore";
+
 import { AuthContext } from "../../contexts/Auth";
 import firebase from "../../plugins/firebase";
 import Layout from "../../components/Layout/Layout";

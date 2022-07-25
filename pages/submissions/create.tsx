@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
-import { AuthContext } from "../../contexts/Auth";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+
+import { AuthContext } from "../../contexts/Auth";
 import categories from "../../consts/categories";
 import Layout from "../../components/Layout/Layout";
 import CompletedModal from "../../components/Submissions/CompletedModal";

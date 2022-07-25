@@ -2,8 +2,10 @@ import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useContext } from "react";
+
 import { AuthContext } from "../contexts/Auth";
 import Layout from "../components/Layout/Layout";
+
 const About: NextPage = () => {
   const { currentUser } = useContext(AuthContext);
   const logo = {
@@ -34,8 +36,8 @@ const About: NextPage = () => {
         <div className="mt-1 mb-5 text-lg">
           <p>Installation is not required, but it will make it easier to use.</p>
           <p>
-            To install, access the app in a web browser and click the Install button. The following is an explanation of how to
-            install in the case of Chrome.
+            To install, access the app in a web browser and click the Install button. The following is an explanation of how to install in
+            the case of Chrome.
           </p>
           <div className="mt-4 ml-2 mb-1">
             <img style={{ height: "530px" }} src={"/about/mobile1.jpg"} className="mr-8 mb-3 rounded-md inline" />
@@ -61,10 +63,7 @@ const About: NextPage = () => {
           </p>
         </div>
         <Link href="/" as="/">
-          <button
-            className="bg-green-400 hover:bg-green-500 text-white font-bold mt-5 w-36 h-8 rounded focus:outline-none"
-            type="submit"
-          >
+          <button className="bg-green-400 hover:bg-green-500 text-white font-bold mt-5 w-36 h-8 rounded focus:outline-none" type="submit">
             Home
           </button>
         </Link>

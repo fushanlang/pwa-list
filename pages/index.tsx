@@ -4,6 +4,7 @@ import "firebase/firestore";
 import { NextPage } from "next";
 import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
+
 import firebase from "../plugins/firebase";
 import { AuthContext } from "../contexts/Auth";
 import Layout from "../components/Layout/Layout";
