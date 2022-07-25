@@ -159,6 +159,7 @@ const Create: NextPage = () => {
                   className="ring-2 ring-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
                   type="text"
                   maxLength={28}
+                  value={name}
                   onChange={(e) => {
                     setName(e.target.value);
                     setErrors({ ...errors, name: [] });
@@ -176,6 +177,7 @@ const Create: NextPage = () => {
                   type="text"
                   maxLength={120}
                   placeholder="https://pwalist.app"
+                  value={link}
                   onChange={(e) => {
                     setLink(e.target.value);
                     setErrors({ ...errors, link: [] });
@@ -214,6 +216,7 @@ const Create: NextPage = () => {
                   type="text"
                   maxLength={10}
                   placeholder="ToDo"
+                  value={tag1}
                   onChange={(e) => {
                     setTag1(e.target.value);
                     setErrors({ ...errors, tag1: [] });
@@ -224,6 +227,7 @@ const Create: NextPage = () => {
                   type="text"
                   maxLength={10}
                   placeholder="Timer"
+                  value={tag2}
                   onChange={(e) => {
                     setTag2(e.target.value);
                     setErrors({ ...errors, tag2: [] });
@@ -234,6 +238,7 @@ const Create: NextPage = () => {
                   type="text"
                   maxLength={10}
                   placeholder="Management"
+                  value={tag3}
                   onChange={(e) => {
                     setTag3(e.target.value);
                     setErrors({ ...errors, tag3: [] });
@@ -321,7 +326,8 @@ const Create: NextPage = () => {
                 </label>
               </div>
               <label className="block mb-2">
-                <span className="font-bold">PC size (Up to 3 Images)</span> <span className="ml-2">These screenshots only show PC size display.</span>
+                <span className="font-bold">PC size (Up to 3 Images)</span>{" "}
+                <span className="ml-2">These screenshots only show PC size display.</span>
               </label>
               <div className="flex overflow-scroll">
                 {pcImageUrlList.map((pcImageUrl, index) => (
@@ -352,7 +358,10 @@ const Create: NextPage = () => {
               <ErrorMessage errors={errors.screenshot}></ErrorMessage>
             </div>
             <div className="ml-1 mt-10 mb-12">
-              <button className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none" type="submit">
+              <button
+                className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none"
+                type="submit"
+              >
                 Submit
               </button>
             </div>
