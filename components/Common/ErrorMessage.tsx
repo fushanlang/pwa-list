@@ -2,6 +2,7 @@ interface Props {
   errors: any;
 }
 const ErrorMessage: React.FC<Props> = ({ errors }) => {
+  console.log(errors)
   return (
     <div className="mt-1">
       {errors !== null &&

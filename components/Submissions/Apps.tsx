@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Link from "next/link";
 import DeleteModal from "./DeleteModal";
 
@@ -17,9 +17,9 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
   return (
     <>
       <tbody>
-        {apps.map((app, index) => (
-          <>
-            <tr key={index} className="border h-24 flex items-center">
+        {apps.map((app) => (
+          <Fragment key={app.id}>
+            <tr className="border h-24 flex items-center">
               <td className="w-64 flex items-center">
                 <span className="ml-3 mr-4 w-16">
                   <img className="rounded-md" src={app.icon || "/default-app-icon.png"} />
@@ -53,13 +53,13 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
               </td>
             </tr>
             {app.isRejected && (
-              <tr key={index} className="border border-t-0 h-8 flex items-center">
+              <tr key={app.id} className="border border-t-0 h-8 flex items-center">
                 <td className="text-sm text-red-500">
                   <p className="ml-2">Message: {app.rejectionMessage}</p>
                 </td>
               </tr>
             )}
-          </>
+          </Fragment>
         ))}
       </tbody>
       <DeleteModal modalsOpen={modalsOpen} setModalsOpen={setModalsOpen} targetApp={targetApp} fetchApps={fetchApps} />

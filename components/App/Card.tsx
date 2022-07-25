@@ -7,8 +7,8 @@ interface Props {
 const Card: React.FC<Props> = ({ apps }) => {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-      {apps.map((app, index) => (
-        <Link key={index} href="/app/[name]" as={`/app/${app.nameLowercase}`}>
+      {apps.map((app) => (
+        <Link key={app.id} href="/app/[name]" as={`/app/${app.nameLowercase}`}>
           <a
             style={{ height: "120px" }}
             className="flex items-center border mb-1 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700"

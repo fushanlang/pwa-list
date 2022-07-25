@@ -227,8 +227,8 @@ const Edit: NextPage<Props> = (props) => {
                     }}
                   >
                     <option value="">-</option>
-                    {categories.map((category, index) => (
-                      <option key={index} value={category.value}>
+                    {categories.map((category) => (
+                      <option key={category.value} value={category.value}>
                         {category.label}
                       </option>
                     ))}
