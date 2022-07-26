@@ -1,13 +1,12 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { useContext } from "react";
 
-import { AuthContext } from "../contexts/Auth";
+import { useLoginUser } from "../contexts/Auth";
 import Layout from "../components/Layout/Layout";
 
 const About: NextPage = () => {
-  const { currentUser } = useContext(AuthContext);
+  const loginUser = useLoginUser();
   const logo = {
     fontFamily: "'Nunito', sans-serif",
   };
@@ -50,7 +49,7 @@ const About: NextPage = () => {
         <div className="mt-1 mb-4 text-lg">
           <p>
             If you know a good Progressive Web App, please submit it using
-            {currentUser ? (
+            {loginUser ? (
               <Link href="/submissions" as="/submissions">
                 <a className="text-blue-400"> this form</a>
               </Link>

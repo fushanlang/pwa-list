@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
-import { AuthContext } from "../../contexts/Auth";
+import { useLoginUser } from "../../contexts/Auth";
 import Layout from "../../components/Layout/Layout";
 import Auth from "../../components/SignUp/Auth";
 const logo = {
@@ -9,14 +9,14 @@ const logo = {
 };
 
 const SignUp: NextPage = () => {
-  const { currentUser } = useContext(AuthContext);
+  const loginUser = useLoginUser();
   useEffect(() => {
-    currentUser && Router.push("/submissions");
-  }, [currentUser]);
+    loginUser && Router.push("/submissions");
+  }, [loginUser]);
 
   return (
     <Layout title="Sign-Up">
-      {!currentUser && (
+      {!loginUser && (
         <div className="text-center mt-16">
           <h1 className="text-3xl font-bold mb-7" style={logo}>
             P<span className="text-green-500">W</span>A LIST
