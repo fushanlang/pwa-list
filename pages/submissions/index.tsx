@@ -4,20 +4,20 @@ import Link from "next/link";
 import Router from "next/router";
 import "firebase/firestore";
 
-import { AuthContext } from "../../contexts/Auth";
+import { useLoginUser } from "../../contexts/Auth";
 import firebase from "../../plugins/firebase";
 import Layout from "../../components/Layout/Layout";
 import Apps from "../../components/Submissions/Apps";
 import Loading from "../../components/Common/Loading";
 
 const Submissions: NextPage = () => {
+  const loginUser = useLoginUser();
   const db = firebase.firestore();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [apps, setApps] = useState<any>([]);
-  const { currentUser } = useContext(AuthContext);
   const fetchUserApps = async () => {
-    if (!currentUser) return;
-    const apps = await db.collection("applications").where("userId", "==", currentUser.uid).orderBy("updatedAt", "desc").get();
+    if (!loginUser) return;
+    const apps = await db.collection("applications").where("userId", "==", loginUser.uid).orderBy("updatedAt", "desc").get();
     setApps(
       apps.docs.map((doc) => ({
         id: doc.id,
@@ -39,9 +39,9 @@ const Submissions: NextPage = () => {
     setIsLoading(false);
   };
   useEffect(() => {
-    !currentUser && Router.push("sign-up");
+    !loginUser && Router.push("sign-up");
     fetchUserApps();
-  }, [currentUser]);
+  }, [loginUser]);
 
   const signOut = async () => {
     firebase.auth().signOut();
@@ -49,7 +49,7 @@ const Submissions: NextPage = () => {
 
   return (
     <Layout title="Submissions">
-      {currentUser && (
+      {loginUser && (
         <>
           {isLoading ? (
             <div className="mt-64">

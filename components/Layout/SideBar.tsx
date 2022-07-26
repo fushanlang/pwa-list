@@ -5,7 +5,7 @@ import CategoryLinkForSideBar from "./CategoryLinkForSideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
-import { AuthContext } from "../../contexts/Auth";
+import { useLoginUser } from "../../contexts/Auth";
 
 import {
   faBookOpen,
@@ -42,7 +42,7 @@ library.add(
   faUtensils
 );
 const SideBar: React.FC = () => {
-  const { currentUser } = useContext(AuthContext);
+  const loginUser = useLoginUser();
   const router = useRouter();
   const path = router.pathname;
   const date = new Date();
@@ -101,7 +101,7 @@ const SideBar: React.FC = () => {
                 <Link href="/about" as="/about">
                   <a className="mr-2">About</a>
                 </Link>
-                {currentUser ? (
+                {loginUser ? (
                   <Link href="/submissions" as="/submissions">
                     <a className="mr-2">Submit app</a>
                   </Link>

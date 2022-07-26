@@ -6,7 +6,7 @@ import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 
 import firebase from "../plugins/firebase";
-import { AuthContext } from "../contexts/Auth";
+import { useLoginUser } from "../contexts/Auth";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import ChangeThemeButton from "../components/Common/ChangeThemeButton";
@@ -15,8 +15,8 @@ interface Props {
   apps: object;
 }
 const Index: NextPage<Props> = ({ apps }) => {
+  const loginUser = useLoginUser();
   const logo = { fontFamily: "'Nunito', sans-serif" };
-  const { currentUser } = useContext(AuthContext);
   const date = new Date();
 
   return (
@@ -64,7 +64,7 @@ const Index: NextPage<Props> = ({ apps }) => {
               <Link href="/about" as="/about">
                 <a className="mr-3">About</a>
               </Link>
-              {currentUser ? (
+              {loginUser ? (
                 <Link href="/submissions" as="/submissions">
                   <a className="mr-3">Submit app</a>
                 </Link>

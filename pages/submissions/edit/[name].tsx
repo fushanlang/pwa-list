@@ -5,7 +5,7 @@ import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
-import { AuthContext } from "../../../contexts/Auth";
+import { useLoginUser } from "../../../contexts/Auth";
 import categories from "../../../consts/categories";
 import editValidate from "../../../plugins/submissions/editValidate";
 import firebase from "../../../plugins/firebase";
@@ -23,11 +23,11 @@ interface Props {
 }
 
 const Edit: NextPage<Props> = (props) => {
+  const loginUser = useLoginUser();
   const { app, isFound } = props;
-  const { currentUser } = useContext(AuthContext);
   useEffect(() => {
-    currentUser === null && Router.push("/sign-up");
-  }, [currentUser]);
+    loginUser === null && Router.push("/sign-up");
+  }, [loginUser]);
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -189,7 +189,7 @@ const Edit: NextPage<Props> = (props) => {
   return (
     <Layout title={`${app.name} - Edit`}>
       <>
-        {currentUser && currentUser.uid === app.userId && isFound ? (
+        {loginUser && loginUser.uid === app.userId && isFound ? (
           <div className="px-5 py-6">
             <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
               <div className="ml-1 mt-1 mb-9">

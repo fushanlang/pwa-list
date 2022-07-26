@@ -5,7 +5,7 @@ import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
-import { AuthContext } from "../../contexts/Auth";
+import { useLoginUser } from "../../contexts/Auth";
 import categories from "../../consts/categories";
 import Layout from "../../components/Layout/Layout";
 import CompletedModal from "../../components/Submissions/CompletedModal";
@@ -17,10 +17,10 @@ import firebase from "../../plugins/firebase";
 
 const db = firebase.firestore();
 const Create: NextPage = () => {
-  const { currentUser } = useContext(AuthContext);
+  const loginUser = useLoginUser();
   useEffect(() => {
-    currentUser === null && Router.push("/sign-up");
-  }, [currentUser]);
+    loginUser === null && Router.push("/sign-up");
+  }, [loginUser]);
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -115,7 +115,7 @@ const Create: NextPage = () => {
     const storageMobile2Url = mobileImages[1] ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2") : null;
     const storageMobile3Url = mobileImages[2] ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[2], "mobile3") : null;
     db.collection("applications").add({
-      userId: currentUser.uid,
+      userId: loginUser.uid,
       name: name,
       nameLowercase: nameLowercase,
       link: link,
@@ -148,7 +148,7 @@ const Create: NextPage = () => {
 
   return (
     <Layout title="Submit">
-      {currentUser && (
+      {loginUser && (
         <div className="px-5 py-6">
           <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
             <div className="ml-1 mt-1 mb-9">
