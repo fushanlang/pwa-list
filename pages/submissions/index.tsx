@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { NextPage } from "next";
 import Link from "next/link";
 import Router from "next/router";
