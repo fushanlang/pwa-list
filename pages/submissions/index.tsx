@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { NextPage } from "next";
 import Link from "next/link";
 import Router from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import { setAsyncWithLoading } from "../../store/modules/loginUserApps";
 import "firebase/firestore";
 
 import { useLoginUser } from "../../contexts/Auth";
@@ -12,35 +14,15 @@ import Loading from "../../components/Common/Loading";
 
 const Submissions: NextPage = () => {
   const loginUser = useLoginUser();
-  const db = firebase.firestore();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [apps, setApps] = useState<any>([]);
-  const fetchUserApps = async () => {
-    if (!loginUser) return;
-    const apps = await db.collection("applications").where("userId", "==", loginUser.uid).orderBy("updatedAt", "desc").get();
-    setApps(
-      apps.docs.map((doc) => ({
-        id: doc.id,
-        name: doc.data().name,
-        nameLowercase: doc.data().nameLowercase,
-        icon: doc.data().icon,
-        link: doc.data().link,
-        isPublic: doc.data().isPublic,
-        isRejected: doc.data().isRejected,
-        rejectionMessage: doc.data().rejectionMessage,
-        imageMobile1: doc.data().imageMobile1,
-        imageMobile2: doc.data().imageMobile2,
-        imageMobile3: doc.data().imageMobile3,
-        imagePc1: doc.data().imagePc1,
-        imagePc2: doc.data().imagePc2,
-        imagePc3: doc.data().imagePc3,
-      }))
-    );
-    setIsLoading(false);
-  };
+  const isLoading = useSelector((state: any) => state.loginUserApps.isLoading);
+  const apps = useSelector((state: any) => state.loginUserApps.apps);
+  const dispatch = useDispatch();
   useEffect(() => {
-    !loginUser && Router.push("sign-up");
-    fetchUserApps();
+    if (loginUser) {
+      dispatch(setAsyncWithLoading(loginUser.uid));
+    } else {
+      Router.push("sign-up");
+    }
   }, [loginUser]);
 
   const signOut = async () => {
@@ -68,7 +50,7 @@ const Submissions: NextPage = () => {
                     </tr>
                   </thead>
                   {Object.keys(apps).length ? (
-                    <Apps apps={apps} fetchApps={fetchUserApps} />
+                    <Apps apps={apps} />
                   ) : (
                     <tbody>
                       <tr className="text-center">

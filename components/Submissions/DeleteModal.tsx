@@ -1,7 +1,9 @@
 import Modal from "react-modal";
 import { useTheme } from "next-themes";
 import "firebase/firestore";
+import { useDispatch } from "react-redux";
 
+import { remove } from "../../store/modules/loginUserApps";
 import firebase from "../../plugins/firebase";
 import deleteFromStorage from "../../plugins/image/deleteFromStorage";
 
@@ -9,10 +11,9 @@ interface Props {
   modalOpen: boolean;
   setModalOpen: any;
   targetApp: any;
-  fetchApps: any;
 }
 
-const DeleteModal: React.FC<Props> = ({ modalOpen, setModalOpen, targetApp, fetchApps }) => {
+const DeleteModal: React.FC<Props> = ({ modalOpen, setModalOpen, targetApp }) => {
   const db = firebase.firestore();
   Modal.setAppElement("#__next");
 
@@ -36,9 +37,10 @@ const DeleteModal: React.FC<Props> = ({ modalOpen, setModalOpen, targetApp, fetc
   let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
   modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
 
+  const dispatch = useDispatch();
   const handleDeleteApp = async (app) => {
+    dispatch(remove(app.id));
     await db.collection("applications").doc(app.id).delete();
-    fetchApps();
     setModalOpen(false);
     await deleteFromStorage("application-icons", app.name, "icon");
     if (app.imageMobile1 !== null) await deleteFromStorage("application-images", app.name, "mobile1");

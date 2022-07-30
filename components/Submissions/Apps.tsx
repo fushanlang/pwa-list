@@ -5,10 +5,9 @@ import DeleteModal from "./DeleteModal";
 
 interface Props {
   apps: any;
-  fetchApps: any;
 }
 
-const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
+const Apps: React.FC<Props> = ({ apps }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [targetApp, setTargetApp] = useState<Object>([]);
   const handleDeleteApp = (app) => {
@@ -51,7 +50,7 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
               </td>
             </tr>
             {app.isRejected && (
-              <tr key={app.id} className="border border-t-0 h-8 flex items-center">
+              <tr className="border border-t-0 h-8 flex items-center">
                 <td className="text-sm text-red-500">
                   <p className="ml-2">Message: {app.rejectionMessage}</p>
                 </td>
@@ -60,7 +59,7 @@ const Apps: React.FC<Props> = ({ apps, fetchApps }) => {
           </Fragment>
         ))}
       </tbody>
-      <DeleteModal modalOpen={modalOpen} setModalOpen={setModalOpen} targetApp={targetApp} fetchApps={fetchApps} />
+      <DeleteModal modalOpen={modalOpen} setModalOpen={setModalOpen} targetApp={targetApp} />
     </>
   );
 };

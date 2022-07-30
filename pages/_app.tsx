@@ -6,9 +6,11 @@ import { AppProps } from "next/app";
 import Router from "next/router";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
+import { Provider } from "react-redux";
 
 import * as gtag from "../plugins/gtag";
 import { AuthProvider } from "../contexts/Auth";
+import store from "../store";
 
 Router.events.on("routeChangeComplete", (url) => gtag.pageview(url));
 
@@ -57,7 +59,9 @@ const WrappedApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
       <ThemeProvider attribute="class" defaultTheme="light">
         <AuthProvider>
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
         </AuthProvider>
       </ThemeProvider>
     </>
