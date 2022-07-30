@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
 import "firebase/firestore";
@@ -83,17 +83,15 @@ const Create: NextPage = () => {
     setIconUrl("");
   };
 
-  const handleDeletePcImage = async (e: React.FormEvent<HTMLFormElement>, index: number) => {
-    e.preventDefault();
-    setPcImageUrlList(pcImageUrlList.filter((_, i) => i !== index));
-    setPcImages(pcImages.filter((_, i) => i !== index));
-  };
+  const handleDeletePcImage = useCallback((index: number) => {
+    setPcImageUrlList((prev) => prev.filter((_, i) => i !== index));
+    setPcImages((prev) => prev.filter((_, i) => i !== index));
+  }, []);
 
-  const handleDeleteMobileImage = async (e: React.FormEvent<HTMLFormElement>, index: number) => {
-    e.preventDefault();
-    setMobileImageUrlList(mobileImageUrlList.filter((_, i) => i !== index));
-    setMobileImages(mobileImages.filter((_, i) => i !== index));
-  };
+  const handleDeleteMobileImage = useCallback((index: number) => {
+    setMobileImageUrlList((prev) => prev.filter((_, i) => i !== index));
+    setMobileImages((prev) => prev.filter((_, i) => i !== index));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -303,13 +301,7 @@ const Create: NextPage = () => {
               <label className="block font-bold mb-2">Mobile size (Up to 3 Images)</label>
               <div className="flex overflow-scroll">
                 {mobileImageUrlList.map((mobileImageUrl, index) => (
-                  <ImagePreview
-                    key={index}
-                    imageUrl={mobileImageUrl}
-                    handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) => handleDeleteMobileImage(event, index)}
-                    isLast={mobileImageUrlList.length - 1 === index}
-                    isDisplayDeleteIcon={false}
-                  />
+                  <ImagePreview key={index} index={index} imageUrl={mobileImageUrl} handleDeleteImage={handleDeleteMobileImage} />
                 ))}
               </div>
               <div className="mb-8">
@@ -333,13 +325,7 @@ const Create: NextPage = () => {
               </label>
               <div className="flex overflow-scroll">
                 {pcImageUrlList.map((pcImageUrl, index) => (
-                  <ImagePreview
-                    key={index}
-                    imageUrl={pcImageUrl}
-                    handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) => handleDeletePcImage(event, index)}
-                    isLast={pcImageUrlList.length - 1 === index}
-                    isDisplayDeleteIcon={false}
-                  />
+                  <ImagePreview key={index} index={index} imageUrl={pcImageUrl} handleDeleteImage={handleDeletePcImage} />
                 ))}
               </div>
               <div className="mb-8">
