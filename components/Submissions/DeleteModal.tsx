@@ -39,8 +39,8 @@ const DeleteModal: React.FC<Props> = ({ modalOpen, setModalOpen, targetApp }) =>
 
   const dispatch = useDispatch();
   const handleDeleteApp = async (app) => {
-    dispatch(remove(app.id));
     await db.collection("applications").doc(app.id).delete();
+    dispatch(remove(app.id));
     setModalOpen(false);
     await deleteFromStorage("application-icons", app.name, "icon");
     if (app.imageMobile1 !== null) await deleteFromStorage("application-images", app.name, "mobile1");
