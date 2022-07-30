@@ -20,7 +20,7 @@ const Search: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    (async function () {
+    const search = async () => {
       if (!inputParam.replace(/\s|-|\./g, "")) {
         setSearchedApps([]);
         return;
@@ -75,7 +75,8 @@ const Search: NextPage = () => {
       const noDupApps = apps.filter((element, index, self) => self.findIndex((e) => e.id === element.id) === index);
       setSearchedApps(noDupApps);
       setIsLoading(false);
-    })();
+    };
+    search();
   }, [inputParam]);
 
   return (

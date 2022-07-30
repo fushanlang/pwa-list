@@ -1,7 +1,7 @@
 import validateRequired from "../validation/validateRequired";
 import validateUrl from "../validation/validateUrl";
 import validateAlphanum from "../validation/validateAlphanum";
-const editValidate = async (
+const editValidate = (
   setErrors: any,
   link: string,
   category: string,

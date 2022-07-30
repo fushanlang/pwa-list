@@ -53,13 +53,13 @@ const Create: NextPage = () => {
   const MAX_PC_IMAGE_NUM = 3;
   const MAX_MOBILE_IMAGE_NUM = 3;
 
-  const onChangeIconHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeIconHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     setIconUrl(window.URL.createObjectURL(files[0]));
     setIcon(files[0]);
   };
 
-  const onChangePcImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangePcImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
     filesArr.splice(MAX_PC_IMAGE_NUM);
@@ -69,7 +69,7 @@ const Create: NextPage = () => {
     });
   };
 
-  const onChangeMobileImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeMobileImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
     filesArr.splice(MAX_MOBILE_IMAGE_NUM);
@@ -78,7 +78,7 @@ const Create: NextPage = () => {
       setMobileImages((images) => [...images, value]);
     });
   };
-  const handleDeleteIcon = async () => {
+  const handleDeleteIcon = () => {
     setIcon(null);
     setIconUrl("");
   };
