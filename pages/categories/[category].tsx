@@ -64,7 +64,6 @@ export async function getStaticProps(context) {
       apps: apps,
       category: changeFirstUpperCase(category),
     },
-    revalidate: 10,
   };
 }
 

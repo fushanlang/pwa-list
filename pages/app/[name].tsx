@@ -191,7 +191,6 @@ export const getStaticProps = async (context) => {
         app: {},
         isFound: false,
       },
-      revalidate: 10,
     };
   }
   app[0]["category"] = changeFirstUpperCase(app[0]["category"]);
@@ -202,7 +201,6 @@ export const getStaticProps = async (context) => {
       app: app[0],
       isFound: true,
     },
-    revalidate: 10,
   };
 };
 export default App;
