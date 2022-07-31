@@ -44,7 +44,6 @@ const loginUserApps = createSlice({
 });
 
 const setAsyncWithLoading = createAsyncThunk("loginUserApps/setAsyncWithLoading", async (payload: any) => {
-  console.log(payload);
   const db = firebase.firestore();
   const response = await db.collection("applications").where("userId", "==", payload).orderBy("updatedAt", "desc").get();
   return response.docs;
