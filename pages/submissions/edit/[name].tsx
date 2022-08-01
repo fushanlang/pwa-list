@@ -12,7 +12,7 @@ import firebase from "../../../plugins/firebase";
 import uploadToStorage from "../../../plugins/image/uploadToStorage";
 import Layout from "../../../components/Layout/Layout";
 import Forbidden from "../../../components/Common/Forbidden";
-import ErrorMessage from "../../../components/Common/ErrorMessage";
+import ErrorMessage from "../../../components/Common/Form/ErrorMessage";
 import ImagePreview from "../../../components/Common/ImagePreview";
 import CompletedModal from "../../../components/Submissions/CompletedModal";
 import { App } from "../../../types/app";

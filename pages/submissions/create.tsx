@@ -9,8 +9,10 @@ import { useLoginUser } from "../../contexts/Auth";
 import categories from "../../consts/categories";
 import Layout from "../../components/Layout/Layout";
 import CompletedModal from "../../components/Submissions/CompletedModal";
-import ErrorMessage from "../../components/Common/ErrorMessage";
 import ImagePreview from "../../components/Common/ImagePreview";
+import Input from "../../components/Common/Form/Input";
+import Select from "../../components/Common/Form/Select";
+import ErrorMessage from "../../components/Common/Form/ErrorMessage";
 import createValidate from "../../plugins/submissions/createValidate";
 import uploadToStorage from "../../plugins/image/uploadToStorage";
 import firebase from "../../plugins/firebase";
@@ -151,15 +153,12 @@ const Create: NextPage = () => {
           <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
             <div className="ml-1 mt-1 mb-9">
               <div className="mb-6">
-                <label className="block font-bold mb-2">
-                  Name<span className="text-red-400 ml-2">*</span>
-                </label>
-                <input
-                  className="ring-2 ring-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                  type="text"
+                <Input
+                  label={"Name"}
+                  isRequired={true}
                   maxLength={28}
-                  value={name}
-                  onChange={(e) => {
+                  state={name}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setName(e.target.value);
                     setErrors({ ...errors, name: [] });
                   }}
@@ -167,17 +166,13 @@ const Create: NextPage = () => {
                 <ErrorMessage errors={errors.name}></ErrorMessage>
               </div>
               <div className="mb-6">
-                <label className="block font-bold mb-2">
-                  Link
-                  <span className="text-red-400 ml-2">*</span>
-                </label>
-                <input
-                  className="ring-2 ring-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                  type="text"
+                <Input
+                  label={"Link"}
+                  isRequired={true}
                   maxLength={120}
                   placeholder="https://pwalist.app"
-                  value={link}
-                  onChange={(e) => {
+                  state={link}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setLink(e.target.value);
                     setErrors({ ...errors, link: [] });
                   }}
@@ -185,24 +180,16 @@ const Create: NextPage = () => {
                 <ErrorMessage errors={errors.link}></ErrorMessage>
               </div>
               <div className="mb-6">
-                <label className="block font-bold mb-2">
-                  Category<span className="text-red-400 ml-2">*</span>
-                </label>
-                <select
-                  className="ring-2 ring-gray-300 w-44 py-2 px-3 rounded leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                  value={category}
-                  onChange={(e) => {
+                <Select
+                  label={"Category"}
+                  isRequired={true}
+                  state={category}
+                  list={categories}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setCategory(e.target.value);
                     setErrors({ ...errors, category: [] });
                   }}
-                >
-                  <option value="">-</option>
-                  {categories.map((category) => (
-                    <option key={category.value} value={category.value}>
-                      {category.label}
-                    </option>
-                  ))}
-                </select>
+                />
                 <ErrorMessage errors={errors.category}></ErrorMessage>
               </div>
               <div className="mb-6">
