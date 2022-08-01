@@ -33,10 +33,10 @@ const Create: NextPage = () => {
   const [description, setDescription] = useState<string>("");
   const [icon, setIcon] = useState<File | null>(null);
   const [iconUrl, setIconUrl] = useState<string>("");
-  const [pcImages, setPcImages] = useState<Array<File>>([]);
-  const [pcImageUrlList, setPcImageUrlList] = useState<Array<string>>([]);
-  const [mobileImages, setMobileImages] = useState<Array<File>>([]);
-  const [mobileImageUrlList, setMobileImageUrlList] = useState<Array<string>>([]);
+  const [mobileImages, setMobileImages] = useState<File[]>([]);
+  const [mobileImageUrlList, setMobileImageUrlList] = useState<string[]>([]);
+  const [pcImages, setPcImages] = useState<File[]>([]);
+  const [pcImageUrlList, setPcImageUrlList] = useState<string[]>([]);
   const [errors, setErrors] = useState<any>({
     name: [],
     link: [],

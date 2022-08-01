@@ -2,6 +2,7 @@ import validateRequired from "../validation/validateRequired";
 import validateUrl from "../validation/validateUrl";
 import validateAlphanum from "../validation/validateAlphanum";
 import validateDuplicate from "../validation/validateDuplicate";
+
 const createValidate = async (
   setErrors: any,
   name: string,
@@ -12,18 +13,18 @@ const createValidate = async (
   tag3: string,
   description: string,
   icon: File,
-  pcImages: Array<File>,
-  mobileImages: Array<File>
+  pcImages: File[],
+  mobileImages: File[]
 ) => {
-  var nameErrors = [];
-  var linkErrors = [];
-  var categoryErrors = [];
-  var tag1Errors = [];
-  var tag2Errors = [];
-  var tag3Errors = [];
-  var descriptionErrors = [];
-  var iconErrors = [];
-  var screenshotErrors = [];
+  let nameErrors = [];
+  let linkErrors = [];
+  let categoryErrors = [];
+  let tag1Errors = [];
+  let tag2Errors = [];
+  let tag3Errors = [];
+  let descriptionErrors = [];
+  let iconErrors = [];
+  let screenshotErrors = [];
   // required
   if (validateRequired(name)) nameErrors.push("The Name field is required");
   if (validateRequired(link)) linkErrors.push("The Link field is required");

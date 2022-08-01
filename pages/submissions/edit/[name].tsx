@@ -15,12 +15,11 @@ import Forbidden from "../../../components/Common/Forbidden";
 import ErrorMessage from "../../../components/Common/ErrorMessage";
 import ImagePreview from "../../../components/Common/ImagePreview";
 import CompletedModal from "../../../components/Submissions/CompletedModal";
+import { App } from "../../../type/common";
+
 const db = firebase.firestore();
 
-interface Props {
-  app: any;
-  isFound: boolean;
-}
+type Props = { app: App; isFound: boolean };
 
 const Edit: NextPage<Props> = (props) => {
   const { app, isFound } = props;
@@ -38,41 +37,23 @@ const Edit: NextPage<Props> = (props) => {
   const [tag2, setTag2] = useState<string>("");
   const [tag3, setTag3] = useState<string>("");
   const [description, setDescription] = useState<string>(app.description);
-  const [icon, setIcon] = useState<any | null>(null);
+  const [icon, setIcon] = useState<File>(null);
   const [iconUrl, setIconUrl] = useState<string>(app.icon);
-  const [mobileImages, setMobileImages] = useState<Array<File>>([]);
-  const [mobileImageUrlList, setMobileImageUrlList] = useState<Array<string>>([]);
-  const [pcImages, setPcImages] = useState<Array<File>>([]);
-  const [pcImageUrlList, setPcImageUrlList] = useState<Array<string>>([]);
+  const [mobileImages, setMobileImages] = useState<File[]>([]);
+  const [mobileImageUrlList, setMobileImageUrlList] = useState<string[]>([]);
+  const [pcImages, setPcImages] = useState<File[]>([]);
+  const [pcImageUrlList, setPcImageUrlList] = useState<string[]>([]);
 
   useEffect(() => {
     app.tag1 && setTag1(app.tag1);
     app.tag2 && setTag2(app.tag2);
     app.tag3 && setTag3(app.tag3);
-    if (app.imageMobile1) {
-      setMobileImages((prev) => [...prev, null]);
-      setMobileImageUrlList((prev) => [...prev, app.imageMobile1]);
-    }
-    if (app.imageMobile2) {
-      setMobileImages((prev) => [...prev, null]);
-      setMobileImageUrlList((prev) => [...prev, app.imageMobile2]);
-    }
-    if (app.imageMobile3) {
-      setMobileImages((prev) => [...prev, null]);
-      setMobileImageUrlList((prev) => [...prev, app.imageMobile3]);
-    }
-    if (app.imagePc1) {
-      setPcImages((prev) => [...prev, null]);
-      setPcImageUrlList((prev) => [...prev, app.imagePc1]);
-    }
-    if (app.imagePc2) {
-      setPcImages((prev) => [...prev, null]);
-      setPcImageUrlList((prev) => [...prev, app.imagePc2]);
-    }
-    if (app.imagePc3) {
-      setPcImages((prev) => [...prev, null]);
-      setPcImageUrlList((prev) => [...prev, app.imagePc3]);
-    }
+    app.imageMobile1 && setMobileImageUrlList((prev) => [...prev, app.imageMobile1]);
+    app.imageMobile2 && setMobileImageUrlList((prev) => [...prev, app.imageMobile2]);
+    app.imageMobile3 && setMobileImageUrlList((prev) => [...prev, app.imageMobile3]);
+    app.imagePc1 && setPcImageUrlList((prev) => [...prev, app.imagePc1]);
+    app.imagePc2 && setPcImageUrlList((prev) => [...prev, app.imagePc2]);
+    app.imagePc3 && setPcImageUrlList((prev) => [...prev, app.imagePc3]);
   }, []);
 
   const [errors, setErrors] = useState<any>({

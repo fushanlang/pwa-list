@@ -24,7 +24,7 @@ const App: NextPage<Props> = (props) => {
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
   // setting the initial slide
-  var slideNum = [0, 1, 2, 3, 4, 5];
+  let slideNum = [0, 1, 2, 3, 4, 5];
   if (isFound) {
     if (app.imageMobile1 === null) slideNum.splice(0, 0, null);
     if (app.imageMobile2 === null) slideNum.splice(1, 0, null);

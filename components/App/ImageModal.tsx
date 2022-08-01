@@ -11,12 +11,12 @@ import { App } from "../../type/common";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");
 
-interface Props {
+type Props = {
   app: App;
   modalIsOpen: boolean;
   setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   initialSlide: number;
-}
+};
 
 const modalStyle = {
   overlay: {

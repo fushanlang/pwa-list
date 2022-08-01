@@ -1,5 +1,5 @@
 export type CardApp = {
-  id: number;
+  id: string;
   name: string;
   nameLowercase: string;
   icon: string;
@@ -11,7 +11,7 @@ export type CardApp = {
 };
 
 export type submissionTableApp = {
-  id: number;
+  id: string;
   icon: string;
   isPublic: boolean;
   isRejected: boolean;
@@ -21,6 +21,7 @@ export type submissionTableApp = {
 };
 
 export type App = {
+  id: string;
   category: string;
   description: string;
   icon: string;
