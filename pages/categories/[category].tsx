@@ -1,14 +1,14 @@
 import { NextPage } from "next";
 import "firebase/firestore";
+
 import Layout from "../../components/Layout/Layout";
 import Card from "../../components/App/Card";
 import firebase from "../../plugins/firebase";
 import { changeFirstUpperCase } from "../../plugins/common/functions";
+import { CardApp } from "../../type/common";
 
-interface Props {
-  apps: any;
-  category: string;
-}
+type Props = { apps: CardApp[]; category: string };
+
 const Category: NextPage<Props> = (props) => {
   const { apps, category } = props;
   return (
@@ -64,7 +64,6 @@ export async function getStaticProps(context) {
       apps: apps,
       category: changeFirstUpperCase(category),
     },
-    revalidate: 10,
   };
 }
 

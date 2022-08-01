@@ -3,10 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { changeFirstUpperCase } from "../../plugins/common/functions";
 
-interface Props {
+type Props = {
   categoryName: string;
   iconName: any;
-}
+};
+
 const CategoryLinkForCategories: React.FC<Props> = ({ categoryName, iconName }) => {
   return (
     <Link href="categories/[category]" as={`/categories/${categoryName}`}>

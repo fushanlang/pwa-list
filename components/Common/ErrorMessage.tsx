@@ -1,15 +1,13 @@
-interface Props {
-  errors: any;
-}
+type Props = { errors: [] };
+
 const ErrorMessage: React.FC<Props> = ({ errors }) => {
   return (
     <div className="mt-1">
-      {errors !== null &&
-        errors.map((error) => (
-          <p className="text-base text-red-400" key={error}>
-            {error}
-          </p>
-        ))}
+      {errors.map((error) => (
+        <p className="text-base text-red-400" key={error}>
+          {error}
+        </p>
+      ))}
     </div>
   );
 };

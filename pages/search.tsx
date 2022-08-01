@@ -8,19 +8,20 @@ import firebase from "../plugins/firebase";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import Loading from "../components/Common/Loading";
+import { CardApp } from "../type/common";
 
 const Search: NextPage = () => {
   const db = firebase.firestore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [inputParam, setInputParam] = useState<string>("");
-  const [searchedApps, setSearchedApps] = useState<Object | null>([]);
+  const [searchedApps, setSearchedApps] = useState<CardApp[]>([]);
 
   useEffect(() => {
     localStorage.inputSearchParam && setInputParam(localStorage.inputSearchParam);
   }, []);
 
   useEffect(() => {
-    (async function () {
+    const search = async () => {
       if (!inputParam.replace(/\s|-|\./g, "")) {
         setSearchedApps([]);
         return;
@@ -75,7 +76,8 @@ const Search: NextPage = () => {
       const noDupApps = apps.filter((element, index, self) => self.findIndex((e) => e.id === element.id) === index);
       setSearchedApps(noDupApps);
       setIsLoading(false);
-    })();
+    };
+    search();
   }, [inputParam]);
 
   return (

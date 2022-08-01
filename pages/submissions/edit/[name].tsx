@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
 import "firebase/firestore";
@@ -15,21 +15,20 @@ import Forbidden from "../../../components/Common/Forbidden";
 import ErrorMessage from "../../../components/Common/ErrorMessage";
 import ImagePreview from "../../../components/Common/ImagePreview";
 import CompletedModal from "../../../components/Submissions/CompletedModal";
+import { App } from "../../../type/common";
+
 const db = firebase.firestore();
 
-interface Props {
-  app: any;
-  isFound: boolean;
-}
+type Props = { app: App; isFound: boolean };
 
 const Edit: NextPage<Props> = (props) => {
-  const loginUser = useLoginUser();
   const { app, isFound } = props;
+  const loginUser = useLoginUser();
   useEffect(() => {
     loginUser === null && Router.push("/sign-up");
   }, [loginUser]);
 
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [name, setName] = useState<string>(app.name);
   const [link, setLink] = useState<string>(app.link);
@@ -38,41 +37,23 @@ const Edit: NextPage<Props> = (props) => {
   const [tag2, setTag2] = useState<string>("");
   const [tag3, setTag3] = useState<string>("");
   const [description, setDescription] = useState<string>(app.description);
-  const [icon, setIcon] = useState<any | null>(null);
+  const [icon, setIcon] = useState<File>(null);
   const [iconUrl, setIconUrl] = useState<string>(app.icon);
-  const [mobileImages, setMobileImages] = useState<Array<File>>([]);
-  const [mobileImageUrlList, setMobileImageUrlList] = useState<Array<string>>([]);
-  const [pcImages, setPcImages] = useState<Array<File>>([]);
-  const [pcImageUrlList, setPcImageUrlList] = useState<Array<string>>([]);
+  const [mobileImages, setMobileImages] = useState<File[]>([]);
+  const [mobileImageUrlList, setMobileImageUrlList] = useState<string[]>([]);
+  const [pcImages, setPcImages] = useState<File[]>([]);
+  const [pcImageUrlList, setPcImageUrlList] = useState<string[]>([]);
 
   useEffect(() => {
     app.tag1 && setTag1(app.tag1);
     app.tag2 && setTag2(app.tag2);
     app.tag3 && setTag3(app.tag3);
-    if (app.imageMobile1) {
-      setMobileImages((images) => [...images, null]);
-      setMobileImageUrlList((urls) => [...urls, app.imageMobile1]);
-    }
-    if (app.imageMobile2) {
-      setMobileImages((images) => [...images, null]);
-      setMobileImageUrlList((urls) => [...urls, app.imageMobile2]);
-    }
-    if (app.imageMobile3) {
-      setMobileImages((images) => [...images, null]);
-      setMobileImageUrlList((urls) => [...urls, app.imageMobile3]);
-    }
-    if (app.imagePc1) {
-      setPcImages((images) => [...images, null]);
-      setPcImageUrlList((urls) => [...urls, app.imagePc1]);
-    }
-    if (app.imagePc2) {
-      setPcImages((images) => [...images, null]);
-      setPcImageUrlList((urls) => [...urls, app.imagePc2]);
-    }
-    if (app.imagePc3) {
-      setPcImages((images) => [...images, null]);
-      setPcImageUrlList((urls) => [...urls, app.imagePc3]);
-    }
+    app.imageMobile1 && setMobileImageUrlList((prev) => [...prev, app.imageMobile1]);
+    app.imageMobile2 && setMobileImageUrlList((prev) => [...prev, app.imageMobile2]);
+    app.imageMobile3 && setMobileImageUrlList((prev) => [...prev, app.imageMobile3]);
+    app.imagePc1 && setPcImageUrlList((prev) => [...prev, app.imagePc1]);
+    app.imagePc2 && setPcImageUrlList((prev) => [...prev, app.imagePc2]);
+    app.imagePc3 && setPcImageUrlList((prev) => [...prev, app.imagePc3]);
   }, []);
 
   const [errors, setErrors] = useState<any>({
@@ -86,18 +67,19 @@ const Edit: NextPage<Props> = (props) => {
     icon: [],
     screenshot: [],
   });
+
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
   const MAX_PC_IMAGE_NUM = 3;
   const MAX_MOBILE_IMAGE_NUM = 3;
 
-  const onChangeIconHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeIconHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     setIconUrl(window.URL.createObjectURL(files[0]));
     setIcon(files[0]);
   };
 
-  const onChangeMobileImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeMobileImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
     filesArr.splice(MAX_MOBILE_IMAGE_NUM);
@@ -107,7 +89,7 @@ const Edit: NextPage<Props> = (props) => {
     });
   };
 
-  const onChangePcImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangePcImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
     filesArr.splice(MAX_PC_IMAGE_NUM);
@@ -117,22 +99,20 @@ const Edit: NextPage<Props> = (props) => {
     });
   };
 
-  const handleDeleteIcon = async () => {
+  const handleDeleteIcon = () => {
     setIcon(null);
     setIconUrl(null);
   };
 
-  const handleDeleteMobileImage = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    e.preventDefault();
-    setMobileImageUrlList(mobileImageUrlList.filter((_, i) => i !== index));
-    setMobileImages(mobileImages.filter((_, i) => i !== index));
-  };
+  const handleDeletePcImage = useCallback((index: number) => {
+    setPcImageUrlList((prev) => prev.filter((_, i) => i !== index));
+    setPcImages((prev) => prev.filter((_, i) => i !== index));
+  }, []);
 
-  const handleDeletePcImage = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    e.preventDefault();
-    setPcImageUrlList(pcImageUrlList.filter((_, i) => i !== index));
-    setPcImages(pcImages.filter((_, i) => i !== index));
-  };
+  const handleDeleteMobileImage = useCallback((index: number) => {
+    setMobileImageUrlList((prev) => prev.filter((_, i) => i !== index));
+    setMobileImages((prev) => prev.filter((_, i) => i !== index));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -141,7 +121,7 @@ const Edit: NextPage<Props> = (props) => {
       setIsSubmitting(false);
       return;
     }
-    setModalOpen(true);
+    setIsModalOpen(true);
     const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
     const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
     const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
@@ -330,13 +310,7 @@ const Edit: NextPage<Props> = (props) => {
                 <label className="block font-bold mb-2">Mobile size (Up to 3 Images)</label>
                 <div className="flex overflow-scroll">
                   {mobileImageUrlList.map((mobileImageUrl, index) => (
-                    <ImagePreview
-                      key={index}
-                      imageUrl={mobileImageUrl}
-                      handleDeleteImage={(event: React.ChangeEvent<HTMLInputElement>) => handleDeleteMobileImage(event, index)}
-                      isLast={mobileImageUrlList.length - 1 === index}
-                      isDisplayDeleteIcon={true}
-                    />
+                    <ImagePreview key={index} index={index} imageUrl={mobileImageUrl} handleDeleteImage={handleDeleteMobileImage} />
                   ))}
                 </div>
                 <div className="mb-8">
@@ -360,13 +334,7 @@ const Edit: NextPage<Props> = (props) => {
                 </label>
                 <div className="flex overflow-scroll">
                   {pcImageUrlList.map((pcImageUrl, index) => (
-                    <ImagePreview
-                      key={index}
-                      imageUrl={pcImageUrl}
-                      handleDeleteImage={(event: React.ChangeEvent<HTMLInputElement>) => handleDeletePcImage(event, index)}
-                      isLast={pcImageUrlList.length - 1 === index}
-                      isDisplayDeleteIcon={true}
-                    />
+                    <ImagePreview key={index} index={index} imageUrl={pcImageUrl} handleDeleteImage={handleDeletePcImage} />
                   ))}
                 </div>
                 <div className="mb-8">
@@ -395,7 +363,7 @@ const Edit: NextPage<Props> = (props) => {
                 </button>
               </div>
             </form>
-            <CompletedModal modalOpen={modalOpen} isSubmitting={isSubmitting} />
+            <CompletedModal isModalOpen={isModalOpen} isSubmitting={isSubmitting} />
           </div>
         ) : (
           <>

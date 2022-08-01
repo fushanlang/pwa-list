@@ -1,11 +1,8 @@
-const validateEmail = (property: string) => {
-  if (property === "" || property === null) return null;
+const validateEmail = (char: string) => {
+  if (char === "" || char === null) return null;
 
-  var result = property.match(
-    /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/
-  );
-  const error = result === null ? true : false;
-  return error;
+  const result = char.match(/^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/);
+  return result === null ? true : false;
 };
 
 export default validateEmail;

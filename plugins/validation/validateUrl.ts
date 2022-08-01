@@ -1,8 +1,7 @@
-const validateUrl = (property: string) => {
-  if (property === "" || property === null) return null;
-  var result = property.match(/https?/);
-  const error = result === null ? true : false;
-  return error;
+const validateUrl = (url: string) => {
+  if (url === "" || url === null) return null;
+  const result = url.match(/https?/);
+  return result === null ? true : false;
 };
 
 export default validateUrl;

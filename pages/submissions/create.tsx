@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
 import "firebase/firestore";
@@ -22,7 +22,7 @@ const Create: NextPage = () => {
     loginUser === null && Router.push("/sign-up");
   }, [loginUser]);
 
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [link, setLink] = useState<string>("");
@@ -33,10 +33,10 @@ const Create: NextPage = () => {
   const [description, setDescription] = useState<string>("");
   const [icon, setIcon] = useState<File | null>(null);
   const [iconUrl, setIconUrl] = useState<string>("");
-  const [pcImages, setPcImages] = useState<Array<File>>([]);
-  const [pcImageUrlList, setPcImageUrlList] = useState<Array<string>>([]);
-  const [mobileImages, setMobileImages] = useState<Array<File>>([]);
-  const [mobileImageUrlList, setMobileImageUrlList] = useState<Array<string>>([]);
+  const [mobileImages, setMobileImages] = useState<File[]>([]);
+  const [mobileImageUrlList, setMobileImageUrlList] = useState<string[]>([]);
+  const [pcImages, setPcImages] = useState<File[]>([]);
+  const [pcImageUrlList, setPcImageUrlList] = useState<string[]>([]);
   const [errors, setErrors] = useState<any>({
     name: [],
     link: [],
@@ -53,13 +53,13 @@ const Create: NextPage = () => {
   const MAX_PC_IMAGE_NUM = 3;
   const MAX_MOBILE_IMAGE_NUM = 3;
 
-  const onChangeIconHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeIconHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     setIconUrl(window.URL.createObjectURL(files[0]));
     setIcon(files[0]);
   };
 
-  const onChangePcImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangePcImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
     filesArr.splice(MAX_PC_IMAGE_NUM);
@@ -69,7 +69,7 @@ const Create: NextPage = () => {
     });
   };
 
-  const onChangeMobileImageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeMobileImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
     filesArr.splice(MAX_MOBILE_IMAGE_NUM);
@@ -78,22 +78,20 @@ const Create: NextPage = () => {
       setMobileImages((images) => [...images, value]);
     });
   };
-  const handleDeleteIcon = async () => {
+  const handleDeleteIcon = () => {
     setIcon(null);
     setIconUrl("");
   };
 
-  const handleDeletePcImage = async (e: React.FormEvent<HTMLFormElement>, index: number) => {
-    e.preventDefault();
-    setPcImageUrlList(pcImageUrlList.filter((_, i) => i !== index));
-    setPcImages(pcImages.filter((_, i) => i !== index));
-  };
+  const handleDeletePcImage = useCallback((index: number) => {
+    setPcImageUrlList((prev) => prev.filter((_, i) => i !== index));
+    setPcImages((prev) => prev.filter((_, i) => i !== index));
+  }, []);
 
-  const handleDeleteMobileImage = async (e: React.FormEvent<HTMLFormElement>, index: number) => {
-    e.preventDefault();
-    setMobileImageUrlList(mobileImageUrlList.filter((_, i) => i !== index));
-    setMobileImages(mobileImages.filter((_, i) => i !== index));
-  };
+  const handleDeleteMobileImage = useCallback((index: number) => {
+    setMobileImageUrlList((prev) => prev.filter((_, i) => i !== index));
+    setMobileImages((prev) => prev.filter((_, i) => i !== index));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -102,7 +100,7 @@ const Create: NextPage = () => {
       setIsSubmitting(false);
       return;
     }
-    setModalOpen(true);
+    setIsModalOpen(true);
     const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
     const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
     const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
@@ -303,13 +301,7 @@ const Create: NextPage = () => {
               <label className="block font-bold mb-2">Mobile size (Up to 3 Images)</label>
               <div className="flex overflow-scroll">
                 {mobileImageUrlList.map((mobileImageUrl, index) => (
-                  <ImagePreview
-                    key={index}
-                    imageUrl={mobileImageUrl}
-                    handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) => handleDeleteMobileImage(event, index)}
-                    isLast={mobileImageUrlList.length - 1 === index}
-                    isDisplayDeleteIcon={false}
-                  />
+                  <ImagePreview key={index} index={index} imageUrl={mobileImageUrl} handleDeleteImage={handleDeleteMobileImage} />
                 ))}
               </div>
               <div className="mb-8">
@@ -333,13 +325,7 @@ const Create: NextPage = () => {
               </label>
               <div className="flex overflow-scroll">
                 {pcImageUrlList.map((pcImageUrl, index) => (
-                  <ImagePreview
-                    key={index}
-                    imageUrl={pcImageUrl}
-                    handleDeleteImage={(event: React.FormEvent<HTMLFormElement>) => handleDeletePcImage(event, index)}
-                    isLast={pcImageUrlList.length - 1 === index}
-                    isDisplayDeleteIcon={false}
-                  />
+                  <ImagePreview key={index} index={index} imageUrl={pcImageUrl} handleDeleteImage={handleDeletePcImage} />
                 ))}
               </div>
               <div className="mb-8">
@@ -368,7 +354,7 @@ const Create: NextPage = () => {
               </button>
             </div>
           </form>
-          <CompletedModal modalOpen={modalOpen} isSubmitting={isSubmitting} />
+          <CompletedModal isModalOpen={isModalOpen} isSubmitting={isSubmitting} />
         </div>
       )}
     </Layout>

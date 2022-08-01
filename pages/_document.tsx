@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from "next/document";
+
 import { GA_TRACKING_ID } from "../plugins/gtag";
 import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 

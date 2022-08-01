@@ -2,13 +2,16 @@ import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import "../styles/swiper.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { NextPage } from "next";
 import { AppProps } from "next/app";
 import Router from "next/router";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
+import { Provider } from "react-redux";
 
 import * as gtag from "../plugins/gtag";
 import { AuthProvider } from "../contexts/Auth";
+import store from "../store";
 
 Router.events.on("routeChangeComplete", (url) => gtag.pageview(url));
 
@@ -18,7 +21,7 @@ const description = "In PWA List, you can search for Progressive Web Apps by tag
 const imageUrl =
   "https://firebasestorage.googleapis.com/v0/b/pwa-list-b9174.appspot.com/o/common%2Fpwalist.png?alt=media&token=2247b98b-24d0-4304-92ad-f498607f0dcc";
 
-const WrappedApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+const WrappedApp: NextPage<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
@@ -57,7 +60,9 @@ const WrappedApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
       <ThemeProvider attribute="class" defaultTheme="light">
         <AuthProvider>
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
         </AuthProvider>
       </ThemeProvider>
     </>

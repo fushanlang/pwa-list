@@ -23,7 +23,7 @@ const SignUp: NextPage = () => {
           </h1>
           <h2 className="text-2xl font-bold mb-3">Sign up on PWA List</h2>
           <p className="text-lg mb-5">In order to add and manage your apps, please sign up for an account.</p>
-          <Auth></Auth>
+          <Auth />
         </div>
       )}
     </Layout>

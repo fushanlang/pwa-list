@@ -1,10 +1,12 @@
-import { FC, createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import firebase from "../plugins/firebase";
 
 const AuthContext = createContext(null);
 
-export const AuthProvider: FC = ({ children }) => {
+type Props = { children: React.ReactNode };
+
+export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [loginUser, setLoginUser] = useState<firebase.User | null>();
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import validateRequired from "../validation/validateRequired";
 import validateUrl from "../validation/validateUrl";
 import validateAlphanum from "../validation/validateAlphanum";
-const editValidate = async (
+const editValidate = (
   setErrors: any,
   link: string,
   category: string,
@@ -10,18 +10,18 @@ const editValidate = async (
   tag3: string,
   description: string,
   iconUrl: string,
-  pcImageUrlList: Array<string>,
-  mobileImageUrlList: Array<string>
+  pcImageUrlList: string[],
+  mobileImageUrlList: string[]
 ) => {
-  var nameErrors = [];
-  var linkErrors = [];
-  var categoryErrors = [];
-  var tag1Errors = [];
-  var tag2Errors = [];
-  var tag3Errors = [];
-  var descriptionErrors = [];
-  var iconErrors = [];
-  var screenshotErrors = [];
+  let nameErrors = [];
+  let linkErrors = [];
+  let categoryErrors = [];
+  let tag1Errors = [];
+  let tag2Errors = [];
+  let tag3Errors = [];
+  let descriptionErrors = [];
+  let iconErrors = [];
+  let screenshotErrors = [];
   // required
   if (validateRequired(link)) linkErrors.push("The Link field is required");
   if (validateRequired(category)) categoryErrors.push("The Category field is required");

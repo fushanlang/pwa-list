@@ -4,7 +4,9 @@ import "firebase/firestore";
 
 import firebase from "../plugins/firebase";
 
-const createSitemap = (apps) => {
+type App = { nameLowercase: string; updatedAt: string };
+
+const createSitemap = (apps: App[]) => {
   const siteUrl = "https://www.pwalist.app";
 
   return `<?xml version="1.0" encoding="UTF-8"?>

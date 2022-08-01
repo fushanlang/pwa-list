@@ -1,5 +1,5 @@
-const validateRequired = (property: any) => {
-  if (property === "" || property === null) {
+const validateRequired = (input: any) => {
+  if (input === "" || input === null) {
     return true;
   }
   return false;
