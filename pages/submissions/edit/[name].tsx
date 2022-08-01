@@ -29,7 +29,7 @@ const Edit: NextPage<Props> = (props) => {
     loginUser === null && Router.push("/sign-up");
   }, [loginUser]);
 
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [name, setName] = useState<string>(app.name);
   const [link, setLink] = useState<string>(app.link);
@@ -50,28 +50,28 @@ const Edit: NextPage<Props> = (props) => {
     app.tag2 && setTag2(app.tag2);
     app.tag3 && setTag3(app.tag3);
     if (app.imageMobile1) {
-      setMobileImages((images) => [...images, null]);
-      setMobileImageUrlList((urls) => [...urls, app.imageMobile1]);
+      setMobileImages((prev) => [...prev, null]);
+      setMobileImageUrlList((prev) => [...prev, app.imageMobile1]);
     }
     if (app.imageMobile2) {
-      setMobileImages((images) => [...images, null]);
-      setMobileImageUrlList((urls) => [...urls, app.imageMobile2]);
+      setMobileImages((prev) => [...prev, null]);
+      setMobileImageUrlList((prev) => [...prev, app.imageMobile2]);
     }
     if (app.imageMobile3) {
-      setMobileImages((images) => [...images, null]);
-      setMobileImageUrlList((urls) => [...urls, app.imageMobile3]);
+      setMobileImages((prev) => [...prev, null]);
+      setMobileImageUrlList((prev) => [...prev, app.imageMobile3]);
     }
     if (app.imagePc1) {
-      setPcImages((images) => [...images, null]);
-      setPcImageUrlList((urls) => [...urls, app.imagePc1]);
+      setPcImages((prev) => [...prev, null]);
+      setPcImageUrlList((prev) => [...prev, app.imagePc1]);
     }
     if (app.imagePc2) {
-      setPcImages((images) => [...images, null]);
-      setPcImageUrlList((urls) => [...urls, app.imagePc2]);
+      setPcImages((prev) => [...prev, null]);
+      setPcImageUrlList((prev) => [...prev, app.imagePc2]);
     }
     if (app.imagePc3) {
-      setPcImages((images) => [...images, null]);
-      setPcImageUrlList((urls) => [...urls, app.imagePc3]);
+      setPcImages((prev) => [...prev, null]);
+      setPcImageUrlList((prev) => [...prev, app.imagePc3]);
     }
   }, []);
 
@@ -86,6 +86,7 @@ const Edit: NextPage<Props> = (props) => {
     icon: [],
     screenshot: [],
   });
+
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
   const MAX_PC_IMAGE_NUM = 3;
@@ -139,7 +140,7 @@ const Edit: NextPage<Props> = (props) => {
       setIsSubmitting(false);
       return;
     }
-    setModalOpen(true);
+    setIsModalOpen(true);
     const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
     const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
     const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
@@ -381,7 +382,7 @@ const Edit: NextPage<Props> = (props) => {
                 </button>
               </div>
             </form>
-            <CompletedModal modalOpen={modalOpen} isSubmitting={isSubmitting} />
+            <CompletedModal isModalOpen={isModalOpen} isSubmitting={isSubmitting} />
           </div>
         ) : (
           <>

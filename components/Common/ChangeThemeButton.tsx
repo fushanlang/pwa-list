@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+
 library.add(faSun, faMoon);
 const ChangeThemeButton: React.FC = () => {
   const { theme, setTheme } = useTheme();
@@ -12,9 +13,7 @@ const ChangeThemeButton: React.FC = () => {
   return (
     <>
       <button aria-label="DarkModeToggle" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-        {mounted && (
-          <>{theme === "dark" ? <FontAwesomeIcon icon="moon" size="2x" /> : <FontAwesomeIcon icon="sun" size="2x" />}</>
-        )}
+        {mounted && <>{theme === "dark" ? <FontAwesomeIcon icon="moon" size="2x" /> : <FontAwesomeIcon icon="sun" size="2x" />}</>}
       </button>
     </>
   );

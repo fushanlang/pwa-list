@@ -7,6 +7,7 @@ const SignUpLoading: NextPage = () => {
   firebase.auth().onAuthStateChanged((user) => {
     user && Router.push("/submissions");
   });
+
   return (
     <Layout title="Sign-Up-Loading">
       <div className="text-center mt-52">

@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 import { changeFirstUpperCase } from "../../plugins/common/functions";
+import { CardApp } from "../../type/common";
 
-interface Props {
-  apps: any;
-}
+type Props = { apps: CardApp[] };
+
 const Card: React.FC<Props> = ({ apps }) => {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">

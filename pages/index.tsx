@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import Link from "next/link";
 import "firebase/firestore";
 import { NextPage } from "next";
@@ -10,10 +9,10 @@ import { useLoginUser } from "../contexts/Auth";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import ChangeThemeButton from "../components/Common/ChangeThemeButton";
+import { CardApp } from "../type/common";
 
-interface Props {
-  apps: object;
-}
+type Props = { apps: CardApp[] };
+
 const Index: NextPage<Props> = ({ apps }) => {
   const loginUser = useLoginUser();
   const logo = { fontFamily: "'Nunito', sans-serif" };

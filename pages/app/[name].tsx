@@ -13,11 +13,9 @@ import NotFound from "../../components/Common/NotFound";
 import ImageModal from "../../components/App/ImageModal";
 import firebase from "../../plugins/firebase";
 import { changeFirstUpperCase } from "../../plugins/common/functions";
+import { App } from "../../type/common";
 
-interface Props {
-  app: any;
-  isFound: boolean;
-}
+type Props = { app: App; isFound: boolean };
 
 const App: NextPage<Props> = (props) => {
   const { app, isFound } = props;

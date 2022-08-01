@@ -22,7 +22,7 @@ const Create: NextPage = () => {
     loginUser === null && Router.push("/sign-up");
   }, [loginUser]);
 
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [link, setLink] = useState<string>("");
@@ -100,7 +100,7 @@ const Create: NextPage = () => {
       setIsSubmitting(false);
       return;
     }
-    setModalOpen(true);
+    setIsModalOpen(true);
     const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
     const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
     const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
@@ -354,7 +354,7 @@ const Create: NextPage = () => {
               </button>
             </div>
           </form>
-          <CompletedModal modalOpen={modalOpen} isSubmitting={isSubmitting} />
+          <CompletedModal isModalOpen={isModalOpen} isSubmitting={isSubmitting} />
         </div>
       )}
     </Layout>

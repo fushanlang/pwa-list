@@ -6,14 +6,16 @@ import { useDispatch } from "react-redux";
 import { remove } from "../../store/modules/loginUserApps";
 import firebase from "../../plugins/firebase";
 import deleteFromStorage from "../../plugins/image/deleteFromStorage";
+import { submissionTableApp } from "../../type/common";
 
-interface Props {
-  modalOpen: boolean;
-  setModalOpen: any;
-  targetApp: any;
-}
+type Props = {
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  targetApp: submissionTableApp;
+};
 
-const DeleteModal: React.FC<Props> = ({ modalOpen, setModalOpen, targetApp }) => {
+const DeleteModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, targetApp }) => {
+  console.log(targetApp);
   const db = firebase.firestore();
   Modal.setAppElement("#__next");
 
@@ -41,7 +43,7 @@ const DeleteModal: React.FC<Props> = ({ modalOpen, setModalOpen, targetApp }) =>
   const handleDeleteApp = async (app) => {
     await db.collection("applications").doc(app.id).delete();
     dispatch(remove(app.id));
-    setModalOpen(false);
+    setIsModalOpen(false);
     await deleteFromStorage("application-icons", app.name, "icon");
     if (app.imageMobile1 !== null) await deleteFromStorage("application-images", app.name, "mobile1");
     if (app.imageMobile2 !== null) await deleteFromStorage("application-images", app.name, "mobile2");
@@ -54,7 +56,7 @@ const DeleteModal: React.FC<Props> = ({ modalOpen, setModalOpen, targetApp }) =>
 
   return (
     <>
-      <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={modalOpen} onRequestClose={() => setModalOpen(false)}>
+      <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
         <div className="text-center mt-5">
           <img className="inline-block w-20" src={targetApp.icon} />
           <div className="text-xl mb-6">{targetApp.name}</div>
@@ -65,7 +67,10 @@ const DeleteModal: React.FC<Props> = ({ modalOpen, setModalOpen, targetApp }) =>
           >
             Delete
           </button>
-          <button className="text-lg h-10 px-3 border rounded hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => setModalOpen(false)}>
+          <button
+            className="text-lg h-10 px-3 border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+            onClick={() => setIsModalOpen(false)}
+          >
             Cancel
           </button>
         </div>

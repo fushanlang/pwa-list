@@ -4,12 +4,9 @@ import Link from "next/link";
 
 import Loading from "../../components/Common/Loading";
 
-interface Props {
-  modalOpen: boolean;
-  isSubmitting: boolean;
-}
+type Props = { isModalOpen: boolean; isSubmitting: boolean };
 
-const CompletedModal: React.FC<Props> = ({ modalOpen, isSubmitting }) => {
+const CompletedModal: React.FC<Props> = ({ isModalOpen, isSubmitting }) => {
   Modal.setAppElement("#__next");
   const modalStyle = {
     overlay: {
@@ -35,7 +32,7 @@ const CompletedModal: React.FC<Props> = ({ modalOpen, isSubmitting }) => {
 
   return (
     <div>
-      <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={modalOpen}>
+      <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={isModalOpen}>
         {isSubmitting ? (
           <div className="text-center mt-64">
             <Loading />

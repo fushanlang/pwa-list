@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { changeFirstUpperCase } from "../../plugins/common/functions";
 
-interface Props {
+type Props = {
   categoryName: string;
   iconName: any;
-}
+};
 const CategoryLinkForSideBar: React.FC<Props> = ({ categoryName, iconName }) => {
   const router = useRouter();
   const { category } = router.query;

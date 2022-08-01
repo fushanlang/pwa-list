@@ -28,16 +28,9 @@ const loginUserApps = createSlice({
           name: doc.data().name,
           nameLowercase: doc.data().nameLowercase,
           icon: doc.data().icon,
-          link: doc.data().link,
           isPublic: doc.data().isPublic,
           isRejected: doc.data().isRejected,
           rejectionMessage: doc.data().rejectionMessage,
-          imageMobile1: doc.data().imageMobile1,
-          imageMobile2: doc.data().imageMobile2,
-          imageMobile3: doc.data().imageMobile3,
-          imagePc1: doc.data().imagePc1,
-          imagePc2: doc.data().imagePc2,
-          imagePc3: doc.data().imagePc3,
         }));
       });
   },

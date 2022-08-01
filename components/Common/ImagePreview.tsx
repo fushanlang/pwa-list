@@ -2,11 +2,12 @@ import { memo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
-interface Props {
+type Props = {
   index: number;
-  imageUrl: any;
-  handleDeleteImage: any;
-}
+  imageUrl: string;
+  handleDeleteImage: (index: number) => void;
+};
+
 const ImagePreview: React.FC<Props> = memo(({ index, imageUrl, handleDeleteImage }) => {
   return (
     <div className="relative mb-4">

@@ -5,13 +5,16 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/swiper-bundle.min.css";
+
+import { App } from "../../type/common";
+
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");
 
 interface Props {
-  app: any;
+  app: App;
   modalIsOpen: boolean;
-  setModalIsOpen: any;
+  setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   initialSlide: number;
 }
 

@@ -2,18 +2,13 @@ import { Fragment, useState } from "react";
 import Link from "next/link";
 
 import DeleteModal from "./DeleteModal";
+import { submissionTableApp } from "../../type/common";
 
-interface Props {
-  apps: any;
-}
+type Props = { apps: submissionTableApp[] };
 
 const Apps: React.FC<Props> = ({ apps }) => {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [targetApp, setTargetApp] = useState<Object>([]);
-  const handleDeleteApp = (app) => {
-    setTargetApp(app);
-    setModalOpen(true);
-  };
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [targetApp, setTargetApp] = useState<submissionTableApp | null>(null);
   return (
     <>
       <tbody>
@@ -44,7 +39,13 @@ const Apps: React.FC<Props> = ({ apps }) => {
                 <Link href="/submissions/edit/[name]" as={`/submissions/edit/${app.nameLowercase}`}>
                   <button className="h-8 px-2 mr-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700">Edit</button>
                 </Link>
-                <button className="h-8 px-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => handleDeleteApp(app)}>
+                <button
+                  className="h-8 px-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+                  onClick={() => {
+                    setTargetApp(app);
+                    setIsModalOpen(true);
+                  }}
+                >
                   Delete
                 </button>
               </td>
@@ -59,7 +60,7 @@ const Apps: React.FC<Props> = ({ apps }) => {
           </Fragment>
         ))}
       </tbody>
-      <DeleteModal modalOpen={modalOpen} setModalOpen={setModalOpen} targetApp={targetApp} />
+      {isModalOpen && <DeleteModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} targetApp={targetApp} />}
     </>
   );
 };
