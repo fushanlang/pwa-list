@@ -15,7 +15,7 @@ import Forbidden from "../../../components/Common/Forbidden";
 import ErrorMessage from "../../../components/Common/ErrorMessage";
 import ImagePreview from "../../../components/Common/ImagePreview";
 import CompletedModal from "../../../components/Submissions/CompletedModal";
-import { App } from "../../../type/common";
+import { App } from "../../../types/app";
 
 const db = firebase.firestore();
 

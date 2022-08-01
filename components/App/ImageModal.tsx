@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/swiper-bundle.min.css";
 
-import { App } from "../../type/common";
+import { App } from "../../types/app";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");

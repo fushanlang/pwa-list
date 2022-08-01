@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import Link from "next/link";
 
 import DeleteModal from "./DeleteModal";
-import { submissionTableApp } from "../../type/common";
+import { submissionTableApp } from "../../types/app";
 
 type Props = { apps: submissionTableApp[] };
 

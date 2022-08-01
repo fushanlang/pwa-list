@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { changeFirstUpperCase } from "../../plugins/common/functions";
-import { CardApp } from "../../type/common";
+import { CardApp } from "../../types/app";
 
 type Props = { apps: CardApp[] };
 

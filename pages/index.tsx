@@ -9,7 +9,7 @@ import { useLoginUser } from "../contexts/Auth";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import ChangeThemeButton from "../components/Common/ChangeThemeButton";
-import { CardApp } from "../type/common";
+import { CardApp } from "../types/app";
 
 type Props = { apps: CardApp[] };
 

@@ -13,7 +13,7 @@ import NotFound from "../../components/Common/NotFound";
 import ImageModal from "../../components/App/ImageModal";
 import firebase from "../../plugins/firebase";
 import { changeFirstUpperCase } from "../../plugins/common/functions";
-import { App } from "../../type/common";
+import { App } from "../../types/app";
 
 type Props = { app: App; isFound: boolean };
 

@@ -1,25 +1,3 @@
-export type CardApp = {
-  id: string;
-  name: string;
-  nameLowercase: string;
-  icon: string;
-  category: string;
-  tag1: string;
-  tag2: string;
-  tag3: string;
-  description: string;
-};
-
-export type submissionTableApp = {
-  id: string;
-  icon: string;
-  isPublic: boolean;
-  isRejected: boolean;
-  name: string;
-  nameLowercase: string;
-  rejectionMessage: string;
-};
-
 export type App = {
   id: string;
   category: string;
@@ -47,4 +25,26 @@ export type App = {
   tag3: string;
   tag3Lowercase: string;
   userId: string;
+};
+
+export type CardApp = {
+  id: string;
+  name: string;
+  nameLowercase: string;
+  icon: string;
+  category: string;
+  tag1: string;
+  tag2: string;
+  tag3: string;
+  description: string;
+};
+
+export type submissionTableApp = {
+  id: string;
+  icon: string;
+  isPublic: boolean;
+  isRejected: boolean;
+  name: string;
+  nameLowercase: string;
+  rejectionMessage: string;
 };

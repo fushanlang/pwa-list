@@ -8,7 +8,7 @@ import firebase from "../plugins/firebase";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import Loading from "../components/Common/Loading";
-import { CardApp } from "../type/common";
+import { CardApp } from "../types/app";
 
 const Search: NextPage = () => {
   const db = firebase.firestore();
