@@ -302,7 +302,7 @@ const Create: NextPage = () => {
                 </InputFile>
               </div>
 
-              <div className="mb-2">
+              <div>
                 <InputFile
                   id={"pcImage"}
                   label={"PC size (Up to 3 Images)"}
@@ -319,8 +319,8 @@ const Create: NextPage = () => {
                     ))}
                   </div>
                 </InputFile>
+                <ErrorMessage errors={errors.screenshot}></ErrorMessage>
               </div>
-              <ErrorMessage errors={errors.screenshot}></ErrorMessage>
             </div>
             <div className="ml-1 mt-10 mb-12">
               <button
