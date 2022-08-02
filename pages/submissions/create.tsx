@@ -11,6 +11,7 @@ import Layout from "../../components/Layout/Layout";
 import CompletedModal from "../../components/Submissions/CompletedModal";
 import ImagePreview from "../../components/Common/ImagePreview";
 import Input from "../../components/Common/Form/Input";
+import InputFile from "../../components/Common/Form/InputFile";
 import Select from "../../components/Common/Form/Select";
 import Textarea from "../../components/Common/Form/Textarea";
 import ErrorMessage from "../../components/Common/Form/ErrorMessage";
@@ -146,7 +147,6 @@ const Create: NextPage = () => {
     });
     setIsSubmitting(false);
   };
-
   return (
     <Layout title="Submit">
       {loginUser && (
@@ -167,6 +167,7 @@ const Create: NextPage = () => {
                 />
                 <ErrorMessage errors={errors.name}></ErrorMessage>
               </div>
+
               <div className="mb-6">
                 <Input
                   id={"link"}
@@ -182,6 +183,7 @@ const Create: NextPage = () => {
                 />
                 <ErrorMessage errors={errors.link}></ErrorMessage>
               </div>
+
               <div className="mb-6">
                 <Select
                   id={"category"}
@@ -196,6 +198,7 @@ const Create: NextPage = () => {
                 />
                 <ErrorMessage errors={errors.category}></ErrorMessage>
               </div>
+
               <div className="mb-6">
                 <Input
                   id={"tag"}
@@ -237,6 +240,7 @@ const Create: NextPage = () => {
                 <ErrorMessage errors={errors.tag2}></ErrorMessage>
                 <ErrorMessage errors={errors.tag3}></ErrorMessage>
               </div>
+
               <div className="mb-6">
                 <Textarea
                   id={"about"}
@@ -251,84 +255,70 @@ const Create: NextPage = () => {
                 />
                 <ErrorMessage errors={errors.description}></ErrorMessage>
               </div>
-              <label className="block font-bold mb-2">
-                Icon<span className="text-red-400 ml-2">*</span>
-              </label>
-              {iconUrl && (
-                <div className="flex mb-4">
-                  <div className="relative">
-                    <img className="border rounded max-h-20" src={iconUrl} />
-                    <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1" onClick={handleDeleteIcon}>
-                      <FontAwesomeIcon icon={faMinusCircle} size="lg" />
-                    </button>
-                  </div>
-                </div>
-              )}
-              <div className="mb-8">
-                <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
-                  Choose
-                  <input
-                    type="file"
-                    className="hidden"
-                    accept="image/*"
-                    multiple
-                    onChange={(e) => {
-                      onChangeIconHandler(e);
-                      setErrors({ ...errors, icon: [] });
-                    }}
-                  />
-                </label>
+
+              <div className="mb-6">
+                <InputFile
+                  id={"icon"}
+                  label={"Icon"}
+                  isRequired={true}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    onChangeIconHandler(e);
+                    setErrors({ ...errors, icon: [] });
+                  }}
+                >
+                  {iconUrl && (
+                    <div className="flex mb-4">
+                      <div className="relative">
+                        <img className="border rounded max-h-20" src={iconUrl} />
+                        <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1" onClick={handleDeleteIcon}>
+                          <FontAwesomeIcon icon={faMinusCircle} size="lg" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </InputFile>
                 <ErrorMessage errors={errors.icon}></ErrorMessage>
               </div>
-              <p className="mb-2">
+
+              <p className="mb-3">
                 <span className="font-bold text-base">Screenshots</span>
-                <span className="text-red-400 ml-2">*</span>
                 <span className="ml-2">Either mobile or PC screenshot is required.</span>
               </p>
-              <label className="block font-bold mb-2">Mobile size (Up to 3 Images)</label>
-              <div className="flex overflow-scroll">
-                {mobileImageUrlList.map((mobileImageUrl, index) => (
-                  <ImagePreview key={index} index={index} imageUrl={mobileImageUrl} handleDeleteImage={handleDeleteMobileImage} />
-                ))}
+              <div className="mb-6">
+                <InputFile
+                  id={"mobileImage"}
+                  label={"Mobile size (Up to 3 Images)"}
+                  isRequired={false}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    onChangeMobileImageHandler(e);
+                    setErrors({ ...errors, screenshot: [] });
+                  }}
+                >
+                  <div className="flex overflow-scroll">
+                    {mobileImageUrlList.map((mobileImageUrl, index) => (
+                      <ImagePreview key={index} index={index} imageUrl={mobileImageUrl} handleDeleteImage={handleDeleteMobileImage} />
+                    ))}
+                  </div>
+                </InputFile>
               </div>
-              <div className="mb-8">
-                <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
-                  Choose
-                  <input
-                    type="file"
-                    className="hidden"
-                    accept="image/*"
-                    multiple
-                    onChange={(e) => {
-                      onChangeMobileImageHandler(e);
-                      setErrors({ ...errors, screenshot: [] });
-                    }}
-                  />
-                </label>
-              </div>
-              <label className="block mb-2">
-                <span className="font-bold">PC size (Up to 3 Images)</span>{" "}
-                <span className="ml-2">These screenshots only show PC size display.</span>
-              </label>
-              <div className="flex overflow-scroll">
-                {pcImageUrlList.map((pcImageUrl, index) => (
-                  <ImagePreview key={index} index={index} imageUrl={pcImageUrl} handleDeleteImage={handleDeletePcImage} />
-                ))}
-              </div>
-              <div className="mb-8">
-                <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
-                  Choose
-                  <input
-                    type="file"
-                    className="hidden"
-                    accept="image/*"
-                    multiple
-                    onChange={(e) => {
-                      onChangePcImageHandler(e);
-                      setErrors({ ...errors, screenshot: [] });
-                    }}
-                  />
-                </label>
+
+              <div className="mb-2">
+                <InputFile
+                  id={"pcImage"}
+                  label={"PC size (Up to 3 Images)"}
+                  labelMessage={"only show PC size display."}
+                  isRequired={false}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    onChangePcImageHandler(e);
+                    setErrors({ ...errors, screenshot: [] });
+                  }}
+                >
+                  <div className="flex overflow-scroll">
+                    {pcImageUrlList.map((pcImageUrl, index) => (
+                      <ImagePreview key={index} index={index} imageUrl={pcImageUrl} handleDeleteImage={handleDeletePcImage} />
+                    ))}
+                  </div>
+                </InputFile>
               </div>
               <ErrorMessage errors={errors.screenshot}></ErrorMessage>
             </div>
