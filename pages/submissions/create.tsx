@@ -12,6 +12,7 @@ import CompletedModal from "../../components/Submissions/CompletedModal";
 import ImagePreview from "../../components/Common/ImagePreview";
 import Input from "../../components/Common/Form/Input";
 import Select from "../../components/Common/Form/Select";
+import Textarea from "../../components/Common/Form/Textarea";
 import ErrorMessage from "../../components/Common/Form/ErrorMessage";
 import createValidate from "../../plugins/submissions/createValidate";
 import uploadToStorage from "../../plugins/image/uploadToStorage";
@@ -154,6 +155,7 @@ const Create: NextPage = () => {
             <div className="ml-1 mt-1 mb-9">
               <div className="mb-6">
                 <Input
+                  id={"name"}
                   label={"Name"}
                   isRequired={true}
                   maxLength={28}
@@ -167,6 +169,7 @@ const Create: NextPage = () => {
               </div>
               <div className="mb-6">
                 <Input
+                  id={"link"}
                   label={"Link"}
                   isRequired={true}
                   maxLength={120}
@@ -181,6 +184,7 @@ const Create: NextPage = () => {
               </div>
               <div className="mb-6">
                 <Select
+                  id={"category"}
                   label={"Category"}
                   isRequired={true}
                   state={category}
@@ -193,40 +197,38 @@ const Create: NextPage = () => {
                 <ErrorMessage errors={errors.category}></ErrorMessage>
               </div>
               <div className="mb-6">
-                <label className="block mb-2">
-                  <span className="font-bold">Tags</span>
-                  <span className="text-red-400 ml-2">*</span>
-                  <span className="ml-2">1 or more required</span>
-                </label>
-                <input
-                  className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                  type="text"
+                <Input
+                  id={"tag"}
+                  label={"Tags"}
+                  labelMessage={"1 or more required"}
+                  isRequired={true}
+                  inputClass={"w-28 mr-4"}
                   maxLength={10}
                   placeholder="ToDo"
-                  value={tag1}
-                  onChange={(e) => {
+                  state={tag1}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setTag1(e.target.value);
                     setErrors({ ...errors, tag1: [] });
                   }}
                 />
-                <input
-                  className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                  type="text"
+                <Input
+                  id={"tag"}
+                  inputClass={"w-28 mr-4"}
                   maxLength={10}
                   placeholder="Timer"
-                  value={tag2}
-                  onChange={(e) => {
+                  state={tag2}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setTag2(e.target.value);
                     setErrors({ ...errors, tag2: [] });
                   }}
                 />
-                <input
-                  className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                  type="text"
+                <Input
+                  id={"tag"}
+                  inputClass={"w-28"}
                   maxLength={10}
                   placeholder="Management"
-                  value={tag3}
-                  onChange={(e) => {
+                  state={tag3}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setTag3(e.target.value);
                     setErrors({ ...errors, tag3: [] });
                   }}
@@ -236,19 +238,17 @@ const Create: NextPage = () => {
                 <ErrorMessage errors={errors.tag3}></ErrorMessage>
               </div>
               <div className="mb-6">
-                <label className="block font-bold mb-2">
-                  About this app
-                  <span className="text-red-400 ml-2">*</span>
-                </label>
-                <textarea
-                  className="ring-2 ring-gray-300 form-textarea mt-1 block w-full rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                  rows={10}
+                <Textarea
+                  id={"about"}
+                  label={"About this app"}
+                  isRequired={true}
                   maxLength={2000}
-                  onChange={(e) => {
+                  state={description}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setDescription(e.target.value);
                     setErrors({ ...errors, description: [] });
                   }}
-                ></textarea>
+                />
                 <ErrorMessage errors={errors.description}></ErrorMessage>
               </div>
               <label className="block font-bold mb-2">
