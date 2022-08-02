@@ -5,6 +5,8 @@ import "firebase/storage";
 const storage = firebase.storage();
 
 const uploadToStorage = async (folder: string, name: string, image: File, fileName: string) => {
+  if (!image) return null;
+
   await storage.ref(`${folder}/${name}/${fileName}.png`).put(image);
   const res = await storage.ref(`${folder}`).child(`${name}/${fileName}.png`).getDownloadURL();
   return res;

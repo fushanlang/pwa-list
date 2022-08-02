@@ -109,13 +109,15 @@ const Create: NextPage = () => {
     const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
     const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
     const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-|\./g, "") : null;
-    const storageIconUrl = icon ? await uploadToStorage(iconsFolder, nameLowercase, icon, "icon") : null;
-    const storagePc1Url = pcImages[0] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1") : null;
-    const storagePc2Url = pcImages[1] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2") : null;
-    const storagePc3Url = pcImages[2] ? await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3") : null;
-    const storageMobile1Url = mobileImages[0] ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[0], "mobile1") : null;
-    const storageMobile2Url = mobileImages[1] ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2") : null;
-    const storageMobile3Url = mobileImages[2] ? await uploadToStorage(imagesFolder, nameLowercase, mobileImages[2], "mobile3") : null;
+    const uploadResp = await Promise.all([
+      uploadToStorage(iconsFolder, nameLowercase, icon, "icon"),
+      uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1"),
+      uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2"),
+      uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3"),
+      uploadToStorage(imagesFolder, nameLowercase, mobileImages[0], "mobile1"),
+      uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2"),
+      uploadToStorage(imagesFolder, nameLowercase, mobileImages[2], "mobile3"),
+    ]);
     db.collection("applications").add({
       userId: loginUser.uid,
       name: name,
@@ -129,13 +131,13 @@ const Create: NextPage = () => {
       tag2Lowercase: tag2Lowercase,
       tag3Lowercase: tag3Lowercase,
       description: description,
-      icon: storageIconUrl,
-      imagePc1: storagePc1Url,
-      imagePc2: storagePc2Url,
-      imagePc3: storagePc3Url,
-      imageMobile1: storageMobile1Url,
-      imageMobile2: storageMobile2Url,
-      imageMobile3: storageMobile3Url,
+      icon: uploadResp[0],
+      imagePc1: uploadResp[1],
+      imagePc2: uploadResp[2],
+      imagePc3: uploadResp[3],
+      imageMobile1: uploadResp[4],
+      imageMobile2: uploadResp[5],
+      imageMobile3: uploadResp[6],
       isPublic: false,
       isRejected: false,
       isFeatured: false,
