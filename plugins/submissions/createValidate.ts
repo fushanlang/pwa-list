@@ -15,7 +15,7 @@ const createValidate = async (
   icon: File,
   pcImages: File[],
   mobileImages: File[]
-) => {
+): Promise<boolean> => {
   let nameErrors = [];
   let linkErrors = [];
   let categoryErrors = [];

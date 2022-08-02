@@ -12,7 +12,7 @@ const editValidate = (
   iconUrl: string,
   pcImageUrlList: string[],
   mobileImageUrlList: string[]
-) => {
+): boolean => {
   let nameErrors = [];
   let linkErrors = [];
   let categoryErrors = [];
