@@ -15,7 +15,6 @@ type Props = {
 };
 
 const DeleteModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, targetApp }) => {
-  console.log(targetApp);
   const db = firebase.firestore();
   Modal.setAppElement("#__next");
 
