@@ -1,4 +1,4 @@
-const validateRequired = (input: any) => {
+const validateRequired = (input: any): boolean => {
   if (input === "" || input === null) {
     return true;
   }

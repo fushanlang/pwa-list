@@ -8,8 +8,7 @@ const uploadToStorage = async (folder: string, name: string, image: File, fileNa
   if (!image) return null;
 
   await storage.ref(`${folder}/${name}/${fileName}.png`).put(image);
-  const res = await storage.ref(`${folder}`).child(`${name}/${fileName}.png`).getDownloadURL();
-  return res;
+  return await storage.ref(`${folder}`).child(`${name}/${fileName}.png`).getDownloadURL();
 };
 
 export default uploadToStorage;
