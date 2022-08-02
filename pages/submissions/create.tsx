@@ -9,7 +9,7 @@ import { useLoginUser } from "../../contexts/Auth";
 import categories from "../../consts/categories";
 import Layout from "../../components/Layout/Layout";
 import CompletedModal from "../../components/Submissions/CompletedModal";
-import ImagePreview from "../../components/Common/ImagePreview";
+import ImagePreview from "../../components/Submissions/ImagePreview";
 import Input from "../../components/Common/Form/Input";
 import InputFile from "../../components/Common/Form/InputFile";
 import Select from "../../components/Common/Form/Select";

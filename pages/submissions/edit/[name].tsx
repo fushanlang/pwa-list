@@ -17,7 +17,7 @@ import InputFile from "../../../components/Common/Form/InputFile";
 import Select from "../../../components/Common/Form/Select";
 import Textarea from "../../../components/Common/Form/Textarea";
 import ErrorMessage from "../../../components/Common/Form/ErrorMessage";
-import ImagePreview from "../../../components/Common/ImagePreview";
+import ImagePreview from "../../../components/Submissions/ImagePreview";
 import CompletedModal from "../../../components/Submissions/CompletedModal";
 import { App } from "../../../types/app";
 
