@@ -18,7 +18,7 @@ const Input: React.FC<Props> = (props) => {
   const isRequired = props.isRequired;
   const handleChange = props.handleChange;
 
-  const inputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
