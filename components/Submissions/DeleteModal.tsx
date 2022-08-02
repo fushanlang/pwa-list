@@ -43,13 +43,13 @@ const DeleteModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, targetApp }
     await db.collection("applications").doc(app.id).delete();
     dispatch(remove(app.id));
     setIsModalOpen(false);
-    await deleteFromStorage("application-icons", app.name, "icon");
-    if (app.imageMobile1 !== null) await deleteFromStorage("application-images", app.name, "mobile1");
-    if (app.imageMobile2 !== null) await deleteFromStorage("application-images", app.name, "mobile2");
-    if (app.imageMobile3 !== null) await deleteFromStorage("application-images", app.name, "mobile3");
-    if (app.imagePc1 !== null) await deleteFromStorage("application-images", app.name, "pc1");
-    if (app.imagePc2 !== null) await deleteFromStorage("application-images", app.name, "pc2");
-    if (app.imagePc3 !== null) await deleteFromStorage("application-images", app.name, "pc3");
+    deleteFromStorage("application-icons", app.name, "icon");
+    if (app.imageMobile1 !== null) deleteFromStorage("application-images", app.name, "mobile1");
+    if (app.imageMobile2 !== null) deleteFromStorage("application-images", app.name, "mobile2");
+    if (app.imageMobile3 !== null) deleteFromStorage("application-images", app.name, "mobile3");
+    if (app.imagePc1 !== null) deleteFromStorage("application-images", app.name, "pc1");
+    if (app.imagePc2 !== null) deleteFromStorage("application-images", app.name, "pc2");
+    if (app.imagePc3 !== null) deleteFromStorage("application-images", app.name, "pc3");
   };
   const { theme } = useTheme();
 
