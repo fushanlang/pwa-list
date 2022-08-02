@@ -4,7 +4,7 @@ import "firebase/storage";
 
 const storage = firebase.storage();
 
-const uploadToStorage = async (folder: string, name: string, image: File, fileName: string): Promise<boolean> => {
+const uploadToStorage = async (folder: string, name: string, image: File, fileName: string): Promise<string> => {
   if (!image) return null;
 
   await storage.ref(`${folder}/${name}/${fileName}.png`).put(image);
