@@ -12,8 +12,12 @@ import firebase from "../../../plugins/firebase";
 import uploadToStorage from "../../../plugins/image/uploadToStorage";
 import Layout from "../../../components/Layout/Layout";
 import Forbidden from "../../../components/Common/Forbidden";
-import ErrorMessage from "../../../components/Common/ErrorMessage";
-import ImagePreview from "../../../components/Common/ImagePreview";
+import Input from "../../../components/Common/Form/Input";
+import InputFile from "../../../components/Common/Form/InputFile";
+import Select from "../../../components/Common/Form/Select";
+import Textarea from "../../../components/Common/Form/Textarea";
+import ErrorMessage from "../../../components/Common/Form/ErrorMessage";
+import ImagePreview from "../../../components/Submissions/ImagePreview";
 import CompletedModal from "../../../components/Submissions/CompletedModal";
 import { App } from "../../../types/app";
 
@@ -177,77 +181,71 @@ const Edit: NextPage<Props> = (props) => {
                   <div className="block font-bold">Name</div>
                   <div className="text-xl font-bold">{name}</div>
                 </div>
+
                 <div className="mb-6">
-                  <label className="block font-bold mb-2">
-                    Link
-                    <span className="text-red-400 ml-2">*</span>
-                  </label>
-                  <input
-                    className="ring-2 ring-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                    type="text"
+                  <Input
+                    id={"link"}
+                    label={"Link"}
+                    isRequired={true}
                     maxLength={120}
                     placeholder="https://pwalist.app"
-                    value={link}
-                    onChange={(e) => {
+                    state={link}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setLink(e.target.value);
                       setErrors({ ...errors, link: [] });
                     }}
                   />
                   <ErrorMessage errors={errors.link}></ErrorMessage>
                 </div>
+
                 <div className="mb-6">
-                  <label className="block font-bold mb-2">
-                    Category<span className="text-red-400 ml-2">*</span>
-                  </label>
-                  <select
-                    className="ring-2 ring-gray-300 w-44 py-2 px-3 rounded leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                    value={category}
-                    onChange={(e) => {
+                  <Select
+                    id={"category"}
+                    label={"Category"}
+                    isRequired={true}
+                    state={category}
+                    list={categories}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setCategory(e.target.value);
                       setErrors({ ...errors, category: [] });
                     }}
-                  >
-                    <option value="">-</option>
-                    {categories.map((category) => (
-                      <option key={category.value} value={category.value}>
-                        {category.label}
-                      </option>
-                    ))}
-                  </select>
+                  />
                   <ErrorMessage errors={errors.category}></ErrorMessage>
                 </div>
+
                 <div className="mb-6">
-                  <label className="block mb-2">
-                    <span className="font-bold">Tags</span>
-                    <span className="text-red-400 ml-2">*</span>
-                    <span className="ml-2">1 or more required</span>
-                  </label>
-                  <input
-                    className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                    type="text"
+                  <Input
+                    id={"tag"}
+                    label={"Tags"}
+                    labelMessage={"1 or more required"}
+                    isRequired={true}
+                    inputClass={"w-28 mr-4"}
                     maxLength={10}
-                    value={tag1}
-                    onChange={(e) => {
+                    placeholder="ToDo"
+                    state={tag1}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setTag1(e.target.value);
                       setErrors({ ...errors, tag1: [] });
                     }}
                   />
-                  <input
-                    className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                    type="text"
+                  <Input
+                    id={"tag"}
+                    inputClass={"w-28 mr-4"}
                     maxLength={10}
-                    value={tag2}
-                    onChange={(e) => {
+                    placeholder="Timer"
+                    state={tag2}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setTag2(e.target.value);
                       setErrors({ ...errors, tag2: [] });
                     }}
                   />
-                  <input
-                    className="ring-2 ring-gray-300 rounded w-28 py-2 px-3 mr-4 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                    type="text"
+                  <Input
+                    id={"tag"}
+                    inputClass={"w-28"}
                     maxLength={10}
-                    value={tag3}
-                    onChange={(e) => {
+                    placeholder="Management"
+                    state={tag3}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setTag3(e.target.value);
                       setErrors({ ...errors, tag3: [] });
                     }}
@@ -256,103 +254,87 @@ const Edit: NextPage<Props> = (props) => {
                   <ErrorMessage errors={errors.tag2}></ErrorMessage>
                   <ErrorMessage errors={errors.tag3}></ErrorMessage>
                 </div>
+
                 <div className="mb-6">
-                  <label className="block font-bold mb-2">
-                    About this app
-                    <span className="text-red-400 ml-2">*</span>
-                  </label>
-                  <textarea
-                    className="ring-2 ring-gray-300 form-textarea mt-1 block w-full rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
-                    rows={10}
+                  <Textarea
+                    id={"about"}
+                    label={"About this app"}
+                    isRequired={true}
                     maxLength={2000}
-                    value={description}
-                    onChange={(e) => {
+                    state={description}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setDescription(e.target.value);
                       setErrors({ ...errors, description: [] });
                     }}
-                  ></textarea>
+                  />
                   <ErrorMessage errors={errors.description}></ErrorMessage>
                 </div>
-                <label className="block font-bold mb-2">
-                  Icon<span className="text-red-400 ml-2">*</span>
-                </label>
-                {iconUrl && (
-                  <div className="flex mb-4">
-                    <div className="relative">
-                      <img className="border rounded max-h-20" src={iconUrl} />
-                      <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1" onClick={handleDeleteIcon}>
-                        <FontAwesomeIcon icon={faMinusCircle} size="lg" />
-                      </button>
-                    </div>
-                  </div>
-                )}
-                <div className="mb-8">
-                  <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
-                    Choose
-                    <input
-                      type="file"
-                      className="hidden"
-                      accept="image/*"
-                      multiple
-                      onChange={(e) => {
-                        onChangeIconHandler(e);
-                        setErrors({ ...errors, icon: [] });
-                      }}
-                    />
-                  </label>
+
+                <div className="mb-6">
+                  <InputFile
+                    id={"icon"}
+                    label={"Icon"}
+                    isRequired={true}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      onChangeIconHandler(e);
+                      setErrors({ ...errors, icon: [] });
+                    }}
+                  >
+                    {iconUrl && (
+                      <div className="flex mb-4">
+                        <div className="relative">
+                          <img className="border rounded max-h-20" src={iconUrl} />
+                          <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1" onClick={handleDeleteIcon}>
+                            <FontAwesomeIcon icon={faMinusCircle} size="lg" />
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </InputFile>
                   <ErrorMessage errors={errors.icon}></ErrorMessage>
                 </div>
-                <p className="mb-2">
+
+                <p className="mb-3">
                   <span className="font-bold text-base">Screenshots</span>
-                  <span className="text-red-400 ml-2">*</span>
                   <span className="ml-2">Either mobile or PC screenshot is required.</span>
                 </p>
-                <label className="block font-bold mb-2">Mobile size (Up to 3 Images)</label>
-                <div className="flex overflow-scroll">
-                  {mobileImageUrlList.map((mobileImageUrl, index) => (
-                    <ImagePreview key={index} index={index} imageUrl={mobileImageUrl} handleDeleteImage={handleDeleteMobileImage} />
-                  ))}
+                <div className="mb-6">
+                  <InputFile
+                    id={"mobileImage"}
+                    label={"Mobile size (Up to 3 Images)"}
+                    isRequired={false}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      onChangeMobileImageHandler(e);
+                      setErrors({ ...errors, screenshot: [] });
+                    }}
+                  >
+                    <div className="flex overflow-scroll">
+                      {mobileImageUrlList.map((mobileImageUrl, index) => (
+                        <ImagePreview key={index} index={index} imageUrl={mobileImageUrl} handleDeleteImage={handleDeleteMobileImage} />
+                      ))}
+                    </div>
+                  </InputFile>
                 </div>
-                <div className="mb-8">
-                  <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
-                    Choose
-                    <input
-                      type="file"
-                      className="hidden"
-                      accept="image/*"
-                      multiple
-                      onChange={(e) => {
-                        onChangeMobileImageHandler(e);
-                        setErrors({ ...errors, screenshot: [] });
-                      }}
-                    />
-                  </label>
+
+                <div>
+                  <InputFile
+                    id={"pcImage"}
+                    label={"PC size (Up to 3 Images)"}
+                    labelMessage={"only show PC size display."}
+                    isRequired={false}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      onChangePcImageHandler(e);
+                      setErrors({ ...errors, screenshot: [] });
+                    }}
+                  >
+                    <div className="flex overflow-scroll">
+                      {pcImageUrlList.map((pcImageUrl, index) => (
+                        <ImagePreview key={index} index={index} imageUrl={pcImageUrl} handleDeleteImage={handleDeletePcImage} />
+                      ))}
+                    </div>
+                  </InputFile>
+                  <ErrorMessage errors={errors.screenshot}></ErrorMessage>
                 </div>
-                <label className="block mb-2">
-                  <span className="font-bold">PC size (Up to 3 Images)</span>{" "}
-                  <span className="ml-2">These screenshots only show PC size display.</span>
-                </label>
-                <div className="flex overflow-scroll">
-                  {pcImageUrlList.map((pcImageUrl, index) => (
-                    <ImagePreview key={index} index={index} imageUrl={pcImageUrl} handleDeleteImage={handleDeletePcImage} />
-                  ))}
-                </div>
-                <div className="mb-8">
-                  <label className="cursor-pointer py-1 px-5 inline-block tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
-                    Choose
-                    <input
-                      type="file"
-                      className="hidden"
-                      accept="image/*"
-                      multiple
-                      onChange={(e) => {
-                        onChangePcImageHandler(e);
-                        setErrors({ ...errors, screenshot: [] });
-                      }}
-                    />
-                  </label>
-                </div>
-                <ErrorMessage errors={errors.screenshot}></ErrorMessage>
               </div>
               <div className="ml-1 mt-10 mb-12">
                 <button
