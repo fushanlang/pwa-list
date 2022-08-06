@@ -41,8 +41,9 @@ const createValidate = async (
   if (pcImages[0] === undefined && mobileImages[0] === undefined) {
     screenshotErrors.push("Please enter either mobile size or PC size screenshot");
   }
-  const nameIsNotDuplicate = await validateNotDuplicate(name, "nameLowercase");
-  if (!nameErrors.length && !nameIsNotDuplicate) nameErrors.push("The app name has already been registered");
+  if (!nameErrors.length && !(await validateNotDuplicate(name, "nameLowercase"))) {
+    nameErrors.push("The app name has already been registered");
+  }
   if (
     nameErrors.length ||
     linkErrors.length ||
