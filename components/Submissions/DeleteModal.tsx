@@ -40,16 +40,16 @@ const DeleteModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, targetApp }
 
   const dispatch = useDispatch();
   const handleDeleteApp = async (app) => {
-    await db.collection("applications").doc(app.id).delete();
-    dispatch(remove(app.id));
-    setIsModalOpen(false);
-    deleteFromStorage("application-icons", app.name, "icon");
-    if (app.imageMobile1 !== null) deleteFromStorage("application-images", app.name, "mobile1");
-    if (app.imageMobile2 !== null) deleteFromStorage("application-images", app.name, "mobile2");
-    if (app.imageMobile3 !== null) deleteFromStorage("application-images", app.name, "mobile3");
-    if (app.imagePc1 !== null) deleteFromStorage("application-images", app.name, "pc1");
-    if (app.imagePc2 !== null) deleteFromStorage("application-images", app.name, "pc2");
-    if (app.imagePc3 !== null) deleteFromStorage("application-images", app.name, "pc3");
+    try {
+      deleteFromStorage("application-icons", app.name);
+      deleteFromStorage("application-images", app.name);
+      await db.collection("applications").doc(app.id).delete();
+      dispatch(remove(app.id));
+    } catch (e) {
+      alert("An error occurred while deleting");
+    } finally {
+      setIsModalOpen(false);
+    }
   };
   const { theme } = useTheme();
 
