@@ -1,4 +1,4 @@
-import validateRequired from "../validation/validateRequired";
+import validateNotNull from "../validation/validateNotNull";
 import validateUrl from "../validation/validateUrl";
 import validateAlphanum from "../validation/validateAlphanum";
 const editValidate = (
@@ -23,16 +23,16 @@ const editValidate = (
   let iconErrors = [];
   let screenshotErrors = [];
   // required
-  if (validateRequired(link)) linkErrors.push("The Link field is required");
-  if (validateRequired(category)) categoryErrors.push("The Category field is required");
-  if (validateRequired(tag1)) tag1Errors.push("The Tag field is required");
-  if (validateRequired(description)) descriptionErrors.push("The About this app field is required");
-  if (validateRequired(iconUrl)) iconErrors.push("The Icon is required");
+  if (!validateNotNull(link)) linkErrors.push("The Link field is required");
+  if (!validateNotNull(category)) categoryErrors.push("The Category field is required");
+  if (!validateNotNull(tag1)) tag1Errors.push("The Tag field is required");
+  if (!validateNotNull(description)) descriptionErrors.push("The About this app field is required");
+  if (!validateNotNull(iconUrl)) iconErrors.push("The Icon is required");
   // custom
-  if (validateUrl(link)) linkErrors.push("Please enter the correct Link");
-  if (validateAlphanum(tag1)) tag1Errors.push("Please enter the tag1 in single-byte alphanumeric characters");
-  if (validateAlphanum(tag2)) tag2Errors.push("Please enter the tag2 in single-byte alphanumeric characters");
-  if (validateAlphanum(tag3)) tag3Errors.push("Please enter the tag3 in single-byte alphanumeric characters");
+  if (!linkErrors.length && !validateUrl(link)) linkErrors.push("Please enter the correct Link");
+  if (!validateAlphanum(tag1)) tag1Errors.push("Please enter the tag1 in single-byte alphanumeric characters");
+  if (!validateAlphanum(tag2)) tag2Errors.push("Please enter the tag2 in single-byte alphanumeric characters");
+  if (!validateAlphanum(tag3)) tag3Errors.push("Please enter the tag3 in single-byte alphanumeric characters");
   if (pcImageUrlList[0] === undefined && mobileImageUrlList[0] === undefined)
     screenshotErrors.push("Please enter either mobile size or PC size screenshot");
 
