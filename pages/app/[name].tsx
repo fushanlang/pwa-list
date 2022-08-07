@@ -78,6 +78,7 @@ const App: NextPage<Props> = (props) => {
             <div className="flex mt-6 overflow-scroll">
               {imageUrls.map((url, index) => (
                 <img
+                  key={url}
                   onClick={() => {
                     setModalIsOpen(true);
                     setInitialSlide(index);

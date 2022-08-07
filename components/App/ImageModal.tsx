@@ -52,7 +52,7 @@ const ImageModal: React.FC<Props> = ({ imageUrls, modalIsOpen, setModalIsOpen, i
             <div>
               {imageUrls.map((url) => (
                 <SwiperSlide>
-                  <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={url} />
+                  <img key={url} style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={url} />
                 </SwiperSlide>
               ))}
             </div>
