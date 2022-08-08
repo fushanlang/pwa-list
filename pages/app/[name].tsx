@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
@@ -23,7 +24,9 @@ const App: NextPage<Props> = (props) => {
   const [initialSlide, setInitialSlide] = useState<number>(0);
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
-  const imageUrls = [app.imageMobile1, app.imageMobile2, app.imageMobile3, app.imagePc1, app.imagePc2, app.imagePc3].filter((url) => url);
+  const imageUrls = isFound
+    ? [app.imageMobile1, app.imageMobile2, app.imageMobile3, app.imagePc1, app.imagePc2, app.imagePc3].filter((url) => url)
+    : [];
 
   return (
     <Layout title={isFound ? app.name : "Not Found"}>
@@ -52,8 +55,15 @@ const App: NextPage<Props> = (props) => {
               &nbsp;Back
             </button>
             <div className="flex items-center ml-1">
-              <div className="mr-4 w-20">
-                <img className="rounded-md" src={app.icon || "/default-app-icon.png"} />
+              <div className="mr-4 w-20 pt-1">
+                <Image
+                  className="rounded-md"
+                  alt="icon"
+                  src={app.icon || "/default-app-icon.png"}
+                  width={100}
+                  height={100}
+                  objectFit="contain"
+                />
               </div>
               <div className="flex flex-col ml-1">
                 <h1 className="font-bold text-2xl">{app.name}</h1>
@@ -79,12 +89,13 @@ const App: NextPage<Props> = (props) => {
               {imageUrls.map((url, index) => (
                 <img
                   key={url}
+                  className="border rounded max-h-96 mx-2 cursor-pointer"
+                  src={url}
+                  alt={`screenshot${index}`}
                   onClick={() => {
                     setModalIsOpen(true);
                     setInitialSlide(index);
                   }}
-                  className="border rounded max-h-96 mx-2 cursor-pointer"
-                  src={url}
                 />
               ))}
             </div>

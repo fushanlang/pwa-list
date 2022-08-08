@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 
@@ -40,7 +41,7 @@ const CompletedModal: React.FC<Props> = ({ isModalOpen, isSubmitting }) => {
           </div>
         ) : (
           <div className="text-lg text-center pt-28">
-            <img src={"/add-complete.svg"} className="w-72 inline" />
+            <Image alt="complete" src={"/add-complete.svg"} width={400} height={300} objectFit="contain" />
             <div className="mt-14">Your app submission has been completed successfully.</div>
             <div className="mt-1">This app will be published after checking.</div>
             <div className="text-2xl mt-6 mb-7">Thank you</div>

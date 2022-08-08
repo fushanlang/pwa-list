@@ -50,9 +50,9 @@ const ImageModal: React.FC<Props> = ({ imageUrls, modalIsOpen, setModalIsOpen, i
           </button>
           <Swiper className="mt-2" id="swiper" spaceBetween={50} slidesPerView={1} initialSlide={initialSlide} navigation>
             <div>
-              {imageUrls.map((url) => (
-                <SwiperSlide>
-                  <img key={url} style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={url} />
+              {imageUrls.map((url, index) => (
+                <SwiperSlide key={url}>
+                  <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={url} alt={`screenshot${index}`} />
                 </SwiperSlide>
               ))}
             </div>

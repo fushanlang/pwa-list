@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import "firebase/firestore";
 import { useDispatch } from "react-redux";
@@ -57,8 +58,8 @@ const DeleteModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, targetApp }
     <>
       <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
         <div className="text-center mt-5">
-          <img className="inline-block w-20" src={targetApp.icon} />
-          <div className="text-xl mb-6">{targetApp.name}</div>
+          <Image className="rounded-md w-20" alt="icon" src={targetApp.icon} width={100} height={100} objectFit="contain" />
+          <div className="text-xl mt-1 mb-6">{targetApp.name}</div>
           <div className="text-base mb-5">Are you sure you want to delete this submission?</div>
           <button
             className="text-lg h-10 px-3 mr-2 border rounded text-white bg-red-500 hover:bg-red-600"

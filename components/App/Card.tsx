@@ -16,10 +16,10 @@ const Card: React.FC<Props> = ({ apps }) => {
               <Image
                 className="rounded-md"
                 src={app.icon || "/default-app-icon.png"}
+                alt="icon"
                 width={100}
                 height={100}
                 objectFit="contain"
-                alt="icon"
               />
             </div>
             <div className="flex flex-col">
