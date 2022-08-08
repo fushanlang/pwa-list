@@ -1,4 +1,5 @@
 import Router from "next/router";
+import Image from "next/image";
 
 import firebase from "../../plugins/firebase";
 
@@ -27,8 +28,8 @@ const Auth: React.FC = () => {
             className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
             onClick={handleGoogleSignUp}
           >
-            <div className="mr-3 w-6">
-              <img src={"/logo/Google.png"} />
+            <div className="mr-3 w-6 pt-1">
+              <Image alt="Google" src={"/logo/Google.png"} width={50} height={50} objectFit="contain" />
             </div>
             Sign in with Google
           </button>
@@ -36,8 +37,8 @@ const Auth: React.FC = () => {
             className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
             onClick={handleTwitterSignUp}
           >
-            <div className="mr-3 w-7">
-              <img src={"/logo/Twitter.png"} />
+            <div className="mr-3 w-7 pt-1">
+              <Image alt="Twitter" src={"/logo/Twitter.png"} width={50} height={50} objectFit="contain" />
             </div>
             Sign in with Twitter
           </button>
@@ -45,8 +46,8 @@ const Auth: React.FC = () => {
             className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
             onClick={handleFacebookSignIn}
           >
-            <div className="mr-3 w-5">
-              <img src={"/logo/FaceBook.png"} />
+            <div className="mr-3 w-5 pt-1">
+              <Image alt="FaceBook" src={"/logo/FaceBook.png"} width={50} height={50} objectFit="contain" />
             </div>
             Sign in with Facebook
           </button>

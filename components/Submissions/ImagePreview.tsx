@@ -11,7 +11,7 @@ type Props = {
 const ImagePreview: React.FC<Props> = memo(({ index, imageUrl, handleDeleteImage }) => {
   return (
     <div className="relative mb-4">
-      <img className="border rounded max-h-60 mx-2" src={imageUrl} />
+      <img className="border rounded max-h-60 mx-2" alt="preview" src={imageUrl} />
       {
         <button
           className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3"
