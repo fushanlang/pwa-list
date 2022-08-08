@@ -283,7 +283,7 @@ const Edit: NextPage<Props> = (props) => {
                     {iconUrl && (
                       <div className="flex mb-4">
                         <div className="relative">
-                          <img className="border rounded max-h-20" src={iconUrl} />
+                          <img className="border rounded max-h-20" alt="icon" src={iconUrl} />
                           <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1" onClick={handleDeleteIcon}>
                             <FontAwesomeIcon icon={faMinusCircle} size="lg" />
                           </button>
