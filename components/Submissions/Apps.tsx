@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import DeleteModal from "./DeleteModal";
 import { submissionTableApp } from "../../types/app";
@@ -16,8 +17,15 @@ const Apps: React.FC<Props> = ({ apps }) => {
           <Fragment key={app.id}>
             <tr className="border h-24 flex items-center">
               <td className="w-64 flex items-center">
-                <span className="ml-3 mr-4 w-16">
-                  <img className="rounded-md" src={app.icon || "/default-app-icon.png"} />
+                <span className="ml-3 mr-4 w-16 pt-1">
+                  <Image
+                    className="rounded-md"
+                    alt="icon"
+                    src={app.icon || "/default-app-icon.png"}
+                    width={100}
+                    height={100}
+                    objectFit="contain"
+                  />
                 </span>
                 {app.name}
               </td>

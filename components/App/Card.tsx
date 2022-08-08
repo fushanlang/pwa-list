@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { changeFirstUpperCase } from "../../plugins/common/functions";
 import { CardApp } from "../../types/app";
@@ -11,8 +12,15 @@ const Card: React.FC<Props> = ({ apps }) => {
       {apps.map((app) => (
         <Link key={app.id} href="/app/[name]" as={`/app/${app.nameLowercase}`}>
           <a style={{ height: "120px" }} className="flex items-center border mb-1 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700">
-            <div className="mr-4 w-20">
-              <img className="rounded-md" src={app.icon || "/default-app-icon.png"} />
+            <div className="mr-4 w-20 pt-1">
+              <Image
+                className="rounded-md"
+                src={app.icon || "/default-app-icon.png"}
+                alt="icon"
+                width={100}
+                height={100}
+                objectFit="contain"
+              />
             </div>
             <div className="flex flex-col">
               <div className="text-base font-bold">{app.name}</div>

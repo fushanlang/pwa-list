@@ -6,13 +6,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/swiper-bundle.min.css";
 
-import { App } from "../../types/app";
-
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");
 
 type Props = {
-  app: App;
+  imageUrls: string[];
   modalIsOpen: boolean;
   setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   initialSlide: number;
@@ -37,7 +35,7 @@ const modalStyle = {
   },
 };
 
-const ImageModal: React.FC<Props> = ({ app, modalIsOpen, setModalIsOpen, initialSlide }) => {
+const ImageModal: React.FC<Props> = ({ imageUrls, modalIsOpen, setModalIsOpen, initialSlide }) => {
   let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
   modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
 
@@ -52,36 +50,11 @@ const ImageModal: React.FC<Props> = ({ app, modalIsOpen, setModalIsOpen, initial
           </button>
           <Swiper className="mt-2" id="swiper" spaceBetween={50} slidesPerView={1} initialSlide={initialSlide} navigation>
             <div>
-              {app.imageMobile1 !== null && (
-                <SwiperSlide>
-                  <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={app.imageMobile1} />
+              {imageUrls.map((url, index) => (
+                <SwiperSlide key={url}>
+                  <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={url} alt={`screenshot${index}`} />
                 </SwiperSlide>
-              )}
-              {app.imageMobile2 !== null && (
-                <SwiperSlide>
-                  <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={app.imageMobile2} />
-                </SwiperSlide>
-              )}
-              {app.imageMobile3 !== null && (
-                <SwiperSlide>
-                  <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={app.imageMobile3} />
-                </SwiperSlide>
-              )}
-              {app.imagePc1 !== null && (
-                <SwiperSlide className="hidden lg:inline-block">
-                  <img style={{ maxHeight: "680px" }} className="border rounded-lg inline mt-20 xl:mt-0" src={app.imagePc1} />
-                </SwiperSlide>
-              )}
-              {app.imagePc2 !== null && (
-                <SwiperSlide className="hidden lg:inline-block">
-                  <img style={{ maxHeight: "680px" }} className="border rounded-lg inline mt-20 xl:mt-0" src={app.imagePc2} />
-                </SwiperSlide>
-              )}
-              {app.imagePc3 !== null && (
-                <SwiperSlide className="hidden lg:inline-block">
-                  <img style={{ maxHeight: "680px" }} className="border rounded-lg inline mt-20 xl:mt-0" src={app.imagePc3} />
-                </SwiperSlide>
-              )}
+              ))}
             </div>
           </Swiper>
         </div>
