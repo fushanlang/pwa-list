@@ -63,6 +63,7 @@ export async function getStaticProps(context) {
     props: {
       apps: apps,
       category: changeFirstUpperCase(category),
+      revalidate: 20,
     },
   };
 }
