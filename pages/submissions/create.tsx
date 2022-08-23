@@ -250,7 +250,7 @@ const Create: NextPage = () => {
                   isRequired={true}
                   maxLength={2000}
                   state={description}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                     setDescription(e.target.value);
                     setErrors({ ...errors, description: [] });
                   }}
