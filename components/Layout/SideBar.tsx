@@ -77,20 +77,22 @@ const SideBar: React.FC = () => {
               )}
             </Link>
             <p className="mb-3 mt-2">CATEGORIES</p>
-            <CategoryLinkForSideBar categoryName="business" iconName="chart-bar" />
-            <CategoryLinkForSideBar categoryName="design" iconName="palette" />
-            <CategoryLinkForSideBar categoryName="education" iconName="book-open" />
-            <CategoryLinkForSideBar categoryName="entertainment" iconName="star" />
-            <CategoryLinkForSideBar categoryName="food" iconName="utensils" />
-            <CategoryLinkForSideBar categoryName="games" iconName="gamepad" />
-            <CategoryLinkForSideBar categoryName="lifestyle" iconName="child" />
-            <CategoryLinkForSideBar categoryName="music" iconName="music" />
-            <CategoryLinkForSideBar categoryName="news" iconName="newspaper" />
-            <CategoryLinkForSideBar categoryName="shopping" iconName="shopping-bag" />
-            <CategoryLinkForSideBar categoryName="social" iconName="share-alt" />
-            <CategoryLinkForSideBar categoryName="tech" iconName="code" />
-            <CategoryLinkForSideBar categoryName="tools" iconName="hammer" />
-            <CategoryLinkForSideBar categoryName="travel" iconName="plane" />
+            <div className="ml-1">
+              <CategoryLinkForSideBar categoryName="business" iconName="chart-bar" />
+              <CategoryLinkForSideBar categoryName="design" iconName="palette" />
+              <CategoryLinkForSideBar categoryName="education" iconName="book-open" />
+              <CategoryLinkForSideBar categoryName="entertainment" iconName="star" />
+              <CategoryLinkForSideBar categoryName="food" iconName="utensils" />
+              <CategoryLinkForSideBar categoryName="games" iconName="gamepad" />
+              <CategoryLinkForSideBar categoryName="lifestyle" iconName="child" />
+              <CategoryLinkForSideBar categoryName="music" iconName="music" />
+              <CategoryLinkForSideBar categoryName="news" iconName="newspaper" />
+              <CategoryLinkForSideBar categoryName="shopping" iconName="shopping-bag" />
+              <CategoryLinkForSideBar categoryName="social" iconName="share-alt" />
+              <CategoryLinkForSideBar categoryName="tech" iconName="code" />
+              <CategoryLinkForSideBar categoryName="tools" iconName="hammer" />
+              <CategoryLinkForSideBar categoryName="travel" iconName="plane" />
+            </div>
           </div>
         </div>
         <div className="mb-2 w-60 text-center">

@@ -15,7 +15,9 @@ const Layout: React.FC<Props> = ({ children, title }) => {
         <title>{`${title} | PWA List`}</title>
       </Head>
       <div className="h-screen flex">
-        <SideBar />
+        <div className="overflow-scroll">
+          <SideBar />
+        </div>
         <div className="flex-1 pb-16 md:pb-0 overflow-scroll">{children}</div>
         <BottomBar />
       </div>
