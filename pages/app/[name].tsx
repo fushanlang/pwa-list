@@ -65,7 +65,7 @@ const App: NextPage<Props> = (props) => {
                   objectFit="contain"
                 />
               </div>
-              <div className="flex flex-col ml-1">
+              <div className="ml-1">
                 <h1 className="font-bold text-2xl">{app.name}</h1>
                 <h2 className="text-base font-semibold">{app.category}</h2>
                 <div className="mt-1 text-base font-semibold">
