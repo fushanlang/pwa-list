@@ -11,10 +11,10 @@ const SignUpLoading: NextPage = () => {
   return (
     <Layout title="Sign-Up-Loading">
       <div className="text-center mt-52">
-        <div className="mt-64">
+        <div className="mt-64 mb-10">
           <Loading />
         </div>
-        <div className="text-xl mt-10">Signing up now...</div>
+        <div className="text-xl">Signing up now...</div>
       </div>
     </Layout>
   );

@@ -39,8 +39,8 @@ import CategoryLinkForCategories from "../components/Layout/CategoryLinkForCateg
 const Categories: NextPage = () => {
   return (
     <Layout title="Categories">
-      <div className="flex-1 overflow-scroll pt-5 pl-7">
-        <p className="text-lg mt-1 mb-6">Categories</p>
+      <div className="pt-6 pl-7">
+        <p className="text-lg mb-6">Categories</p>
         <div className="flex flex-col ml-1">
           <CategoryLinkForCategories categoryName="business" iconName="chart-bar" />
           <CategoryLinkForCategories categoryName="design" iconName="palette" />

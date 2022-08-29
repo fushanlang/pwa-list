@@ -21,13 +21,11 @@ const Index: NextPage<Props> = ({ apps }) => {
   return (
     <Layout title="Home">
       <div className="min-h-screen p-6">
-        <div className="flex mt-3 justify-between">
+        <div className="flex justify-between mt-3">
           <h1 className="text-3xl font-bold" style={logo}>
             P<span className="text-green-500">W</span>A LIST
           </h1>
-          <span>
-            <ChangeThemeButton />
-          </span>
+          <ChangeThemeButton />
         </div>
         <div>
           <div className="mt-2">
@@ -56,7 +54,7 @@ const Index: NextPage<Props> = ({ apps }) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col items-center border-t-2 text-center mb-3 md:hidden">
+      <div className="border-t-2 mb-3 md:hidden">
         <div className="text-base mt-5">
           <div>
             <Link href="/about" as="/about">
