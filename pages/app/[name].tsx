@@ -46,7 +46,7 @@ const App: NextPage<Props> = (props) => {
         {!isFound ? (
           <NotFound />
         ) : (
-          <div className="border border-green-200 px-4 py-7 rounded-lg">
+          <div className="border border-green-200 pl-5 pr-4 py-7 rounded-lg">
             <button
               className="text-center py-1 px-5 tracking-wide rounded-md border-2 border-black dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               onClick={() => router.back()}
@@ -101,7 +101,7 @@ const App: NextPage<Props> = (props) => {
                 />
               ))}
             </div>
-            <div className="mt-7 px-4 break-words">
+            <div className="mt-7 break-words">
               <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
               <p style={{ whiteSpace: "pre-line" }} className="text-left text-lg">
                 {app.description}
