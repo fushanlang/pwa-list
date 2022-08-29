@@ -9,7 +9,7 @@ const BottomBar: React.FC = () => {
   return (
     <div className="fixed bottom-0 w-full border-t bg-white dark:bg-gray-800 md:hidden">
       <ul className="flex justify-around items-center h-14 pt-1">
-        <li className="text-center">
+        <li className="text-center w-20">
           <Link href="/">
             {path === "/" ? (
               <a className="text-green-500">
@@ -24,7 +24,7 @@ const BottomBar: React.FC = () => {
             )}
           </Link>
         </li>
-        <li className="text-center">
+        <li className="text-center w-20">
           <Link href="/search">
             {path === "/search" ? (
               <a className="text-green-500">
@@ -39,7 +39,7 @@ const BottomBar: React.FC = () => {
             )}
           </Link>
         </li>
-        <li className="text-center">
+        <li className="text-center w-20">
           <Link href="/categories">
             {path === "/categories" ? (
               <a className="text-green-500">
