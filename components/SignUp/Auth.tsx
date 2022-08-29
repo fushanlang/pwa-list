@@ -1,18 +1,18 @@
 import Router from "next/router";
-import Image from "next/image";
 
 import firebase from "../../plugins/firebase";
+import LoginButton from "./LoginButton";
 
 const Auth: React.FC = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   const twitterProvider = new firebase.auth.TwitterAuthProvider();
   const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-  const handleGoogleSignUp = () => {
+  const handleGoogleSignIn = () => {
     firebase.auth().signInWithRedirect(googleProvider);
     Router.push("/sign-up/loading");
   };
-  const handleTwitterSignUp = () => {
+  const handleTwitterSignIn = () => {
     firebase.auth().signInWithRedirect(twitterProvider);
     Router.push("/sign-up/loading");
   };
@@ -21,38 +21,10 @@ const Auth: React.FC = () => {
     Router.push("/sign-up/loading");
   };
   return (
-    <div>
-      <div>
-        <div className="flex justify-center flex-wrap">
-          <button
-            className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-            onClick={handleGoogleSignUp}
-          >
-            <div className="mr-3 w-6 pt-1">
-              <Image alt="Google" src={"/logo/Google.png"} width={50} height={50} objectFit="contain" />
-            </div>
-            Sign in with Google
-          </button>
-          <button
-            className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-            onClick={handleTwitterSignUp}
-          >
-            <div className="mr-3 w-7 pt-1">
-              <Image alt="Twitter" src={"/logo/Twitter.png"} width={50} height={50} objectFit="contain" />
-            </div>
-            Sign in with Twitter
-          </button>
-          <button
-            className="flex items-center justify-center mx-2 my-2 w-56 h-10 font-bold border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-            onClick={handleFacebookSignIn}
-          >
-            <div className="mr-3 w-5 pt-1">
-              <Image alt="FaceBook" src={"/logo/FaceBook.png"} width={50} height={50} objectFit="contain" />
-            </div>
-            Sign in with Facebook
-          </button>
-        </div>
-      </div>
+    <div className="flex justify-center flex-wrap">
+      <LoginButton label="Sign in with Google" imagePath="/logo/Google.png" handleLogin={handleGoogleSignIn} />
+      <LoginButton label="Sign in with Twitter" imagePath="/logo/Twitter.png" handleLogin={handleTwitterSignIn} />
+      <LoginButton label="Sign in with Facebook" imagePath="/logo/FaceBook.png" handleLogin={handleFacebookSignIn} />
     </div>
   );
 };
