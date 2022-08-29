@@ -48,42 +48,44 @@ const App: NextPage<Props> = (props) => {
         ) : (
           <div className="border border-green-200 px-4 py-7 rounded-lg">
             <button
-              className="text-center mb-5 py-1 px-5 inline-block tracking-wide rounded-md border-2 border-black dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="text-center py-1 px-5 tracking-wide rounded-md border-2 border-black dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               onClick={() => router.back()}
             >
               <FontAwesomeIcon icon={faChevronLeft} />
               &nbsp;Back
             </button>
-            <div className="flex items-center ml-1">
-              <div className="mr-4 w-20 pt-1">
-                <Image
-                  className="rounded-md"
-                  alt="icon"
-                  src={app.icon || "/default-app-icon.png"}
-                  width={100}
-                  height={100}
-                  objectFit="contain"
-                />
-              </div>
-              <div className="flex flex-col ml-1">
-                <h1 className="font-bold text-2xl">{app.name}</h1>
-                <h2 className="text-base font-semibold">{app.category}</h2>
-                <div className="mt-1 text-base font-semibold">
-                  {app.tag1 && <span>{app.tag1}</span>}
-                  {app.tag2 && <span> / {app.tag2}</span>}
-                  {app.tag3 && <span> / {app.tag3}</span>}
+            <div className="mt-5 my-1">
+              <div className="flex items-center mb-5">
+                <div className="w-20 pt-1">
+                  <Image
+                    className="rounded-md"
+                    alt="icon"
+                    src={app.icon || "/default-app-icon.png"}
+                    width={100}
+                    height={100}
+                    objectFit="contain"
+                  />
+                </div>
+                <div className="ml-5">
+                  <h1 className="font-bold text-2xl">{app.name}</h1>
+                  <h2 className="text-base font-semibold">{app.category}</h2>
+                  <div className="mt-1 text-base font-semibold">
+                    {app.tag1 && <span>{app.tag1}</span>}
+                    {app.tag2 && <span> / {app.tag2}</span>}
+                    {app.tag3 && <span> / {app.tag3}</span>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <a
-                target="_blank"
-                href={app.link}
-                className="text-center w-56 mt-7 ml-1 py-1 inline-block tracking-wide text-white bg-green-400 rounded-md hover:bg-green-500"
-              >
-                Link&nbsp;
-                <FontAwesomeIcon icon={faLink} />
-              </a>
+              <div>
+                <a
+                  target="_blank"
+                  href={app.link}
+                  className="text-center w-56 py-1 inline-block tracking-wide text-white bg-green-400 rounded-md hover:bg-green-500"
+                >
+                  Link&nbsp;
+                  <FontAwesomeIcon icon={faLink} />
+                </a>
+              </div>
             </div>
             <div className="flex mt-6 overflow-scroll">
               {imageUrls.map((url, index) => (

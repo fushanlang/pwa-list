@@ -7,19 +7,19 @@ const BottomBar: React.FC = () => {
   const router = useRouter();
   const path = router.pathname;
   return (
-    <div className="bottom-0 w-full border-t fixed bg-white dark:bg-gray-800 md:hidden">
-      <ul className="flex h-14 justify-around items-center pt-1">
-        <li className="text-center pr-6">
+    <div className="fixed bottom-0 w-full border-t bg-white dark:bg-gray-800 md:hidden">
+      <ul className="flex justify-around items-center h-14 pt-1">
+        <li className="text-center">
           <Link href="/">
             {path === "/" ? (
-              <a className="block text-green-500">
-                <FontAwesomeIcon icon={faHome} size="lg" className="" />
-                <span className="text-xs block">Home</span>
+              <a className="text-green-500">
+                <FontAwesomeIcon icon={faHome} size="lg" />
+                <div className="text-xs">Home</div>
               </a>
             ) : (
-              <a className="block hover:text-green-500">
-                <FontAwesomeIcon icon={faHome} size="lg" className="" />
-                <span className="text-xs block">Home</span>
+              <a className="hover:text-green-500">
+                <FontAwesomeIcon icon={faHome} size="lg" />
+                <div className="text-xs">Home</div>
               </a>
             )}
           </Link>
@@ -27,14 +27,14 @@ const BottomBar: React.FC = () => {
         <li className="text-center">
           <Link href="/search">
             {path === "/search" ? (
-              <a className="block text-green-500">
-                <FontAwesomeIcon icon={faSearch} size="lg" className="" />
-                <span className="text-xs block">Search</span>
+              <a className="text-green-500">
+                <FontAwesomeIcon icon={faSearch} size="lg" />
+                <div className="text-xs">Search</div>
               </a>
             ) : (
-              <a className="block hover:text-green-500">
-                <FontAwesomeIcon icon={faSearch} size="lg" className="" />
-                <span className="text-xs block">Search</span>
+              <a className="hover:text-green-500">
+                <FontAwesomeIcon icon={faSearch} size="lg" />
+                <div className="text-xs">Search</div>
               </a>
             )}
           </Link>
@@ -42,14 +42,14 @@ const BottomBar: React.FC = () => {
         <li className="text-center">
           <Link href="/categories">
             {path === "/categories" ? (
-              <a className="block text-green-500">
-                <FontAwesomeIcon icon={faListUl} size="lg" className="" />
-                <span className="text-xs block">Categories</span>
+              <a className="text-green-500">
+                <FontAwesomeIcon icon={faListUl} size="lg" />
+                <div className="text-xs">Categories</div>
               </a>
             ) : (
-              <a className="block hover:text-green-500">
-                <FontAwesomeIcon icon={faListUl} size="lg" className="" />
-                <span className="text-xs block">Categories</span>
+              <a className="hover:text-green-500">
+                <FontAwesomeIcon icon={faListUl} size="lg" />
+                <div className="text-xs">Categories</div>
               </a>
             )}
           </Link>

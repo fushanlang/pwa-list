@@ -15,7 +15,7 @@ const About: NextPage = () => {
       <Head>
         <meta name="description" content="In PWA List, you can search for Progressive Web Apps by category, tag, and app name." />
       </Head>
-      <div className="px-7 py-6 ">
+      <div className="px-7 py-6">
         <h1 className="text-3xl font-bold mb-3" style={logo}>
           About
         </h1>

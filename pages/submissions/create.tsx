@@ -154,7 +154,7 @@ const Create: NextPage = () => {
       {loginUser && (
         <div className="px-5 py-6">
           <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
-            <div className="ml-1 mt-1 mb-9">
+            <div className="mb-9">
               <div className="mb-6">
                 <Input
                   id={"name"}
@@ -324,7 +324,7 @@ const Create: NextPage = () => {
                 <ErrorMessage errors={errors.screenshot}></ErrorMessage>
               </div>
             </div>
-            <div className="ml-1 mt-10 mb-12">
+            <div className="mt-10 mb-12">
               <button
                 className="w-48 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none"
                 type="submit"

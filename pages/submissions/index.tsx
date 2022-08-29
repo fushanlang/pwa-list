@@ -38,7 +38,7 @@ const Submissions: NextPage = () => {
               <Loading />
             </div>
           ) : (
-            <div className="rounded-lg px-8 py-10">
+            <div className="px-8 py-10">
               <h1 className="text-2xl font-semibold">Submissions</h1>
               <div className="overflow-scroll mt-3">
                 <table className="text-base border">

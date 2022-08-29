@@ -17,7 +17,7 @@ const Apps: React.FC<Props> = ({ apps }) => {
           <Fragment key={app.id}>
             <tr className="border h-24 flex items-center">
               <td className="w-64 flex items-center">
-                <span className="ml-3 mr-4 w-16 pt-1">
+                <div className="ml-3 w-16 pt-1">
                   <Image
                     className="rounded-md"
                     alt="icon"
@@ -26,8 +26,8 @@ const Apps: React.FC<Props> = ({ apps }) => {
                     height={100}
                     objectFit="contain"
                   />
-                </span>
-                {app.name}
+                </div>
+                <div className="ml-6">{app.name}</div>
               </td>
               <td className="w-32 text-center">
                 {app.isPublic && <span className="text-blue-400">Public</span>}

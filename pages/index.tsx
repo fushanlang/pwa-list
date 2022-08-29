@@ -21,22 +21,20 @@ const Index: NextPage<Props> = ({ apps }) => {
   return (
     <Layout title="Home">
       <div className="min-h-screen p-6">
-        <div className="flex mt-3 justify-between">
+        <div className="flex justify-between mt-3">
           <h1 className="text-3xl font-bold" style={logo}>
             P<span className="text-green-500">W</span>A LIST
           </h1>
-          <span className="mr-2">
-            <ChangeThemeButton />
-          </span>
+          <ChangeThemeButton />
         </div>
         <div>
-          <div className="ml-1.5 my-2">
+          <div className="mt-2">
             <h2 className="text-xl font-bold">New Apps</h2>
             <p className="text-base text-gray-500 dark:text-gray-300">Recently added Progressive Web Apps.</p>
           </div>
-          <>
+          <div className="mt-3">
             <Card apps={apps} />
-          </>
+          </div>
           {/* Google Adsense start*/}
           {/* <div className="overflow-scroll text-center mt-16">
               <AdSense.Google client={GOOGLE_ADSENSE_CLIENT} slot="6767679949" style={{ width: 970, height: 90 }} format="" />
@@ -56,7 +54,7 @@ const Index: NextPage<Props> = ({ apps }) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col items-center border-t-2 text-center mb-3 md:hidden">
+      <div className="border-t-2 mb-3 md:hidden">
         <div className="text-base mt-5">
           <div>
             <Link href="/about" as="/about">

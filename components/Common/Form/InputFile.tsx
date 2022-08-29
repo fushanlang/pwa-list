@@ -26,7 +26,7 @@ const Input: React.FC<Props> = (props) => {
       {children}
       <input id={id} ref={inputRef} type="file" className="hidden" accept="image/*" multiple onChange={handleChange} />
       <button
-        className="cursor-pointer py-1 px-5 tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+        className="py-1 px-5 tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
         onClick={(e) => {
           inputRef.current.click();
           e.preventDefault();

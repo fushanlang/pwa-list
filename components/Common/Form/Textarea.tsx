@@ -22,7 +22,7 @@ const Textarea: React.FC<Props> = (props) => {
       <Label id={id} label={label} isRequired={isRequired} />
       <textarea
         id={id}
-        className="ring-2 ring-gray-300 form-textarea mt-1 block w-full rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
+        className="ring-2 ring-gray-300 mt-1 block w-full rounded w-full py-2 px-3 leading-tight focus:outline-none focus:ring focus:ring-green-400"
         rows={10}
         maxLength={maxLength}
         value={state}
