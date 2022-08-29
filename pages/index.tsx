@@ -54,7 +54,7 @@ const Index: NextPage<Props> = ({ apps }) => {
           </p>
         </div>
       </div>
-      <div className="border-t-2 mb-3 md:hidden">
+      <div className="border-t-2 text-center mb-3 md:hidden">
         <div className="text-base mt-5">
           <div>
             <Link href="/about" as="/about">
