@@ -3,8 +3,8 @@ import "firebase/firestore";
 
 import firebase from "../../plugins/firebase";
 
-const loginUserApps = createSlice({
-  name: "loginUserApps",
+const userApps = createSlice({
+  name: "userApps",
   initialState: {
     isLoading: true,
     apps: [],
@@ -36,13 +36,13 @@ const loginUserApps = createSlice({
   },
 });
 
-const setAsyncWithLoading = createAsyncThunk("loginUserApps/setAsyncWithLoading", async (payload: string) => {
+const setAsyncWithLoading = createAsyncThunk("userApps/setAsyncWithLoading", async (payload: string) => {
   const db = firebase.firestore();
   const response = await db.collection("applications").where("userId", "==", payload).orderBy("updatedAt", "desc").get();
   return response.docs;
 });
 
-const { remove } = loginUserApps.actions;
+const { remove } = userApps.actions;
 
 export { remove, setAsyncWithLoading };
-export default loginUserApps.reducer;
+export default userApps.reducer;

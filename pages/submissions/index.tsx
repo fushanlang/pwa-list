@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import Router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { setAsyncWithLoading } from "../../store/modules/loginUserApps";
+import { setAsyncWithLoading } from "../../store/modules/userApps";
 import "firebase/firestore";
 
 import { useLoginUser } from "../../contexts/Auth";
@@ -14,8 +14,8 @@ import Loading from "../../components/Common/Loading";
 
 const Submissions: NextPage = () => {
   const loginUser = useLoginUser();
-  const isLoading = useSelector((state: any) => state.loginUserApps.isLoading);
-  const apps = useSelector((state: any) => state.loginUserApps.apps);
+  const isLoading = useSelector((state: any) => state.userApps.isLoading);
+  const apps = useSelector((state: any) => state.userApps.apps);
   const dispatch = useDispatch();
   useEffect(() => {
     if (loginUser) {

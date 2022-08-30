@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./modules/loginUserApps";
+import reducer from "./modules/userApps";
 
 export default configureStore({
   reducer: {
-    loginUserApps: reducer,
+    userApps: reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ["loginUserApps/setAsyncWithLoading/fulfilled"],
+        ignoredActions: ["userApps/setAsyncWithLoading/fulfilled"],
       },
     }),
 });
