@@ -19,10 +19,10 @@ const userApps = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(setAsyncWithLoading.pending, (state) => {
+      .addCase(setAsyncApps.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(setAsyncWithLoading.fulfilled, (state, action) => {
+      .addCase(setAsyncApps.fulfilled, (state, action) => {
         state.isLoading = false;
         state.apps = action.payload.map((doc) => ({
           id: doc.id,
@@ -37,7 +37,7 @@ const userApps = createSlice({
   },
 });
 
-const setAsyncWithLoading = createAsyncThunk("userApps/setAsyncWithLoading", async (payload: string) => {
+const setAsyncApps = createAsyncThunk("userApps/setAsyncApps", async (payload: string) => {
   const db = firebase.firestore();
   const response = await db.collection("applications").where("userId", "==", payload).orderBy("updatedAt", "desc").get();
   return response.docs;
@@ -45,7 +45,7 @@ const setAsyncWithLoading = createAsyncThunk("userApps/setAsyncWithLoading", asy
 
 const { remove } = userApps.actions;
 
-export { remove, setAsyncWithLoading };
+export { remove, setAsyncApps };
 export const selectUserApps = (state: RootState) => state.userApps.apps;
 export const selectIsLoading = (state: RootState) => state.userApps.isLoading;
 export default userApps.reducer;

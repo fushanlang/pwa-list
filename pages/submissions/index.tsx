@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import Router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { setAsyncWithLoading, selectUserApps, selectIsLoading } from "../../store/modules/userApps";
+import { setAsyncApps, selectUserApps, selectIsLoading } from "../../store/modules/userApps";
 import "firebase/firestore";
 
 import { selectUser } from "../../store/modules/user";
@@ -19,7 +19,7 @@ const Submissions: NextPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (user.uid) {
-      dispatch(setAsyncWithLoading(user.uid));
+      dispatch(setAsyncApps(user.uid));
     } else {
       Router.push("sign-up");
     }
