@@ -45,11 +45,11 @@ Developers can submit PWAs, and users can search for them by name, category, or 
 
 - Next.js
 - TypeScript
+- Firebase
+  - Storage, Firestore, and Authentication
 - Redux
 - Vercel
   - Hosting an app
-- Firebase
-  - Storage, Firestore, and Authentication
 - Tailwind CSS
 
 ## :star2: Features
