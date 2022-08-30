@@ -1,14 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./modules/loginUserApps";
+import userAppsReducer from "./modules/userApps";
+import userReducer from "./modules/user";
 
-export default configureStore({
+export const store = configureStore({
   reducer: {
-    loginUserApps: reducer,
+    userApps: userAppsReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ["loginUserApps/setAsyncWithLoading/fulfilled"],
+        ignoredActions: ["userApps/setAsyncApps/fulfilled"],
       },
     }),
 });
+export type RootState = ReturnType<typeof store.getState>;

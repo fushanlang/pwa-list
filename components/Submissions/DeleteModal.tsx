@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import "firebase/firestore";
 import { useDispatch } from "react-redux";
 
-import { remove } from "../../store/modules/loginUserApps";
+import { remove } from "../../store/modules/userApps";
 import firebase from "../../plugins/firebase";
 import deleteFromStorage from "../../plugins/image/deleteFromStorage";
 import { submissionTableApp } from "../../types/app";

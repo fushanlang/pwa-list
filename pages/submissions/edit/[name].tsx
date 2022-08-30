@@ -4,8 +4,9 @@ import Router from "next/router";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
-import { useLoginUser } from "../../../contexts/Auth";
+import { selectUser } from "../../../store/modules/user";
 import categories from "../../../consts/categories";
 import editValidate from "../../../plugins/submissions/editValidate";
 import firebase from "../../../plugins/firebase";
@@ -27,11 +28,7 @@ type Props = { app: App; isFound: boolean };
 
 const Edit: NextPage<Props> = (props) => {
   const { app, isFound } = props;
-  const loginUser = useLoginUser();
-  useEffect(() => {
-    loginUser === null && Router.push("/sign-up");
-  }, [loginUser]);
-
+  const user = useSelector(selectUser);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [name, setName] = useState<string>(app.name);
@@ -145,8 +142,7 @@ const Edit: NextPage<Props> = (props) => {
     if (pcImages[1]) storagePc2Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2");
     if (pcImages[2]) storagePc3Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3");
 
-    const appRef = db.collection("applications").doc(app.id);
-    await appRef.update({
+    await db.collection("applications").doc(app.id).update({
       nameLowercase: nameLowercase,
       link: link,
       category: category,
@@ -173,7 +169,7 @@ const Edit: NextPage<Props> = (props) => {
   return (
     <Layout title={`${app.name} - Edit`}>
       <>
-        {loginUser && loginUser.uid === app.userId && isFound ? (
+        {user.uid === app.userId && isFound ? (
           <div className="px-5 py-6">
             <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
               <div className="mb-9">

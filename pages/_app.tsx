@@ -10,8 +10,8 @@ import Head from "next/head";
 import { Provider } from "react-redux";
 
 import * as gtag from "../plugins/gtag";
-import { AuthProvider } from "../contexts/Auth";
-import store from "../store";
+import { store } from "../store";
+import Auth from "../components/Common/Auth";
 
 Router.events.on("routeChangeComplete", (url) => gtag.pageview(url));
 
@@ -59,11 +59,11 @@ const WrappedApp: NextPage<AppProps> = ({ Component, pageProps }) => {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" />
       </Head>
       <ThemeProvider attribute="class" defaultTheme="light">
-        <AuthProvider>
-          <Provider store={store}>
+        <Provider store={store}>
+          <Auth>
             <Component {...pageProps} />
-          </Provider>
-        </AuthProvider>
+          </Auth>
+        </Provider>
       </ThemeProvider>
     </>
   );

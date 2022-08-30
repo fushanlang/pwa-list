@@ -1,16 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import "firebase/firestore";
 
+import { RootState } from "../index";
 import firebase from "../../plugins/firebase";
 
-const loginUserApps = createSlice({
-  name: "loginUserApps",
+const userApps = createSlice({
+  name: "userApps",
   initialState: {
     isLoading: true,
     apps: [],
   },
   reducers: {
-    remove(state, { type, payload }) {
+    remove(state, { payload }) {
       state.apps = state.apps.filter((value) => {
         return value.id !== payload;
       });
@@ -18,10 +19,10 @@ const loginUserApps = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(setAsyncWithLoading.pending, (state) => {
+      .addCase(setAsyncApps.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(setAsyncWithLoading.fulfilled, (state, action) => {
+      .addCase(setAsyncApps.fulfilled, (state, action) => {
         state.isLoading = false;
         state.apps = action.payload.map((doc) => ({
           id: doc.id,
@@ -36,13 +37,15 @@ const loginUserApps = createSlice({
   },
 });
 
-const setAsyncWithLoading = createAsyncThunk("loginUserApps/setAsyncWithLoading", async (payload: string) => {
+const setAsyncApps = createAsyncThunk("userApps/setAsyncApps", async (payload: string) => {
   const db = firebase.firestore();
   const response = await db.collection("applications").where("userId", "==", payload).orderBy("updatedAt", "desc").get();
   return response.docs;
 });
 
-const { remove } = loginUserApps.actions;
+const { remove } = userApps.actions;
 
-export { remove, setAsyncWithLoading };
-export default loginUserApps.reducer;
+export { remove, setAsyncApps };
+export const selectUserApps = (state: RootState) => state.userApps.apps;
+export const selectIsLoading = (state: RootState) => state.userApps.isLoading;
+export default userApps.reducer;

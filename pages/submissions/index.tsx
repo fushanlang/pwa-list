@@ -3,27 +3,27 @@ import { NextPage } from "next";
 import Link from "next/link";
 import Router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { setAsyncWithLoading } from "../../store/modules/loginUserApps";
+import { setAsyncApps, selectUserApps, selectIsLoading } from "../../store/modules/userApps";
 import "firebase/firestore";
 
-import { useLoginUser } from "../../contexts/Auth";
+import { selectUser } from "../../store/modules/user";
 import firebase from "../../plugins/firebase";
 import Layout from "../../components/Layout/Layout";
 import Apps from "../../components/Submissions/Apps";
 import Loading from "../../components/Common/Loading";
 
 const Submissions: NextPage = () => {
-  const loginUser = useLoginUser();
-  const isLoading = useSelector((state: any) => state.loginUserApps.isLoading);
-  const apps = useSelector((state: any) => state.loginUserApps.apps);
+  const user = useSelector(selectUser);
+  const isLoading = useSelector(selectIsLoading);
+  const apps = useSelector(selectUserApps);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (loginUser) {
-      dispatch(setAsyncWithLoading(loginUser.uid));
+    if (user.uid) {
+      dispatch(setAsyncApps(user.uid));
     } else {
       Router.push("sign-up");
     }
-  }, [loginUser]);
+  }, [user]);
 
   const signOut = async () => {
     firebase.auth().signOut();
@@ -31,7 +31,7 @@ const Submissions: NextPage = () => {
 
   return (
     <Layout title="Submissions">
-      {loginUser && (
+      {user.uid && (
         <>
           {isLoading ? (
             <div className="mt-64">

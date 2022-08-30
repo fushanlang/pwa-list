@@ -1,7 +1,7 @@
 import Router from "next/router";
 
 import firebase from "../../plugins/firebase";
-import LoginButton from "./LoginButton";
+import SignInWithOtherService from "./LoginWithOtherService";
 
 const Auth: React.FC = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -9,22 +9,19 @@ const Auth: React.FC = () => {
   const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
   const handleGoogleSignIn = () => {
-    firebase.auth().signInWithRedirect(googleProvider);
-    Router.push("/sign-up/loading");
+    firebase.auth().signInWithPopup(googleProvider);
   };
   const handleTwitterSignIn = () => {
-    firebase.auth().signInWithRedirect(twitterProvider);
-    Router.push("/sign-up/loading");
+    firebase.auth().signInWithPopup(twitterProvider);
   };
   const handleFacebookSignIn = () => {
-    firebase.auth().signInWithRedirect(facebookProvider);
-    Router.push("/sign-up/loading");
+    firebase.auth().signInWithPopup(facebookProvider);
   };
   return (
     <div className="flex justify-center flex-wrap">
-      <LoginButton label="Sign in with Google" imagePath="/logo/Google.png" handleLogin={handleGoogleSignIn} />
-      <LoginButton label="Sign in with Twitter" imagePath="/logo/Twitter.png" handleLogin={handleTwitterSignIn} />
-      <LoginButton label="Sign in with Facebook" imagePath="/logo/FaceBook.png" handleLogin={handleFacebookSignIn} />
+      <SignInWithOtherService label="Sign in with Google" imagePath="/logo/Google.png" handleSignIn={handleGoogleSignIn} />
+      <SignInWithOtherService label="Sign in with Twitter" imagePath="/logo/Twitter.png" handleSignIn={handleTwitterSignIn} />
+      <SignInWithOtherService label="Sign in with Facebook" imagePath="/logo/FaceBook.png" handleSignIn={handleFacebookSignIn} />
     </div>
   );
 };

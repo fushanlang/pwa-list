@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
+import { useSelector } from "react-redux";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
-import { useLoginUser } from "../../contexts/Auth";
+import { selectUser } from "../../store/modules/user";
 import categories from "../../consts/categories";
 import Layout from "../../components/Layout/Layout";
 import CompletedModal from "../../components/Submissions/CompletedModal";
@@ -21,10 +22,10 @@ import firebase from "../../plugins/firebase";
 
 const db = firebase.firestore();
 const Create: NextPage = () => {
-  const loginUser = useLoginUser();
+  const user = useSelector(selectUser);
   useEffect(() => {
-    loginUser === null && Router.push("/sign-up");
-  }, [loginUser]);
+    user.uid === "" && Router.push("/sign-up");
+  }, [user]);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -119,7 +120,7 @@ const Create: NextPage = () => {
       uploadToStorage(imagesFolder, nameLowercase, mobileImages[2], "mobile3"),
     ]);
     db.collection("applications").add({
-      userId: loginUser.uid,
+      userId: user.uid,
       name: name,
       nameLowercase: nameLowercase,
       link: link,
@@ -151,7 +152,7 @@ const Create: NextPage = () => {
   };
   return (
     <Layout title="Submit">
-      {loginUser && (
+      {user.uid && (
         <div className="px-5 py-6">
           <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
             <div className="mb-9">
