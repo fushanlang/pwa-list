@@ -18,6 +18,10 @@ Check it on [Product Hunt](https://www.producthunt.com/posts/pwa-list-3) :cat2:
   <img width="50" alt="typeScript-logo" src="https://user-images.githubusercontent.com/42294938/136691558-f350b45b-089d-4a2d-89c8-188a2c201ee3.png" />
 </a>
 
+<a href="https://redux.js.org/" target="_blank">
+  <img width="179" alt="redux-logo" src="https://user-images.githubusercontent.com/42294938/187449303-279082a1-5a21-452c-85ec-48a190032286.png" />
+</a>
+
 <a href="https://firebase.google.com/" target="_blank">
   <img width="179" alt="firebase-logo" src="https://user-images.githubusercontent.com/42294938/136691555-98c3406a-29e2-4a39-aad8-1214d88b10f3.png" />
 </a>
@@ -41,6 +45,7 @@ Developers can submit PWAs, and users can search for them by name, category, or 
 
 - Next.js
 - TypeScript
+- Redux
 - Vercel
   - Hosting an app
 - Firebase
@@ -51,7 +56,7 @@ Developers can submit PWAs, and users can search for them by name, category, or 
 
 - Submit an app
 - Search Apps
-- Sign Up / Log In with Google, Twitter and FaceBook
+- Sign Up / Sign In with Google, Twitter and FaceBook
 
 ## :tea: Author
 
