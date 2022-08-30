@@ -18,16 +18,14 @@ const SignUp: NextPage = () => {
 
   return (
     <Layout title="Sign-Up">
-      {user.uid === "" && (
-        <div className="text-center mt-16">
-          <h1 className="text-3xl font-bold mb-7" style={logo}>
-            P<span className="text-green-500">W</span>A LIST
-          </h1>
-          <h2 className="text-2xl font-bold mb-3">Sign up on PWA List</h2>
-          <p className="text-lg mb-5">In order to add and manage your apps, please sign up for an account.</p>
-          <Auth />
-        </div>
-      )}
+      <div className="text-center mt-16">
+        <h1 className="text-3xl font-bold mb-7" style={logo}>
+          P<span className="text-green-500">W</span>A LIST
+        </h1>
+        <h2 className="text-2xl font-bold mb-3">Sign up on PWA List</h2>
+        <p className="text-lg mb-5">In order to add and manage your apps, please sign up for an account.</p>
+        <Auth />
+      </div>
     </Layout>
   );
 };

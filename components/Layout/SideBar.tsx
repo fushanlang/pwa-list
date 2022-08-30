@@ -3,9 +3,6 @@ import { useRouter } from "next/router";
 import CategoryLinkForSideBar from "./CategoryLinkForSideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { useSelector } from "react-redux";
-
-import { selectUser } from "../../store/modules/user";
 
 import {
   faBookOpen,
@@ -42,7 +39,6 @@ library.add(
   faUtensils
 );
 const SideBar: React.FC = () => {
-  const user = useSelector(selectUser);
   const router = useRouter();
   const path = router.pathname;
   const date = new Date();
@@ -103,15 +99,9 @@ const SideBar: React.FC = () => {
                 <Link href="/about" as="/about">
                   <a className="mr-2">About</a>
                 </Link>
-                {user.uid ? (
-                  <Link href="/submissions" as="/submissions">
-                    <a className="mr-2">Submit app</a>
-                  </Link>
-                ) : (
-                  <Link href="/sign-up" as="/sign-up">
-                    <a className="mr-2">Submit app</a>
-                  </Link>
-                )}
+                <Link href="/submissions" as="/submissions">
+                  <a className="mr-2">Submit app</a>
+                </Link>
                 <a className="mr-2" target="_blank" href="mailto:hello.pwalist@gmail.com">
                   Contact
                 </a>
