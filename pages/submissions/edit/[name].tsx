@@ -29,10 +29,6 @@ type Props = { app: App; isFound: boolean };
 const Edit: NextPage<Props> = (props) => {
   const { app, isFound } = props;
   const user = useSelector(selectUser);
-  useEffect(() => {
-    user.uid === "" && Router.push("/sign-up");
-  }, [user]);
-
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [name, setName] = useState<string>(app.name);
