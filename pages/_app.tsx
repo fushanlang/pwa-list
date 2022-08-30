@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 
 import * as gtag from "../plugins/gtag";
 import { AuthProvider } from "../contexts/Auth";
-import store from "../store";
+import { store } from "../store";
 
 Router.events.on("routeChangeComplete", (url) => gtag.pageview(url));
 

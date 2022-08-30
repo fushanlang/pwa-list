@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import "firebase/firestore";
 
+import { RootState } from "../index";
 import firebase from "../../plugins/firebase";
 
 const userApps = createSlice({
@@ -10,7 +11,7 @@ const userApps = createSlice({
     apps: [],
   },
   reducers: {
-    remove(state, { type, payload }) {
+    remove(state, { payload }) {
       state.apps = state.apps.filter((value) => {
         return value.id !== payload;
       });
@@ -45,4 +46,6 @@ const setAsyncWithLoading = createAsyncThunk("userApps/setAsyncWithLoading", asy
 const { remove } = userApps.actions;
 
 export { remove, setAsyncWithLoading };
+export const selectUserApps = (state: RootState) => state.userApps.apps;
+export const selectIsLoading = (state: RootState) => state.userApps.isLoading;
 export default userApps.reducer;

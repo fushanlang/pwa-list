@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./modules/userApps";
+import userAppsreducer from "./modules/userApps";
 
-export default configureStore({
+export const store = configureStore({
   reducer: {
-    userApps: reducer,
+    userApps: userAppsreducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -12,3 +12,4 @@ export default configureStore({
       },
     }),
 });
+export type RootState = ReturnType<typeof store.getState>;
