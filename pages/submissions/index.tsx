@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NextPage } from "next";
 import Link from "next/link";
 import Router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { setAsyncApps, selectUserApps, selectIsLoading } from "../../store/modules/userApps";
+import { set, selectUserApps } from "../../store/modules/userApps";
 import "firebase/firestore";
 
 import { selectUser } from "../../store/modules/user";
@@ -13,21 +13,30 @@ import Apps from "../../components/Submissions/Apps";
 import Loading from "../../components/Common/Loading";
 
 const Submissions: NextPage = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const user = useSelector(selectUser);
-  const isLoading = useSelector(selectIsLoading);
   const apps = useSelector(selectUserApps);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (user.uid) {
-      dispatch(setAsyncApps(user.uid));
-    } else {
-      Router.push("sign-up");
-    }
-  }, [user]);
+
+  const setApps = async (uid: string) => {
+    setIsLoading(true);
+    const db = firebase.firestore();
+    const res = await db.collection("applications").where("userId", "==", uid).orderBy("updatedAt", "desc").get();
+    dispatch(set(res));
+    setIsLoading(false);
+  };
 
   const signOut = async () => {
     firebase.auth().signOut();
   };
+
+  useEffect(() => {
+    if (user.uid === "") {
+      Router.push("sign-up");
+      return;
+    }
+    setApps(user.uid);
+  }, [user]);
 
   return (
     <Layout title="Submissions">
