@@ -146,8 +146,7 @@ const Edit: NextPage<Props> = (props) => {
     if (pcImages[1]) storagePc2Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2");
     if (pcImages[2]) storagePc3Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3");
 
-    const appRef = db.collection("applications").doc(app.id);
-    await appRef.update({
+    await db.collection("applications").doc(app.id).update({
       nameLowercase: nameLowercase,
       link: link,
       category: category,
@@ -174,7 +173,7 @@ const Edit: NextPage<Props> = (props) => {
   return (
     <Layout title={`${app.name} - Edit`}>
       <>
-        {user.uid && user.uid === app.userId && isFound ? (
+        {user.uid === app.userId && isFound ? (
           <div className="px-5 py-6">
             <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
               <div className="mb-9">
