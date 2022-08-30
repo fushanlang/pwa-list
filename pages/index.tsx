@@ -1,11 +1,12 @@
 import Link from "next/link";
 import "firebase/firestore";
 import { NextPage } from "next";
+import { useSelector } from "react-redux";
 import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 
 import firebase from "../plugins/firebase";
-import { useLoginUser } from "../contexts/Auth";
+import { selectUser } from "../store/modules/user";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import ChangeThemeButton from "../components/Common/ChangeThemeButton";
@@ -14,7 +15,7 @@ import { CardApp } from "../types/app";
 type Props = { apps: CardApp[] };
 
 const Index: NextPage<Props> = ({ apps }) => {
-  const loginUser = useLoginUser();
+  const user = useSelector(selectUser);
   const logo = { fontFamily: "'Nunito', sans-serif" };
   const date = new Date();
 
@@ -60,7 +61,7 @@ const Index: NextPage<Props> = ({ apps }) => {
             <Link href="/about" as="/about">
               <a className="mr-3">About</a>
             </Link>
-            {loginUser ? (
+            {user.uid ? (
               <Link href="/submissions" as="/submissions">
                 <a className="mr-3">Submit app</a>
               </Link>

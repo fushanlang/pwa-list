@@ -4,8 +4,9 @@ import Router from "next/router";
 import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
-import { useLoginUser } from "../../../contexts/Auth";
+import { selectUser } from "../../../store/modules/user";
 import categories from "../../../consts/categories";
 import editValidate from "../../../plugins/submissions/editValidate";
 import firebase from "../../../plugins/firebase";
@@ -27,10 +28,10 @@ type Props = { app: App; isFound: boolean };
 
 const Edit: NextPage<Props> = (props) => {
   const { app, isFound } = props;
-  const loginUser = useLoginUser();
+  const user = useSelector(selectUser);
   useEffect(() => {
-    loginUser === null && Router.push("/sign-up");
-  }, [loginUser]);
+    user.uid === "" && Router.push("/sign-up");
+  }, [user]);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -173,7 +174,7 @@ const Edit: NextPage<Props> = (props) => {
   return (
     <Layout title={`${app.name} - Edit`}>
       <>
-        {loginUser && loginUser.uid === app.userId && isFound ? (
+        {user.uid && user.uid === app.userId && isFound ? (
           <div className="px-5 py-6">
             <form onSubmit={handleSubmit} className="xl:px-28 pt-6">
               <div className="mb-9">
