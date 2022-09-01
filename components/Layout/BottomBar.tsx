@@ -12,12 +12,12 @@ const BottomBar: React.FC = () => {
         <li className="text-center w-20">
           <Link href="/">
             {path === "/" ? (
-              <a className="text-green-500">
+              <a className="block text-green-500">
                 <FontAwesomeIcon icon={faHome} size="lg" />
                 <div className="text-xs">Home</div>
               </a>
             ) : (
-              <a className="hover:text-green-500">
+              <a className="block hover:text-green-500">
                 <FontAwesomeIcon icon={faHome} size="lg" />
                 <div className="text-xs">Home</div>
               </a>
@@ -27,12 +27,12 @@ const BottomBar: React.FC = () => {
         <li className="text-center w-20">
           <Link href="/search">
             {path === "/search" ? (
-              <a className="text-green-500">
+              <a className="block text-green-500">
                 <FontAwesomeIcon icon={faSearch} size="lg" />
                 <div className="text-xs">Search</div>
               </a>
             ) : (
-              <a className="hover:text-green-500">
+              <a className="block hover:text-green-500">
                 <FontAwesomeIcon icon={faSearch} size="lg" />
                 <div className="text-xs">Search</div>
               </a>
@@ -42,12 +42,12 @@ const BottomBar: React.FC = () => {
         <li className="text-center w-20">
           <Link href="/categories">
             {path === "/categories" ? (
-              <a className="text-green-500">
+              <a className="block text-green-500">
                 <FontAwesomeIcon icon={faListUl} size="lg" />
                 <div className="text-xs">Categories</div>
               </a>
             ) : (
-              <a className="hover:text-green-500">
+              <a className="block hover:text-green-500">
                 <FontAwesomeIcon icon={faListUl} size="lg" />
                 <div className="text-xs">Categories</div>
               </a>
