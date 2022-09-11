@@ -6,7 +6,10 @@ type Props = {
   labelMessage?: string;
   isRequired: boolean;
   state: string;
-  list: any;
+  list: {
+    label: string;
+    value: string;
+  }[];
   handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
