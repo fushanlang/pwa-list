@@ -4,12 +4,7 @@ type Props = {
   labelMessage?: string;
   isRequired?: boolean;
 };
-const Label: React.FC<Props> = (props) => {
-  const id = props.id;
-  const label = props.label ?? "";
-  const labelMessage = props.labelMessage ?? "";
-  const isRequired = props.isRequired;
-
+const Label: React.FC<Props> = ({ id, label = "", labelMessage = "", isRequired }) => {
   return (
     <>
       {label && (

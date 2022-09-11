@@ -8,16 +8,9 @@ type Props = {
   label?: string;
   labelMessage?: string;
   isRequired?: boolean;
-  handleChange: any;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
-const Input: React.FC<Props> = (props) => {
-  const children = props.children;
-  const id = props.id;
-  const label = props.label ?? "";
-  const labelMessage = props.labelMessage ?? "";
-  const isRequired = props.isRequired;
-  const handleChange = props.handleChange;
-
+const Input: React.FC<Props> = ({ children, id, label = "", labelMessage = "", isRequired, handleChange }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (

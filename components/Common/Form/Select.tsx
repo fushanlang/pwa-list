@@ -7,18 +7,10 @@ type Props = {
   isRequired: boolean;
   state: string;
   list: any;
-  handleChange: any;
+  handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
-const Select: React.FC<Props> = (props) => {
-  const id = props.id;
-  const label = props.label;
-  const labelMessage = props.labelMessage;
-  const isRequired = props.isRequired;
-  const state = props.state;
-  const list = props.list;
-  const handleChange = props.handleChange;
-
+const Select: React.FC<Props> = ({ id, label, labelMessage, isRequired, state, list, handleChange }) => {
   return (
     <>
       <Label id={id} label={label} labelMessage={labelMessage} isRequired={isRequired} />
