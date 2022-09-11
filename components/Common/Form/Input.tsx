@@ -9,19 +9,19 @@ type Props = {
   placeholder?: string;
   maxLength: number;
   state: string;
-  handleChange: any;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
-const Input: React.FC<Props> = (props) => {
-  const id = props.id;
-  const label = props.label ?? "";
-  const labelMessage = props.labelMessage ?? "";
-  const isRequired = props.isRequired;
-  const inputClass = props.inputClass ?? "w-full";
-  const placeholder = props.placeholder ?? "";
-  const maxLength = props.maxLength;
-  const state = props.state;
-  const handleChange = props.handleChange;
-
+const Input: React.FC<Props> = ({
+  id,
+  label = "",
+  labelMessage = "",
+  isRequired,
+  inputClass = "w-full",
+  placeholder = "",
+  maxLength,
+  state,
+  handleChange,
+}) => {
   return (
     <>
       <Label id={id} label={label} labelMessage={labelMessage} isRequired={isRequired} />

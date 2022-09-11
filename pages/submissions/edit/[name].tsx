@@ -200,7 +200,7 @@ const Edit: NextPage<Props> = (props) => {
                     isRequired={true}
                     state={category}
                     list={categories}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                       setCategory(e.target.value);
                       setErrors({ ...errors, category: [] });
                     }}

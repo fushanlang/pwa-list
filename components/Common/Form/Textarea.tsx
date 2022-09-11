@@ -1,22 +1,15 @@
 import Label from "./Label";
 
 type Props = {
-  id?: string;
+  id: string;
   label?: string;
   labelMessage?: string;
   isRequired?: boolean;
   maxLength: number;
   state: string;
-  handleChange: any;
+  handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
-const Textarea: React.FC<Props> = (props) => {
-  const id = props.id;
-  const label = props.label ?? "";
-  const isRequired = props.isRequired;
-  const maxLength = props.maxLength;
-  const state = props.state;
-  const handleChange = props.handleChange;
-
+const Textarea: React.FC<Props> = ({ id, label = "", isRequired, maxLength, state, handleChange }) => {
   return (
     <>
       <Label id={id} label={label} isRequired={isRequired} />
