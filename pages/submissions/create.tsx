@@ -153,8 +153,8 @@ const Create: NextPage = () => {
             <div className="mb-9">
               <div className="mb-6">
                 <Input
-                  id={"name"}
-                  label={"Name"}
+                  id="name"
+                  label="Name"
                   isRequired={true}
                   maxLength={28}
                   state={name}
@@ -164,8 +164,8 @@ const Create: NextPage = () => {
               </div>
               <div className="mb-6">
                 <Input
-                  id={"link"}
-                  label={"Link"}
+                  id="link"
+                  label="Link"
                   isRequired={true}
                   maxLength={120}
                   placeholder="https://pwalist.app"
@@ -176,8 +176,8 @@ const Create: NextPage = () => {
               </div>
               <div className="mb-6">
                 <Select
-                  id={"category"}
-                  label={"Category"}
+                  id="category"
+                  label="Category"
                   isRequired={true}
                   state={category}
                   list={categories}
@@ -187,40 +187,26 @@ const Create: NextPage = () => {
               </div>
               <div className="mb-6">
                 <Input
-                  id={"tag"}
-                  label={"Tags"}
-                  labelMessage={"1 or more required"}
+                  id="tag"
+                  label="Tags"
+                  labelMessage="1 or more required"
                   isRequired={true}
-                  inputClass={"w-28 mr-4"}
+                  inputClass="w-28 mr-4"
                   maxLength={10}
                   placeholder="ToDo"
                   state={tag1}
                   handleChange={handleChangeTag1}
                 />
-                <Input
-                  id={"tag"}
-                  inputClass={"w-28 mr-4"}
-                  maxLength={10}
-                  placeholder="Timer"
-                  state={tag2}
-                  handleChange={handleChangeTag2}
-                />
-                <Input
-                  id={"tag"}
-                  inputClass={"w-28"}
-                  maxLength={10}
-                  placeholder="Management"
-                  state={tag3}
-                  handleChange={handleChangeTag3}
-                />
+                <Input id="tag" inputClass="w-28 mr-4" maxLength={10} placeholder="Timer" state={tag2} handleChange={handleChangeTag2} />
+                <Input id="tag" inputClass="w-28" maxLength={10} placeholder="Management" state={tag3} handleChange={handleChangeTag3} />
                 <ErrorMessage errors={errors.tag1}></ErrorMessage>
                 <ErrorMessage errors={errors.tag2}></ErrorMessage>
                 <ErrorMessage errors={errors.tag3}></ErrorMessage>
               </div>
               <div className="mb-6">
                 <Textarea
-                  id={"about"}
-                  label={"About this app"}
+                  id="about"
+                  label="About this app"
                   isRequired={true}
                   maxLength={2000}
                   state={description}
@@ -229,7 +215,7 @@ const Create: NextPage = () => {
                 />
               </div>
               <div className="mb-6">
-                <InputFile id={"icon"} label={"Icon"} isRequired={true} errors={errors.icon} handleChange={handleChangeIcon}>
+                <InputFile id="icon" label="Icon" isRequired={true} errors={errors.icon} handleChange={handleChangeIcon}>
                   {iconUrl && (
                     <div className="flex mb-4">
                       <ImagePreview imageUrl={iconUrl} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />
@@ -242,12 +228,7 @@ const Create: NextPage = () => {
                 <span className="ml-2">Either mobile or PC screenshot is required.</span>
               </p>
               <div className="mb-6">
-                <InputFile
-                  id={"mobileImage"}
-                  label={"Mobile size (Up to 3 Images)"}
-                  isRequired={false}
-                  handleChange={handleChangeMobileImage}
-                >
+                <InputFile id="mobileImage" label="Mobile size (Up to 3 Images)" isRequired={false} handleChange={handleChangeMobileImage}>
                   {mobileImageUrls.length !== 0 && (
                     <div className="flex mb-4">
                       {mobileImageUrls.map((url, index) => (
@@ -265,9 +246,9 @@ const Create: NextPage = () => {
               </div>
               <div>
                 <InputFile
-                  id={"pcImage"}
-                  label={"PC size (Up to 3 Images)"}
-                  labelMessage={"only show PC size display."}
+                  id="pcImage"
+                  label="PC size (Up to 3 Images)"
+                  labelMessage="only show PC size display."
                   isRequired={false}
                   errors={errors.screenshot}
                   handleChange={handleChangePcImage}
@@ -278,7 +259,7 @@ const Create: NextPage = () => {
                         <ImagePreview
                           key={index}
                           imageUrl={url}
-                          handleClickDelete={handleClickDeleteMobileImage}
+                          handleClickDelete={handleClickDeletePcImage}
                           maxHeight="max-h-60"
                           index={index}
                         />

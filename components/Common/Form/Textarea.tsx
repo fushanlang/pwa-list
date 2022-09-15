@@ -14,6 +14,7 @@ type Props = {
   handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 const Textarea: React.FC<Props> = memo(({ id, label = "", isRequired, maxLength, state, errors = [], handleChange }) => {
+  console.log("text");
   return (
     <>
       <Label id={id} label={label} isRequired={isRequired} />
