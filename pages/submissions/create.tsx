@@ -75,10 +75,10 @@ const Create: NextPage = () => {
     setIconUrl("");
   };
 
-  const handleClickDeleteImage = useCallback((index: number, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
+  const handleClickDeleteImage = (index: number, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
     setUrls((prev: string[]) => prev.filter((_, i) => i !== index));
     setImages((prev: File[]) => prev.filter((_, i) => i !== index));
-  }, []);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -218,7 +218,7 @@ const Create: NextPage = () => {
                   label={"Icon"}
                   isRequired={true}
                   errors={errors.icon}
-                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e), [])}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e)}
                 >
                   {iconUrl && <ImagePreview imageUrls={[iconUrl]} handleClickDelete={handleClickDeleteIcon} maxHeight="20" />}
                 </InputFile>
@@ -232,10 +232,7 @@ const Create: NextPage = () => {
                   id={"mobileImage"}
                   label={"Mobile size (Up to 3 Images)"}
                   isRequired={false}
-                  handleChange={useCallback(
-                    (e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setMobileImages, setMobileImageUrls),
-                    []
-                  )}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setMobileImages, setMobileImageUrls)}
                 >
                   {mobileImageUrls.length !== 0 && (
                     <ImagePreview
@@ -253,10 +250,7 @@ const Create: NextPage = () => {
                   labelMessage={"only show PC size display."}
                   isRequired={false}
                   errors={errors.screenshot}
-                  handleChange={useCallback(
-                    (e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setPcImages, setPcImageUrls),
-                    []
-                  )}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setPcImages, setPcImageUrls)}
                 >
                   {pcImageUrls.length !== 0 && (
                     <ImagePreview
