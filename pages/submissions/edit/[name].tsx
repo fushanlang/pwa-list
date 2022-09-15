@@ -169,7 +169,6 @@ const Edit: NextPage<Props> = (props) => {
                     handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value), [])}
                   />
                 </div>
-
                 <div className="mb-6">
                   <Select
                     id={"category"}
@@ -181,7 +180,6 @@ const Edit: NextPage<Props> = (props) => {
                     handleChange={useCallback((e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value), [])}
                   />
                 </div>
-
                 <div className="mb-6">
                   <Input
                     id={"tag"}
@@ -226,7 +224,6 @@ const Edit: NextPage<Props> = (props) => {
                     handleChange={useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value), [])}
                   />
                 </div>
-
                 <div className="mb-6">
                   <InputFile
                     id={"icon"}
@@ -263,7 +260,6 @@ const Edit: NextPage<Props> = (props) => {
                     )}
                   </InputFile>
                 </div>
-
                 <div>
                   <InputFile
                     id={"pcImage"}
