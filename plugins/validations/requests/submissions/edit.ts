@@ -12,8 +12,8 @@ const validateEdit = (
   tag3: string,
   description: string,
   iconUrl: string,
-  pcImageUrlList: string[],
-  mobileImageUrlList: string[]
+  pcImageUrls: string[],
+  mobileImageUrls: string[]
 ): boolean => {
   let errors: any = { link: [], category: [], tag1: [], tag2: [], tag3: [], description: [], iconUrl: [], screenshot: [] };
   // required
@@ -27,7 +27,7 @@ const validateEdit = (
   validate(isAlphanum, tag1, "tag1", "Please input the tag1 in single-byte alphanumeric character", errors);
   validate(isAlphanum, tag2, "tag2", "Please input the tag2 in single-byte alphanumeric character", errors);
   validate(isAlphanum, tag3, "tag3", "Please input the tag3 in single-byte alphanumeric character", errors);
-  if (pcImageUrlList[0] === undefined && mobileImageUrlList[0] === undefined) {
+  if (pcImageUrls[0] === undefined && mobileImageUrls[0] === undefined) {
     errors.screenshot.push("Please select mobile size or PC size screenshot");
   }
   return setErrors(set, errors);

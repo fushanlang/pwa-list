@@ -1,9 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { NextPage } from "next";
-import Router from "next/router";
 import "firebase/firestore";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 
 import { selectUser } from "../../../store/modules/user";
@@ -41,20 +38,20 @@ const Edit: NextPage<Props> = (props) => {
   const [icon, setIcon] = useState<File>(null);
   const [iconUrl, setIconUrl] = useState<string>(app.icon);
   const [mobileImages, setMobileImages] = useState<File[]>([]);
-  const [mobileImageUrlList, setMobileImageUrlList] = useState<string[]>([]);
+  const [mobileImageUrls, setMobileImageUrls] = useState<string[]>([]);
   const [pcImages, setPcImages] = useState<File[]>([]);
-  const [pcImageUrlList, setPcImageUrlList] = useState<string[]>([]);
+  const [pcImageUrls, setPcImageUrls] = useState<string[]>([]);
 
   useEffect(() => {
     app.tag1 && setTag1(app.tag1);
     app.tag2 && setTag2(app.tag2);
     app.tag3 && setTag3(app.tag3);
-    app.imageMobile1 && setMobileImageUrlList((prev) => [...prev, app.imageMobile1]);
-    app.imageMobile2 && setMobileImageUrlList((prev) => [...prev, app.imageMobile2]);
-    app.imageMobile3 && setMobileImageUrlList((prev) => [...prev, app.imageMobile3]);
-    app.imagePc1 && setPcImageUrlList((prev) => [...prev, app.imagePc1]);
-    app.imagePc2 && setPcImageUrlList((prev) => [...prev, app.imagePc2]);
-    app.imagePc3 && setPcImageUrlList((prev) => [...prev, app.imagePc3]);
+    app.imageMobile1 && setMobileImageUrls((prev) => [...prev, app.imageMobile1]);
+    app.imageMobile2 && setMobileImageUrls((prev) => [...prev, app.imageMobile2]);
+    app.imageMobile3 && setMobileImageUrls((prev) => [...prev, app.imageMobile3]);
+    app.imagePc1 && setPcImageUrls((prev) => [...prev, app.imagePc1]);
+    app.imagePc2 && setPcImageUrls((prev) => [...prev, app.imagePc2]);
+    app.imagePc3 && setPcImageUrls((prev) => [...prev, app.imagePc3]);
   }, []);
 
   const [errors, setErrors] = useState<any>({
@@ -71,8 +68,7 @@ const Edit: NextPage<Props> = (props) => {
 
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
-  const MAX_PC_IMAGE_NUM = 3;
-  const MAX_MOBILE_IMAGE_NUM = 3;
+  const MAX_IMAGE_NUM = 3;
 
   const onChangeIconHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -80,57 +76,42 @@ const Edit: NextPage<Props> = (props) => {
     setIcon(files[0]);
   };
 
-  const onChangeMobileImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeImageHandler = (e: React.ChangeEvent<HTMLInputElement>, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
     const { files } = e.target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
-    filesArr.splice(MAX_MOBILE_IMAGE_NUM);
+    filesArr.splice(MAX_IMAGE_NUM);
     filesArr.map((value) => {
-      setMobileImageUrlList((urls) => [...urls, window.URL.createObjectURL(value)]);
-      setMobileImages((images) => [...images, value]);
+      setUrls((urls: string[]) => [...urls, window.URL.createObjectURL(value)]);
+      setImages((images: File[]) => [...images, value]);
     });
   };
 
-  const onChangePcImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    const filesArr = Object.entries(files).map(([key, value]) => value);
-    filesArr.splice(MAX_PC_IMAGE_NUM);
-    filesArr.map((value) => {
-      setPcImageUrlList((urls) => [...urls, window.URL.createObjectURL(value)]);
-      setPcImages((images) => [...images, value]);
-    });
-  };
-
-  const handleDeleteIcon = () => {
+  const handleClickDeleteIcon = () => {
     setIcon(null);
-    setIconUrl(null);
+    setIconUrl("");
   };
 
-  const handleDeletePcImage = useCallback((index: number) => {
-    setPcImageUrlList((prev) => prev.filter((_, i) => i !== index));
-    setPcImages((prev) => prev.filter((_, i) => i !== index));
-  }, []);
-
-  const handleDeleteMobileImage = useCallback((index: number) => {
-    setMobileImageUrlList((prev) => prev.filter((_, i) => i !== index));
-    setMobileImages((prev) => prev.filter((_, i) => i !== index));
+  const handleClickDeleteImage = useCallback((index: number, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
+    setUrls((prev: string[]) => prev.filter((_, i) => i !== index));
+    setImages((prev: File[]) => prev.filter((_, i) => i !== index));
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (!validateEdit(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrlList, mobileImageUrlList)) {
+    if (!validateEdit(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrls, mobileImageUrls)) {
       setIsSubmitting(false);
       return;
     }
     setIsModalOpen(true);
     const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
     let storageIconUrl = iconUrl;
-    let storageMobile1Url = mobileImageUrlList[0] ? mobileImageUrlList[0] : null;
-    let storageMobile2Url = mobileImageUrlList[1] ? mobileImageUrlList[1] : null;
-    let storageMobile3Url = mobileImageUrlList[2] ? mobileImageUrlList[2] : null;
-    let storagePc1Url = pcImageUrlList[0] ? pcImageUrlList[0] : null;
-    let storagePc2Url = pcImageUrlList[1] ? pcImageUrlList[1] : null;
-    let storagePc3Url = pcImageUrlList[2] ? pcImageUrlList[2] : null;
+    let storageMobile1Url = mobileImageUrls[0] ? mobileImageUrls[0] : null;
+    let storageMobile2Url = mobileImageUrls[1] ? mobileImageUrls[1] : null;
+    let storageMobile3Url = mobileImageUrls[2] ? mobileImageUrls[2] : null;
+    let storagePc1Url = pcImageUrls[0] ? pcImageUrls[0] : null;
+    let storagePc2Url = pcImageUrls[1] ? pcImageUrls[1] : null;
+    let storagePc3Url = pcImageUrls[2] ? pcImageUrls[2] : null;
     if (icon) storageIconUrl = await uploadToStorage(iconsFolder, nameLowercase, icon, "icon");
     if (mobileImages[0]) storageMobile1Url = await uploadToStorage(imagesFolder, nameLowercase, mobileImages[0], "mobile1");
     if (mobileImages[1]) storageMobile2Url = await uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2");
@@ -254,16 +235,7 @@ const Edit: NextPage<Props> = (props) => {
                     errors={errors.icon}
                     handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e), [])}
                   >
-                    {iconUrl && (
-                      <div className="flex mb-4">
-                        <div className="relative">
-                          <img className="border rounded max-h-20" alt="icon" src={iconUrl} />
-                          <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1" onClick={handleDeleteIcon}>
-                            <FontAwesomeIcon icon={faMinusCircle} size="lg" />
-                          </button>
-                        </div>
-                      </div>
-                    )}
+                    {iconUrl && <ImagePreview imageUrls={[iconUrl]} handleClickDelete={handleClickDeleteIcon} maxHeight="20" />}
                   </InputFile>
                   <ErrorMessage errors={errors.icon}></ErrorMessage>
                 </div>
@@ -277,13 +249,18 @@ const Edit: NextPage<Props> = (props) => {
                     id={"mobileImage"}
                     label={"Mobile size (Up to 3 Images)"}
                     isRequired={false}
-                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangeMobileImageHandler(e), [])}
+                    handleChange={useCallback(
+                      (e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setMobileImages, setMobileImageUrls),
+                      []
+                    )}
                   >
-                    <div className="flex overflow-scroll">
-                      {mobileImageUrlList.map((mobileImageUrl, index) => (
-                        <ImagePreview key={index} index={index} imageUrl={mobileImageUrl} handleDeleteImage={handleDeleteMobileImage} />
-                      ))}
-                    </div>
+                    {mobileImageUrls.length !== 0 && (
+                      <ImagePreview
+                        imageUrls={mobileImageUrls}
+                        handleClickDelete={(index) => handleClickDeleteImage(index, setMobileImages, setMobileImageUrls)}
+                        maxHeight="60"
+                      />
+                    )}
                   </InputFile>
                 </div>
 
@@ -294,13 +271,18 @@ const Edit: NextPage<Props> = (props) => {
                     labelMessage={"only show PC size display."}
                     isRequired={false}
                     errors={errors.screenshot}
-                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangePcImageHandler(e), [])}
+                    handleChange={useCallback(
+                      (e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setPcImages, setPcImageUrls),
+                      []
+                    )}
                   >
-                    <div className="flex overflow-scroll">
-                      {pcImageUrlList.map((pcImageUrl, index) => (
-                        <ImagePreview key={index} index={index} imageUrl={pcImageUrl} handleDeleteImage={handleDeletePcImage} />
-                      ))}
-                    </div>
+                    {pcImageUrls.length !== 0 && (
+                      <ImagePreview
+                        imageUrls={pcImageUrls}
+                        handleClickDelete={(index) => handleClickDeleteImage(index, setPcImages, setPcImageUrls)}
+                        maxHeight="60"
+                      />
+                    )}
                   </InputFile>
                 </div>
               </div>

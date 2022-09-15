@@ -60,6 +60,7 @@ const Create: NextPage = () => {
     setIconUrl(window.URL.createObjectURL(files[0]));
     setIcon(files[0]);
   };
+
   const onChangeImageHandler = (e: React.ChangeEvent<HTMLInputElement>, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
     const { files } = e.target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
