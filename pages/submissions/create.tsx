@@ -231,8 +231,8 @@ const Create: NextPage = () => {
               <div className="mb-6">
                 <InputFile id={"icon"} label={"Icon"} isRequired={true} errors={errors.icon} handleChange={handleChangeIcon}>
                   {iconUrl && (
-                    <div className="mb-4">
-                      <ImagePreview imageUrls={[iconUrl]} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />
+                    <div className="flex mb-4">
+                      <ImagePreview imageUrl={iconUrl} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />
                     </div>
                   )}
                 </InputFile>
@@ -249,8 +249,16 @@ const Create: NextPage = () => {
                   handleChange={handleChangeMobileImage}
                 >
                   {mobileImageUrls.length !== 0 && (
-                    <div className="mb-4">
-                      <ImagePreview imageUrls={mobileImageUrls} handleClickDelete={handleClickDeleteMobileImage} maxHeight="max-h-60" />
+                    <div className="flex mb-4">
+                      {mobileImageUrls.map((url, index) => (
+                        <ImagePreview
+                          key={index}
+                          imageUrl={url}
+                          handleClickDelete={handleClickDeleteMobileImage}
+                          maxHeight="max-h-60"
+                          index={index}
+                        />
+                      ))}
                     </div>
                   )}
                 </InputFile>
@@ -265,8 +273,16 @@ const Create: NextPage = () => {
                   handleChange={handleChangePcImage}
                 >
                   {pcImageUrls.length !== 0 && (
-                    <div className="mb-4">
-                      <ImagePreview imageUrls={pcImageUrls} handleClickDelete={handleClickDeletePcImage} maxHeight="max-h-60" />
+                    <div className="flex mb-4">
+                      {pcImageUrls.map((url, index) => (
+                        <ImagePreview
+                          key={index}
+                          imageUrl={url}
+                          handleClickDelete={handleClickDeleteMobileImage}
+                          maxHeight="max-h-60"
+                          index={index}
+                        />
+                      ))}
                     </div>
                   )}
                 </InputFile>
