@@ -212,7 +212,6 @@ const Create: NextPage = () => {
                   handleChange={useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value), [])}
                 />
               </div>
-
               <div className="mb-6">
                 <InputFile
                   id={"icon"}
