@@ -220,7 +220,7 @@ const Create: NextPage = () => {
                   errors={errors.icon}
                   handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e)}
                 >
-                  {iconUrl && <ImagePreview imageUrls={[iconUrl]} handleClickDelete={handleClickDeleteIcon} maxHeight="20" />}
+                  {iconUrl && <ImagePreview imageUrls={[iconUrl]} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />}
                 </InputFile>
               </div>
               <p className="mb-3">
@@ -238,7 +238,7 @@ const Create: NextPage = () => {
                     <ImagePreview
                       imageUrls={mobileImageUrls}
                       handleClickDelete={(index) => handleClickDeleteImage(index, setMobileImages, setMobileImageUrls)}
-                      maxHeight="60"
+                      maxHeight="max-h-60"
                     />
                   )}
                 </InputFile>
@@ -256,7 +256,7 @@ const Create: NextPage = () => {
                     <ImagePreview
                       imageUrls={pcImageUrls}
                       handleClickDelete={(index) => handleClickDeleteImage(index, setPcImages, setPcImageUrls)}
-                      maxHeight="60"
+                      maxHeight="max-h-60"
                     />
                   )}
                 </InputFile>

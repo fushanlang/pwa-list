@@ -13,7 +13,7 @@ const ImagePreview: React.FC<Props> = ({ imageUrls, handleClickDelete, maxHeight
     <div className="flex">
       {imageUrls.map((url, index) => (
         <div className="relative mb-4" key={index}>
-          <img className={`border rounded mx-2 max-h-${maxHeight}`} alt="preview" src={url} />
+          <img className={`border rounded mx-2 ${maxHeight}`} alt="preview" src={url} />
           <button
             className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3"
             onClick={(e) => {
