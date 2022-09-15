@@ -10,6 +10,7 @@ type Props = {
 };
 
 const ImagePreview: React.FC<Props> = memo(({ imageUrls, handleClickDelete, maxHeight }) => {
+  console.log("preview");
   return (
     <div className="flex">
       {imageUrls.map((url, index) => (

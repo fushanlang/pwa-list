@@ -14,8 +14,6 @@ type Props = {
 };
 const Input: React.FC<Props> = memo(({ children, id, label = "", labelMessage = "", isRequired, errors = [], handleChange }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  console.log("file");
-
   return (
     <>
       <Label id={id} label={label} labelMessage={labelMessage} isRequired={isRequired} />
