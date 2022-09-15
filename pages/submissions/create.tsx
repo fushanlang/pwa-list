@@ -234,7 +234,7 @@ const Create: NextPage = () => {
                   maxLength={2000}
                   state={description}
                   errors={errors.description}
-                  handleChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
+                  handleChange={useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value), [])}
                 />
               </div>
 
@@ -243,7 +243,7 @@ const Create: NextPage = () => {
                   id={"icon"}
                   label={"Icon"}
                   isRequired={true}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e)}
+                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e), [])}
                 >
                   {iconUrl && (
                     <div className="flex mb-4">
@@ -267,7 +267,7 @@ const Create: NextPage = () => {
                   id={"mobileImage"}
                   label={"Mobile size (Up to 3 Images)"}
                   isRequired={false}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeMobileImageHandler(e)}
+                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangeMobileImageHandler(e), [])}
                 >
                   <div className="flex overflow-scroll">
                     {mobileImageUrlList.map((mobileImageUrl, index) => (
@@ -284,7 +284,7 @@ const Create: NextPage = () => {
                   labelMessage={"only show PC size display."}
                   isRequired={false}
                   errors={errors.screenshot}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangePcImageHandler(e)}
+                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangePcImageHandler(e), [])}
                 >
                   <div className="flex overflow-scroll">
                     {pcImageUrlList.map((pcImageUrl, index) => (

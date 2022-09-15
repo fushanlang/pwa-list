@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import Label from "./Label";
 import ErrorMessage from "./ErrorMessage";
 
@@ -11,7 +13,7 @@ type Props = {
   errors?: string[];
   handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
-const Textarea: React.FC<Props> = ({ id, label = "", isRequired, maxLength, state, errors = [], handleChange }) => {
+const Textarea: React.FC<Props> = memo(({ id, label = "", isRequired, maxLength, state, errors = [], handleChange }) => {
   return (
     <>
       <Label id={id} label={label} isRequired={isRequired} />
@@ -26,6 +28,6 @@ const Textarea: React.FC<Props> = ({ id, label = "", isRequired, maxLength, stat
       <ErrorMessage errors={errors}></ErrorMessage>
     </>
   );
-};
+});
 
 export default Textarea;
