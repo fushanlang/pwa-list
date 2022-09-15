@@ -163,12 +163,9 @@ const Create: NextPage = () => {
                   isRequired={true}
                   maxLength={28}
                   state={name}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setName(e.target.value);
-                    setErrors({ ...errors, name: [] });
-                  }}
+                  errors={errors.name}
+                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value), [])}
                 />
-                <ErrorMessage errors={errors.name}></ErrorMessage>
               </div>
 
               <div className="mb-6">
@@ -179,12 +176,9 @@ const Create: NextPage = () => {
                   maxLength={120}
                   placeholder="https://pwalist.app"
                   state={link}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setLink(e.target.value);
-                    setErrors({ ...errors, link: [] });
-                  }}
+                  errors={errors.link}
+                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value), [])}
                 />
-                <ErrorMessage errors={errors.link}></ErrorMessage>
               </div>
 
               <div className="mb-6">
@@ -194,12 +188,9 @@ const Create: NextPage = () => {
                   isRequired={true}
                   state={category}
                   list={categories}
-                  handleChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                    setCategory(e.target.value);
-                    setErrors({ ...errors, category: [] });
-                  }}
+                  errors={errors.link}
+                  handleChange={useCallback((e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value), [])}
                 />
-                <ErrorMessage errors={errors.category}></ErrorMessage>
               </div>
 
               <div className="mb-6">
@@ -212,10 +203,7 @@ const Create: NextPage = () => {
                   maxLength={10}
                   placeholder="ToDo"
                   state={tag1}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setTag1(e.target.value);
-                    setErrors({ ...errors, tag1: [] });
-                  }}
+                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag1(e.target.value), [])}
                 />
                 <Input
                   id={"tag"}
@@ -223,10 +211,7 @@ const Create: NextPage = () => {
                   maxLength={10}
                   placeholder="Timer"
                   state={tag2}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setTag2(e.target.value);
-                    setErrors({ ...errors, tag2: [] });
-                  }}
+                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag2(e.target.value), [])}
                 />
                 <Input
                   id={"tag"}
@@ -234,10 +219,7 @@ const Create: NextPage = () => {
                   maxLength={10}
                   placeholder="Management"
                   state={tag3}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setTag3(e.target.value);
-                    setErrors({ ...errors, tag3: [] });
-                  }}
+                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag3(e.target.value), [])}
                 />
                 <ErrorMessage errors={errors.tag1}></ErrorMessage>
                 <ErrorMessage errors={errors.tag2}></ErrorMessage>
@@ -251,12 +233,9 @@ const Create: NextPage = () => {
                   isRequired={true}
                   maxLength={2000}
                   state={description}
-                  handleChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                    setDescription(e.target.value);
-                    setErrors({ ...errors, description: [] });
-                  }}
+                  errors={errors.description}
+                  handleChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
                 />
-                <ErrorMessage errors={errors.description}></ErrorMessage>
               </div>
 
               <div className="mb-6">
@@ -264,10 +243,7 @@ const Create: NextPage = () => {
                   id={"icon"}
                   label={"Icon"}
                   isRequired={true}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    onChangeIconHandler(e);
-                    setErrors({ ...errors, icon: [] });
-                  }}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e)}
                 >
                   {iconUrl && (
                     <div className="flex mb-4">
@@ -280,7 +256,6 @@ const Create: NextPage = () => {
                     </div>
                   )}
                 </InputFile>
-                <ErrorMessage errors={errors.icon}></ErrorMessage>
               </div>
 
               <p className="mb-3">
@@ -292,10 +267,7 @@ const Create: NextPage = () => {
                   id={"mobileImage"}
                   label={"Mobile size (Up to 3 Images)"}
                   isRequired={false}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    onChangeMobileImageHandler(e);
-                    setErrors({ ...errors, screenshot: [] });
-                  }}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeMobileImageHandler(e)}
                 >
                   <div className="flex overflow-scroll">
                     {mobileImageUrlList.map((mobileImageUrl, index) => (
@@ -311,10 +283,8 @@ const Create: NextPage = () => {
                   label={"PC size (Up to 3 Images)"}
                   labelMessage={"only show PC size display."}
                   isRequired={false}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    onChangePcImageHandler(e);
-                    setErrors({ ...errors, screenshot: [] });
-                  }}
+                  errors={errors.screenshot}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangePcImageHandler(e)}
                 >
                   <div className="flex overflow-scroll">
                     {pcImageUrlList.map((pcImageUrl, index) => (
@@ -322,7 +292,6 @@ const Create: NextPage = () => {
                     ))}
                   </div>
                 </InputFile>
-                <ErrorMessage errors={errors.screenshot}></ErrorMessage>
               </div>
             </div>
             <div className="mt-10 mb-12">
