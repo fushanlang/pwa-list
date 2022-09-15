@@ -8,11 +8,10 @@ type Props = {
 };
 
 const ImagePreview: React.FC<Props> = ({ imageUrls, handleClickDelete, maxHeight }) => {
-  console.log("preview");
   return (
     <div className="flex">
       {imageUrls.map((url, index) => (
-        <div className="relative mb-4" key={index}>
+        <div className="relative" key={index}>
           <img className={`border rounded mx-2 ${maxHeight}`} alt="preview" src={url} />
           <button
             className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-3"

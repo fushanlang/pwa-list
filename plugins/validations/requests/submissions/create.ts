@@ -1,5 +1,6 @@
 import validate from "../../validate";
 import setErrors from "../../setErrors";
+import isNotEmpty from "../../types/isNotEmpty";
 import isNotNull from "../../types/isNotNull";
 import isUrl from "../../types/isUrl";
 import isAlphanum from "../../types/isAlphanum";
@@ -20,11 +21,11 @@ const validateCreate = async (
 ): Promise<boolean> => {
   let errors: any = { name: [], link: [], category: [], tag1: [], tag2: [], tag3: [], description: [], icon: [], screenshot: [] };
   // required
-  validate(isNotNull, name, "name", "Please input the app name", errors);
-  validate(isNotNull, link, "link", "Please input the link", errors);
-  validate(isNotNull, category, "category", "Please select the category", errors);
-  validate(isNotNull, tag1, "tag1", "Please input the tag", errors);
-  validate(isNotNull, description, "description", "Please input the  description", errors);
+  validate(isNotEmpty, name, "name", "Please input the app name", errors);
+  validate(isNotEmpty, link, "link", "Please input the link", errors);
+  validate(isNotEmpty, category, "category", "Please select the category", errors);
+  validate(isNotEmpty, tag1, "tag1", "Please input the tag", errors);
+  validate(isNotEmpty, description, "description", "Please input the  description", errors);
   validate(isNotNull, icon, "icon", "Please select the icon", errors);
   // custom
   errors.link.length || validate(isUrl, link, "link", "Please input the correct Link", errors);

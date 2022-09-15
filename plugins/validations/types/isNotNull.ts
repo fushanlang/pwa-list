@@ -1,5 +1,5 @@
 const isNotNull = (input: any): boolean => {
-  if (input === null || input.trim() === "") {
+  if (input === null) {
     return false;
   }
   return true;

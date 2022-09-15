@@ -232,7 +232,11 @@ const Edit: NextPage<Props> = (props) => {
                     errors={errors.icon}
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e)}
                   >
-                    {iconUrl && <ImagePreview imageUrls={[iconUrl]} handleClickDelete={handleClickDeleteIcon} maxHeight="20" />}
+                    {iconUrl && (
+                      <div className="mb-4">
+                        <ImagePreview imageUrls={[iconUrl]} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />
+                      </div>
+                    )}
                   </InputFile>
                   <ErrorMessage errors={errors.icon}></ErrorMessage>
                 </div>
@@ -248,11 +252,13 @@ const Edit: NextPage<Props> = (props) => {
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setMobileImages, setMobileImageUrls)}
                   >
                     {mobileImageUrls.length !== 0 && (
-                      <ImagePreview
-                        imageUrls={mobileImageUrls}
-                        handleClickDelete={(index) => handleClickDeleteImage(index, setMobileImages, setMobileImageUrls)}
-                        maxHeight="60"
-                      />
+                      <div className="mb-4">
+                        <ImagePreview
+                          imageUrls={mobileImageUrls}
+                          handleClickDelete={(index) => handleClickDeleteImage(index, setMobileImages, setMobileImageUrls)}
+                          maxHeight="max-h-60"
+                        />
+                      </div>
                     )}
                   </InputFile>
                 </div>
@@ -266,11 +272,13 @@ const Edit: NextPage<Props> = (props) => {
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setPcImages, setPcImageUrls)}
                   >
                     {pcImageUrls.length !== 0 && (
-                      <ImagePreview
-                        imageUrls={pcImageUrls}
-                        handleClickDelete={(index) => handleClickDeleteImage(index, setPcImages, setPcImageUrls)}
-                        maxHeight="60"
-                      />
+                      <div className="mb-4">
+                        <ImagePreview
+                          imageUrls={pcImageUrls}
+                          handleClickDelete={(index) => handleClickDeleteImage(index, setPcImages, setPcImageUrls)}
+                          maxHeight="max-h-60"
+                        />
+                      </div>
                     )}
                   </InputFile>
                 </div>
