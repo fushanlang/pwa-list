@@ -1,14 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { NextPage } from "next";
-import Router from "next/router";
 import "firebase/firestore";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 
 import { selectUser } from "../../../store/modules/user";
 import categories from "../../../consts/categories";
-import editValidate from "../../../plugins/submissions/editValidate";
+import validateEdit from "../../../plugins/validations/requests/submissions/edit";
 import firebase from "../../../plugins/firebase";
 import uploadToStorage from "../../../plugins/image/uploadToStorage";
 import Layout from "../../../components/Layout/Layout";
@@ -41,20 +38,20 @@ const Edit: NextPage<Props> = (props) => {
   const [icon, setIcon] = useState<File>(null);
   const [iconUrl, setIconUrl] = useState<string>(app.icon);
   const [mobileImages, setMobileImages] = useState<File[]>([]);
-  const [mobileImageUrlList, setMobileImageUrlList] = useState<string[]>([]);
+  const [mobileImageUrls, setMobileImageUrls] = useState<string[]>([]);
   const [pcImages, setPcImages] = useState<File[]>([]);
-  const [pcImageUrlList, setPcImageUrlList] = useState<string[]>([]);
+  const [pcImageUrls, setPcImageUrls] = useState<string[]>([]);
 
   useEffect(() => {
     app.tag1 && setTag1(app.tag1);
     app.tag2 && setTag2(app.tag2);
     app.tag3 && setTag3(app.tag3);
-    app.imageMobile1 && setMobileImageUrlList((prev) => [...prev, app.imageMobile1]);
-    app.imageMobile2 && setMobileImageUrlList((prev) => [...prev, app.imageMobile2]);
-    app.imageMobile3 && setMobileImageUrlList((prev) => [...prev, app.imageMobile3]);
-    app.imagePc1 && setPcImageUrlList((prev) => [...prev, app.imagePc1]);
-    app.imagePc2 && setPcImageUrlList((prev) => [...prev, app.imagePc2]);
-    app.imagePc3 && setPcImageUrlList((prev) => [...prev, app.imagePc3]);
+    app.imageMobile1 && setMobileImageUrls((prev) => [...prev, app.imageMobile1]);
+    app.imageMobile2 && setMobileImageUrls((prev) => [...prev, app.imageMobile2]);
+    app.imageMobile3 && setMobileImageUrls((prev) => [...prev, app.imageMobile3]);
+    app.imagePc1 && setPcImageUrls((prev) => [...prev, app.imagePc1]);
+    app.imagePc2 && setPcImageUrls((prev) => [...prev, app.imagePc2]);
+    app.imagePc3 && setPcImageUrls((prev) => [...prev, app.imagePc3]);
   }, []);
 
   const [errors, setErrors] = useState<any>({
@@ -71,69 +68,64 @@ const Edit: NextPage<Props> = (props) => {
 
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
-  const MAX_PC_IMAGE_NUM = 3;
-  const MAX_MOBILE_IMAGE_NUM = 3;
+  const MAX_IMAGE_NUM = 3;
 
-  const onChangeIconHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
+  const setImageInfo = (target: HTMLInputElement, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
+    const { files } = target;
+    const filesArr = Object.entries(files).map(([key, value]) => value);
+    filesArr.splice(MAX_IMAGE_NUM);
+    filesArr.map((value: File) => {
+      setImages((images: File[]) => [...images, value]);
+      setUrls((urls: string[]) => [...urls, window.URL.createObjectURL(value)]);
+    });
+  };
+  const deleteImageInfo = (index: number, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
+    setImages((prev: File[]) => prev.filter((_, i) => i !== index));
+    setUrls((prev: string[]) => prev.filter((_, i) => i !== index));
+  };
+  const setIconInfo = (target) => {
+    const { files } = target;
     setIconUrl(window.URL.createObjectURL(files[0]));
     setIcon(files[0]);
   };
-
-  const onChangeMobileImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    const filesArr = Object.entries(files).map(([key, value]) => value);
-    filesArr.splice(MAX_MOBILE_IMAGE_NUM);
-    filesArr.map((value) => {
-      setMobileImageUrlList((urls) => [...urls, window.URL.createObjectURL(value)]);
-      setMobileImages((images) => [...images, value]);
-    });
-  };
-
-  const onChangePcImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    const filesArr = Object.entries(files).map(([key, value]) => value);
-    filesArr.splice(MAX_PC_IMAGE_NUM);
-    filesArr.map((value) => {
-      setPcImageUrlList((urls) => [...urls, window.URL.createObjectURL(value)]);
-      setPcImages((images) => [...images, value]);
-    });
-  };
-
-  const handleDeleteIcon = () => {
+  const deleteIconInfo = () => {
     setIcon(null);
-    setIconUrl(null);
+    setIconUrl("");
   };
 
-  const handleDeletePcImage = useCallback((index: number) => {
-    setPcImageUrlList((prev) => prev.filter((_, i) => i !== index));
-    setPcImages((prev) => prev.filter((_, i) => i !== index));
+  const handleChangeLink = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value), []);
+  const handleChangeCategory = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value), []);
+  const handleChangeTag1 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag1(e.target.value), []);
+  const handleChangeTag2 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag2(e.target.value), []);
+  const handleChangeTag3 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag3(e.target.value), []);
+  const handleChangeDescription = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value), []);
+  const handleChangeIcon = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setIconInfo(e.target), []);
+  const handleChangeMobileImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setImageInfo(e.target, setMobileImages, setMobileImageUrls);
   }, []);
-
-  const handleDeleteMobileImage = useCallback((index: number) => {
-    setMobileImageUrlList((prev) => prev.filter((_, i) => i !== index));
-    setMobileImages((prev) => prev.filter((_, i) => i !== index));
+  const handleChangePcImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setImageInfo(e.target, setPcImages, setPcImageUrls);
   }, []);
+  const handleClickDeleteIcon = useCallback(() => deleteIconInfo(), []);
+  const handleClickDeleteMobileImage = useCallback((index: number) => deleteImageInfo(index, setMobileImages, setMobileImageUrls), []);
+  const handleClickDeletePcImage = useCallback((index: number) => deleteImageInfo(index, setPcImages, setPcImageUrls), []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (!(await editValidate(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrlList, mobileImageUrlList))) {
+    if (!validateEdit(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrls, mobileImageUrls)) {
       setIsSubmitting(false);
       return;
     }
     setIsModalOpen(true);
     const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
-    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
-    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
-    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-|\./g, "") : null;
     let storageIconUrl = iconUrl;
-    let storageMobile1Url = mobileImageUrlList[0] ? mobileImageUrlList[0] : null;
-    let storageMobile2Url = mobileImageUrlList[1] ? mobileImageUrlList[1] : null;
-    let storageMobile3Url = mobileImageUrlList[2] ? mobileImageUrlList[2] : null;
-    let storagePc1Url = pcImageUrlList[0] ? pcImageUrlList[0] : null;
-    let storagePc2Url = pcImageUrlList[1] ? pcImageUrlList[1] : null;
-    let storagePc3Url = pcImageUrlList[2] ? pcImageUrlList[2] : null;
+    let storageMobile1Url = mobileImageUrls[0] ? mobileImageUrls[0] : null;
+    let storageMobile2Url = mobileImageUrls[1] ? mobileImageUrls[1] : null;
+    let storageMobile3Url = mobileImageUrls[2] ? mobileImageUrls[2] : null;
+    let storagePc1Url = pcImageUrls[0] ? pcImageUrls[0] : null;
+    let storagePc2Url = pcImageUrls[1] ? pcImageUrls[1] : null;
+    let storagePc3Url = pcImageUrls[2] ? pcImageUrls[2] : null;
     if (icon) storageIconUrl = await uploadToStorage(iconsFolder, nameLowercase, icon, "icon");
     if (mobileImages[0]) storageMobile1Url = await uploadToStorage(imagesFolder, nameLowercase, mobileImages[0], "mobile1");
     if (mobileImages[1]) storageMobile2Url = await uploadToStorage(imagesFolder, nameLowercase, mobileImages[1], "mobile2");
@@ -142,28 +134,31 @@ const Edit: NextPage<Props> = (props) => {
     if (pcImages[1]) storagePc2Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2");
     if (pcImages[2]) storagePc3Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3");
 
-    await db.collection("applications").doc(app.id).update({
-      nameLowercase: nameLowercase,
-      link: link,
-      category: category,
-      tag1: tag1,
-      tag2: tag2,
-      tag3: tag3,
-      tag1Lowercase: tag1Lowercase,
-      tag2Lowercase: tag2Lowercase,
-      tag3Lowercase: tag3Lowercase,
-      description: description,
-      icon: storageIconUrl,
-      imageMobile1: storageMobile1Url,
-      imageMobile2: storageMobile2Url,
-      imageMobile3: storageMobile3Url,
-      imagePc1: storagePc1Url,
-      imagePc2: storagePc2Url,
-      imagePc3: storagePc3Url,
-      isPublic: false,
-      isRejected: false,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    await db
+      .collection("applications")
+      .doc(app.id)
+      .update({
+        nameLowercase: nameLowercase,
+        link: link,
+        category: category,
+        tag1: tag1,
+        tag2: tag2,
+        tag3: tag3,
+        tag1Lowercase: tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null,
+        tag2Lowercase: tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null,
+        tag3Lowercase: tag3 ? tag3.toLowerCase().replace(/\s|-|\./g, "") : null,
+        description: description,
+        icon: storageIconUrl,
+        imageMobile1: storageMobile1Url,
+        imageMobile2: storageMobile2Url,
+        imageMobile3: storageMobile3Url,
+        imagePc1: storagePc1Url,
+        imagePc2: storagePc2Url,
+        imagePc3: storagePc3Url,
+        isPublic: false,
+        isRejected: false,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
     setIsSubmitting(false);
   };
   return (
@@ -179,72 +174,40 @@ const Edit: NextPage<Props> = (props) => {
                 </div>
                 <div className="mb-6">
                   <Input
-                    id={"link"}
-                    label={"Link"}
+                    id="link"
+                    label="Link"
                     isRequired={true}
                     maxLength={120}
                     placeholder="https://pwalist.app"
                     state={link}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setLink(e.target.value);
-                      setErrors({ ...errors, link: [] });
-                    }}
+                    handleChange={handleChangeLink}
                   />
-                  <ErrorMessage errors={errors.link}></ErrorMessage>
                 </div>
-
                 <div className="mb-6">
                   <Select
-                    id={"category"}
-                    label={"Category"}
+                    id="category"
+                    label="Category"
                     isRequired={true}
                     state={category}
                     list={categories}
-                    handleChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                      setCategory(e.target.value);
-                      setErrors({ ...errors, category: [] });
-                    }}
+                    errors={errors.category}
+                    handleChange={handleChangeCategory}
                   />
-                  <ErrorMessage errors={errors.category}></ErrorMessage>
                 </div>
-
                 <div className="mb-6">
                   <Input
-                    id={"tag"}
-                    label={"Tags"}
-                    labelMessage={"1 or more required"}
+                    id="tag"
+                    label="Tags"
+                    labelMessage="1 or more required"
                     isRequired={true}
-                    inputClass={"w-28 mr-4"}
+                    inputClass="w-28 mr-4"
                     maxLength={10}
                     placeholder="ToDo"
                     state={tag1}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setTag1(e.target.value);
-                      setErrors({ ...errors, tag1: [] });
-                    }}
+                    handleChange={handleChangeTag1}
                   />
-                  <Input
-                    id={"tag"}
-                    inputClass={"w-28 mr-4"}
-                    maxLength={10}
-                    placeholder="Timer"
-                    state={tag2}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setTag2(e.target.value);
-                      setErrors({ ...errors, tag2: [] });
-                    }}
-                  />
-                  <Input
-                    id={"tag"}
-                    inputClass={"w-28"}
-                    maxLength={10}
-                    placeholder="Management"
-                    state={tag3}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setTag3(e.target.value);
-                      setErrors({ ...errors, tag3: [] });
-                    }}
-                  />
+                  <Input id="tag" inputClass="w-28 mr-4" maxLength={10} placeholder="Timer" state={tag2} handleChange={handleChangeTag2} />
+                  <Input id="tag" inputClass="w-28" maxLength={10} placeholder="Management" state={tag3} handleChange={handleChangeTag3} />
                   <ErrorMessage errors={errors.tag1}></ErrorMessage>
                   <ErrorMessage errors={errors.tag2}></ErrorMessage>
                   <ErrorMessage errors={errors.tag3}></ErrorMessage>
@@ -252,83 +215,73 @@ const Edit: NextPage<Props> = (props) => {
 
                 <div className="mb-6">
                   <Textarea
-                    id={"about"}
-                    label={"About this app"}
+                    id="about"
+                    label="About this app"
                     isRequired={true}
                     maxLength={2000}
                     state={description}
-                    handleChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                      setDescription(e.target.value);
-                      setErrors({ ...errors, description: [] });
-                    }}
+                    errors={errors.description}
+                    handleChange={handleChangeDescription}
                   />
-                  <ErrorMessage errors={errors.description}></ErrorMessage>
                 </div>
-
                 <div className="mb-6">
-                  <InputFile
-                    id={"icon"}
-                    label={"Icon"}
-                    isRequired={true}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      onChangeIconHandler(e);
-                      setErrors({ ...errors, icon: [] });
-                    }}
-                  >
+                  <InputFile id="icon" label="Icon" isRequired={true} errors={errors.icon} handleChange={handleChangeIcon}>
                     {iconUrl && (
                       <div className="flex mb-4">
-                        <div className="relative">
-                          <img className="border rounded max-h-20" alt="icon" src={iconUrl} />
-                          <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1" onClick={handleDeleteIcon}>
-                            <FontAwesomeIcon icon={faMinusCircle} size="lg" />
-                          </button>
-                        </div>
+                        <ImagePreview imageUrl={iconUrl} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />
                       </div>
                     )}
                   </InputFile>
-                  <ErrorMessage errors={errors.icon}></ErrorMessage>
                 </div>
-
                 <p className="mb-3">
                   <span className="font-bold text-base">Screenshots</span>
                   <span className="ml-2">Either mobile or PC screenshot is required.</span>
                 </p>
                 <div className="mb-6">
                   <InputFile
-                    id={"mobileImage"}
-                    label={"Mobile size (Up to 3 Images)"}
+                    id="mobileImage"
+                    label="Mobile size (Up to 3 Images)"
                     isRequired={false}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      onChangeMobileImageHandler(e);
-                      setErrors({ ...errors, screenshot: [] });
-                    }}
+                    handleChange={handleChangeMobileImage}
                   >
-                    <div className="flex overflow-scroll">
-                      {mobileImageUrlList.map((mobileImageUrl, index) => (
-                        <ImagePreview key={index} index={index} imageUrl={mobileImageUrl} handleDeleteImage={handleDeleteMobileImage} />
-                      ))}
-                    </div>
+                    {mobileImageUrls.length !== 0 && (
+                      <div className="flex mb-4">
+                        {mobileImageUrls.map((url, index) => (
+                          <ImagePreview
+                            key={index}
+                            imageUrl={url}
+                            handleClickDelete={handleClickDeleteMobileImage}
+                            maxHeight="max-h-60"
+                            index={index}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </InputFile>
                 </div>
-
                 <div>
                   <InputFile
-                    id={"pcImage"}
-                    label={"PC size (Up to 3 Images)"}
-                    labelMessage={"only show PC size display."}
+                    id="pcImage"
+                    label="PC size (Up to 3 Images)"
+                    labelMessage="only show PC size display."
                     isRequired={false}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      onChangePcImageHandler(e);
-                      setErrors({ ...errors, screenshot: [] });
-                    }}
+                    errors={errors.screenshot}
+                    handleChange={handleChangePcImage}
                   >
-                    <div className="flex overflow-scroll">
-                      {pcImageUrlList.map((pcImageUrl, index) => (
-                        <ImagePreview key={index} index={index} imageUrl={pcImageUrl} handleDeleteImage={handleDeletePcImage} />
-                      ))}
-                    </div>
+                    {pcImageUrls.length !== 0 && (
+                      <div className="flex mb-4">
+                        {pcImageUrls.map((url, index) => (
+                          <ImagePreview
+                            key={index}
+                            imageUrl={url}
+                            handleClickDelete={handleClickDeletePcImage}
+                            maxHeight="max-h-60"
+                            index={index}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </InputFile>
-                  <ErrorMessage errors={errors.screenshot}></ErrorMessage>
                 </div>
               </div>
               <div className="mt-10 mb-12">

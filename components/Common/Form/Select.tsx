@@ -1,4 +1,7 @@
+import { memo } from "react";
+
 import Label from "./Label";
+import ErrorMessage from "./ErrorMessage";
 
 type Props = {
   id: string;
@@ -6,6 +9,7 @@ type Props = {
   labelMessage?: string;
   isRequired: boolean;
   state: string;
+  errors?: string[];
   list: {
     label: string;
     value: string;
@@ -13,7 +17,7 @@ type Props = {
   handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
-const Select: React.FC<Props> = ({ id, label, labelMessage, isRequired, state, list, handleChange }) => {
+const Select: React.FC<Props> = memo(({ id, label, labelMessage, isRequired, state, errors = [], list, handleChange }) => {
   return (
     <>
       <Label id={id} label={label} labelMessage={labelMessage} isRequired={isRequired} />
@@ -30,8 +34,9 @@ const Select: React.FC<Props> = ({ id, label, labelMessage, isRequired, state, l
           </option>
         ))}
       </select>
+      <ErrorMessage errors={errors}></ErrorMessage>
     </>
   );
-};
+});
 
 export default Select;
