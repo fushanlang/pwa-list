@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 import { selectUser } from "../../../store/modules/user";
 import categories from "../../../consts/categories";
-import editValidate from "../../../plugins/submissions/editValidate";
+import validateEdit from "../../../plugins/validations/requests/submissions/edit";
 import firebase from "../../../plugins/firebase";
 import uploadToStorage from "../../../plugins/image/uploadToStorage";
 import Layout from "../../../components/Layout/Layout";
@@ -118,7 +118,7 @@ const Edit: NextPage<Props> = (props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (!(await editValidate(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrlList, mobileImageUrlList))) {
+    if (!(await validateEdit(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrlList, mobileImageUrlList))) {
       setIsSubmitting(false);
       return;
     }

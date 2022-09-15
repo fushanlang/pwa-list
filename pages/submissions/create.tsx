@@ -16,7 +16,7 @@ import InputFile from "../../components/Common/Form/InputFile";
 import Select from "../../components/Common/Form/Select";
 import Textarea from "../../components/Common/Form/Textarea";
 import ErrorMessage from "../../components/Common/Form/ErrorMessage";
-import createValidate from "../../plugins/submissions/createValidate";
+import validateCreate from "../../plugins/validations/requests/submissions/create";
 import uploadToStorage from "../../plugins/image/uploadToStorage";
 import firebase from "../../plugins/firebase";
 
@@ -101,7 +101,7 @@ const Create: NextPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (!(await createValidate(setErrors, name, link, category, tag1, tag2, tag3, description, icon, pcImages, mobileImages))) {
+    if (!(await validateCreate(setErrors, name, link, category, tag1, tag2, tag3, description, icon, pcImages, mobileImages))) {
       setIsSubmitting(false);
       return;
     }

@@ -1,7 +1,7 @@
-import validateNotNull from "../validation/validateNotNull";
-import validateUrl from "../validation/validateUrl";
-import validateAlphanum from "../validation/validateAlphanum";
-const editValidate = (
+import isNotNull from "../../isNotNull";
+import isUrl from "../../isUrl";
+import isAlphanum from "../../isAlphanum";
+const validateEdit = (
   setErrors: any,
   link: string,
   category: string,
@@ -23,16 +23,16 @@ const editValidate = (
   let iconErrors = [];
   let screenshotErrors = [];
   // required
-  if (!validateNotNull(link)) linkErrors.push("The Link field is required");
-  if (!validateNotNull(category)) categoryErrors.push("The Category field is required");
-  if (!validateNotNull(tag1)) tag1Errors.push("The Tag field is required");
-  if (!validateNotNull(description)) descriptionErrors.push("The About this app field is required");
-  if (!validateNotNull(iconUrl)) iconErrors.push("The Icon is required");
+  if (!isNotNull(link)) linkErrors.push("The Link field is required");
+  if (!isNotNull(category)) categoryErrors.push("The Category field is required");
+  if (!isNotNull(tag1)) tag1Errors.push("The Tag field is required");
+  if (!isNotNull(description)) descriptionErrors.push("The About this app field is required");
+  if (!isNotNull(iconUrl)) iconErrors.push("The Icon is required");
   // custom
-  if (!linkErrors.length && !validateUrl(link)) linkErrors.push("Please enter the correct Link");
-  if (!validateAlphanum(tag1)) tag1Errors.push("Please enter the tag1 in single-byte alphanumeric characters");
-  if (!validateAlphanum(tag2)) tag2Errors.push("Please enter the tag2 in single-byte alphanumeric characters");
-  if (!validateAlphanum(tag3)) tag3Errors.push("Please enter the tag3 in single-byte alphanumeric characters");
+  if (!linkErrors.length && !isUrl(link)) linkErrors.push("Please enter the correct Link");
+  if (!isAlphanum(tag1)) tag1Errors.push("Please enter the tag1 in single-byte alphanumeric characters");
+  if (!isAlphanum(tag2)) tag2Errors.push("Please enter the tag2 in single-byte alphanumeric characters");
+  if (!isAlphanum(tag3)) tag3Errors.push("Please enter the tag3 in single-byte alphanumeric characters");
   if (pcImageUrlList[0] === undefined && mobileImageUrlList[0] === undefined)
     screenshotErrors.push("Please enter either mobile size or PC size screenshot");
 
@@ -63,4 +63,4 @@ const editValidate = (
   return true;
 };
 
-export default editValidate;
+export default validateEdit;
