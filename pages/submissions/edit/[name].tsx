@@ -70,13 +70,13 @@ const Edit: NextPage<Props> = (props) => {
   const iconsFolder = "application-icons";
   const MAX_IMAGE_NUM = 3;
 
-  const onChangeIconHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeIcon = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     setIconUrl(window.URL.createObjectURL(files[0]));
     setIcon(files[0]);
   };
 
-  const onChangeImageHandler = (e: React.ChangeEvent<HTMLInputElement>, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
     const { files } = e.target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
     filesArr.splice(MAX_IMAGE_NUM);
@@ -95,6 +95,13 @@ const Edit: NextPage<Props> = (props) => {
     setUrls((prev: string[]) => prev.filter((_, i) => i !== index));
     setImages((prev: File[]) => prev.filter((_, i) => i !== index));
   };
+
+  const handleChangeLink = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value), []);
+  const handleChangeCategory = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value), []);
+  const handleChangeTag1 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag1(e.target.value), []);
+  const handleChangeTag2 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag2(e.target.value), []);
+  const handleChangeTag3 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag3(e.target.value), []);
+  const handleChangeDescription = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value), []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -166,7 +173,7 @@ const Edit: NextPage<Props> = (props) => {
                     maxLength={120}
                     placeholder="https://pwalist.app"
                     state={link}
-                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value), [])}
+                    handleChange={handleChangeLink}
                   />
                 </div>
                 <div className="mb-6">
@@ -177,7 +184,7 @@ const Edit: NextPage<Props> = (props) => {
                     state={category}
                     list={categories}
                     errors={errors.category}
-                    handleChange={useCallback((e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value), [])}
+                    handleChange={handleChangeCategory}
                   />
                 </div>
                 <div className="mb-6">
@@ -190,7 +197,7 @@ const Edit: NextPage<Props> = (props) => {
                     maxLength={10}
                     placeholder="ToDo"
                     state={tag1}
-                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag1(e.target.value), [])}
+                    handleChange={handleChangeTag1}
                   />
                   <Input
                     id={"tag"}
@@ -198,7 +205,7 @@ const Edit: NextPage<Props> = (props) => {
                     maxLength={10}
                     placeholder="Timer"
                     state={tag2}
-                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag2(e.target.value), [])}
+                    handleChange={handleChangeTag2}
                   />
                   <Input
                     id={"tag"}
@@ -206,7 +213,7 @@ const Edit: NextPage<Props> = (props) => {
                     maxLength={10}
                     placeholder="Management"
                     state={tag3}
-                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag3(e.target.value), [])}
+                    handleChange={handleChangeTag3}
                   />
                   <ErrorMessage errors={errors.tag1}></ErrorMessage>
                   <ErrorMessage errors={errors.tag2}></ErrorMessage>
@@ -221,7 +228,7 @@ const Edit: NextPage<Props> = (props) => {
                     maxLength={2000}
                     state={description}
                     errors={errors.description}
-                    handleChange={useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value), [])}
+                    handleChange={handleChangeDescription}
                   />
                 </div>
                 <div className="mb-6">
@@ -230,7 +237,7 @@ const Edit: NextPage<Props> = (props) => {
                     label={"Icon"}
                     isRequired={true}
                     errors={errors.icon}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e)}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeIcon(e)}
                   >
                     {iconUrl && (
                       <div className="mb-4">
@@ -249,7 +256,7 @@ const Edit: NextPage<Props> = (props) => {
                     id={"mobileImage"}
                     label={"Mobile size (Up to 3 Images)"}
                     isRequired={false}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setMobileImages, setMobileImageUrls)}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeImage(e, setMobileImages, setMobileImageUrls)}
                   >
                     {mobileImageUrls.length !== 0 && (
                       <div className="mb-4">
@@ -269,7 +276,7 @@ const Edit: NextPage<Props> = (props) => {
                     labelMessage={"only show PC size display."}
                     isRequired={false}
                     errors={errors.screenshot}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setPcImages, setPcImageUrls)}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeImage(e, setPcImages, setPcImageUrls)}
                   >
                     {pcImageUrls.length !== 0 && (
                       <div className="mb-4">
