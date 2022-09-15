@@ -1,9 +1,9 @@
-const validate = (validateMethod: any, input: any, property: string, message: string, tmpErrors: any) => {
+const validate = (validateMethod: any, input: any, property: string, message: string, errors: any): void => {
   if (!validateMethod(input)) {
-    tmpErrors[property].push(message);
-    return true;
+    errors[property].push(message);
+    return;
   } else {
-    return false;
+    return;
   }
 };
 

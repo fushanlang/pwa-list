@@ -1,10 +1,12 @@
-import isNotNull from "../../isNotNull";
-import isUrl from "../../isUrl";
-import isAlphanum from "../../isAlphanum";
-import isNotDuplicate from "../../isNotDuplicate";
+import validate from "../../validate";
+import setErrors from "../../setErrors";
+import isNotNull from "../../types/isNotNull";
+import isUrl from "../../types/isUrl";
+import isAlphanum from "../../types/isAlphanum";
+import isNotDuplicate from "../../types/isNotDuplicate";
 
 const validateCreate = async (
-  setErrors: any,
+  set: React.Dispatch<any>,
   name: string,
   link: string,
   category: string,
@@ -16,59 +18,27 @@ const validateCreate = async (
   pcImages: File[],
   mobileImages: File[]
 ): Promise<boolean> => {
-  let nameErrors = [];
-  let linkErrors = [];
-  let categoryErrors = [];
-  let tag1Errors = [];
-  let tag2Errors = [];
-  let tag3Errors = [];
-  let descriptionErrors = [];
-  let iconErrors = [];
-  let screenshotErrors = [];
+  let errors: any = { name: [], link: [], category: [], tag1: [], tag2: [], tag3: [], description: [], icon: [], screenshot: [] };
   // required
-  if (!isNotNull(name)) nameErrors.push("The Name field is required");
-  if (!isNotNull(link)) linkErrors.push("The Link field is required");
-  if (!isNotNull(category)) categoryErrors.push("The Category field is required");
-  if (!isNotNull(tag1)) tag1Errors.push("The Tag field is required");
-  if (!isNotNull(description)) descriptionErrors.push("The About this app field is required");
-  if (!isNotNull(icon)) iconErrors.push("The Icon is required");
+  validate(isNotNull, name, "name", "Please input the app name", errors);
+  validate(isNotNull, link, "link", "Please input the link", errors);
+  validate(isNotNull, category, "category", "Please select the category", errors);
+  validate(isNotNull, tag1, "tag1", "Please input the tag", errors);
+  validate(isNotNull, description, "description", "Please input the  description", errors);
+  validate(isNotNull, icon, "icon", "Please select the icon", errors);
   // custom
-  if (!linkErrors.length && !isUrl(link)) linkErrors.push("Please enter the correct Link");
-  if (!isAlphanum(name)) nameErrors.push("Please enter the name in single-byte alphanumeric characters");
-  if (!isAlphanum(tag1)) tag1Errors.push("Please enter the tag1 in single-byte alphanumeric characters");
-  if (!isAlphanum(tag2)) tag2Errors.push("Please enter the tag2 in single-byte alphanumeric characters");
-  if (!isAlphanum(tag3)) tag3Errors.push("Please enter the tag3 in single-byte alphanumeric characters");
+  errors.link.length || validate(isUrl, link, "link", "Please input the correct Link", errors);
+  validate(isAlphanum, name, "name", "Please input the app name in single-byte alphanumeric character", errors);
+  validate(isAlphanum, tag1, "tag1", "Please input the tag1 in single-byte alphanumeric character", errors);
+  validate(isAlphanum, tag2, "tag2", "Please input the tag2 in single-byte alphanumeric character", errors);
+  validate(isAlphanum, tag3, "tag3", "Please input the tag3 in single-byte alphanumeric character", errors);
   if (pcImages[0] === undefined && mobileImages[0] === undefined) {
-    screenshotErrors.push("Please enter either mobile size or PC size screenshot");
+    errors.screenshot.push("Please select mobile size or PC size screenshot");
   }
-  if (!nameErrors.length && !(await isNotDuplicate(name, "nameLowercase"))) {
-    nameErrors.push("The app name has already been registered");
+  if (!errors.name.length && !(await isNotDuplicate(name, "nameLowercase"))) {
+    errors.name.push("The app name has already been registered");
   }
-  if (
-    nameErrors.length ||
-    linkErrors.length ||
-    categoryErrors.length ||
-    tag1Errors.length ||
-    tag2Errors.length ||
-    tag3Errors.length ||
-    descriptionErrors.length ||
-    iconErrors.length ||
-    screenshotErrors.length
-  ) {
-    setErrors({
-      name: nameErrors,
-      link: linkErrors,
-      category: categoryErrors,
-      tag1: tag1Errors,
-      tag2: tag2Errors,
-      tag3: tag3Errors,
-      description: descriptionErrors,
-      icon: iconErrors,
-      screenshot: screenshotErrors,
-    });
-    return false;
-  }
-  return true;
+  return setErrors(set, errors);
 };
 
 export default validateCreate;
