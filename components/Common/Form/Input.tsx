@@ -28,7 +28,6 @@ const Input: React.FC<Props> = memo(
     errors = [],
     handleChange,
   }) => {
-    console.log("input");
     return (
       <>
         <Label id={id} label={label} labelMessage={labelMessage} isRequired={isRequired} />

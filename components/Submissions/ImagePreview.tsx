@@ -11,7 +11,6 @@ type Props = {
 };
 
 const ImagePreview: React.FC<Props> = memo(({ imageUrl, handleClickDelete, maxHeight, index = 0 }) => {
-  console.log("preview");
   return (
     <div className="relative">
       <img className={`border rounded mx-2 ${maxHeight}`} alt="preview" src={imageUrl} />

@@ -23,7 +23,6 @@ const validateEdit = (
   validate(isNotEmpty, tag1, "tag1", "Please input the tag", errors);
   validate(isNotEmpty, description, "description", "Please input the  description", errors);
   validate(isNotEmpty, iconUrl, "icon", "Please select the icon", errors);
-  console.log(iconUrl);
   // custom
   errors.link.length || validate(isUrl, link, "link", "Please input the correct Link", errors);
   validate(isAlphanum, tag1, "tag1", "Please input the tag1 in single-byte alphanumeric character", errors);
