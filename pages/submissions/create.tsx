@@ -55,29 +55,27 @@ const Create: NextPage = () => {
   const iconsFolder = "application-icons";
   const MAX_IMAGE_NUM = 3;
 
-  const handleChangeIcon = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
+  const setImageInfo = (target, setImages, setUrls) => {
+    const { files } = target;
+    const filesArr = Object.entries(files).map(([key, value]) => value);
+    filesArr.splice(MAX_IMAGE_NUM);
+    filesArr.map((value: File) => {
+      setImages((images: File[]) => [...images, value]);
+      setUrls((urls: string[]) => [...urls, window.URL.createObjectURL(value)]);
+    });
+  };
+  const deleteImageInfo = (index, setImages, setUrls) => {
+    setImages((prev: File[]) => prev.filter((_, i) => i !== index));
+    setUrls((prev: string[]) => prev.filter((_, i) => i !== index));
+  };
+  const setIconInfo = (target) => {
+    const { files } = target;
     setIconUrl(window.URL.createObjectURL(files[0]));
     setIcon(files[0]);
   };
-  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
-    const { files } = e.target;
-    const filesArr = Object.entries(files).map(([key, value]) => value);
-    filesArr.splice(MAX_IMAGE_NUM);
-    filesArr.map((value) => {
-      setUrls((urls: string[]) => [...urls, window.URL.createObjectURL(value)]);
-      setImages((images: File[]) => [...images, value]);
-    });
-  };
-
-  const handleClickDeleteIcon = () => {
+  const deleteIconInfo = () => {
     setIcon(null);
     setIconUrl("");
-  };
-
-  const handleClickDeleteImage = (index: number, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
-    setUrls((prev: string[]) => prev.filter((_, i) => i !== index));
-    setImages((prev: File[]) => prev.filter((_, i) => i !== index));
   };
 
   const handleChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value), []);
@@ -87,6 +85,16 @@ const Create: NextPage = () => {
   const handleChangeTag2 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag2(e.target.value), []);
   const handleChangeTag3 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag3(e.target.value), []);
   const handleChangeDescription = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value), []);
+  const handleChangeIcon = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setIconInfo(e.target), []);
+  const handleChangeMobileImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setImageInfo(e.target, setMobileImages, setMobileImageUrls);
+  }, []);
+  const handleChangePcImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setImageInfo(e.target, setPcImages, setPcImageUrls);
+  }, []);
+  const handleClickDeleteIcon = useCallback(() => deleteIconInfo(), []);
+  const handleClickDeleteMobileImage = useCallback((index: number) => deleteImageInfo(index, setMobileImages, setMobileImageUrls), []);
+  const handleClickDeletePcImage = useCallback((index: number) => deleteImageInfo(index, setPcImages, setPcImageUrls), []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -221,13 +229,7 @@ const Create: NextPage = () => {
                 />
               </div>
               <div className="mb-6">
-                <InputFile
-                  id={"icon"}
-                  label={"Icon"}
-                  isRequired={true}
-                  errors={errors.icon}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeIcon(e)}
-                >
+                <InputFile id={"icon"} label={"Icon"} isRequired={true} errors={errors.icon} handleChange={handleChangeIcon}>
                   {iconUrl && (
                     <div className="mb-4">
                       <ImagePreview imageUrls={[iconUrl]} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />
@@ -244,15 +246,11 @@ const Create: NextPage = () => {
                   id={"mobileImage"}
                   label={"Mobile size (Up to 3 Images)"}
                   isRequired={false}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeImage(e, setMobileImages, setMobileImageUrls)}
+                  handleChange={handleChangeMobileImage}
                 >
                   {mobileImageUrls.length !== 0 && (
                     <div className="mb-4">
-                      <ImagePreview
-                        imageUrls={mobileImageUrls}
-                        handleClickDelete={(index) => handleClickDeleteImage(index, setMobileImages, setMobileImageUrls)}
-                        maxHeight="max-h-60"
-                      />
+                      <ImagePreview imageUrls={mobileImageUrls} handleClickDelete={handleClickDeleteMobileImage} maxHeight="max-h-60" />
                     </div>
                   )}
                 </InputFile>
@@ -264,15 +262,11 @@ const Create: NextPage = () => {
                   labelMessage={"only show PC size display."}
                   isRequired={false}
                   errors={errors.screenshot}
-                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeImage(e, setPcImages, setPcImageUrls)}
+                  handleChange={handleChangePcImage}
                 >
                   {pcImageUrls.length !== 0 && (
                     <div className="mb-4">
-                      <ImagePreview
-                        imageUrls={pcImageUrls}
-                        handleClickDelete={(index) => handleClickDeleteImage(index, setPcImages, setPcImageUrls)}
-                        maxHeight="max-h-60"
-                      />
+                      <ImagePreview imageUrls={pcImageUrls} handleClickDelete={handleClickDeletePcImage} maxHeight="max-h-60" />
                     </div>
                   )}
                 </InputFile>

@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
@@ -7,7 +9,7 @@ type Props = {
   maxHeight: string;
 };
 
-const ImagePreview: React.FC<Props> = ({ imageUrls, handleClickDelete, maxHeight }) => {
+const ImagePreview: React.FC<Props> = memo(({ imageUrls, handleClickDelete, maxHeight }) => {
   return (
     <div className="flex">
       {imageUrls.map((url, index) => (
@@ -26,6 +28,6 @@ const ImagePreview: React.FC<Props> = ({ imageUrls, handleClickDelete, maxHeight
       ))}
     </div>
   );
-};
+});
 
 export default ImagePreview;
