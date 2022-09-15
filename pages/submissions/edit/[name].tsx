@@ -236,7 +236,6 @@ const Edit: NextPage<Props> = (props) => {
                   </InputFile>
                   <ErrorMessage errors={errors.icon}></ErrorMessage>
                 </div>
-
                 <p className="mb-3">
                   <span className="font-bold text-base">Screenshots</span>
                   <span className="ml-2">Either mobile or PC screenshot is required.</span>
