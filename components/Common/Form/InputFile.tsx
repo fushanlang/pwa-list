@@ -1,4 +1,4 @@
-import { useRef, memo } from "react";
+import { useRef } from "react";
 
 import Label from "./Label";
 import ErrorMessage from "./ErrorMessage";
@@ -12,7 +12,7 @@ type Props = {
   errors?: string[];
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
-const Input: React.FC<Props> = memo(({ children, id, label = "", labelMessage = "", isRequired, errors = [], handleChange }) => {
+const Input: React.FC<Props> = ({ children, id, label = "", labelMessage = "", isRequired, errors = [], handleChange }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <>
@@ -31,6 +31,6 @@ const Input: React.FC<Props> = memo(({ children, id, label = "", labelMessage = 
       <ErrorMessage errors={errors}></ErrorMessage>
     </>
   );
-});
+};
 
 export default Input;
