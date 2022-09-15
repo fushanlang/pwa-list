@@ -13,7 +13,6 @@ type Props = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 const Input: React.FC<Props> = memo(({ children, id, label = "", labelMessage = "", isRequired, errors = [], handleChange }) => {
-  console.log("file");
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <>

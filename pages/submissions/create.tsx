@@ -55,7 +55,7 @@ const Create: NextPage = () => {
   const iconsFolder = "application-icons";
   const MAX_IMAGE_NUM = 3;
 
-  const setImageInfo = (target, setImages, setUrls) => {
+  const setImageInfo = (target: HTMLInputElement, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
     const { files } = target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
     filesArr.splice(MAX_IMAGE_NUM);
@@ -64,7 +64,7 @@ const Create: NextPage = () => {
       setUrls((urls: string[]) => [...urls, window.URL.createObjectURL(value)]);
     });
   };
-  const deleteImageInfo = (index, setImages, setUrls) => {
+  const deleteImageInfo = (index: number, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
     setImages((prev: File[]) => prev.filter((_, i) => i !== index));
     setUrls((prev: string[]) => prev.filter((_, i) => i !== index));
   };

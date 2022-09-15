@@ -16,13 +16,14 @@ const validateEdit = (
   pcImageUrls: string[],
   mobileImageUrls: string[]
 ): boolean => {
-  let errors: any = { link: [], category: [], tag1: [], tag2: [], tag3: [], description: [], iconUrl: [], screenshot: [] };
+  let errors: any = { link: [], category: [], tag1: [], tag2: [], tag3: [], description: [], icon: [], screenshot: [] };
   // required
   validate(isNotEmpty, link, "link", "Please input the link", errors);
   validate(isNotEmpty, category, "category", "Please select the category", errors);
   validate(isNotEmpty, tag1, "tag1", "Please input the tag", errors);
   validate(isNotEmpty, description, "description", "Please input the  description", errors);
-  validate(isNotNull, iconUrl, "icon", "Please select the icon", errors);
+  validate(isNotEmpty, iconUrl, "icon", "Please select the icon", errors);
+  console.log(iconUrl);
   // custom
   errors.link.length || validate(isUrl, link, "link", "Please input the correct Link", errors);
   validate(isAlphanum, tag1, "tag1", "Please input the tag1 in single-byte alphanumeric character", errors);

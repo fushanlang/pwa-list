@@ -70,30 +70,27 @@ const Edit: NextPage<Props> = (props) => {
   const iconsFolder = "application-icons";
   const MAX_IMAGE_NUM = 3;
 
-  const handleChangeIcon = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
+  const setImageInfo = (target: HTMLInputElement, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
+    const { files } = target;
+    const filesArr = Object.entries(files).map(([key, value]) => value);
+    filesArr.splice(MAX_IMAGE_NUM);
+    filesArr.map((value: File) => {
+      setImages((images: File[]) => [...images, value]);
+      setUrls((urls: string[]) => [...urls, window.URL.createObjectURL(value)]);
+    });
+  };
+  const deleteImageInfo = (index: number, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
+    setImages((prev: File[]) => prev.filter((_, i) => i !== index));
+    setUrls((prev: string[]) => prev.filter((_, i) => i !== index));
+  };
+  const setIconInfo = (target) => {
+    const { files } = target;
     setIconUrl(window.URL.createObjectURL(files[0]));
     setIcon(files[0]);
   };
-
-  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
-    const { files } = e.target;
-    const filesArr = Object.entries(files).map(([key, value]) => value);
-    filesArr.splice(MAX_IMAGE_NUM);
-    filesArr.map((value) => {
-      setUrls((urls: string[]) => [...urls, window.URL.createObjectURL(value)]);
-      setImages((images: File[]) => [...images, value]);
-    });
-  };
-
-  const handleClickDeleteIcon = () => {
+  const deleteIconInfo = () => {
     setIcon(null);
     setIconUrl("");
-  };
-
-  const handleClickDeleteImage = (index: number, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
-    setUrls((prev: string[]) => prev.filter((_, i) => i !== index));
-    setImages((prev: File[]) => prev.filter((_, i) => i !== index));
   };
 
   const handleChangeLink = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value), []);
@@ -102,6 +99,16 @@ const Edit: NextPage<Props> = (props) => {
   const handleChangeTag2 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag2(e.target.value), []);
   const handleChangeTag3 = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag3(e.target.value), []);
   const handleChangeDescription = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value), []);
+  const handleChangeIcon = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setIconInfo(e.target), []);
+  const handleChangeMobileImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setImageInfo(e.target, setMobileImages, setMobileImageUrls);
+  }, []);
+  const handleChangePcImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setImageInfo(e.target, setPcImages, setPcImageUrls);
+  }, []);
+  const handleClickDeleteIcon = useCallback(() => deleteIconInfo(), []);
+  const handleClickDeleteMobileImage = useCallback((index: number) => deleteImageInfo(index, setMobileImages, setMobileImageUrls), []);
+  const handleClickDeletePcImage = useCallback((index: number) => deleteImageInfo(index, setPcImages, setPcImageUrls), []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -167,8 +174,8 @@ const Edit: NextPage<Props> = (props) => {
                 </div>
                 <div className="mb-6">
                   <Input
-                    id={"link"}
-                    label={"Link"}
+                    id="link"
+                    label="Link"
                     isRequired={true}
                     maxLength={120}
                     placeholder="https://pwalist.app"
@@ -178,8 +185,8 @@ const Edit: NextPage<Props> = (props) => {
                 </div>
                 <div className="mb-6">
                   <Select
-                    id={"category"}
-                    label={"Category"}
+                    id="category"
+                    label="Category"
                     isRequired={true}
                     state={category}
                     list={categories}
@@ -189,32 +196,18 @@ const Edit: NextPage<Props> = (props) => {
                 </div>
                 <div className="mb-6">
                   <Input
-                    id={"tag"}
-                    label={"Tags"}
-                    labelMessage={"1 or more required"}
+                    id="tag"
+                    label="Tags"
+                    labelMessage="1 or more required"
                     isRequired={true}
-                    inputClass={"w-28 mr-4"}
+                    inputClass="w-28 mr-4"
                     maxLength={10}
                     placeholder="ToDo"
                     state={tag1}
                     handleChange={handleChangeTag1}
                   />
-                  <Input
-                    id={"tag"}
-                    inputClass={"w-28 mr-4"}
-                    maxLength={10}
-                    placeholder="Timer"
-                    state={tag2}
-                    handleChange={handleChangeTag2}
-                  />
-                  <Input
-                    id={"tag"}
-                    inputClass={"w-28"}
-                    maxLength={10}
-                    placeholder="Management"
-                    state={tag3}
-                    handleChange={handleChangeTag3}
-                  />
+                  <Input id="tag" inputClass="w-28 mr-4" maxLength={10} placeholder="Timer" state={tag2} handleChange={handleChangeTag2} />
+                  <Input id="tag" inputClass="w-28" maxLength={10} placeholder="Management" state={tag3} handleChange={handleChangeTag3} />
                   <ErrorMessage errors={errors.tag1}></ErrorMessage>
                   <ErrorMessage errors={errors.tag2}></ErrorMessage>
                   <ErrorMessage errors={errors.tag3}></ErrorMessage>
@@ -222,8 +215,8 @@ const Edit: NextPage<Props> = (props) => {
 
                 <div className="mb-6">
                   <Textarea
-                    id={"about"}
-                    label={"About this app"}
+                    id="about"
+                    label="About this app"
                     isRequired={true}
                     maxLength={2000}
                     state={description}
@@ -232,20 +225,13 @@ const Edit: NextPage<Props> = (props) => {
                   />
                 </div>
                 <div className="mb-6">
-                  <InputFile
-                    id={"icon"}
-                    label={"Icon"}
-                    isRequired={true}
-                    errors={errors.icon}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeIcon(e)}
-                  >
+                  <InputFile id="icon" label="Icon" isRequired={true} errors={errors.icon} handleChange={handleChangeIcon}>
                     {iconUrl && (
-                      <div className="mb-4">
-                        <ImagePreview imageUrls={[iconUrl]} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />
+                      <div className="flex mb-4">
+                        <ImagePreview imageUrl={iconUrl} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />
                       </div>
                     )}
                   </InputFile>
-                  <ErrorMessage errors={errors.icon}></ErrorMessage>
                 </div>
                 <p className="mb-3">
                   <span className="font-bold text-base">Screenshots</span>
@@ -253,38 +239,46 @@ const Edit: NextPage<Props> = (props) => {
                 </p>
                 <div className="mb-6">
                   <InputFile
-                    id={"mobileImage"}
-                    label={"Mobile size (Up to 3 Images)"}
+                    id="mobileImage"
+                    label="Mobile size (Up to 3 Images)"
                     isRequired={false}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeImage(e, setMobileImages, setMobileImageUrls)}
+                    handleChange={handleChangeMobileImage}
                   >
                     {mobileImageUrls.length !== 0 && (
-                      <div className="mb-4">
-                        <ImagePreview
-                          imageUrls={mobileImageUrls}
-                          handleClickDelete={(index) => handleClickDeleteImage(index, setMobileImages, setMobileImageUrls)}
-                          maxHeight="max-h-60"
-                        />
+                      <div className="flex mb-4">
+                        {mobileImageUrls.map((url, index) => (
+                          <ImagePreview
+                            key={index}
+                            imageUrl={url}
+                            handleClickDelete={handleClickDeleteMobileImage}
+                            maxHeight="max-h-60"
+                            index={index}
+                          />
+                        ))}
                       </div>
                     )}
                   </InputFile>
                 </div>
                 <div>
                   <InputFile
-                    id={"pcImage"}
-                    label={"PC size (Up to 3 Images)"}
-                    labelMessage={"only show PC size display."}
+                    id="pcImage"
+                    label="PC size (Up to 3 Images)"
+                    labelMessage="only show PC size display."
                     isRequired={false}
                     errors={errors.screenshot}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeImage(e, setPcImages, setPcImageUrls)}
+                    handleChange={handleChangePcImage}
                   >
                     {pcImageUrls.length !== 0 && (
-                      <div className="mb-4">
-                        <ImagePreview
-                          imageUrls={pcImageUrls}
-                          handleClickDelete={(index) => handleClickDeleteImage(index, setPcImages, setPcImageUrls)}
-                          maxHeight="max-h-60"
-                        />
+                      <div className="flex mb-4">
+                        {pcImageUrls.map((url, index) => (
+                          <ImagePreview
+                            key={index}
+                            imageUrl={url}
+                            handleClickDelete={handleClickDeletePcImage}
+                            maxHeight="max-h-60"
+                            index={index}
+                          />
+                        ))}
                       </div>
                     )}
                   </InputFile>
