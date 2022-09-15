@@ -118,15 +118,12 @@ const Edit: NextPage<Props> = (props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (!(await validateEdit(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrlList, mobileImageUrlList))) {
+    if (!validateEdit(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrlList, mobileImageUrlList)) {
       setIsSubmitting(false);
       return;
     }
     setIsModalOpen(true);
     const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
-    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
-    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
-    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-|\./g, "") : null;
     let storageIconUrl = iconUrl;
     let storageMobile1Url = mobileImageUrlList[0] ? mobileImageUrlList[0] : null;
     let storageMobile2Url = mobileImageUrlList[1] ? mobileImageUrlList[1] : null;
@@ -142,28 +139,31 @@ const Edit: NextPage<Props> = (props) => {
     if (pcImages[1]) storagePc2Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[1], "pc2");
     if (pcImages[2]) storagePc3Url = await uploadToStorage(imagesFolder, nameLowercase, pcImages[2], "pc3");
 
-    await db.collection("applications").doc(app.id).update({
-      nameLowercase: nameLowercase,
-      link: link,
-      category: category,
-      tag1: tag1,
-      tag2: tag2,
-      tag3: tag3,
-      tag1Lowercase: tag1Lowercase,
-      tag2Lowercase: tag2Lowercase,
-      tag3Lowercase: tag3Lowercase,
-      description: description,
-      icon: storageIconUrl,
-      imageMobile1: storageMobile1Url,
-      imageMobile2: storageMobile2Url,
-      imageMobile3: storageMobile3Url,
-      imagePc1: storagePc1Url,
-      imagePc2: storagePc2Url,
-      imagePc3: storagePc3Url,
-      isPublic: false,
-      isRejected: false,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    await db
+      .collection("applications")
+      .doc(app.id)
+      .update({
+        nameLowercase: nameLowercase,
+        link: link,
+        category: category,
+        tag1: tag1,
+        tag2: tag2,
+        tag3: tag3,
+        tag1Lowercase: tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null,
+        tag2Lowercase: tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null,
+        tag3Lowercase: tag3 ? tag3.toLowerCase().replace(/\s|-|\./g, "") : null,
+        description: description,
+        icon: storageIconUrl,
+        imageMobile1: storageMobile1Url,
+        imageMobile2: storageMobile2Url,
+        imageMobile3: storageMobile3Url,
+        imagePc1: storagePc1Url,
+        imagePc2: storagePc2Url,
+        imagePc3: storagePc3Url,
+        isPublic: false,
+        isRejected: false,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
     setIsSubmitting(false);
   };
   return (
@@ -185,12 +185,8 @@ const Edit: NextPage<Props> = (props) => {
                     maxLength={120}
                     placeholder="https://pwalist.app"
                     state={link}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setLink(e.target.value);
-                      setErrors({ ...errors, link: [] });
-                    }}
+                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value), [])}
                   />
-                  <ErrorMessage errors={errors.link}></ErrorMessage>
                 </div>
 
                 <div className="mb-6">
@@ -200,12 +196,9 @@ const Edit: NextPage<Props> = (props) => {
                     isRequired={true}
                     state={category}
                     list={categories}
-                    handleChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                      setCategory(e.target.value);
-                      setErrors({ ...errors, category: [] });
-                    }}
+                    errors={errors.category}
+                    handleChange={useCallback((e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value), [])}
                   />
-                  <ErrorMessage errors={errors.category}></ErrorMessage>
                 </div>
 
                 <div className="mb-6">
@@ -218,10 +211,7 @@ const Edit: NextPage<Props> = (props) => {
                     maxLength={10}
                     placeholder="ToDo"
                     state={tag1}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setTag1(e.target.value);
-                      setErrors({ ...errors, tag1: [] });
-                    }}
+                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag1(e.target.value), [])}
                   />
                   <Input
                     id={"tag"}
@@ -229,10 +219,7 @@ const Edit: NextPage<Props> = (props) => {
                     maxLength={10}
                     placeholder="Timer"
                     state={tag2}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setTag2(e.target.value);
-                      setErrors({ ...errors, tag2: [] });
-                    }}
+                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag2(e.target.value), [])}
                   />
                   <Input
                     id={"tag"}
@@ -240,10 +227,7 @@ const Edit: NextPage<Props> = (props) => {
                     maxLength={10}
                     placeholder="Management"
                     state={tag3}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setTag3(e.target.value);
-                      setErrors({ ...errors, tag3: [] });
-                    }}
+                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTag3(e.target.value), [])}
                   />
                   <ErrorMessage errors={errors.tag1}></ErrorMessage>
                   <ErrorMessage errors={errors.tag2}></ErrorMessage>
@@ -257,12 +241,9 @@ const Edit: NextPage<Props> = (props) => {
                     isRequired={true}
                     maxLength={2000}
                     state={description}
-                    handleChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                      setDescription(e.target.value);
-                      setErrors({ ...errors, description: [] });
-                    }}
+                    errors={errors.description}
+                    handleChange={useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value), [])}
                   />
-                  <ErrorMessage errors={errors.description}></ErrorMessage>
                 </div>
 
                 <div className="mb-6">
@@ -270,10 +251,8 @@ const Edit: NextPage<Props> = (props) => {
                     id={"icon"}
                     label={"Icon"}
                     isRequired={true}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      onChangeIconHandler(e);
-                      setErrors({ ...errors, icon: [] });
-                    }}
+                    errors={errors.icon}
+                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e), [])}
                   >
                     {iconUrl && (
                       <div className="flex mb-4">
@@ -298,10 +277,7 @@ const Edit: NextPage<Props> = (props) => {
                     id={"mobileImage"}
                     label={"Mobile size (Up to 3 Images)"}
                     isRequired={false}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      onChangeMobileImageHandler(e);
-                      setErrors({ ...errors, screenshot: [] });
-                    }}
+                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangeMobileImageHandler(e), [])}
                   >
                     <div className="flex overflow-scroll">
                       {mobileImageUrlList.map((mobileImageUrl, index) => (
@@ -317,10 +293,8 @@ const Edit: NextPage<Props> = (props) => {
                     label={"PC size (Up to 3 Images)"}
                     labelMessage={"only show PC size display."}
                     isRequired={false}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      onChangePcImageHandler(e);
-                      setErrors({ ...errors, screenshot: [] });
-                    }}
+                    errors={errors.screenshot}
+                    handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangePcImageHandler(e), [])}
                   >
                     <div className="flex overflow-scroll">
                       {pcImageUrlList.map((pcImageUrl, index) => (
@@ -328,7 +302,6 @@ const Edit: NextPage<Props> = (props) => {
                       ))}
                     </div>
                   </InputFile>
-                  <ErrorMessage errors={errors.screenshot}></ErrorMessage>
                 </div>
               </div>
               <div className="mt-10 mb-12">

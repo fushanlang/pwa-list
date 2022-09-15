@@ -3,8 +3,6 @@ import { NextPage } from "next";
 import Router from "next/router";
 import { useSelector } from "react-redux";
 import "firebase/firestore";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import { selectUser } from "../../store/modules/user";
 import categories from "../../consts/categories";
@@ -39,9 +37,9 @@ const Create: NextPage = () => {
   const [icon, setIcon] = useState<File | null>(null);
   const [iconUrl, setIconUrl] = useState<string>("");
   const [mobileImages, setMobileImages] = useState<File[]>([]);
-  const [mobileImageUrlList, setMobileImageUrlList] = useState<string[]>([]);
+  const [mobileImageUrls, setMobileImageUrls] = useState<string[]>([]);
   const [pcImages, setPcImages] = useState<File[]>([]);
-  const [pcImageUrlList, setPcImageUrlList] = useState<string[]>([]);
+  const [pcImageUrls, setPcImageUrls] = useState<string[]>([]);
   const [errors, setErrors] = useState<any>({
     name: [],
     link: [],
@@ -55,47 +53,31 @@ const Create: NextPage = () => {
   });
   const imagesFolder = "application-images";
   const iconsFolder = "application-icons";
-  const MAX_PC_IMAGE_NUM = 3;
-  const MAX_MOBILE_IMAGE_NUM = 3;
+  const MAX_IMAGE_NUM = 3;
 
   const onChangeIconHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     setIconUrl(window.URL.createObjectURL(files[0]));
     setIcon(files[0]);
   };
-
-  const onChangePcImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeImageHandler = (e: React.ChangeEvent<HTMLInputElement>, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
     const { files } = e.target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
-    filesArr.splice(MAX_PC_IMAGE_NUM);
+    filesArr.splice(MAX_IMAGE_NUM);
     filesArr.map((value) => {
-      setPcImageUrlList((urls) => [...urls, window.URL.createObjectURL(value)]);
-      setPcImages((images) => [...images, value]);
+      setUrls((urls: string[]) => [...urls, window.URL.createObjectURL(value)]);
+      setImages((images: File[]) => [...images, value]);
     });
   };
 
-  const onChangeMobileImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    const filesArr = Object.entries(files).map(([key, value]) => value);
-    filesArr.splice(MAX_MOBILE_IMAGE_NUM);
-    filesArr.map((value) => {
-      setMobileImageUrlList((urls) => [...urls, window.URL.createObjectURL(value)]);
-      setMobileImages((images) => [...images, value]);
-    });
-  };
-  const handleDeleteIcon = () => {
+  const handleClickDeleteIcon = () => {
     setIcon(null);
     setIconUrl("");
   };
 
-  const handleDeletePcImage = useCallback((index: number) => {
-    setPcImageUrlList((prev) => prev.filter((_, i) => i !== index));
-    setPcImages((prev) => prev.filter((_, i) => i !== index));
-  }, []);
-
-  const handleDeleteMobileImage = useCallback((index: number) => {
-    setMobileImageUrlList((prev) => prev.filter((_, i) => i !== index));
-    setMobileImages((prev) => prev.filter((_, i) => i !== index));
+  const handleClickDeleteImage = useCallback((index: number, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
+    setUrls((prev: string[]) => prev.filter((_, i) => i !== index));
+    setImages((prev: File[]) => prev.filter((_, i) => i !== index));
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -107,9 +89,6 @@ const Create: NextPage = () => {
     }
     setIsModalOpen(true);
     const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
-    const tag1Lowercase = tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null;
-    const tag2Lowercase = tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null;
-    const tag3Lowercase = tag3 ? tag3.toLowerCase().replace(/\s|-|\./g, "") : null;
     const uploadResp = await Promise.all([
       uploadToStorage(iconsFolder, nameLowercase, icon, "icon"),
       uploadToStorage(imagesFolder, nameLowercase, pcImages[0], "pc1"),
@@ -128,9 +107,9 @@ const Create: NextPage = () => {
       tag1: tag1,
       tag2: tag2,
       tag3: tag3,
-      tag1Lowercase: tag1Lowercase,
-      tag2Lowercase: tag2Lowercase,
-      tag3Lowercase: tag3Lowercase,
+      tag1Lowercase: tag1 ? tag1.toLowerCase().replace(/\s|-|\./g, "") : null,
+      tag2Lowercase: tag2 ? tag2.toLowerCase().replace(/\s|-|\./g, "") : null,
+      tag3Lowercase: tag3 ? tag3.toLowerCase().replace(/\s|-|\./g, "") : null,
       description: description,
       icon: uploadResp[0],
       imagePc1: uploadResp[1],
@@ -167,7 +146,6 @@ const Create: NextPage = () => {
                   handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value), [])}
                 />
               </div>
-
               <div className="mb-6">
                 <Input
                   id={"link"}
@@ -180,7 +158,6 @@ const Create: NextPage = () => {
                   handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value), [])}
                 />
               </div>
-
               <div className="mb-6">
                 <Select
                   id={"category"}
@@ -188,11 +165,10 @@ const Create: NextPage = () => {
                   isRequired={true}
                   state={category}
                   list={categories}
-                  errors={errors.link}
+                  errors={errors.category}
                   handleChange={useCallback((e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value), [])}
                 />
               </div>
-
               <div className="mb-6">
                 <Input
                   id={"tag"}
@@ -225,7 +201,6 @@ const Create: NextPage = () => {
                 <ErrorMessage errors={errors.tag2}></ErrorMessage>
                 <ErrorMessage errors={errors.tag3}></ErrorMessage>
               </div>
-
               <div className="mb-6">
                 <Textarea
                   id={"about"}
@@ -243,21 +218,12 @@ const Create: NextPage = () => {
                   id={"icon"}
                   label={"Icon"}
                   isRequired={true}
+                  errors={errors.icon}
                   handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangeIconHandler(e), [])}
                 >
-                  {iconUrl && (
-                    <div className="flex mb-4">
-                      <div className="relative">
-                        <img className="border rounded max-h-20" alt="icon" src={iconUrl} />
-                        <button className="text-red-500 hover:text-red-700 absolute top-0 right-0 mt-1 mr-1" onClick={handleDeleteIcon}>
-                          <FontAwesomeIcon icon={faMinusCircle} size="lg" />
-                        </button>
-                      </div>
-                    </div>
-                  )}
+                  {iconUrl && <ImagePreview imageUrls={[iconUrl]} handleClickDelete={handleClickDeleteIcon} maxHeight="20" />}
                 </InputFile>
               </div>
-
               <p className="mb-3">
                 <span className="font-bold text-base">Screenshots</span>
                 <span className="ml-2">Either mobile or PC screenshot is required.</span>
@@ -267,16 +233,20 @@ const Create: NextPage = () => {
                   id={"mobileImage"}
                   label={"Mobile size (Up to 3 Images)"}
                   isRequired={false}
-                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangeMobileImageHandler(e), [])}
+                  handleChange={useCallback(
+                    (e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setMobileImages, setMobileImageUrls),
+                    []
+                  )}
                 >
-                  <div className="flex overflow-scroll">
-                    {mobileImageUrlList.map((mobileImageUrl, index) => (
-                      <ImagePreview key={index} index={index} imageUrl={mobileImageUrl} handleDeleteImage={handleDeleteMobileImage} />
-                    ))}
-                  </div>
+                  {mobileImageUrls.length !== 0 && (
+                    <ImagePreview
+                      imageUrls={mobileImageUrls}
+                      handleClickDelete={(index) => handleClickDeleteImage(index, setMobileImages, setMobileImageUrls)}
+                      maxHeight="60"
+                    />
+                  )}
                 </InputFile>
               </div>
-
               <div>
                 <InputFile
                   id={"pcImage"}
@@ -284,13 +254,18 @@ const Create: NextPage = () => {
                   labelMessage={"only show PC size display."}
                   isRequired={false}
                   errors={errors.screenshot}
-                  handleChange={useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChangePcImageHandler(e), [])}
+                  handleChange={useCallback(
+                    (e: React.ChangeEvent<HTMLInputElement>) => onChangeImageHandler(e, setPcImages, setPcImageUrls),
+                    []
+                  )}
                 >
-                  <div className="flex overflow-scroll">
-                    {pcImageUrlList.map((pcImageUrl, index) => (
-                      <ImagePreview key={index} index={index} imageUrl={pcImageUrl} handleDeleteImage={handleDeletePcImage} />
-                    ))}
-                  </div>
+                  {pcImageUrls.length !== 0 && (
+                    <ImagePreview
+                      imageUrls={pcImageUrls}
+                      handleClickDelete={(index) => handleClickDeleteImage(index, setPcImages, setPcImageUrls)}
+                      maxHeight="60"
+                    />
+                  )}
                 </InputFile>
               </div>
             </div>
