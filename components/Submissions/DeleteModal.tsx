@@ -40,7 +40,7 @@ const DeleteModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, targetApp }
   modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
 
   const dispatch = useDispatch();
-  const handleDeleteApp = async (app) => {
+  const dleteApp = async (app) => {
     try {
       deleteFromStorage("application-icons", app.name);
       deleteFromStorage("application-images", app.name);
@@ -63,7 +63,7 @@ const DeleteModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, targetApp }
           <div className="text-base mb-5">Are you sure you want to delete this submission?</div>
           <button
             className="text-lg h-10 px-3 mr-2 border rounded text-white bg-red-500 hover:bg-red-600"
-            onClick={() => handleDeleteApp(targetApp)}
+            onClick={() => dleteApp(targetApp)}
           >
             Delete
           </button>

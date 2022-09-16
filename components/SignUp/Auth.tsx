@@ -8,20 +8,20 @@ const Auth: React.FC = () => {
   const twitterProvider = new firebase.auth.TwitterAuthProvider();
   const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-  const handleGoogleSignIn = () => {
+  const handleClickGoogleSignIn = () => {
     firebase.auth().signInWithPopup(googleProvider);
   };
-  const handleTwitterSignIn = () => {
+  const handleClickTwitterSignIn = () => {
     firebase.auth().signInWithPopup(twitterProvider);
   };
-  const handleFacebookSignIn = () => {
+  const handleClickFacebookSignIn = () => {
     firebase.auth().signInWithPopup(facebookProvider);
   };
   return (
     <div className="flex justify-center flex-wrap">
-      <SignInWithOtherService label="Sign in with Google" imagePath="/icons/Google.png" handleSignIn={handleGoogleSignIn} />
-      <SignInWithOtherService label="Sign in with Twitter" imagePath="/icons/Twitter.png" handleSignIn={handleTwitterSignIn} />
-      <SignInWithOtherService label="Sign in with Facebook" imagePath="/icons/FaceBook.png" handleSignIn={handleFacebookSignIn} />
+      <SignInWithOtherService label="Sign in with Google" imagePath="/icons/Google.png" handleClick={handleClickGoogleSignIn} />
+      <SignInWithOtherService label="Sign in with Twitter" imagePath="/icons/Twitter.png" handleClick={handleClickTwitterSignIn} />
+      <SignInWithOtherService label="Sign in with Facebook" imagePath="/icons/FaceBook.png" handleClick={handleClickFacebookSignIn} />
     </div>
   );
 };
