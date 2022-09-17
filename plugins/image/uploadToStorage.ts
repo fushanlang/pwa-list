@@ -6,9 +6,9 @@ const storage = firebase.storage();
 
 const uploadToStorage = async (folder: string, name: string, image: File, fileName: string): Promise<string> => {
   if (!image) return null;
-
-  await storage.ref(`${folder}/${name}/${fileName}.png`).put(image);
-  return await storage.ref(`${folder}`).child(`${name}/${fileName}.png`).getDownloadURL();
+  const extension = image.name.split(".").pop();
+  await storage.ref(`${folder}/${name}/${fileName}.${extension}`).put(image);
+  return await storage.ref(`${folder}`).child(`${name}/${fileName}.${extension}`).getDownloadURL();
 };
 
 export default uploadToStorage;
