@@ -24,9 +24,16 @@ const App: NextPage<Props> = (props) => {
   const [initialSlide, setInitialSlide] = useState<number>(0);
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
-  const imageUrls = isFound ? [app.imageMobile1, app.imageMobile2, app.imageMobile3, app.imagePc1, app.imagePc2, app.imagePc3] : [];
-  const mobileImageUrls = isFound ? [app.imageMobile1, app.imageMobile2, app.imageMobile3] : [];
-
+  const images = isFound
+    ? {
+        mobile1: app.imageMobile1,
+        mobile2: app.imageMobile2,
+        mobile3: app.imageMobile3,
+        pc1: app.imagePc1,
+        pc2: app.imagePc2,
+        pc3: app.imagePc3,
+      }
+    : {};
   return (
     <Layout title={isFound ? app.name : "Not Found"}>
       {isFound && (
@@ -87,12 +94,12 @@ const App: NextPage<Props> = (props) => {
               </div>
             </div>
             <div className="flex mt-6 overflow-scroll">
-              {imageUrls.map((url, index) => (
+              {Object.keys(images).map((key, index) => (
                 <img
-                  key={url}
-                  className="border rounded max-h-96 mx-2 cursor-pointer"
-                  src={url}
-                  alt={`screenshot${index}`}
+                  key={key}
+                  className={`border rounded max-h-96 mx-2 cursor-pointer ${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}
+                  src={images[key]}
+                  alt={`screenshot${key}`}
                   onClick={() => {
                     setModalIsOpen(true);
                     setInitialSlide(index);
@@ -106,7 +113,7 @@ const App: NextPage<Props> = (props) => {
                 {app.description}
               </p>
             </div>
-            <ImageModal imageUrls={imageUrls} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} initialSlide={initialSlide} />
+            <ImageModal images={images} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} initialSlide={initialSlide} />
           </div>
         )}
         {/* Google Adsense start*/}

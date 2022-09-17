@@ -10,7 +10,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");
 
 type Props = {
-  imageUrls: string[];
+  images: any;
   modalIsOpen: boolean;
   setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   initialSlide: number;
@@ -35,7 +35,7 @@ const modalStyle = {
   },
 };
 
-const ImageModal: React.FC<Props> = ({ imageUrls, modalIsOpen, setModalIsOpen, initialSlide }) => {
+const ImageModal: React.FC<Props> = ({ images, modalIsOpen, setModalIsOpen, initialSlide }) => {
   let modalStyleDarkMode = JSON.parse(JSON.stringify(modalStyle));
   modalStyleDarkMode.content.backgroundColor = "rgb(31 41 55)";
 
@@ -49,9 +49,9 @@ const ImageModal: React.FC<Props> = ({ imageUrls, modalIsOpen, setModalIsOpen, i
             <FontAwesomeIcon size="2x" className="text-green-400 absolute top-5 right-5" icon={faTimesCircle} />
           </button>
           <Swiper className="mt-2" id="swiper" spaceBetween={50} slidesPerView={1} initialSlide={initialSlide} navigation>
-            {imageUrls.map((url, index) => (
-              <SwiperSlide key={url}>
-                <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={url} alt={`screenshot${index}`} />
+            {Object.keys(images).map((key, index) => (
+              <SwiperSlide key={key} className={`${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}>
+                <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={images[key]} alt={`screenshot${index}`} />
               </SwiperSlide>
             ))}
           </Swiper>
