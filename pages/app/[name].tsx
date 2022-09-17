@@ -24,10 +24,16 @@ const App: NextPage<Props> = (props) => {
   const [initialSlide, setInitialSlide] = useState<number>(0);
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
-  const imageUrls = isFound
-    ? [app.imageMobile1, app.imageMobile2, app.imageMobile3, app.imagePc1, app.imagePc2, app.imagePc3].filter((url) => url)
-    : [];
-
+  let images: any = {};
+  if (isFound) {
+    images = {};
+    if (app.imageMobile1) images.mobile1 = app.imageMobile1;
+    if (app.imageMobile2) images.mobile2 = app.imageMobile2;
+    if (app.imageMobile3) images.mobile3 = app.imageMobile3;
+    if (app.imagePc1) images.pc1 = app.imagePc1;
+    if (app.imagePc2) images.pc2 = app.imagePc2;
+    if (app.imagePc3) images.pc3 = app.imagePc3;
+  }
   return (
     <Layout title={isFound ? app.name : "Not Found"}>
       {isFound && (
@@ -88,12 +94,12 @@ const App: NextPage<Props> = (props) => {
               </div>
             </div>
             <div className="flex mt-6 overflow-scroll">
-              {imageUrls.map((url, index) => (
+              {Object.keys(images).map((key, index) => (
                 <img
-                  key={url}
-                  className="border rounded max-h-96 mx-2 cursor-pointer"
-                  src={url}
-                  alt={`screenshot${index}`}
+                  key={key}
+                  className={`border rounded max-h-96 mx-2 cursor-pointer ${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}
+                  src={images[key]}
+                  alt={`screenshot${key}`}
                   onClick={() => {
                     setModalIsOpen(true);
                     setInitialSlide(index);
@@ -107,7 +113,7 @@ const App: NextPage<Props> = (props) => {
                 {app.description}
               </p>
             </div>
-            <ImageModal imageUrls={imageUrls} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} initialSlide={initialSlide} />
+            <ImageModal images={images} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} initialSlide={initialSlide} />
           </div>
         )}
         {/* Google Adsense start*/}
