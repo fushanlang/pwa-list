@@ -49,13 +49,11 @@ const ImageModal: React.FC<Props> = ({ imageUrls, modalIsOpen, setModalIsOpen, i
             <FontAwesomeIcon size="2x" className="text-green-400 absolute top-5 right-5" icon={faTimesCircle} />
           </button>
           <Swiper className="mt-2" id="swiper" spaceBetween={50} slidesPerView={1} initialSlide={initialSlide} navigation>
-            <div>
-              {imageUrls.map((url, index) => (
-                <SwiperSlide key={url}>
-                  <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={url} alt={`screenshot${index}`} />
-                </SwiperSlide>
-              ))}
-            </div>
+            {imageUrls.map((url, index) => (
+              <SwiperSlide key={url}>
+                <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={url} alt={`screenshot${index}`} />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </Modal>
