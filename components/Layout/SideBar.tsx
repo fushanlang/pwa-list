@@ -43,7 +43,7 @@ const SideBar: React.FC = () => {
   const path = router.pathname;
   const date = new Date();
   return (
-    <div className="hidden md:block border-gray-300">
+    <div className="border-gray-300">
       <div className="w-60">
         <div className="px-6 pt-3">
           <div className="flex flex-col mt-4 ">
