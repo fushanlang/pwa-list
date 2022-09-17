@@ -24,16 +24,16 @@ const App: NextPage<Props> = (props) => {
   const [initialSlide, setInitialSlide] = useState<number>(0);
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
-  const images = isFound
-    ? {
-        mobile1: app.imageMobile1,
-        mobile2: app.imageMobile2,
-        mobile3: app.imageMobile3,
-        pc1: app.imagePc1,
-        pc2: app.imagePc2,
-        pc3: app.imagePc3,
-      }
-    : {};
+  let images: any = {};
+  if (isFound) {
+    images = {};
+    if (app.imageMobile1) images.mobile1 = app.imageMobile1;
+    if (app.imageMobile2) images.mobile2 = app.imageMobile2;
+    if (app.imageMobile3) images.mobile3 = app.imageMobile3;
+    if (app.imagePc1) images.pc1 = app.imagePc1;
+    if (app.imagePc2) images.pc2 = app.imagePc2;
+    if (app.imagePc3) images.pc3 = app.imagePc3;
+  }
   return (
     <Layout title={isFound ? app.name : "Not Found"}>
       {isFound && (
