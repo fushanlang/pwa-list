@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
 import { useSelector } from "react-redux";

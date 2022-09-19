@@ -4,10 +4,9 @@ import Link from "next/link";
 import Router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { set, selectUserApps } from "../../store/modules/userApps";
-import "firebase/firestore";
 
 import { selectUser } from "../../store/modules/user";
-import firebase from "../../plugins/firebase";
+import { db, auth } from "../../plugins/firebase";
 import Layout from "../../components/Layout/Layout";
 import Apps from "../../components/Submissions/Apps";
 import Loading from "../../components/Common/Loading";
@@ -20,14 +19,13 @@ const Submissions: NextPage = () => {
 
   const setApps = async (uid: string) => {
     setIsLoading(true);
-    const db = firebase.firestore();
     const res = await db.collection("applications").where("userId", "==", uid).orderBy("updatedAt", "desc").get();
     dispatch(set(res));
     setIsLoading(false);
   };
 
   const signOut = async () => {
-    firebase.auth().signOut();
+    auth.signOut();
   };
 
   useEffect(() => {

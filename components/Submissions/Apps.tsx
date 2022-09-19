@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import DeleteModal from "./DeleteModal";
-import { submissionTableApp } from "../../types/app";
+import { submissionTableApp } from "../../types/apps";
 
 type Props = { apps: submissionTableApp[] };
 

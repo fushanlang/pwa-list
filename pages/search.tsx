@@ -2,16 +2,14 @@ import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import "firebase/firestore";
 
-import firebase from "../plugins/firebase";
+import { db } from "../plugins/firebase";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import Loading from "../components/Common/Loading";
-import { CardApp } from "../types/app";
+import { CardApp } from "../types/apps";
 
 const Search: NextPage = () => {
-  const db = firebase.firestore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [inputParam, setInputParam] = useState<string>("");
   const [searchedApps, setSearchedApps] = useState<CardApp[]>([]);

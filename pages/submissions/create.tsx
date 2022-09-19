@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { NextPage } from "next";
 import Router from "next/router";
 import { useSelector } from "react-redux";
-import "firebase/firestore";
+import firebase from "firebase/app";
 
 import { selectUser } from "../../store/modules/user";
 import categories from "../../consts/categories";
@@ -16,9 +16,8 @@ import Textarea from "../../components/Common/Form/Textarea";
 import ErrorMessage from "../../components/Common/Form/ErrorMessage";
 import validateCreate from "../../plugins/validations/requests/submissions/create";
 import uploadToStorage from "../../plugins/image/uploadToStorage";
-import firebase from "../../plugins/firebase";
+import { db } from "../../plugins/firebase";
 
-const db = firebase.firestore();
 const Create: NextPage = () => {
   const user = useSelector(selectUser);
   useEffect(() => {

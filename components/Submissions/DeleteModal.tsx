@@ -1,13 +1,12 @@
 import Modal from "react-modal";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import "firebase/firestore";
 import { useDispatch } from "react-redux";
 
 import { remove } from "../../store/modules/userApps";
-import firebase from "../../plugins/firebase";
+import { db } from "../../plugins/firebase";
 import deleteFromStorage from "../../plugins/image/deleteFromStorage";
-import { submissionTableApp } from "../../types/app";
+import { submissionTableApp } from "../../types/apps";
 
 type Props = {
   isModalOpen: boolean;
@@ -16,7 +15,6 @@ type Props = {
 };
 
 const DeleteModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, targetApp }) => {
-  const db = firebase.firestore();
   Modal.setAppElement("#__next");
 
   const modalStyle = {

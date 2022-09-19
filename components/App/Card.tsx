@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { changeFirstUpperCase } from "../../plugins/common/functions";
-import { CardApp } from "../../types/app";
+import { CardApp } from "../../types/apps";
 
 type Props = { apps: CardApp[] };
 
