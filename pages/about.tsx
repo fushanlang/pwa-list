@@ -37,9 +37,9 @@ const About: NextPage = () => {
             the case of Chrome.
           </p>
           <div className="mt-4 ml-2 mb-1">
-            <img alt="screenshot1" src={"/about/mobile1.jpg"} className="h-33 mr-8 mb-3 rounded-md inline" />
-            <img alt="screenshot2" src={"/about/mobile2.jpg"} className="h-33 mr-8 mb-3 rounded-md inline" />
-            <img alt="screenshot3" src={"/about/mobile3.jpg"} className="h-33 mr-8 mb-3 rounded-md inline" />
+            <img alt="screenshot1" src={"/about/mobile1.jpg"} className="h-132 mr-8 mb-3 rounded-md inline" />
+            <img alt="screenshot2" src={"/about/mobile2.jpg"} className="h-132 mr-8 mb-3 rounded-md inline" />
+            <img alt="screenshot3" src={"/about/mobile3.jpg"} className="h-132 mr-8 mb-3 rounded-md inline" />
           </div>
           <p>The procedure is slightly different depending on the browser, but it is almost the same.</p>
         </div>

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import "firebase/firestore";
 
 import { RootState } from "../index";
 

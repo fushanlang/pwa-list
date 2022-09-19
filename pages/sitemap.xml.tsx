@@ -1,8 +1,7 @@
 import { GetServerSidePropsContext } from "next";
 import React from "react";
-import "firebase/firestore";
 
-import firebase from "../plugins/firebase";
+import { db } from "../plugins/firebase";
 
 type App = { nameLowercase: string; updatedAt: string };
 
@@ -126,7 +125,6 @@ const createSitemap = (apps: App[]) => {
 };
 
 export const getServerSideProps = async ({ res }: GetServerSidePropsContext) => {
-  const db = firebase.firestore();
   const applications = await db.collection("applications").where("isPublic", "==", true).orderBy("updatedAt").get();
   const apps = applications.docs.map((doc) => ({
     nameLowercase: doc.data().nameLowercase,

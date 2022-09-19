@@ -10,7 +10,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 Modal.setAppElement("#__next");
 
 type Props = {
-  images: any;
+  images: {};
   modalIsOpen: boolean;
   setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   initialSlide: number;

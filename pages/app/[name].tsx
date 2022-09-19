@@ -3,7 +3,6 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import AdSense from "react-adsense";
@@ -12,9 +11,9 @@ import { GOOGLE_ADSENSE_CLIENT } from "../../plugins/googleAdsense";
 import Layout from "../../components/Layout/Layout";
 import NotFound from "../../components/Common/NotFound";
 import ImageModal from "../../components/App/ImageModal";
-import firebase from "../../plugins/firebase";
+import { db } from "../../plugins/firebase";
 import { changeFirstUpperCase } from "../../plugins/common/functions";
-import { App } from "../../types/app";
+import { App } from "../../types/apps";
 
 type Props = { app: App; isFound: boolean };
 
@@ -129,7 +128,6 @@ const App: NextPage<Props> = (props) => {
   );
 };
 export const getStaticPaths = async () => {
-  const db = firebase.firestore();
   const apps = await db.collection("applications").where("isPublic", "==", true).get();
   const paths = apps.docs.map((app: any) => ({
     params: {
@@ -142,7 +140,6 @@ export const getStaticPaths = async () => {
   };
 };
 export const getStaticProps = async (context) => {
-  const db = firebase.firestore();
   const { name } = context.params;
   const res = await db.collection("applications").where("nameLowercase", "==", name).where("isPublic", "==", true).get();
   const app = res.docs.map((res) => res.data());

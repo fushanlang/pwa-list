@@ -1,8 +1,4 @@
-import firebase from "../firebase";
-
-import "firebase/storage";
-
-const storage = firebase.storage();
+import { storage } from "../firebase";
 
 const uploadToStorage = async (folder: string, name: string, image: File, fileName: string): Promise<string> => {
   if (!image) return null;

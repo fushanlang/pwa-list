@@ -1,7 +1,6 @@
 import validate from "../../validate";
 import setErrors from "../../setErrors";
 import isNotEmpty from "../../types/isNotEmpty";
-import isNotNull from "../../types/isNotNull";
 import isUrl from "../../types/isUrl";
 import isAlphanum from "../../types/isAlphanum";
 const validateEdit = (

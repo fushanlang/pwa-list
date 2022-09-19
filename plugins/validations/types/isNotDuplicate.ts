@@ -1,8 +1,4 @@
-import firebase from "../../firebase";
-
-import "firebase/firestore";
-
-const db = firebase.firestore();
+import { db } from "../../firebase";
 
 const isNotDuplicate = async (char: string, field: string): Promise<boolean> => {
   const lowercaseProperty = char.toLowerCase().replace(/\s|-|\./g, "");

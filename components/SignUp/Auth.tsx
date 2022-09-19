@@ -1,21 +1,19 @@
-import Router from "next/router";
-
-import firebase from "../../plugins/firebase";
+import { auth, GoogleAuthProvider, TwitterAuthProvider, FacebookAuthProvider } from "../../plugins/firebase";
 import SignInWithOtherService from "./LoginWithOtherService";
 
 const Auth: React.FC = () => {
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
-  const twitterProvider = new firebase.auth.TwitterAuthProvider();
-  const facebookProvider = new firebase.auth.FacebookAuthProvider();
+  const googleProvider = GoogleAuthProvider;
+  const twitterProvider = TwitterAuthProvider;
+  const facebookProvider = FacebookAuthProvider;
 
   const handleClickGoogleSignIn = () => {
-    firebase.auth().signInWithPopup(googleProvider);
+    auth.signInWithPopup(googleProvider);
   };
   const handleClickTwitterSignIn = () => {
-    firebase.auth().signInWithPopup(twitterProvider);
+    auth.signInWithPopup(twitterProvider);
   };
   const handleClickFacebookSignIn = () => {
-    firebase.auth().signInWithPopup(facebookProvider);
+    auth.signInWithPopup(facebookProvider);
   };
   return (
     <div className="flex justify-center flex-wrap">

@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { NextPage } from "next";
-import "firebase/firestore";
+import firebase from "firebase/app";
 import { useSelector } from "react-redux";
 
 import { selectUser } from "../../../store/modules/user";
 import categories from "../../../consts/categories";
 import validateEdit from "../../../plugins/validations/requests/submissions/edit";
-import firebase from "../../../plugins/firebase";
+import { db } from "../../../plugins/firebase";
 import uploadToStorage from "../../../plugins/image/uploadToStorage";
 import Layout from "../../../components/Layout/Layout";
 import Forbidden from "../../../components/Common/Forbidden";
@@ -17,9 +17,7 @@ import Textarea from "../../../components/Common/Form/Textarea";
 import ErrorMessage from "../../../components/Common/Form/ErrorMessage";
 import ImagePreview from "../../../components/Submissions/ImagePreview";
 import CompletedModal from "../../../components/Submissions/CompletedModal";
-import { App } from "../../../types/app";
-
-const db = firebase.firestore();
+import { App } from "../../../types/apps";
 
 type Props = { app: App; isFound: boolean };
 
@@ -296,9 +294,7 @@ const Edit: NextPage<Props> = (props) => {
             <CompletedModal isModalOpen={isModalOpen} isSubmitting={isSubmitting} />
           </div>
         ) : (
-          <>
-            <Forbidden />
-          </>
+          <Forbidden />
         )}
       </>
     </Layout>
