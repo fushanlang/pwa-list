@@ -294,9 +294,7 @@ const Edit: NextPage<Props> = (props) => {
             <CompletedModal isModalOpen={isModalOpen} isSubmitting={isSubmitting} />
           </div>
         ) : (
-          <>
-            <Forbidden />
-          </>
+          <Forbidden />
         )}
       </>
     </Layout>

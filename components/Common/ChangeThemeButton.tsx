@@ -11,11 +11,9 @@ const ChangeThemeButton: React.FC = () => {
   useEffect(() => setMounted(true), []);
 
   return (
-    <>
-      <button aria-label="DarkModeToggle" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-        {mounted && <>{theme === "dark" ? <FontAwesomeIcon icon="moon" size="2x" /> : <FontAwesomeIcon icon="sun" size="2x" />}</>}
-      </button>
-    </>
+    <button aria-label="DarkModeToggle" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      {mounted && <>{theme === "dark" ? <FontAwesomeIcon icon="moon" size="2x" /> : <FontAwesomeIcon icon="sun" size="2x" />}</>}
+    </button>
   );
 };
 export default ChangeThemeButton;
