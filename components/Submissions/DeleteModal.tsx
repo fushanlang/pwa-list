@@ -55,27 +55,22 @@ const DeleteModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, targetApp }
   const { theme } = useTheme();
 
   return (
-    <>
-      <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
-        <div className="text-center mt-5">
-          <Image className="rounded-md w-20" alt="icon" src={targetApp.icon} width={100} height={100} objectFit="contain" />
-          <div className="text-xl mt-1 mb-6">{targetApp.name}</div>
-          <div className="text-base mb-5">Are you sure you want to delete this submission?</div>
-          <button
-            className="text-lg h-10 px-3 mr-2 border rounded text-white bg-red-500 hover:bg-red-600"
-            onClick={() => dleteApp(targetApp)}
-          >
-            Delete
-          </button>
-          <button
-            className="text-lg h-10 px-3 border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-            onClick={() => setIsModalOpen(false)}
-          >
-            Cancel
-          </button>
-        </div>
-      </Modal>
-    </>
+    <Modal style={theme === "dark" ? modalStyleDarkMode : modalStyle} isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
+      <div className="text-center mt-5">
+        <Image className="rounded-md w-20" alt="icon" src={targetApp.icon} width={100} height={100} objectFit="contain" />
+        <div className="text-xl mt-1 mb-6">{targetApp.name}</div>
+        <div className="text-base mb-5">Are you sure you want to delete this submission?</div>
+        <button
+          className="text-lg h-10 px-3 mr-2 border rounded text-white bg-red-500 hover:bg-red-600"
+          onClick={() => dleteApp(targetApp)}
+        >
+          Delete
+        </button>
+        <button className="text-lg h-10 px-3 border rounded hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => setIsModalOpen(false)}>
+          Cancel
+        </button>
+      </div>
+    </Modal>
   );
 };
 

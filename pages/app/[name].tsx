@@ -109,9 +109,7 @@ const App: NextPage<Props> = (props) => {
             </div>
             <div className="mt-7 break-words">
               <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
-              <p style={{ whiteSpace: "pre-line" }} className="text-left text-lg">
-                {app.description}
-              </p>
+              <p className="text-left text-lg whitespace-pre-line">{app.description}</p>
             </div>
             <ImageModal images={images} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} initialSlide={initialSlide} />
           </div>
