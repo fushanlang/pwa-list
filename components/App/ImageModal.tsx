@@ -51,7 +51,7 @@ const ImageModal: React.FC<Props> = ({ images, modalIsOpen, setModalIsOpen, init
           <Swiper className="mt-2" id="swiper" spaceBetween={50} slidesPerView={1} initialSlide={initialSlide} navigation>
             {Object.keys(images).map((key, index) => (
               <SwiperSlide key={key} className={`${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}>
-                <img style={{ maxHeight: "680px" }} className="border rounded-lg inline" src={images[key]} alt={`screenshot${index}`} />
+                <img className="h-170 border rounded-lg inline" src={images[key]} alt={`screenshot${index}`} />
               </SwiperSlide>
             ))}
           </Swiper>
