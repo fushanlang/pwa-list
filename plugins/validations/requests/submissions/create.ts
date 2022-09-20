@@ -38,6 +38,8 @@ const validateCreate = async (
   errors.icon.length ||
     isAllowedFileType(icon.type, ["image/jpeg", "image/png"]) ||
     errors.icon.push("Please select png or jpg or jpeg for the icon");
+  errors.icon.length || isAllowedFileSize(icon.size, 1000000) || errors.icon.push("Please select png or jpg or jpeg for the icon");
+
   if (pcImages[0] === undefined && mobileImages[0] === undefined) {
     errors.screenshot.push("Please select mobile size or PC size screenshot");
   }
