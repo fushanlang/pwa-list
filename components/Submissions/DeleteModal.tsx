@@ -6,12 +6,12 @@ import { useDispatch } from "react-redux";
 import { remove } from "../../store/modules/userApps";
 import { db } from "../../plugins/firebase";
 import deleteFromStorage from "../../plugins/image/deleteFromStorage";
-import { submissionTableApp } from "../../types/apps";
+import { SubmissionTableApp } from "../../types/apps";
 
 type Props = {
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  targetApp: submissionTableApp;
+  targetApp: SubmissionTableApp;
 };
 
 const DeleteModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, targetApp }) => {

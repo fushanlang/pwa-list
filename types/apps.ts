@@ -39,7 +39,7 @@ export type CardApp = {
   description: string;
 };
 
-export type submissionTableApp = {
+export type SubmissionTableApp = {
   id: string;
   icon: string;
   isPublic: boolean;

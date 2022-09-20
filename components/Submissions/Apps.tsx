@@ -3,13 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 import DeleteModal from "./DeleteModal";
-import { submissionTableApp } from "../../types/apps";
+import { SubmissionTableApp } from "../../types/apps";
 
-type Props = { apps: submissionTableApp[] };
+type Props = { apps: SubmissionTableApp[] };
 
 const Apps: React.FC<Props> = ({ apps }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [targetApp, setTargetApp] = useState<submissionTableApp | null>(null);
+  const [targetApp, setTargetApp] = useState<SubmissionTableApp | null>(null);
   return (
     <>
       <tbody>
