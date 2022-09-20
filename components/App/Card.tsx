@@ -11,7 +11,7 @@ const Card: React.FC<Props> = ({ apps }) => {
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
       {apps.map((app) => (
         <Link key={app.id} href="/app/[name]" as={`/app/${app.nameLowercase}`}>
-          <a className="flex h-30 items-center border mb-1 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700">
+          <a className="flex h-30 items-center border border-gray-400 dark:border-gray-200 mb-1 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700">
             <div className="w-20 pt-1">
               <Image
                 className="rounded-md"
