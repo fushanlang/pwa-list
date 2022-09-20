@@ -111,7 +111,23 @@ const Edit: NextPage<Props> = (props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (!validateEdit(setErrors, link, category, tag1, tag2, tag3, description, iconUrl, pcImageUrls, mobileImageUrls)) {
+    if (
+      !validateEdit(
+        setErrors,
+        link,
+        category,
+        tag1,
+        tag2,
+        tag3,
+        description,
+        icon,
+        pcImages,
+        mobileImages,
+        iconUrl,
+        pcImageUrls,
+        mobileImageUrls
+      )
+    ) {
       setIsSubmitting(false);
       return;
     }
