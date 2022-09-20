@@ -96,7 +96,7 @@ const App: NextPage<Props> = (props) => {
               {Object.keys(images).map((key, index) => (
                 <img
                   key={key}
-                  className={`border rounded max-h-96 mx-2 cursor-pointer ${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}
+                  className={`max-h-96 mx-2 cursor-pointer ${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}
                   src={images[key]}
                   alt={`screenshot${key}`}
                   onClick={() => {

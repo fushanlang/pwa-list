@@ -26,8 +26,8 @@ const modalStyle = {
   content: {
     position: "absolute",
     top: "3rem",
-    left: "1.3rem",
-    right: "1.3rem",
+    left: "0.5rem",
+    right: "0.5rem",
     bottom: "3rem",
     backgroundColor: "white",
     borderRadius: "1rem",
@@ -51,7 +51,7 @@ const ImageModal: React.FC<Props> = ({ images, modalIsOpen, setModalIsOpen, init
           <Swiper className="mt-2" id="swiper" spaceBetween={50} slidesPerView={1} initialSlide={initialSlide} navigation>
             {Object.keys(images).map((key, index) => (
               <SwiperSlide key={key} className={`${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}>
-                <img className="h-170 border rounded-lg inline" src={images[key]} alt={`screenshot${index}`} />
+                <img className="h-132 inline" src={images[key]} alt={`screenshot${index}`} />
               </SwiperSlide>
             ))}
           </Swiper>
