@@ -1,8 +1,10 @@
-import validate from "../../validate";
 import setErrors from "../../setErrors";
 import isNotEmpty from "../../types/isNotEmpty";
 import isUrl from "../../types/isUrl";
 import isAlphanum from "../../types/isAlphanum";
+import isAllowedFileType from "../../types/isAllowedFileType";
+import isAllowedFileSize from "../../types/isAllowedFileSize";
+
 const validateEdit = (
   set: React.Dispatch<any>,
   link: string,
@@ -11,25 +13,44 @@ const validateEdit = (
   tag2: string,
   tag3: string,
   description: string,
+  icon: File,
+  pcImages: File[],
+  mobileImages: File[],
   iconUrl: string,
   pcImageUrls: string[],
   mobileImageUrls: string[]
 ): boolean => {
   let errors: any = { link: [], category: [], tag1: [], tag2: [], tag3: [], description: [], icon: [], screenshot: [] };
   // required
-  validate(isNotEmpty, link, "link", "Please input the link", errors);
-  validate(isNotEmpty, category, "category", "Please select the category", errors);
-  validate(isNotEmpty, tag1, "tag1", "Please input the tag", errors);
-  validate(isNotEmpty, description, "description", "Please input the  description", errors);
-  validate(isNotEmpty, iconUrl, "icon", "Please select the icon", errors);
+  isNotEmpty(link) || errors.link.push("Please input the link");
+  isNotEmpty(category) || errors.category.push("Please select the category");
+  isNotEmpty(tag1) || errors.tag1.push("Please input the tag");
+  isNotEmpty(description) || errors.description.push("Please input the description");
+  isNotEmpty(iconUrl) || errors.icon.push("Please select the icon");
   // custom
-  errors.link.length || validate(isUrl, link, "link", "Please input the correct Link", errors);
-  validate(isAlphanum, tag1, "tag1", "Please input the tag1 in single-byte alphanumeric character", errors);
-  validate(isAlphanum, tag2, "tag2", "Please input the tag2 in single-byte alphanumeric character", errors);
-  validate(isAlphanum, tag3, "tag3", "Please input the tag3 in single-byte alphanumeric character", errors);
+  errors.link.length || isUrl(link) || errors.link.push("Please input the correct link");
+  isAlphanum(tag1) || errors.tag1.push("Please input the tag1 in single-byte alphanumeric character");
+  isAlphanum(tag2) || errors.tag2.push("Please input the tag2 in single-byte alphanumeric character");
+  isAlphanum(tag3) || errors.tag3.push("Please input the tag3 in single-byte alphanumeric character");
+  errors.icon.length ||
+    isAllowedFileType(icon.type, ["image/jpeg", "image/png"]) ||
+    errors.icon.push("Please select png or jpg or jpeg for the icon");
+  errors.icon.length || isAllowedFileSize(icon.size, 1000000) || errors.icon.push("Please select png or jpg or jpeg for the icon");
+
   if (pcImageUrls[0] === undefined && mobileImageUrls[0] === undefined) {
     errors.screenshot.push("Please select mobile size or PC size screenshot");
   }
+  const images = [...pcImages, ...mobileImages];
+  images.every((image: File) => {
+    const isAllowed = isAllowedFileType(image.type, ["image/jpeg", "image/png"]);
+    isAllowed || errors.screenshot.push("Please select png or jpg or jpeg for the screenshot");
+    return isAllowed;
+  });
+  images.every((image: File) => {
+    const isAllowed = isAllowedFileSize(image.size, 1000000);
+    isAllowed || errors.screenshot.push("Please select the screenshot no larger than 1MB");
+    return isAllowed;
+  });
   return setErrors(set, errors);
 };
 

@@ -18,7 +18,7 @@ const Input: React.FC<Props> = memo(({ children, id, label = "", labelMessage = 
     <>
       <Label id={id} label={label} labelMessage={labelMessage} isRequired={isRequired} />
       {children}
-      <input id={id} ref={inputRef} type="file" className="hidden" multiple onChange={handleChange} />
+      <input id={id} ref={inputRef} type="file" className="hidden" accept="image/jpeg, image/png" multiple onChange={handleChange} />
       <button
         className="py-1 px-5 tracking-wide border-2 border-green-400 text-green-500 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
         onClick={(e) => {

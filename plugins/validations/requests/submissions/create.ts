@@ -37,19 +37,19 @@ const validateCreate = async (
   errors.name.length || (await isNotDuplicate(name, "nameLowercase")) || errors.name.push("The app name has already been registered");
   errors.icon.length ||
     isAllowedFileType(icon.type, ["image/jpeg", "image/png"]) ||
-    errors.icon.push("Please choose png or jpg or jpeg for the icon");
+    errors.icon.push("Please select png or jpg or jpeg for the icon");
   if (pcImages[0] === undefined && mobileImages[0] === undefined) {
-    errors.screenshot.push("Please choose mobile size or PC size screenshot");
+    errors.screenshot.push("Please select mobile size or PC size screenshot");
   }
   const images = [...pcImages, ...mobileImages];
   images.every((image: File) => {
     const isAllowed = isAllowedFileType(image.type, ["image/jpeg", "image/png"]);
-    isAllowed || errors.screenshot.push("Please choose png or jpg or jpeg for the screenshot");
+    isAllowed || errors.screenshot.push("Please select png or jpg or jpeg for the screenshot");
     return isAllowed;
   });
   images.every((image: File) => {
     const isAllowed = isAllowedFileSize(image.size, 1000000);
-    isAllowed || errors.screenshot.push("Please choose the screenshot no larger than 1MB");
+    isAllowed || errors.screenshot.push("Please select the screenshot no larger than 1MB");
     return isAllowed;
   });
 
