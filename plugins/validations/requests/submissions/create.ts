@@ -22,19 +22,21 @@ const validateCreate = async (
 ): Promise<boolean> => {
   let errors: any = { name: [], link: [], category: [], tag1: [], tag2: [], tag3: [], description: [], icon: [], screenshot: [] };
   // required
-  isNotEmpty(name) || errors.name.push("Please input the app name");
-  isNotEmpty(link) || errors.link.push("Please input the link");
-  isNotEmpty(category) || errors.category.push("Please select the category");
-  isNotEmpty(tag1) || errors.tag1.push("Please input the tag");
-  isNotEmpty(description) || errors.description.push("Please input the description");
-  isNotNull(icon) || errors.icon.push("Please select the icon");
+  isNotEmpty(name) || errors.name.push("Please input your app's name");
+  isNotEmpty(link) || errors.link.push("Please input your app's link");
+  isNotEmpty(category) || errors.category.push("Please select a category");
+  isNotEmpty(tag1) || errors.tag1.push("Please input a tag");
+  isNotEmpty(description) || errors.description.push("Please input your app's description");
+  isNotNull(icon) || errors.icon.push("Please select an icon");
   // custom
-  isAlphanum(name) || errors.name.push("Please input the app name in single-byte alphanumeric character");
-  isAlphanum(tag1) || errors.tag1.push("Please input the tag1 in single-byte alphanumeric character");
-  isAlphanum(tag2) || errors.tag2.push("Please input the tag2 in single-byte alphanumeric character");
-  isAlphanum(tag3) || errors.tag3.push("Please input the tag3 in single-byte alphanumeric character");
-  errors.link.length || isUrl(link) || errors.link.push("Please input the correct link");
-  errors.name.length || (await isNotDuplicate(name, "nameLowercase")) || errors.name.push("The app name has already been registered");
+  isAlphanum(name) || errors.name.push("Please input your app's name in single-byte alphanumeric character");
+  isAlphanum(tag1) || errors.tag1.push("Please input a tag1 in single-byte alphanumeric character");
+  isAlphanum(tag2) || errors.tag2.push("Please input a tag2 in single-byte alphanumeric character");
+  isAlphanum(tag3) || errors.tag3.push("Please input a tag3 in single-byte alphanumeric character");
+  errors.link.length || isUrl(link) || errors.link.push("Please input a correct link");
+  errors.name.length ||
+    (await isNotDuplicate(name, "nameLowercase")) ||
+    errors.name.push("The entered app name has already been registered");
   errors.icon.length ||
     isAllowedFileType(icon.type, ["image/jpeg", "image/png"]) ||
     errors.icon.push("Please select png or jpg or jpeg for the icon");
