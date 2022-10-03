@@ -12,7 +12,7 @@ type Props = {
   errors?: string[];
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
-const Input: React.FC<Props> = memo(({ children, id, label = "", labelMessage = "", isRequired, errors = [], handleChange }) => {
+const InputFile: React.FC<Props> = memo(({ children, id, label = "", labelMessage = "", isRequired, errors = [], handleChange }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <>
@@ -33,4 +33,4 @@ const Input: React.FC<Props> = memo(({ children, id, label = "", labelMessage = 
   );
 });
 
-export default Input;
+export default InputFile;
