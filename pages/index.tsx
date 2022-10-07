@@ -13,7 +13,6 @@ type Props = { apps: CardApp[] };
 
 const Index: NextPage<Props> = ({ apps }) => {
   const logo = { fontFamily: "'Nunito', sans-serif" };
-  const date = new Date();
 
   return (
     <Layout title="Home">
@@ -74,12 +73,12 @@ const Index: NextPage<Props> = ({ apps }) => {
           </div>
         </div>
         <p className="mt-3">
-          Made By&nbsp;
-          <a className="text-base" target="_blank" href="https://masakifukunishi.site">
+          Made By
+          <a className="text-base ml-1" target="_blank" href="https://masakifukunishi.site">
             Masaki
           </a>
         </p>
-        <p className="mt-1">&copy; PWA List {date.getFullYear()}</p>
+        <p className="mt-1">&copy; PWA List {new Date().getFullYear()}</p>
       </div>
     </Layout>
   );

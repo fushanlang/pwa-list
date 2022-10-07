@@ -41,7 +41,6 @@ library.add(
 const SideBar: React.FC = () => {
   const router = useRouter();
   const path = router.pathname;
-  const date = new Date();
   return (
     <div className="border-gray-300">
       <div className="w-60">
@@ -116,12 +115,12 @@ const SideBar: React.FC = () => {
               </div>
             </div>
             <p className="mt-3">
-              Made By&nbsp;
-              <a target="_blank" href="https://masakifukunishi.site">
+              Made By
+              <a className="ml-1" target="_blank" href="https://masakifukunishi.site">
                 Masaki
               </a>
             </p>
-            <p className="mt-1">&copy; PWA List {date.getFullYear()}</p>
+            <p className="mt-1">&copy; PWA List {new Date().getFullYear()}</p>
           </div>
         </div>
       </div>
