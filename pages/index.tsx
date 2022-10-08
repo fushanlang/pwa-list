@@ -64,8 +64,8 @@ const Index: NextPage<Props> = ({ apps }) => {
             </a>
           </div>
           <div className="mt-1">
-            <Link href="/terms-privacy" as="/terms-privacy">
-              <a className="mr-2">Terms & Privacy</a>
+            <Link href="/privacy" as="/privacy">
+              <a className="mr-2">Privacy</a>
             </Link>
             <a className="mr-2" target="_blank" href="https://twitter.com/pwalist">
               Twitter

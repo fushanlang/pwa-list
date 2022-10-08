@@ -105,7 +105,7 @@ const createSitemap = (apps: App[]) => {
             <priority>0.80</priority>
           </url>
           <url>
-            <loc>https://www.pwalist.app/terms-privacy</loc>
+            <loc>https://www.pwalist.app/privacy</loc>
             <lastmod>2022-05-05T04:15:45+00:00</lastmod>
             <priority>0.80</priority>
           </url>
