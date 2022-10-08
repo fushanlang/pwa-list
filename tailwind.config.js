@@ -9,6 +9,9 @@ module.exports = {
         140: "35rem",
         170: "42.5rem",
       },
+      width: {
+        320: "80rem",
+      },
     },
   },
   variants: {
