@@ -4,7 +4,7 @@ import Layout from "../../components/Layout/Layout";
 import Card from "../../components/App/Card";
 import { db } from "../../plugins/firebase";
 import { changeFirstUpperCase } from "../../plugins/common/functions";
-import { CardApp } from "../../types/apps";
+import type { CardApp } from "../../types/apps";
 
 type Props = { apps: CardApp[]; category: string };
 

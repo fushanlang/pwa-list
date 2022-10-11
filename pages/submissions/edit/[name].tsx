@@ -17,7 +17,7 @@ import Textarea from "../../../components/Common/Form/Textarea";
 import ErrorMessage from "../../../components/Common/Form/ErrorMessage";
 import ImagePreview from "../../../components/Submissions/ImagePreview";
 import CompletedModal from "../../../components/Submissions/CompletedModal";
-import { App } from "../../../types/apps";
+import type { App } from "../../../types/apps";
 
 type Props = { app: App; isFound: boolean };
 

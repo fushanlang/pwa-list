@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { remove } from "../../store/modules/userApps";
 import { db } from "../../plugins/firebase";
 import deleteFromStorage from "../../plugins/image/deleteFromStorage";
-import { SubmissionTableApp } from "../../types/apps";
+import type { SubmissionTableApp } from "../../types/apps";
 
 type Props = {
   isModalOpen: boolean;

@@ -7,7 +7,7 @@ import { db } from "../plugins/firebase";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import ChangeThemeButton from "../components/Common/ChangeThemeButton";
-import { CardApp } from "../types/apps";
+import type { CardApp } from "../types/apps";
 
 type Props = { apps: CardApp[] };
 

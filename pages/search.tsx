@@ -7,7 +7,7 @@ import { db } from "../plugins/firebase";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import Loading from "../components/Common/Loading";
-import { CardApp } from "../types/apps";
+import type { CardApp } from "../types/apps";
 
 const Search: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
