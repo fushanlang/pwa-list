@@ -9,14 +9,13 @@ export type App = {
   imagePc1: string;
   imagePc2: string;
   imagePc3: string;
-  isFeatured: boolean;
   isNewApp: boolean;
   isPublic: boolean;
   isRejected: boolean;
   link: string;
   name: string;
   nameLowercase: string;
-  newAppOrder: number | null | "";
+  newAppOrder: number | null;
   rejectionMessage: string;
   tag1: string;
   tag1Lowercase: string;

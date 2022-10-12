@@ -27,6 +27,7 @@ const Edit: NextPage<Props> = (props) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [name, setName] = useState<string>(app.name);
+  const [nameLowercase, setNameLowercase] = useState<string>(app.nameLowercase);
   const [link, setLink] = useState<string>(app.link);
   const [category, setCategory] = useState<string>(app.category);
   const [tag1, setTag1] = useState<string>("");
@@ -132,7 +133,6 @@ const Edit: NextPage<Props> = (props) => {
       return;
     }
     setIsModalOpen(true);
-    const nameLowercase = name.toLowerCase().replace(/\s|-|\./g, "");
     let storageIconUrl = iconUrl;
     let storageMobile1Url = mobileImageUrls[0] ? mobileImageUrls[0] : null;
     let storageMobile2Url = mobileImageUrls[1] ? mobileImageUrls[1] : null;
@@ -152,7 +152,6 @@ const Edit: NextPage<Props> = (props) => {
       .collection("applications")
       .doc(app.id)
       .update({
-        nameLowercase: nameLowercase,
         link: link,
         category: category,
         tag1: tag1,
@@ -171,6 +170,7 @@ const Edit: NextPage<Props> = (props) => {
         imagePc3: storagePc3Url,
         isPublic: false,
         isRejected: false,
+        rejectionMessage: "",
         updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
     setIsSubmitting(false);
