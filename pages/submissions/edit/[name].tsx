@@ -111,6 +111,7 @@ const Edit: NextPage<Props> = (props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
     if (
       !validateEdit(
