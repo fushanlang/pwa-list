@@ -240,7 +240,14 @@ const Edit: NextPage<Props> = (props) => {
                   />
                 </div>
                 <div className="mb-6">
-                  <InputFile id="icon" label="Icon" isRequired={true} errors={errors.icon} handleChange={handleChangeIcon}>
+                  <InputFile
+                    id="icon"
+                    label="Icon"
+                    isRequired={true}
+                    isMultiple={false}
+                    errors={errors.icon}
+                    handleChange={handleChangeIcon}
+                  >
                     {iconUrl && (
                       <div className="flex mb-4">
                         <ImagePreview imageUrl={iconUrl} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />
@@ -257,6 +264,7 @@ const Edit: NextPage<Props> = (props) => {
                     id="mobileImage"
                     label="Mobile size (Up to 3 Images)"
                     isRequired={false}
+                    isMultiple={true}
                     handleChange={handleChangeMobileImage}
                   >
                     {mobileImageUrls.length !== 0 && (
@@ -280,6 +288,7 @@ const Edit: NextPage<Props> = (props) => {
                     label="PC size (Up to 3 Images)"
                     labelMessage="only show PC size display."
                     isRequired={false}
+                    isMultiple={true}
                     errors={errors.screenshot}
                     handleChange={handleChangePcImage}
                   >

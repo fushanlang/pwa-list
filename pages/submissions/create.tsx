@@ -57,10 +57,9 @@ const Create: NextPage = () => {
   const setImageInfo = (target: HTMLInputElement, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
     const { files } = target;
     const filesArr = Object.entries(files).map(([key, value]) => value);
-    filesArr.splice(MAX_IMAGE_NUM);
     filesArr.map((value: File) => {
-      setImages((images: File[]) => [...images, value]);
-      setUrls((urls: string[]) => [...urls, window.URL.createObjectURL(value)]);
+      setImages((images: File[]) => [...images, value].filter((_, index) => index < MAX_IMAGE_NUM));
+      setUrls((urls: string[]) => [...urls, window.URL.createObjectURL(value)].filter((_, index) => index < MAX_IMAGE_NUM));
     });
   };
   const deleteImageInfo = (index: number, setImages: React.Dispatch<any>, setUrls: React.Dispatch<any>) => {
@@ -214,7 +213,7 @@ const Create: NextPage = () => {
                 />
               </div>
               <div className="mb-6">
-                <InputFile id="icon" label="Icon" isRequired={true} errors={errors.icon} handleChange={handleChangeIcon}>
+                <InputFile id="icon" label="Icon" isRequired={true} isMultiple={false} errors={errors.icon} handleChange={handleChangeIcon}>
                   {iconUrl && (
                     <div className="flex mb-4">
                       <ImagePreview imageUrl={iconUrl} handleClickDelete={handleClickDeleteIcon} maxHeight="max-h-20" />
@@ -227,7 +226,13 @@ const Create: NextPage = () => {
                 <span className="ml-2">Either mobile or PC screenshot is required.</span>
               </p>
               <div className="mb-6">
-                <InputFile id="mobileImage" label="Mobile size (Up to 3 Images)" isRequired={false} handleChange={handleChangeMobileImage}>
+                <InputFile
+                  id="mobileImage"
+                  label="Mobile size (Up to 3 Images)"
+                  isRequired={false}
+                  isMultiple={true}
+                  handleChange={handleChangeMobileImage}
+                >
                   {mobileImageUrls.length !== 0 && (
                     <div className="flex mb-4">
                       {mobileImageUrls.map((url, index) => (
@@ -249,6 +254,7 @@ const Create: NextPage = () => {
                   label="PC size (Up to 3 Images)"
                   labelMessage="only show PC size display."
                   isRequired={false}
+                  isMultiple={true}
                   errors={errors.screenshot}
                   handleChange={handleChangePcImage}
                 >
