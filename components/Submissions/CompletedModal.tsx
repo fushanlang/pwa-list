@@ -19,8 +19,8 @@ const CompletedModal: React.FC<Props> = ({ isModalOpen, isSubmitting }) => {
     content: {
       position: "absolute",
       top: "4rem",
-      left: "3rem",
-      right: "3rem",
+      left: "1rem",
+      right: "1rem",
       bottom: "4rem",
       backgroundColor: "white",
       borderRadius: "1rem",
