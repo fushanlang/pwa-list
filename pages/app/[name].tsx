@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -10,7 +9,6 @@ import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../../plugins/googleAdsense";
 import Layout from "../../components/Layout/Layout";
 import NotFound from "../../components/Common/NotFound";
-import ImageModal from "../../components/App/ImageModal";
 import { db } from "../../plugins/firebase";
 import { changeFirstUpperCase } from "../../plugins/common/functions";
 import type { App } from "../../types/apps";
@@ -19,8 +17,6 @@ type Props = { app: App; isFound: boolean };
 
 const App: NextPage<Props> = (props) => {
   const { app, isFound } = props;
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [initialSlide, setInitialSlide] = useState<number>(0);
   const router = useRouter();
   const url = `https://www.pwalist.app${router.asPath}`;
   let images: any = {};
@@ -93,16 +89,12 @@ const App: NextPage<Props> = (props) => {
               </div>
             </div>
             <div className="flex mt-6 overflow-scroll">
-              {Object.keys(images).map((key, index) => (
+              {Object.keys(images).map((key) => (
                 <img
                   key={key}
-                  className={`max-h-96 mx-2 cursor-pointer ${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}
+                  className={`max-h-120 mx-2 rounded-lg ${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}
                   src={images[key]}
                   alt={`screenshot${key}`}
-                  onClick={() => {
-                    setModalIsOpen(true);
-                    setInitialSlide(index);
-                  }}
                 />
               ))}
             </div>
@@ -110,7 +102,6 @@ const App: NextPage<Props> = (props) => {
               <h3 className="text-left font-bold text-xl mb-2">About this app</h3>
               <p className="text-left text-lg whitespace-pre-line">{app.description}</p>
             </div>
-            <ImageModal images={images} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} initialSlide={initialSlide} />
           </div>
         )}
         {/* Google Adsense start*/}
