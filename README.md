@@ -4,7 +4,7 @@
 
 <div align="center">
 
-# [PWAList](https://pwalist.app/)
+# [PWA List](https://pwalist.app/)
 
 The best place to find PWAs :mag:
 
