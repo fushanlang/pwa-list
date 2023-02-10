@@ -92,7 +92,7 @@ const App: NextPage<Props> = (props) => {
               {Object.keys(images).map((key) => (
                 <img
                   key={key}
-                  className={`max-h-120 mx-2 rounded-lg ${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}
+                  className={`max-h-120 mx-2 rounded-lg border ${key.indexOf("pc") === 0 ? "hidden lg:inline-block" : ""}`}
                   src={images[key]}
                   alt={`screenshot${key}`}
                 />
