@@ -18,8 +18,6 @@ const Auth: React.FC = () => {
   return (
     <div className="flex justify-center flex-wrap">
       <SignInWithOtherService label="Sign in with Google" imagePath="/icons/Google.png" handleClick={handleClickGoogleSignIn} />
-      <SignInWithOtherService label="Sign in with Twitter" imagePath="/icons/Twitter.png" handleClick={handleClickTwitterSignIn} />
-      <SignInWithOtherService label="Sign in with Facebook" imagePath="/icons/FaceBook.png" handleClick={handleClickFacebookSignIn} />
     </div>
   );
 };
