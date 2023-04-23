@@ -29,7 +29,7 @@ const Index: NextPage<Props> = ({ newApps, featuredApps }) => {
         </div>
         <div>
           <div className="mt-2">
-            <h2 className="text-xl font-bold">Featured apps</h2>
+            <h2 className="text-lg font-semibold">Featured apps</h2>
             <div className="flex py-3 mb-3 overflow-scroll">
               {featuredApps.map((app) => (
                 <FeaturedCard app={app} key={app.id} />
@@ -37,7 +37,7 @@ const Index: NextPage<Props> = ({ newApps, featuredApps }) => {
             </div>
           </div>
           <div className="mt-2">
-            <h2 className="text-xl font-bold">New apps</h2>
+            <h2 className="text-lg font-semibold">New apps</h2>
             <p className="text-base text-gray-500 dark:text-gray-300">Recently added Progressive Web Apps</p>
           </div>
           <div className="mt-3">
