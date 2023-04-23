@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { changeFirstUpperCase } from "../../plugins/common/functions";
+import capitalizeFirstLetter from "../../plugins/common/capitalizeFirstLetter";
 
 type Props = {
   categoryName: string;
@@ -17,12 +17,12 @@ const CategoryLinkForSideBar: React.FC<Props> = ({ categoryName, iconName }) => 
         {categoryName === category ? (
           <a className="block text-green-500">
             <FontAwesomeIcon icon={iconName} size="xs" className="mr-2" />
-            {changeFirstUpperCase(categoryName)}
+            {capitalizeFirstLetter(categoryName)}
           </a>
         ) : (
           <a className="block hover:text-green-500">
             <FontAwesomeIcon icon={iconName} size="xs" className="mr-2" />
-            {changeFirstUpperCase(categoryName)}
+            {capitalizeFirstLetter(categoryName)}
           </a>
         )}
       </Link>

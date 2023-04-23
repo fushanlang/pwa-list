@@ -4,14 +4,18 @@ import AdSense from "react-adsense";
 import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 
 import { db } from "../plugins/firebase";
+import mapToCardApp from "../plugins/common/mapToCardApp";
+import mapToFeaturedApp from "../plugins/common/mapToFeaturedApp";
 import Layout from "../components/Layout/Layout";
+import FeaturedCard from "../components/App/FeaturedCard";
 import Card from "../components/App/Card";
 import ChangeThemeButton from "../components/Common/ChangeThemeButton";
 import type { CardApp } from "../types/apps";
+import type { FeaturedApp } from "../types/apps";
 
-type Props = { apps: CardApp[] };
+type Props = { newApps: CardApp[]; featuredApps: FeaturedApp[] };
 
-const Index: NextPage<Props> = ({ apps }) => {
+const Index: NextPage<Props> = ({ newApps, featuredApps }) => {
   const logo = { fontFamily: "'Nunito', sans-serif" };
 
   return (
@@ -25,13 +29,21 @@ const Index: NextPage<Props> = ({ apps }) => {
         </div>
         <div>
           <div className="mt-2">
-            <h2 className="text-xl font-bold">New Apps</h2>
-            <p className="text-base text-gray-500 dark:text-gray-300">Recently added Progressive Web Apps.</p>
+            <h2 className="text-lg font-semibold">Featured apps</h2>
+            <div className="flex py-3 mb-3 overflow-scroll">
+              {featuredApps.map((app) => (
+                <FeaturedCard app={app} key={app.id} />
+              ))}
+            </div>
+          </div>
+          <div className="mt-2">
+            <h2 className="text-lg font-semibold">New apps</h2>
+            <p className="text-base text-gray-500 dark:text-gray-300">Recently added Progressive Web Apps</p>
           </div>
           <div className="mt-3">
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-              {apps.map((app) => (
-                <Card app={app} />
+              {newApps.map((app) => (
+                <Card app={app} key={app.id} />
               ))}
             </div>
           </div>
@@ -88,26 +100,25 @@ const Index: NextPage<Props> = ({ apps }) => {
   );
 };
 export async function getStaticProps() {
-  const applications = await db
+  const newApps = await db
     .collection("applications")
     .where("isNewApp", "==", true)
     .where("isPublic", "==", true)
     .orderBy("newAppOrder", "desc")
     .get();
-  const apps = applications.docs.map((doc) => ({
-    id: doc.id,
-    name: doc.data().name,
-    nameLowercase: doc.data().nameLowercase,
-    icon: doc.data().icon,
-    category: doc.data().category,
-    tag1: doc.data().tag1,
-    tag2: doc.data().tag2,
-    tag3: doc.data().tag3,
-    description: doc.data().description,
-  }));
+
+  const featuredApps = await db
+    .collection("applications")
+    .where("isFeatured", "==", true)
+    .where("isPublic", "==", true)
+    .orderBy("featuredOrder", "asc")
+    .get();
 
   return {
-    props: { apps },
+    props: {
+      newApps: newApps.docs.map((doc) => mapToCardApp(doc)),
+      featuredApps: featuredApps.docs.map((doc) => mapToFeaturedApp(doc)),
+    },
     // revalidate: 20,
   };
 }

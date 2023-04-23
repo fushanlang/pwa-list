@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import { db } from "../plugins/firebase";
+import mapToCardApp from "../plugins/common/mapToCardApp";
 import Layout from "../components/Layout/Layout";
 import Card from "../components/App/Card";
 import Loading from "../components/Common/Loading";
@@ -18,63 +19,44 @@ const Search: NextPage = () => {
     localStorage.inputSearchParam && setInputParam(localStorage.inputSearchParam);
   }, []);
 
+  const searchQuery = async (field: string, param: string) => {
+    return await db
+      .collection("applications")
+      .orderBy(field)
+      .startAt(param)
+      .endAt(param + "\uf8ff")
+      .where("isPublic", "==", true)
+      .get();
+  };
+
+  const search = async () => {
+    if (!inputParam.replace(/\s|-|\./g, "")) {
+      setSearchedApps([]);
+      return;
+    }
+
+    setIsLoading(true);
+    const searchParam = inputParam
+      .toLowerCase()
+      .replace(/\s|-|\./g, "")
+      .trim();
+    localStorage.inputSearchParam = inputParam;
+
+    const searchResults = await Promise.all([
+      searchQuery("nameLowercase", searchParam),
+      searchQuery("tag1Lowercase", searchParam),
+      searchQuery("tag2Lowercase", searchParam),
+      searchQuery("tag3Lowercase", searchParam),
+    ]);
+
+    const mergedResults = searchResults.flatMap((result) => result.docs);
+    const apps = mergedResults.map((doc) => mapToCardApp(doc));
+    const noDupApps = apps.filter((element, index, self) => self.findIndex((e) => e.id === element.id) === index);
+
+    setSearchedApps(noDupApps);
+    setIsLoading(false);
+  };
   useEffect(() => {
-    const search = async () => {
-      if (!inputParam.replace(/\s|-|\./g, "")) {
-        setSearchedApps([]);
-        return;
-      }
-      setIsLoading(true);
-      let searchParam = inputParam
-        .toLowerCase()
-        .replace(/\s|-|\./g, "")
-        .trim();
-      localStorage.inputSearchParam = inputParam;
-      const appsName = await db
-        .collection("applications")
-        .orderBy("nameLowercase")
-        .startAt(searchParam)
-        .endAt(searchParam + "\uf8ff")
-        .where("isPublic", "==", true)
-        .get();
-      const appsTag1 = await db
-        .collection("applications")
-        .orderBy("tag1Lowercase")
-        .startAt(searchParam)
-        .endAt(searchParam + "\uf8ff")
-        .where("isPublic", "==", true)
-        .get();
-      const appsTag2 = await db
-        .collection("applications")
-        .orderBy("tag2Lowercase")
-        .startAt(searchParam)
-        .endAt(searchParam + "\uf8ff")
-        .where("isPublic", "==", true)
-        .get();
-      const appsTag3 = await db
-        .collection("applications")
-        .orderBy("tag3Lowercase")
-        .startAt(searchParam)
-        .endAt(searchParam + "\uf8ff")
-        .where("isPublic", "==", true)
-        .get();
-      let mergedApps = [];
-      mergedApps.push(...appsName.docs, ...appsTag1.docs, ...appsTag2.docs, ...appsTag3.docs);
-      const apps = mergedApps.map((doc) => ({
-        id: doc.id,
-        name: doc.data().name,
-        nameLowercase: doc.data().nameLowercase,
-        icon: doc.data().icon,
-        category: doc.data().category,
-        tag1: doc.data().tag1,
-        tag2: doc.data().tag2,
-        tag3: doc.data().tag3,
-        description: doc.data().description,
-      }));
-      const noDupApps = apps.filter((element, index, self) => self.findIndex((e) => e.id === element.id) === index);
-      setSearchedApps(noDupApps);
-      setIsLoading(false);
-    };
     search();
   }, [inputParam]);
 
@@ -106,7 +88,7 @@ const Search: NextPage = () => {
           <div className="mt-8">
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
               {searchedApps.map((app) => (
-                <Card app={app} />
+                <Card app={app} key={app.id} />
               ))}
             </div>
           </div>
