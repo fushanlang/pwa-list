@@ -15,7 +15,11 @@ const Category: NextPage<Props> = (props) => {
       <div className="p-6">
         <h1 className="text-2xl font-bold mt-3">{category}</h1>
         <div className="mt-2">
-          <Card apps={apps} />
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+            {apps.map((app) => (
+              <Card app={app} />
+            ))}
+          </div>
         </div>
       </div>
     </Layout>

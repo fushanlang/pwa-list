@@ -29,7 +29,11 @@ const Index: NextPage<Props> = ({ apps }) => {
             <p className="text-base text-gray-500 dark:text-gray-300">Recently added Progressive Web Apps.</p>
           </div>
           <div className="mt-3">
-            <Card apps={apps} />
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+              {apps.map((app) => (
+                <Card app={app} />
+              ))}
+            </div>
           </div>
           {/* Google Adsense start*/}
           {/* <div className="overflow-scroll text-center mt-16">
