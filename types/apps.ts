@@ -38,6 +38,14 @@ export type CardApp = {
   description: string;
 };
 
+export type FeaturedApp = {
+  id: string;
+  name: string;
+  nameLowercase: string;
+  category: string;
+  promotionImage: string;
+};
+
 export type SubmissionTableApp = {
   id: string;
   icon: string;

@@ -5,14 +5,17 @@ import { GOOGLE_ADSENSE_CLIENT } from "../plugins/googleAdsense";
 
 import { db } from "../plugins/firebase";
 import mapToCardApp from "../plugins/common/mapToCardApp";
+import mapToFeaturedApp from "../plugins/common/mapToFeaturedApp";
 import Layout from "../components/Layout/Layout";
+import FeaturedCard from "../components/App/FeaturedCard";
 import Card from "../components/App/Card";
 import ChangeThemeButton from "../components/Common/ChangeThemeButton";
 import type { CardApp } from "../types/apps";
+import type { FeaturedApp } from "../types/apps";
 
-type Props = { newApps: CardApp[] };
+type Props = { newApps: CardApp[]; featuredApps: FeaturedApp[] };
 
-const Index: NextPage<Props> = ({ newApps }) => {
+const Index: NextPage<Props> = ({ newApps, featuredApps }) => {
   const logo = { fontFamily: "'Nunito', sans-serif" };
 
   return (
@@ -27,6 +30,11 @@ const Index: NextPage<Props> = ({ newApps }) => {
         <div>
           <div className="mt-2">
             <h2 className="text-xl font-bold">Featured apps</h2>
+            <div className="flex py-3 mb-3 overflow-scroll">
+              {featuredApps.map((app) => (
+                <FeaturedCard app={app} key={app.id} />
+              ))}
+            </div>
           </div>
           <div className="mt-2">
             <h2 className="text-xl font-bold">New apps</h2>
@@ -98,8 +106,19 @@ export async function getStaticProps() {
     .where("isPublic", "==", true)
     .orderBy("newAppOrder", "desc")
     .get();
+
+  const featuredApps = await db
+    .collection("applications")
+    .where("isFeatured", "==", true)
+    .where("isPublic", "==", true)
+    .orderBy("featuredOrder", "asc")
+    .get();
+
   return {
-    props: { newApps: newApps.docs.map((doc) => mapToCardApp(doc)) },
+    props: {
+      newApps: newApps.docs.map((doc) => mapToCardApp(doc)),
+      featuredApps: featuredApps.docs.map((doc) => mapToFeaturedApp(doc)),
+    },
     // revalidate: 20,
   };
 }
