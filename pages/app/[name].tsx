@@ -132,9 +132,8 @@ export const getStaticPaths = async () => {
 };
 export const getStaticProps = async (context) => {
   const { name } = context.params;
-  const res = await db.collection("applications").where("nameLowercase", "==", name).where("isPublic", "==", true).get();
-  const app = res.docs.map((res) => res.data());
-  if (app.length == 0) {
+  const res = await db.collection("applications").where("nameLowercase", "==", name).where("isPublic", "==", true).limit(1).get();
+  if (res.empty) {
     return {
       props: {
         app: {},
@@ -142,12 +141,27 @@ export const getStaticProps = async (context) => {
       },
     };
   }
-  app[0]["category"] = capitalizeFirstLetter(app[0]["category"]);
-  delete app[0]["createdAt"];
-  delete app[0]["updatedAt"];
+  const app = res.docs[0].data();
   return {
     props: {
-      app: app[0],
+      app: {
+        id: res.docs[0].id,
+        name: app.name,
+        nameLowercase: app.nameLowercase,
+        icon: app.icon,
+        category: capitalizeFirstLetter(app.category),
+        tag1: app.tag1,
+        tag2: app.tag2,
+        tag3: app.tag3,
+        description: app.description,
+        link: app.link,
+        imageMobile1: app.imageMobile1,
+        imageMobile2: app.imageMobile2,
+        imageMobile3: app.imageMobile3,
+        imagePc1: app.imagePc1,
+        imagePc2: app.imagePc2,
+        imagePc3: app.imagePc3,
+      },
       isFound: true,
     },
   };
