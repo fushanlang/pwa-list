@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import Layout from "../../components/Layout/Layout";
 import Card from "../../components/App/Card";
 import { db } from "../../plugins/firebase";
-import { changeFirstUpperCase } from "../../plugins/common/functions";
+import capitalizeFirstLetter from "../../plugins/common/capitalizeFirstLetter";
 import type { CardApp } from "../../types/apps";
 
 type Props = { apps: CardApp[]; category: string };
@@ -17,7 +17,7 @@ const Category: NextPage<Props> = (props) => {
         <div className="mt-2">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {apps.map((app) => (
-              <Card app={app} />
+              <Card app={app} key={app.id} />
             ))}
           </div>
         </div>
@@ -61,7 +61,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       apps: apps,
-      category: changeFirstUpperCase(category),
+      category: capitalizeFirstLetter(category),
     },
     // revalidate: 20,
   };

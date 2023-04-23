@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { changeFirstUpperCase } from "../../plugins/common/functions";
+import capitalizeFirstLetter from "../../plugins/common/capitalizeFirstLetter";
 import type { CardApp } from "../../types/apps";
 
 type Props = { app: CardApp };
@@ -15,7 +15,7 @@ const Card: React.FC<Props> = ({ app }) => {
         </div>
         <div className="ml-4">
           <div className="text-base font-bold">{app.name}</div>
-          <div className="mt-0.5 font-semibold">{changeFirstUpperCase(app.category)}</div>
+          <div className="mt-0.5 font-semibold">{capitalizeFirstLetter(app.category)}</div>
           <div className="text-sm mt-1">
             {app.tag1 && <span>{app.tag1}</span>}
             {app.tag2 && <span> / {app.tag2}</span>}

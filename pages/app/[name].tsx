@@ -10,7 +10,7 @@ import { GOOGLE_ADSENSE_CLIENT } from "../../plugins/googleAdsense";
 import Layout from "../../components/Layout/Layout";
 import NotFound from "../../components/Common/NotFound";
 import { db } from "../../plugins/firebase";
-import { changeFirstUpperCase } from "../../plugins/common/functions";
+import capitalizeFirstLetter from "../../plugins/common/capitalizeFirstLetter";
 import type { App } from "../../types/apps";
 
 type Props = { app: App; isFound: boolean };
@@ -142,7 +142,7 @@ export const getStaticProps = async (context) => {
       },
     };
   }
-  app[0]["category"] = changeFirstUpperCase(app[0]["category"]);
+  app[0]["category"] = capitalizeFirstLetter(app[0]["category"]);
   delete app[0]["createdAt"];
   delete app[0]["updatedAt"];
   return {

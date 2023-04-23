@@ -106,7 +106,7 @@ const Search: NextPage = () => {
           <div className="mt-8">
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
               {searchedApps.map((app) => (
-                <Card app={app} />
+                <Card app={app} key={app.id} />
               ))}
             </div>
           </div>
