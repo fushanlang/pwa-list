@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import Layout from "../../components/Layout/Layout";
 import Card from "../../components/App/Card";
 import { db } from "../../plugins/firebase";
+import mapToCardApp from "../../plugins/common/mapToCardApp";
 import capitalizeFirstLetter from "../../plugins/common/capitalizeFirstLetter";
 import type { CardApp } from "../../types/apps";
 
@@ -40,27 +41,16 @@ export const getStaticPaths = async () => {
 
 export async function getStaticProps(context) {
   const { category } = context.params;
-  const applications = await db
+  const apps = await db
     .collection("applications")
     .where("isPublic", "==", true)
     .where("category", "==", category)
     .orderBy("nameLowercase")
     .get();
-  const apps = applications.docs.map((doc) => ({
-    id: doc.id,
-    name: doc.data().name,
-    nameLowercase: doc.data().nameLowercase,
-    icon: doc.data().icon,
-    category: doc.data().category,
-    tag1: doc.data().tag1,
-    tag2: doc.data().tag2,
-    tag3: doc.data().tag3,
-    description: doc.data().description,
-  }));
 
   return {
     props: {
-      apps: apps,
+      apps: apps.docs.map((doc) => mapToCardApp(doc)),
       category: capitalizeFirstLetter(category),
     },
     // revalidate: 20,
