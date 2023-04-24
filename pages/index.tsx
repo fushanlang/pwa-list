@@ -16,13 +16,11 @@ import type { FeaturedApp } from "../types/apps";
 type Props = { newApps: CardApp[]; featuredApps: FeaturedApp[] };
 
 const Index: NextPage<Props> = ({ newApps, featuredApps }) => {
-  const logo = { fontFamily: "'Nunito', sans-serif" };
-
   return (
     <Layout title="Home">
       <div className="min-h-screen p-6">
         <div className="flex justify-between mt-3">
-          <h1 className="text-3xl font-bold" style={logo}>
+          <h1 className="text-3xl font-bold" style={{ fontFamily: "'Nunito', sans-serif" }}>
             P<span className="text-green-500">W</span>A LIST
           </h1>
           <ChangeThemeButton />

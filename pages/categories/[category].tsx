@@ -14,7 +14,10 @@ const Category: NextPage<Props> = (props) => {
   return (
     <Layout title={category}>
       <div className="p-6">
-        <h1 className="text-2xl font-bold mt-3">{category}</h1>
+        <h1 className="text-3xl font-bold mt-3" style={{ fontFamily: "'Nunito', sans-serif" }}>
+          P<span className="text-green-500">W</span>A LIST
+        </h1>
+        <h2 className="text-2xl font-bold mt-3">{category}</h2>
         <div className="mt-2">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {apps.map((app) => (
