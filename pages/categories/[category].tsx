@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Link from "next/link";
 
 import Layout from "../../components/Layout/Layout";
 import Card from "../../components/App/Card";
@@ -15,7 +16,11 @@ const Category: NextPage<Props> = (props) => {
     <Layout title={category}>
       <div className="p-6">
         <h1 className="text-3xl font-bold mt-3" style={{ fontFamily: "'Nunito', sans-serif" }}>
-          P<span className="text-green-500">W</span>A LIST
+          <Link href="/" as="/">
+            <a>
+              P<span className="text-green-500">W</span>A LIST
+            </a>
+          </Link>
         </h1>
         <h2 className="text-2xl font-bold mt-3">{category}</h2>
         <div className="mt-2">

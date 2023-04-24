@@ -21,7 +21,11 @@ const Index: NextPage<Props> = ({ newApps, featuredApps }) => {
       <div className="min-h-screen p-6">
         <div className="flex justify-between mt-3">
           <h1 className="text-3xl font-bold" style={{ fontFamily: "'Nunito', sans-serif" }}>
-            P<span className="text-green-500">W</span>A LIST
+            <Link href="/" as="/">
+              <a>
+                P<span className="text-green-500">W</span>A LIST
+              </a>
+            </Link>
           </h1>
           <ChangeThemeButton />
         </div>
